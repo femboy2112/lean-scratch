@@ -36,6 +36,7 @@ import Mathlib.Tactic.Linarith
 namespace TLICA.ProfileComparison.Pointwise
 
 open TLICA.Profile
+open Classical
 open scoped ENNReal
 
 variable {α : Type*}
@@ -71,6 +72,9 @@ theorem dInfUnion_symm (f g : ScalarProfile α) : dInfUnion f g = dInfUnion g f 
 /-- **Proposition 5.2.3** (reflexivity, union form). -/
 theorem dInfUnion_self (f : ScalarProfile α) : dInfUnion f f = 0 := by
   unfold dInfUnion
+  apply le_antisymm _ (zero_le _)
+  apply iSup_le
+  intro _
   simp [sub_self]
 
 /-- The union distance is bounded above by 1, since profile values lie
@@ -142,14 +146,16 @@ theorem dInfShared_nonneg (f g : ScalarProfile α) : 0 ≤ dInfShared f g :=
 theorem dInfShared_symm (f g : ScalarProfile α) :
     dInfShared f g = dInfShared g f := by
   unfold dInfShared
-  rw [Set.inter_comm g.domain f.domain]
-  congr 1
-  · -- The nonempty conditions match.
-    rfl
-  · funext x
-    congr 1
-    funext _
+  by_cases h : (f.domain ∩ g.domain).Nonempty
+  · have h' : (g.domain ∩ f.domain).Nonempty := by rwa [Set.inter_comm]
+    rw [if_pos h, if_pos h', Set.inter_comm f.domain g.domain]
+    apply iSup_congr
+    intro x
+    apply iSup_congr
+    intro _
     rw [abs_sub_comm]
+  · have h' : ¬ (g.domain ∩ f.domain).Nonempty := by rwa [Set.inter_comm]
+    rw [if_neg h, if_neg h']
 
 /-- **Proposition 5.2.3** (reflexivity, shared form).
 
