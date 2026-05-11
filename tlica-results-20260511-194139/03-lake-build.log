@@ -1,0 +1,15 @@
+⚠ [1296/1298] Replayed TLICA.ProfileComparison.ShellRefinement
+warning: ././././TLICA/ProfileComparison/ShellRefinement.lean:77:30: unused variable `rs`
+note: this linter can be disabled with `set_option linter.unusedVariables false`
+warning: ././././TLICA/ProfileComparison/ShellRefinement.lean:78:15: unused variable `ha_unit`
+note: this linter can be disabled with `set_option linter.unusedVariables false`
+warning: ././././TLICA/ProfileComparison/ShellRefinement.lean:78:41: unused variable `hb_unit`
+note: this linter can be disabled with `set_option linter.unusedVariables false`
+warning: ././././TLICA/ProfileComparison/ShellRefinement.lean:88:38: unused variable `rs`
+note: this linter can be disabled with `set_option linter.unusedVariables false`
+warning: ././././TLICA/ProfileComparison/ShellRefinement.lean:89:5: unused variable `f`
+note: this linter can be disabled with `set_option linter.unusedVariables false`
+warning: ././././TLICA/ProfileComparison/ShellRefinement.lean:89:7: unused variable `g`
+note: this linter can be disabled with `set_option linter.unusedVariables false`
+Build completed successfully.
+lake build exit status: 0
