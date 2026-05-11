@@ -16,11 +16,11 @@ in the v0.3.1 rigorous edition is documented in `MAPPING.md`.
 
 | Target | Module | Status |
 |---|---|---|
-| Lemma 2.4.2 (strict ρ-bound, warm-up) | `TLICA.IntegrationGraph` | Fully encoded |
-| Proposition 3.3.7 (cogito as unique φ-supremum) | `TLICA.PhiCoordinate` | Fully encoded |
-| Proposition 2.5.1 (scalar mode aggregation) | `TLICA.ModeAggregation` | Fully encoded |
-| Proposition 5.7.2 (uniform convergence by M-test) | `TLICA.Dynamics` | Statement-only skeleton |
-| Theorem 6.5.1 (formal non-reducibility, after v0.3.1 D_φ repair) | `TLICA.NonReducibility` | Fully encoded |
+| Lemma 2.4.2 (strict ρ-bound, warm-up) | `TLICA.IntegrationGraph` | Machine-verified (round 1) |
+| Proposition 3.3.7 (cogito as unique φ-supremum) | `TLICA.PhiCoordinate` | Machine-verified (round 1) |
+| Proposition 2.5.1 (scalar mode aggregation) | `TLICA.ModeAggregation` | Machine-verified (round 1) |
+| Proposition 5.7.2 (uniform convergence by M-test) | `TLICA.Dynamics` | Encoded; awaiting compile (round 2) |
+| Theorem 6.5.1 (formal non-reducibility, after v0.3.1 D_φ repair) | `TLICA.NonReducibility` | Machine-verified (round 1) |
 
 The architecture's coefficient field K, modeled as a linear ordered field
 with a positive non-Archimedean infinitesimal δ, is encoded as the

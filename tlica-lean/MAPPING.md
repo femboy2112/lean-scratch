@@ -51,7 +51,7 @@ file is the cross-reference table that connects the two artifacts.
 
 | Lean declaration | v0.3.1 reference | Status |
 |---|---|---|
-| `mode_aggregation_uniform_convergent` | `05_dynamics.md` §5.7 (Proposition 5.7.2) | Skeleton (statement-only placeholder) |
+| `mode_aggregation_uniform_convergent` | `05_dynamics.md` §5.7 (Proposition 5.7.2) | Encoded (Weierstrass M-test via `tendstoUniformly_tsum`) |
 
 ## TLICA.NonReducibility
 
@@ -70,18 +70,10 @@ file is the cross-reference table that connects the two artifacts.
 
 Of the priority targets identified by the second-round verifier:
 
-- **Lemma 2.4.2** (strict ρ-bound, warm-up): fully encoded.
-- **Proposition 3.3.7** (cogito unique supremum of φ): fully encoded.
-- **Proposition 2.5.1** (scalar mode aggregation): fully encoded.
-- **Proposition 5.7.2** (uniform convergence by M-test): statement-only
-  skeleton with a `True`-typed placeholder body; the proof requires the
-  exact mathlib `tendstoUniformly_tsum` API, which should be checked
-  against the current mathlib version and substituted in by the compiler-in-loop.
-- **Theorem 6.5.1** (formal non-reducibility): fully encoded via finite
-  witness coordinate triples.
+- **Lemma 2.4.2** (strict ρ-bound, warm-up): fully encoded and machine-verified at mathlib v4.11.0.
+- **Proposition 3.3.7** (cogito unique supremum of φ): fully encoded and machine-verified.
+- **Proposition 2.5.1** (scalar mode aggregation): fully encoded and machine-verified, in four parts (summability, non-negative lower bound, ≤ 1 upper bound, strict-off-cogito bound).
+- **Proposition 5.7.2** (uniform convergence by M-test): fully encoded in round 2 via `tendstoUniformly_tsum` applied with majorant `M_k = a_k`; awaiting compilation verification.
+- **Theorem 6.5.1** (formal non-reducibility): fully encoded and machine-verified via finite witness coordinate triples; the proof of `no_F_phi` exercises the v0.3.1 `D_φ` repair via the witness with φ-value `1 - 2·δ - 1/2`.
 
-The first compilation pass is expected to surface a small number of
-typeclass or API-name corrections (especially in `ModeAggregation`, where
-`tsum_le_tsum` and `tsum_pos` have specific argument orderings that vary
-across mathlib versions). The Claude Code prompt documents the iteration
-protocol for closing those.
+All five priority theorems have type-checking proofs in the project; four are machine-verified at v4.11.0 (compilation iteration #1 closed); the fifth was added in round 2 and awaits compilation verification.
