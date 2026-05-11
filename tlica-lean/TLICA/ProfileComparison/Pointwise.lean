@@ -169,9 +169,9 @@ theorem dInfShared_self_of_nonempty
   unfold dInfShared
   rw [Set.inter_self]
   rw [if_pos h]
-  apply iSup_eq_zero.mpr
+  apply ENNReal.iSup_eq_zero.mpr
   intro x
-  apply iSup_eq_zero.mpr
+  apply ENNReal.iSup_eq_zero.mpr
   intro _
   simp [sub_self]
 
