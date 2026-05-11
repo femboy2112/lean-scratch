@@ -111,7 +111,9 @@ theorem dInfUnion_triangle (f g h : ScalarProfile α) :
         ENNReal.ofReal_add (abs_nonneg _) (abs_nonneg _)
     _ ≤ (⨆ y : α, ENNReal.ofReal |f.zeroExtend y - g.zeroExtend y|) +
         (⨆ y : α, ENNReal.ofReal |g.zeroExtend y - h.zeroExtend y|) :=
-        add_le_add (le_iSup _ x) (le_iSup _ x)
+        add_le_add
+          (le_iSup (fun y => ENNReal.ofReal |f.zeroExtend y - g.zeroExtend y|) x)
+          (le_iSup (fun y => ENNReal.ofReal |g.zeroExtend y - h.zeroExtend y|) x)
 
 /-! ## The shared form distance via intersection -/
 
