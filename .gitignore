@@ -1,4 +1,4 @@
 tlica-lean/.lake/
 tlica-lean-round3/
-tlica-results-*/
-tlica-results-*.zip
+#tlica-results-*/
+#tlica-results-*.zip
