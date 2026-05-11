@@ -77,3 +77,30 @@ Of the priority targets identified by the second-round verifier:
 - **Theorem 6.5.1** (formal non-reducibility): fully encoded and machine-verified via finite witness coordinate triples; the proof of `no_F_phi` exercises the v0.3.1 `D_φ` repair via the witness with φ-value `1 - 2·δ - 1/2`.
 
 All five priority theorems have type-checking proofs in the project; four are machine-verified at v4.11.0 (compilation iteration #1 closed); the fifth was added in round 2 and awaits compilation verification.
+
+## Round 3 — Profile-comparison apparatus
+
+| Lean declaration | v0.2 working paper reference | Status |
+|---|---|---|
+| `structure ScalarProfile` | profile_comparison_v0_2.md §4 (notation), §5.1 (foundation signature) | Encoded |
+| `ScalarProfile.zeroExtend` | profile_comparison_v0_2.md §5.2bis.1 | Encoded |
+| `ScalarProfile.zeroExtend_nonneg`, `zeroExtend_le_one`, `abs_sub_zeroExtend_le_one` | Supporting facts | Encoded |
+| `dInfUnion` | profile_comparison_v0_2.md §5.2bis.1 (Definition) | Encoded |
+| `dInfUnion_nonneg` | §5.2.1 / §5.2bis.2 (non-negativity) | Encoded |
+| `dInfUnion_symm` | §5.2.2 (symmetry) | Encoded |
+| `dInfUnion_self` | §5.2.3 (reflexivity) | Encoded |
+| `dInfUnion_le_one` | §5.1.1 codomain claim | Encoded |
+| `dInfUnion_triangle` | §5.2bis.2 (full triangle inequality) | Encoded |
+| `dInfShared` | profile_comparison_v0_2.md §5.1.1 (Definition) | Encoded |
+| `dInfShared_nonneg` | §5.2.1 (non-negativity) | Encoded |
+| `dInfShared_symm` | §5.2.2 (symmetry) | Encoded |
+| `dInfShared_self_of_nonempty` | §5.2.3 (reflexivity, qualified) | Encoded |
+| `dInfShared_le_one_of_nonempty` | §5.1.1 (bound when non-empty) | Encoded |
+| `dInfShared_top_iff` | §5.1.1 (⊤ exactly on empty intersection) | Encoded |
+| `dInfShared_le_one_or_top` | Combined bound | Encoded |
+| `structure ShellThresholds` | v0.3.1 rigorous edition 04_profiles.md §4.3.1 | Encoded (structure only) |
+| `shellOf` | Helper for shell membership | Encoded |
+| `shellStratifiedBound` | profile_comparison_v0_2.md §5.3 (Proposition 5.3.1) | Statement placeholder; deferred full proof |
+| `shellStableDistanceVanishing` | profile_comparison_v0_2.md §5.3 (Corollary 5.3.2) | Statement placeholder; deferred full proof |
+
+The qualified triangle inequality for `dInfShared` (Proposition 5.2.6, which requires the three pairwise shared subdomains to coincide) is not yet encoded; it can be added in a subsequent round once the subdomain-coincidence hypothesis is formalized.
