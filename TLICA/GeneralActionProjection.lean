@@ -1,14 +1,10 @@
 /-
-TLICA.GeneralActionProjection — Projected PCE over arbitrary action spaces.
+TLICA.GeneralActionProjection — Compatibility names for arbitrary actions.
 
-The existing foundation action type `TLICA.ProjectMap.Action α` stores
-`Unit`, so it is singleton-like. `TLICA.ActionProjection.ProjectedPCE` is still
-useful as an interface over that foundation type, but agency and free-will
-formalization need an arbitrary action type.
-
-This module adds a deterministic project-map layer parameterized by
-`Act : Type*`, while preserving the existing `ProjectMap` and `ProjectedPCE`
-layers unchanged. Stochastic projection remains deferred.
+As of the v0.4 foundation refinement, `TLICA.ProjectMap.ProjectMap` is already
+parameterized by an arbitrary action type `Act`. This module retains the older
+`General*` names as compatibility wrappers over the single primitive
+deterministic projection structure. Stochastic projection remains deferred.
 -/
 
 import TLICA.ActionProjection
@@ -22,21 +18,15 @@ open TLICA.ActionProjection
 
 variable {α Act : Type*}
 
-/-- Deterministic project map over an arbitrary action type `Act`. -/
-structure GeneralProjectMap (α Act : Type*) where
-  /-- The no-action / null action in the generalized action space. -/
-  noAction : Act
-  /-- Deterministic projection of a profile under an action. -/
-  project : Act → ScalarProfile α → ScalarProfile α
-  /-- No-action projection agrees with some natural-dynamics evolution. -/
-  identity_action_natural :
-    ∃ (naturalDynamics : ScalarProfile α → ScalarProfile α),
-      ∀ P, project noAction P = naturalDynamics P
+/-- Compatibility alias: the generalized project map is the parameterized
+    foundation `ProjectMap`. There is only one primitive deterministic
+    projection structure. -/
+abbrev GeneralProjectMap (α Act : Type*) := ProjectMap α Act
 
-/-- The existing deterministic `ProjectMap` embeds into the generalized layer. -/
-def generalProjectMapOfProjectMap (proj : ProjectMap α) :
+/-- The old embedding is now the identity compatibility bridge. -/
+def generalProjectMapOfProjectMap (proj : ProjectMap α (Action α)) :
     GeneralProjectMap α (Action α) where
-  noAction := Action.noAction
+  noAction := proj.noAction
   project := proj.project
   identity_action_natural := proj.identity_action_natural
 
@@ -63,7 +53,7 @@ application. -/
 def GeneralProjectedPCE (fam : FutureMSIModel α)
     (globalRank : GlobalPreservationRanking α) (proj : GeneralProjectMap α Act)
     (P : ScalarProfile α) (a : Act) : ℝ :=
-  globalRank.rank (generalFutureMSIContents fam proj P a)
+  ProjectedPCE fam globalRank proj P a
 
 namespace GeneralProjectedPCE
 
@@ -83,7 +73,8 @@ theorem eq_of_future_contents_eq
       generalFutureMSIContents fam proj P b) :
     GeneralProjectedPCE fam globalRank proj P a =
       GeneralProjectedPCE fam globalRank proj P b := by
-  unfold GeneralProjectedPCE
+  change globalRank.rank (generalFutureMSIContents fam proj P a) =
+    globalRank.rank (generalFutureMSIContents fam proj P b)
   rw [h]
 
 /-- Rank comparison implies general projected-PCE comparison. -/

@@ -16,14 +16,17 @@ namespace TLICA.ProjectMap
 
 open TLICA.Profile
 
-variable {α : Type*}
+variable {α Act : Type*}
 
-/-- An action available to a modeling I at a given time. The architecture
-    leaves the action-space application-defined; here we encode it as an
-    opaque type. -/
+/-- Degenerate/default foundation action type. The v0.4 projection structure is
+    parameterized by an arbitrary action type; this singleton-like wrapper
+    preserves the old foundation default case. -/
 structure Action (α : Type*) where
-  /-- An action carries some application-level data; we keep this abstract. -/
+  /-- The old default action carried only unit data. -/
   data : Unit
+
+/-- Unit-valued default action type for the degenerate foundation case. -/
+abbrev DefaultAction (_α : Type*) := Unit
 
 /-- The "no action" / null action. -/
 def Action.noAction : Action α := ⟨()⟩
@@ -35,26 +38,32 @@ def Action.noAction : Action α := ⟨()⟩
     it) is captured by parameterizing the action space.
 
     Reference: orphan_cluster_v0_1.md Definition 5.2.1 (deterministic variant). -/
-structure ProjectMap (α : Type*) where
+structure ProjectMap (α Act : Type*) where
+  /-- The no-action / null action for this action space. -/
+  noAction : Act
   /-- The projection function. -/
-  project : Action α → ScalarProfile α → ScalarProfile α
+  project : Act → ScalarProfile α → ScalarProfile α
   /-- **Axiom 5.3.1**: the no-action projection equals the natural-dynamics
       evolution of the current profile.
       We state it abstractly: there is *some* natural-dynamics function and
       `project noAction` equals it. -/
   identity_action_natural :
     ∃ (naturalDynamics : ScalarProfile α → ScalarProfile α),
-      ∀ P, project Action.noAction P = naturalDynamics P
+      ∀ P, project noAction P = naturalDynamics P
+
+/-- Compatibility abbreviation for the old singleton-action foundation
+    projection map. New code should prefer `ProjectMap α Act`. -/
+abbrev DefaultProjectMap (α : Type*) := ProjectMap α (Action α)
 
 namespace ProjectMap
 
-variable {α : Type*}
+variable {α Act : Type*}
 
 /-- The no-action projection is well-defined (existence is automatic since
     `project` is total). -/
-theorem noAction_projects (proj : ProjectMap α) (P : ScalarProfile α) :
-    ∃ P', proj.project Action.noAction P = P' :=
-  ⟨proj.project Action.noAction P, rfl⟩
+theorem noAction_projects (proj : ProjectMap α Act) (P : ScalarProfile α) :
+    ∃ P', proj.project proj.noAction P = P' :=
+  ⟨proj.project proj.noAction P, rfl⟩
 
 end ProjectMap
 

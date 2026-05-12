@@ -1,16 +1,22 @@
 # 1. Build status.
 
-Baseline `lake build` on branch `codex/tlica-temporal-trajectory-v0` succeeded before differentiated-affect edits.
+Baseline `lake build` on branch `codex/tlica-differentiated-affect-v0` succeeded before v0.4 foundation-refinement edits.
 
 Baseline `bash scripts/audit_lean.sh` succeeded with zero `sorry`, zero `admit`, and zero global `axiom` declarations in imported Lean files.
 
-After adding the differentiated-affect layer, `lake build` succeeds. Remaining output is warning-only and comes from existing duplicate-namespace lints plus deterministic-default unused-variable warnings.
+After the v0.4 foundation refinement, `lake build` succeeds. Remaining output is warning-only and comes from existing duplicate-namespace lints plus deterministic-default unused-variable warnings.
 
 Final audit status: `bash scripts/audit_lean.sh` succeeds with zero `sorry`/`admit`/global-axiom findings.
 
 # 2. Files changed.
 
-- `TLICA/DifferentiatedAffect.lean`
+- `TLICA/ProjectMap.lean`
+- `TLICA/PCE.lean`
+- `TLICA/ProfileIso.lean`
+- `TLICA/ActionProjection.lean`
+- `TLICA/GeneralActionProjection.lean`
+- `TLICA/Agency.lean`
+- `TLICA/FreeWill.lean`
 - `TLICA.lean`
 - `MAPPING.md`
 - `docs/tlica_codex/LEAN_VERIFICATION_REPORT.md`
@@ -19,90 +25,86 @@ Final audit status: `bash scripts/audit_lean.sh` succeeds with zero `sorry`/`adm
 - `docs/tlica_rosetta/ROSETTA_PURE_MATH_VIEW.md`
 - `docs/tlica_rosetta/ROSETTA_BRIDGE_VIEW.md`
 
-# 3. Inherited declarations confirmed before editing.
+# 3. Inherited application stack confirmed before editing.
 
-Free-will/agency ladder:
+- `TLICA.ActionProjection`
+- `TLICA.GeneralActionProjection`
+- `TLICA.Agency`
+- `TLICA.FreeWill`
+- `TLICA.TemporalTrajectory`
+- `TLICA.DifferentiatedAffect`
 
-- `TLICA.FreeWill.PCEFreeWillWitness`
-- `TLICA.FreeWill.PCEFreeWillWitness.toFreeWillWitness`
-- `TLICA.FreeWill.freeWillWitness_of_pceFreeWillWitness`
-- `TLICA.FreeWill.PCEFreeWillWitness.hasLiveAlternatives`
-- `TLICA.FreeWill.FreeWillWitness.hasLiveAlternatives`
-- `TLICA.Agency.hasLiveAlternatives`
-- `TLICA.Agency.selectsFeasibleAction`
+# 4. Foundation refinements.
 
-Temporal trajectory layer:
+Application pressure revealed that singleton `Action α` was too weak. The primitive deterministic projection structure is now:
 
-- `TLICA.TemporalTrajectory.ProfileTrajectory`
-- `TLICA.TemporalTrajectory.ActionSchedule`
-- `TLICA.TemporalTrajectory.generatedBy`
-- `TLICA.TemporalTrajectory.stepUnionDistance`
-- `TLICA.TemporalTrajectory.stepSharedDistance`
-- `TLICA.TemporalTrajectory.unionStepStable`
-- `TLICA.TemporalTrajectory.eventuallyUnionStepStable`
-- `TLICA.TemporalTrajectory.freeWillWitness_oneStep_branch_contents_distinct`
-- `TLICA.TemporalTrajectory.pceFreeWillWitness_oneStep_branch_contents_distinct`
+- `TLICA.ProjectMap.ProjectMap (α Act : Type*)`
+- `TLICA.ProjectMap.ProjectMap.noAction`
+- `TLICA.ProjectMap.ProjectMap.project`
+- `TLICA.ProjectMap.ProjectMap.identity_action_natural`
 
-# 4. Lean declarations added.
+The old singleton/default action case is preserved:
 
-Added and machine-verified:
+- `TLICA.ProjectMap.Action`
+- `TLICA.ProjectMap.Action.noAction`
+- `TLICA.ProjectMap.DefaultAction`
+- `TLICA.ProjectMap.DefaultProjectMap`
 
-- `TLICA.DifferentiatedAffect.relativePCEDelta`
-- `TLICA.DifferentiatedAffect.pceSupportive`
-- `TLICA.DifferentiatedAffect.pceNeutral`
-- `TLICA.DifferentiatedAffect.pceDefeating`
-- `TLICA.DifferentiatedAffect.pceSupportive_iff`
-- `TLICA.DifferentiatedAffect.pceDefeating_iff`
-- `TLICA.DifferentiatedAffect.pceNeutral_iff`
-- `TLICA.DifferentiatedAffect.pceValence_trichotomy`
-- `TLICA.DifferentiatedAffect.pceSupportive_not_neutral`
-- `TLICA.DifferentiatedAffect.pceSupportive_not_defeating`
-- `TLICA.DifferentiatedAffect.pceDefeating_not_neutral`
-- `TLICA.DifferentiatedAffect.branchUnionDistance`
-- `TLICA.DifferentiatedAffect.branchSharedDistance`
-- `TLICA.DifferentiatedAffect.branchProfileShift`
-- `TLICA.DifferentiatedAffect.branchFutureContents_eq_of_branchProfile_eq`
-- `TLICA.DifferentiatedAffect.branchProfile_ne_of_branchFutureContents_ne`
-- `TLICA.DifferentiatedAffect.PCESupportAffectWitness`
-- `TLICA.DifferentiatedAffect.PCEDefeatAffectWitness`
-- `TLICA.DifferentiatedAffect.PCENeutralAffectWitness`
-- `TLICA.DifferentiatedAffect.ProfileShiftAffectWitness`
-- `TLICA.DifferentiatedAffect.AffectKernelWitness`
-- `TLICA.DifferentiatedAffect.affectKernel_of_pceSupport`
-- `TLICA.DifferentiatedAffect.affectKernel_of_pceDefeat`
-- `TLICA.DifferentiatedAffect.affectKernel_of_profileShift`
-- `TLICA.DifferentiatedAffect.profileShiftAffectWitness_of_freeWillWitness`
-- `TLICA.DifferentiatedAffect.affectKernel_of_freeWillWitness`
-- `TLICA.DifferentiatedAffect.affectKernel_of_pceFreeWillWitness`
-- `TLICA.DifferentiatedAffect.no_affectKernel_of_branch_and_pce_collapse`
-- `TLICA.DifferentiatedAffect.temporalAffectIntensity`
-- `TLICA.DifferentiatedAffect.temporalAffectIntensity_nonneg`
-- `TLICA.DifferentiatedAffect.temporalAffectIntensity_le_of_unionStepStable`
+`TLICA.GeneralActionProjection.GeneralProjectMap` is retained only as a compatibility abbreviation for `ProjectMap α Act`; there is no duplicate primitive deterministic projection structure.
 
-Added as explicit deferred markers, not theorem claims:
+The deterministic foundation-default `TLICA.PCE.PCE` is now parameterized over arbitrary `Act`, and its constant-action theorems still hold:
 
-- `TLICA.DifferentiatedAffect.namedAffectTaxonomy_deferred`
-- `TLICA.DifferentiatedAffect.loveConstitutiveExtension_deferred`
-- `TLICA.DifferentiatedAffect.substrateAffectPathway_deferred`
-- `TLICA.DifferentiatedAffect.sourceOpacityAffect_deferred`
+- `TLICA.PCE.PCE.nonneg`
+- `TLICA.PCE.PCE.eq_rank_msi_contents`
+- `TLICA.PCE.PCE.bounded_by_msi_max`
+- `TLICA.PCE.PCE.every_action_maximizes`
+- `TLICA.PCE.PCE.all_actions_equal`
 
-Preserved:
+# 5. Coherence and feasibility additions.
 
-- Existing `TLICA.TemporalTrajectory`, `TLICA.FreeWill`, `TLICA.Agency`, `TLICA.GeneralActionProjection`, `TLICA.ActionProjection`, `TLICA.PCE`, and `TLICA.ProjectMap` modules are unchanged.
+Added optional profile-coherence layer:
 
-# 5. Rosetta entries added/modified.
+- `TLICA.ProfileIso.ProfileIso`
+- `TLICA.ProfileIso.ProfileIso.refl`
+- `TLICA.ProfileIso.ProfileIso.symm`
+- `TLICA.ProfileIso.ProfileIso.trans`
+- `TLICA.ActionProjection.CoherentFutureMSIModel`
+- `TLICA.ActionProjection.CoherentFutureMSIModel.toFutureMSIModel`
 
-- Updated `MAPPING.md` with the profile/PCE differentiated-affect kernel and deferred markers.
-- Updated `ROSETTA_MATH_FIRST_LEDGER.md` with relative PCE valence, branch-profile shift, affect witnesses, witness bridges, collapse exclusion, and temporal intensity entries.
-- Updated `ROSETTA_PURE_MATH_VIEW.md` to state that PCE-support, defeat, and neutrality are baseline-relative.
-- Updated `ROSETTA_BRIDGE_VIEW.md` with free-will/PCE-free-will bridges into affect-kernel witnesses.
+Existing `FutureMSIModel.domain_match` remains the default weak compatibility condition. The optional coherent model projects to the weaker model.
+
+Added reusable no-action feasibility:
+
+- `TLICA.Agency.FeasibilityModel`
+- `TLICA.Agency.FeasibilityModel.feasible`
+- `TLICA.Agency.FeasibilityModel.noAction_feasible`
+- `TLICA.Agency.AgencyContext.feasibility`
+- `TLICA.Agency.AgencyContext.feasible`
+- `TLICA.Agency.AgencyContext.noAction_feasible`
+
+# 6. Application stack preservation.
+
+The following meanings remain intact:
+
+- `GeneralProjectedPCE` still supports arbitrary `Act`.
+- `selectsFeasibleAction` still quantifies over feasible actions.
+- `FreeWillWitness` still uses branch-sensitive agency.
+- `PCEFreeWillWitness` still implies `FreeWillWitness`.
+- `AffectKernelWitness` still receives bridges from `FreeWillWitness` and `PCEFreeWillWitness`.
+
+`FutureMSIModel + GlobalPreservationRanking` held up across agency, free-will, temporal, and differentiated-affect layers.
+
+# 7. Rosetta entries added/modified.
+
+- Updated `MAPPING.md` with parameterized `ProjectMap`, compatibility `GeneralProjectMap`, `ProfileIso`, `CoherentFutureMSIModel`, and `FeasibilityModel`.
+- Updated `ROSETTA_MATH_FIRST_LEDGER.md` with v0.4 projection, coherence, projected-PCE, and feasibility refinements.
+- Updated `ROSETTA_PURE_MATH_VIEW.md` to state that the singleton action design was too weak and is now a degenerate default.
+- Updated `ROSETTA_BRIDGE_VIEW.md` with compatibility-layer and no-duplicate-primitive-projection notes.
 - Regenerated `lean_declaration_inventory.md`.
 
-# 6. Open mathematical issues requiring user/ChatGPT review.
+# 8. Open mathematical issues requiring user/ChatGPT review.
 
-- `TLICA.DifferentiatedAffect` depends on `TemporalTrajectory`, `FreeWill`, `Agency`, `GeneralActionProjection`, and the existing profile-comparison distance layer.
-- This branch formalizes only the first profile/PCE affect kernel.
-- Free-will witnesses yield profile-shift affect kernels.
-- PCE-free-will witnesses yield PCE-differentiated affect kernels.
-- Named affect taxonomy remains deferred.
-- Substrate and source-opacity affect pathways remain deferred.
+- No global existence of agency, free will, trajectory, or affect is asserted.
+- Stochastic projection remains deferred.
+- `GeneralActionProjection` remains as compatibility names, not as a second primitive projection structure.
+- `ProfileIso` is optional stronger coherence; `FutureMSIModel.domain_match` remains the default weak condition.

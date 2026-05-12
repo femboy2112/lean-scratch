@@ -25,7 +25,7 @@ namespace TLICA.PCE
 open TLICA.Profile TLICA.MSI TLICA.PreservationRanking TLICA.ProjectMap
 open Classical
 
-variable {α : Type*}
+variable {α Act : Type*}
 
 /-- The PCE evaluation of an action, in the deterministic variant.
 
@@ -41,7 +41,7 @@ variable {α : Type*}
 
     Reference: orphan_cluster_v0_1.md Definition 6.2.1 (deterministic). -/
 noncomputable def PCE (msi : MSI α) (pi : PreservationRanking msi)
-    (proj : ProjectMap α) (a : Action α) : ℝ :=
+    (proj : ProjectMap α Act) (a : Act) : ℝ :=
   -- In the deterministic default, the expectation reduces to evaluating Π
   -- on the projected MSI. Since the projected profile lives over a possibly
   -- different domain (subtype mismatch), we use the MSI's own contents as
@@ -50,18 +50,18 @@ noncomputable def PCE (msi : MSI α) (pi : PreservationRanking msi)
 
 namespace PCE
 
-variable {α : Type*}
+variable {α Act : Type*}
 
 /-- PCE is non-negative (follows from `Π.rank_nonneg`). -/
 theorem nonneg (msi : MSI α) (pi : PreservationRanking msi)
-    (proj : ProjectMap α) (a : Action α) :
+    (proj : ProjectMap α Act) (a : Act) :
     0 ≤ PCE msi pi proj a :=
   pi.rank_nonneg _
 
 /-- In the deterministic foundation default, PCE evaluates to the rank of the
     MSI contents. Application-calibrated projection models refine this value. -/
 theorem eq_rank_msi_contents (msi : MSI α) (pi : PreservationRanking msi)
-    (proj : ProjectMap α) (a : Action α) :
+    (proj : ProjectMap α Act) (a : Act) :
     PCE msi pi proj a = pi.rank msi.contents :=
   rfl
 
@@ -71,7 +71,7 @@ theorem eq_rank_msi_contents (msi : MSI α) (pi : PreservationRanking msi)
     In the foundation-default deterministic variant, every action has PCE
     equal to this maximum; richer projection maps differentiate actions. -/
 theorem bounded_by_msi_max (msi : MSI α) (pi : PreservationRanking msi)
-    (proj : ProjectMap α) (a : Action α) :
+    (proj : ProjectMap α Act) (a : Act) :
     PCE msi pi proj a ≤ pi.rank msi.contents := by
   unfold PCE
   exact le_refl _
@@ -80,12 +80,12 @@ theorem bounded_by_msi_max (msi : MSI α) (pi : PreservationRanking msi)
     Since the foundation-default has all actions at the same PCE, the
     selection is trivial here; richer projection maps will differentiate. -/
 def selectsAction (msi : MSI α) (pi : PreservationRanking msi)
-    (proj : ProjectMap α) (a : Action α) : Prop :=
-  ∀ b : Action α, PCE msi pi proj b ≤ PCE msi pi proj a
+    (proj : ProjectMap α Act) (a : Act) : Prop :=
+  ∀ b : Act, PCE msi pi proj b ≤ PCE msi pi proj a
 
 /-- Every action is a maximizer in the foundation default (PCE is constant). -/
 theorem every_action_maximizes (msi : MSI α) (pi : PreservationRanking msi)
-    (proj : ProjectMap α) (a : Action α) :
+    (proj : ProjectMap α Act) (a : Act) :
     selectsAction msi pi proj a := by
   unfold selectsAction PCE
   intro b
@@ -94,7 +94,7 @@ theorem every_action_maximizes (msi : MSI α) (pi : PreservationRanking msi)
 /-- In the deterministic foundation default, all actions receive the same PCE
     value. Differentiated action choice is an application-calibrated extension. -/
 theorem all_actions_equal (msi : MSI α) (pi : PreservationRanking msi)
-    (proj : ProjectMap α) (a b : Action α) :
+    (proj : ProjectMap α Act) (a b : Act) :
     PCE msi pi proj a = PCE msi pi proj b :=
   rfl
 

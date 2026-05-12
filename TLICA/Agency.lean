@@ -15,10 +15,22 @@ import TLICA.GeneralActionProjection
 namespace TLICA.Agency
 
 open TLICA.Profile
+open TLICA.ProjectMap
 open TLICA.ActionProjection
 open TLICA.GeneralActionProjection
 
 variable {α Act : Type*}
+
+/-- Feasibility model indexed by a deterministic project map.
+
+This lifts no-action feasibility into a reusable foundation-level structure
+while allowing feasibility to depend on the action space and projection
+context. -/
+structure FeasibilityModel (α Act : Type*) (proj : GeneralProjectMap α Act) where
+  /-- Feasible actions at a current profile. -/
+  feasible : ScalarProfile α → Set Act
+  /-- No-action is always feasible. -/
+  noAction_feasible : ∀ P, proj.noAction ∈ feasible P
 
 /-- Agency context over an arbitrary action type.
 
@@ -33,10 +45,25 @@ structure AgencyContext (α Act : Type*) where
   globalRank : GlobalPreservationRanking α
   /-- Deterministic generalized projection over `Act`. -/
   proj : GeneralProjectMap α Act
-  /-- Feasible actions at a current profile. -/
-  feasible : ScalarProfile α → Set Act
-  /-- No-action is always feasible. -/
-  noAction_feasible : ∀ P, proj.noAction ∈ feasible P
+  /-- Feasibility model for this projection context. -/
+  feasibility : FeasibilityModel α Act proj
+
+namespace AgencyContext
+
+variable {α Act : Type*}
+
+/-- Feasible actions at a current profile, exposed as an accessor to preserve
+    existing `ctx.feasible P` notation. -/
+def feasible (ctx : AgencyContext α Act) : ScalarProfile α → Set Act :=
+  ctx.feasibility.feasible
+
+/-- No-action feasibility, exposed as an accessor over the lifted feasibility
+    model. -/
+theorem noAction_feasible (ctx : AgencyContext α Act) (P : ScalarProfile α) :
+    ctx.proj.noAction ∈ ctx.feasible P :=
+  ctx.feasibility.noAction_feasible P
+
+end AgencyContext
 
 /-- Projected PCE evaluated in an agency context. Feasibility is kept as a
     separate predicate so infeasible alternatives can be excluded explicitly. -/

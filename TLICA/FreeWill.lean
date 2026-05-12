@@ -59,6 +59,8 @@ theorem branchFutureContents_ne_of_pce_ne
         generalFutureMSIContents ctx.fam ctx.proj P b := by
     simpa [branchFutureContents] using hcontents
   unfold feasibleProjectedPCE GeneralProjectedPCE
+  change ctx.globalRank.rank (generalFutureMSIContents ctx.fam ctx.proj P a) =
+    ctx.globalRank.rank (generalFutureMSIContents ctx.fam ctx.proj P b)
   rw [hfuture]
 
 /-- PCE-branch distinct alternatives are branch-distinct alternatives. -/

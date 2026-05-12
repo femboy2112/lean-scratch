@@ -15,6 +15,7 @@ This module is the top-level entry point. It imports every encoded submodule.
     7. TLICA.Profile                              — Base ρ-profile structure.
     8. TLICA.ProfileComparison.Pointwise          — L^∞ shared and union distances.
     9. TLICA.ProfileComparison.ShellRefinement    — Shell-stratified bound.
+    9b. TLICA.ProfileIso                          — Optional profile coherence relation.
 
   Round 4 (profile-comparison completion + foundation orphan cluster):
    10. TLICA.ProfileComparison.PseudoEMetric     — PseudoEMetricSpace instance.
@@ -44,6 +45,7 @@ import TLICA.ModeAggregation
 import TLICA.Dynamics
 import TLICA.NonReducibility
 import TLICA.Profile
+import TLICA.ProfileIso
 import TLICA.ProfileComparison.Pointwise
 import TLICA.ProfileComparison.ShellRefinement
 import TLICA.ProfileComparison.PseudoEMetric

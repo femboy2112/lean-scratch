@@ -129,12 +129,19 @@ mediates the pointwise comparison and `dInfShared f h ≤ dInfShared f g + dInfS
 | `ModeOp` inductive type | orphan_cluster_v0_1.md §8.2 | Encoded |
 | `ModeOp.fromEval`, `cogito_triggers_modeC` | PtCns-triggered mode selection (Axiom 7.3.3) | Encoded |
 | `IBoundary.boundary`, `boundary_excludes_neutral`, `cogito_in_boundary`, `mem_boundary_iff`, `boundary_not_neutral` | orphan_cluster_v0_1.md §9 | Encoded with proofs |
-| `Action` opaque structure, `ProjectMap` with identity-action axiom | orphan_cluster_v0_1.md §5 (deterministic) | Encoded |
-| `PCE` definition, `nonneg`, `eq_rank_msi_contents`, `bounded_by_msi_max`, `every_action_maximizes`, `all_actions_equal` | orphan_cluster_v0_1.md §6 (deterministic foundation default) | Encoded with proofs |
+| `Action`, `DefaultAction`, `Action.noAction` | Degenerate/singleton default action case retained for compatibility | Encoded |
+| `ProjectMap`, `ProjectMap.noAction`, `ProjectMap.project`, `ProjectMap.identity_action_natural`, `ProjectMap.noAction_projects` | orphan_cluster_v0_1.md §5 deterministic projection, now parameterized by arbitrary action type `Act` | Encoded structure / primitive structure-field assumption / proof |
+| `DefaultProjectMap` | Compatibility abbreviation for the old singleton-action projection shape | Encoded abbreviation |
+| `PCE` definition, `nonneg`, `eq_rank_msi_contents`, `bounded_by_msi_max`, `every_action_maximizes`, `all_actions_equal` | orphan_cluster_v0_1.md §6 deterministic foundation default, now action-constant over arbitrary `Act` | Encoded with proofs |
 
-The foundation orphan cluster is encoded at signature-and-default level. The
-deterministic foundation default `PCE` remains intentionally constant across
-actions. Stochastic projection and refined boundary structure remain deferred.
+The foundation orphan cluster is encoded at signature-and-default level.
+Application pressure revealed that the old singleton `Action α` was too weak,
+so `ProjectMap` is now parameterized over arbitrary action type `Act`. The old
+singleton/default action case is preserved as a degenerate compatibility case.
+The deterministic foundation default `PCE` remains intentionally constant
+across actions over arbitrary `Act`; this is not the application-calibrated
+`ProjectedPCE`. Stochastic projection and refined boundary structure remain
+deferred.
 
 ## Action-calibrated projected PCE
 
@@ -142,6 +149,8 @@ actions. Stochastic projection and refined boundary structure remain deferred.
 |---|---|---|
 | `FutureMSIModel` | Application-ready cross-time MSI assignment for projected profiles | Encoded structure; uses `domain_match`, not full profile equality |
 | `FutureMSIModel.domain_match` | Compatibility between assigned future MSI domain and projected profile domain | Primitive structure-field assumption |
+| `ProfileIso`, `ProfileIso.refl`, `ProfileIso.symm`, `ProfileIso.trans` | Optional extensional profile-coherence relation | Encoded structure/definitions |
+| `CoherentFutureMSIModel`, `CoherentFutureMSIModel.toFutureMSIModel` | Optional stronger future-MSI model with profile-isomorphism coherence, projected to the weaker model | Encoded structure/definition |
 | `GlobalPreservationRanking` | Application-calibrated universal-domain ranking over `Set α` | Encoded structure |
 | `GlobalPreservationRanking.rank_nonneg`, `monotone` | Non-negativity and monotonicity calibration conditions | Primitive structure-field assumptions |
 | `liftSet`, `liftMSIContents` | Subtype-domain content-set lift into the universal content type | Encoded definitions |
@@ -154,23 +163,21 @@ actions. Stochastic projection and refined boundary structure remain deferred.
 | `ProjectedPCE.selectsProjectedAction`, `selected_has_max_projectedPCE` | Projected action-selection and maximality by definition | Encoded definition/proof |
 | `ProjectedPCE.strictly_differentiates_of_rank_lt` | Conditional non-degeneracy under strict global-rank inequality | Encoded with proof; no existence claim |
 
-`FutureMSIModel` uses the weaker `domain_match` field because full equality of
-`ScalarProfile` values involves dependent functions over subtype domains. This
-is sufficient for the projected-PCE layer, which ranks `liftMSIContents` in the
-universal content type rather than comparing projected profile functions.
+`FutureMSIModel` uses the weaker `domain_match` field by default. The optional
+`CoherentFutureMSIModel` records stronger `ProfileIso` coherence and projects
+back to the weaker model. The combination of `FutureMSIModel` and
+`GlobalPreservationRanking` held up across the agency, free-will, temporal, and
+differentiated-affect layers.
 
-`ActionProjection.ProjectedPCE` is an interface layer over the current
-foundation `Action α`. Since `Action α` stores only `Unit`, it is
-singleton-like and should not be used as the final agency/free-will action
-space.
+`ActionProjection.ProjectedPCE` is now parameterized by arbitrary action type
+through the foundation `ProjectMap α Act`.
 
 ## Generalized action-space projected PCE
 
 | Lean declaration | Working-paper reference | Status |
 |---|---|---|
-| `GeneralProjectMap` | Application-ready deterministic projection over arbitrary action type `Act` | Encoded structure |
-| `GeneralProjectMap.noAction`, `project`, `identity_action_natural` | Null action, deterministic projection, and natural-dynamics compatibility | Primitive structure-field assumptions |
-| `generalProjectMapOfProjectMap` | Embedding of existing `ProjectMap α` into the generalized action-space layer | Encoded definition |
+| `GeneralProjectMap` | Compatibility alias for parameterized foundation `ProjectMap α Act` | Encoded abbreviation; no duplicate primitive projection structure |
+| `generalProjectMapOfProjectMap` | Identity compatibility bridge from `ProjectMap α (Action α)` to the general-name layer | Encoded definition |
 | `generalProjectedProfile`, `generalFutureMSI`, `generalFutureMSIContents` | Generic projected-profile and future-MSI helper definitions | Encoded definitions |
 | `GeneralProjectedPCE` | Action-calibrated projected PCE over arbitrary action type `Act` | Encoded definition |
 | `GeneralProjectedPCE.nonneg` | Non-negativity of generic projected PCE | Encoded with proof |
@@ -181,8 +188,9 @@ space.
 | `GeneralProjectedPCE.strictly_differentiates_of_rank_lt` | Conditional strict differentiation over arbitrary action type | Encoded with proof; no existence claim |
 | `generalProjectedPCE_strictly_differentiates_of_rank_lt` | Explicit top-level conditional theorem that strict differentiation is not blocked by singleton action typing | Encoded with proof; no existence claim |
 
-Agency and free-will formalization should use `GeneralActionProjection` with an
-application-supplied `Act`. Deterministic projection remains the current layer;
+`GeneralActionProjection` is retained only as a compatibility naming layer.
+There is now one primitive deterministic projection structure:
+`ProjectMap α Act`. Deterministic projection remains the current layer;
 stochastic projection remains deferred.
 
 ## Agency layer
@@ -191,7 +199,8 @@ stochastic projection remains deferred.
 |---|---|---|
 | `AgencyContext` | Agency as feasible action context over generalized projected PCE | Encoded structure |
 | `AgencyContext.fam`, `globalRank`, `proj` | Generalized projected-PCE calibration objects | Structure fields |
-| `AgencyContext.feasible`, `noAction_feasible` | Feasible action set and no-action feasibility | Primitive structure-field assumptions |
+| `FeasibilityModel`, `FeasibilityModel.feasible`, `FeasibilityModel.noAction_feasible` | Project-map-indexed feasible-action model with no-action feasibility | Encoded structure / primitive structure-field assumption |
+| `AgencyContext.feasibility`, `AgencyContext.feasible`, `AgencyContext.noAction_feasible` | Agency feasibility supplied by reusable `FeasibilityModel` | Encoded field/accessors |
 | `feasibleProjectedPCE` | General projected PCE evaluated in an agency context | Encoded definition |
 | `selectsFeasibleAction` | Feasible maximizer predicate over available alternatives | Encoded definition |
 | `liveAlternative`, `hasLiveAlternatives` | Nontrivial agency via distinct feasible actions | Encoded definitions |
@@ -205,9 +214,10 @@ stochastic projection remains deferred.
 | `pceDifferentiatedAlternative_of_selected_strictly_beats` | Strictly beating a feasible alternative gives PCE differentiation | Encoded with proof |
 | `finiteFeasibleSelection_deferred` | Deferred marker for finite feasible-action maximizer existence | Non-substantive deferred target marker; no theorem claim |
 
-The agency layer depends on `GeneralActionProjection`. It does not assert that
-selected actions exist globally; existence is represented by `AgencyWitness` or
-by an explicit `selectsFeasibleAction` hypothesis.
+The agency layer depends on `GeneralActionProjection` compatibility names over
+the parameterized foundation `ProjectMap`. It does not assert that selected
+actions exist globally; existence is represented by `AgencyWitness` or by an
+explicit `selectsFeasibleAction` hypothesis.
 
 ## Free-will layer
 
