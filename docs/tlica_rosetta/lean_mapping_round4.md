@@ -129,16 +129,18 @@ mediates the shared-distance triangle comparison.
 | `ModeOp` inductive type | orphan_cluster_v0_1.md §8.2 | Encoded |
 | `ModeOp.fromEval`, `cogito_triggers_modeC` | PtCns-triggered mode selection (Axiom 7.3.3) | Encoded |
 | `IBoundary.boundary`, `boundary_excludes_neutral`, `cogito_in_boundary` | orphan_cluster_v0_1.md §9 | Encoded |
-| `Action` opaque structure, `ProjectMap` with identity-action axiom | orphan_cluster_v0_1.md §5 (deterministic) | Encoded |
+| `Action` degenerate wrapper/default action cases, `ProjectMap α Act` with `noAction`, `project`, and identity-action naturality | orphan_cluster_v0_1.md §5 (deterministic, v0.4-aligned) | Encoded |
 | `PCE` definition, `nonneg`, `bounded_by_msi_max`, `every_action_maximizes` | orphan_cluster_v0_1.md §6 (deterministic foundation default) | Encoded |
 
 The foundation orphan cluster is encoded at signature-and-default level. The
 deterministic foundation default `PCE` remains intentionally constant across
-actions. A later additive module, `TLICA.ActionProjection`, supplies an
-action-calibrated deterministic projected-PCE interface over the current
-singleton-like `Action α`. `TLICA.GeneralActionProjection` supplies the
-application-ready arbitrary-action version for agency/free-will work.
+actions over arbitrary action type `Act`; this constancy is by
+foundation-default definition, not by singleton action typing.
+`TLICA.ActionProjection` supplies the primary action-calibrated deterministic
+projected-PCE interface over `ProjectMap α Act`.
+`TLICA.GeneralActionProjection` is a compatibility naming layer, not a second
+primitive projection structure.
 `TLICA.Agency` supplies the first agency layer as feasible action selection
-under generalized projected PCE. `TLICA.FreeWill` supplies the first
+under projected PCE. `TLICA.FreeWill` supplies the first
 branch-sensitive agency witness layer. Stochastic projection, refined boundary
 structure, and richer free-will branch semantics remain deferred.

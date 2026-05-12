@@ -2,6 +2,8 @@
 
 This audit records how the formalized application layers relate to the current source papers and working papers. It is intentionally conservative: it distinguishes source-backed kernels from application claims that remain deferred pending prose/math refinement.
 
+v0.4 source-alignment note: the source prose now reflects that `ProjectMap α Act` is the primitive deterministic projection structure, with `Action α` / `DefaultAction α` retained only as degenerate defaults. Foundation-default `PCE` is action-constant over arbitrary `Act`; action-sensitive continuation appraisal is represented by `ProjectedPCE`.
+
 Alignment classifications:
 
 - directly source-backed
@@ -12,9 +14,9 @@ Alignment classifications:
 
 | Layer | Alignment | Lean/Rosetta coverage | Source alignment note |
 |---|---|---|---|
-| Action projection | source-backed but strengthened | `ACT-001` to `ACT-006`; `ProjectMap α Act`; `ProjectedPCE` | The orphan-cluster projection/PCE apparatus motivates deterministic projection and preservation ranking. v0.4 strengthened the foundation by parameterizing `ProjectMap` over arbitrary `Act`, replacing the old singleton-like default as the primary projection API. |
+| Action projection | source-backed but strengthened | `ACT-001` to `ACT-006`; `ProjectMap α Act`; `ProjectedPCE` | The orphan-cluster projection/PCE apparatus motivates deterministic projection and preservation ranking. v0.4 strengthened the foundation by parameterizing `ProjectMap` over arbitrary `Act`, replacing the old singleton-like default as the primary projection API. Source prose has been aligned to this correction. |
 | General action compatibility | formal convenience / compatibility | `ACT-007` to `ACT-009`; `GeneralProjectMap`, `GeneralProjectedPCE`, `general*` names | Retained only for older branch continuity. There is one primitive deterministic projection structure: `ProjectMap α Act`. |
-| Agency | source-backed but narrowed | `AGY-001` to `AGY-005` | Formalized as feasible projected-PCE selection with live alternatives and PCE-differentiated alternatives. This is a first structural witness layer, not a full account of all agency semantics. |
+| Agency | source-backed but narrowed | `AGY-001` to `AGY-005` | Formalized as feasible projected-PCE selection with live alternatives and PCE-differentiated alternatives. `FeasibilityModel α Act proj` supplies calibrated feasible sets and no-action feasibility; no global maximizer existence is asserted. This is a first structural witness layer, not a full account of all agency semantics. |
 | Free will | source-backed but narrowed | `FWL-001` to `FWL-004` | Formalized as branch-sensitive feasible agency with a selected action and live branch-distinct alternative. PCE-free-will witnesses imply free-will witnesses. Broader compatibilist/incompatibilist metaphysics and stochastic projection are deferred. |
 | Temporal trajectory | source-backed but narrowed | `TMP-001` to `TMP-005` | Formalized as deterministic natural-time indexed profile trajectories supplied as data and verified by `generatedBy`. Phenomenological duration and stochastic trajectories remain deferred. |
 | Differentiated affect | source-backed but narrowed | `AFF-001` to `AFF-007` | Formalized only as a profile/PCE affect kernel: baseline-relative PCE support/defeat/neutrality, branch profile shift, affect-kernel witnesses, and collapse exclusion. Named affect taxonomy, substrate pathway, and source-opacity pathway remain deferred. |

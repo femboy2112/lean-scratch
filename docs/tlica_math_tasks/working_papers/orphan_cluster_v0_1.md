@@ -63,7 +63,7 @@ This is the same structural-shape observation I made when the user first asked a
 - **MSI** is a *distinguished sub-structure* of the lived-I network.
 - **Π** is a *ranking* on subsets of the lived-I.
 - **Project** is a *transition function* from current state and action to projected future state.
-- **PCE** is an *action-orientation principle* that selects actions to maximize Π under Project.
+- **PCE** is an *action-orientation principle* whose application-ready projected form selects actions to maximize Π under Project.
 - **PtCns** is an *evaluation function* on encounters with not-I contents.
 - **Modes A/B/C** are *evolutionary operators* on the profile.
 - **The boundary** is a *derived structural region* of the asymptotic content domain.
@@ -245,17 +245,25 @@ The Project map is the I's representation of how a candidate action would change
 
 ### 5.2 Type signature
 
-**Definition 5.2.1** (Project type signature, foundation-ready form).
+**Definition 5.2.1** (Project type signature, foundation-ready deterministic form).
 
-$$\mathsf{Project}_{m, t} : \mathsf{Actions}_{m, t} \times \mathcal{P}^\rho_{m, t} \to \mathcal{D}(\mathcal{P}^\rho_{m, t + \Delta}),$$
+Lean v0.4 corrects the foundation signature by making the action carrier a parameter of the primitive deterministic projection structure:
 
-where $\mathsf{Actions}_{m, t}$ is the action-space available to $m$ at $t$ (application-defined), $\mathcal{P}^\rho_{m, t}$ is the space of $\rho$-profiles at time $t$, $\Delta > 0$ is a forward-projection horizon, and $\mathcal{D}(X)$ is the space of probability distributions on $X$.
+$$\mathsf{ProjectMap}_{\alpha,\mathsf{Act}} := (\mathsf{noAction} : \mathsf{Act},\ \mathsf{project} : \mathsf{Act} \to \mathcal{P}^\rho_\alpha \to \mathcal{P}^\rho_\alpha,\ \mathsf{identity\_action\_natural}).$$
 
-**Remark 5.2.2** (deterministic special case). When the I's projection apparatus is deterministic at $(m, t)$, $\mathsf{Project}$ produces a Dirac measure and reduces to a function $\mathsf{Actions}_{m, t} \times \mathcal{P}^\rho_{m, t} \to \mathcal{P}^\rho_{m, t + \Delta}$. Most foundation work can proceed at the deterministic level; the stochastic codomain is preserved to support distorted-projection analysis.
+The no-action compatibility field is:
+
+$$\exists\,\mathsf{naturalDynamics},\ \forall P,\ \mathsf{project}(\mathsf{noAction}, P) = \mathsf{naturalDynamics}(P).$$
+
+Here $\mathsf{Act}$ is an arbitrary action carrier supplied by the application context. The old `Action α` wrapper and `DefaultAction α := Unit` are degenerate compatibility/default cases only. `GeneralProjectMap` is a compatibility alias over `ProjectMap α Act`, not a second primitive projection structure.
+
+In the source-level indexed notation, $\mathsf{Actions}_{m,t}$ is an instance of the abstract carrier $\mathsf{Act}$ available to $m$ at $t$, and $\mathcal{P}^\rho_{m,t}$ is the space of $\rho$-profiles at time $t$.
+
+**Remark 5.2.2** (stochastic variants deferred). The verified Lean foundation currently uses the deterministic `ProjectMap α Act`. Stochastic or Bayesian projection may later be represented by a probability-valued refinement, but it is not part of the current primitive structure.
 
 ### 5.3 Axioms
 
-**Axiom 5.3.1** (identity action). $\mathsf{Project}_{m, t}(\text{no action}, P) \approx$ the natural evolution of $P$ under the foundation's update rule (§9.1 of Rosetta stone).
+**Axiom 5.3.1** (identity/no-action naturality). $\mathsf{Project}_{m, t}(\text{no action}, P)$ equals the natural evolution of $P$ under some supplied natural-dynamics function.
 
 The "do nothing" projection should match the apparatus's autonomous dynamics. This connects Project to the established dynamics machinery.
 
@@ -285,17 +293,16 @@ $\mathsf{Project}_{m, t}$ is a Bayesian posterior over future profiles given act
 
 A variant of Candidate 5.4.1 that incorporates substrate-level osmotic effects (§12.9 orphan).
 
-**Recommendation**: foundation declares Project axiomatically (§5.3) with Candidate 5.4.1 as the default deterministic instantiation. Stochastic and Bayesian variants are application-level.
+**Recommendation**: foundation declares deterministic `ProjectMap α Act` axiomatically (§5.3) with Candidate 5.4.1 as the default deterministic instantiation. Stochastic and Bayesian variants are application-level.
 
 ### 5.5 Lean encoding
 
 ```
-structure ProjectMap (m : ModelI) (t : Time m) (Δ : Time m) where
-  project : Action m t → ScalarProfile (Content m) → 
-            ProbabilityMeasure (ScalarProfile (Content m))
-  identity_action : ∀ P, project NoAction P = naturalDynamics P
-  causal_locality : ∀ a P, support (project a P) ⊆ 
-                    affectedRegion a P × naturalDynamics
+structure ProjectMap (α Act : Type*) where
+  noAction : Act
+  project : Act → ScalarProfile α → ScalarProfile α
+  identity_action_natural :
+    ∃ naturalDynamics, ∀ P, project noAction P = naturalDynamics P
 ```
 
 ---
@@ -306,31 +313,37 @@ structure ProjectMap (m : ModelI) (t : Time m) (Δ : Time m) where
 
 PCE is "the structural feature by which the modeling I structurally pulls toward the path that maximizes continued existence of the *maximally-self-defined I*." Cf. `2_access_and_development.md` §4.8.
 
-PCE operates on actions, evaluates them via projection through Π over MSI, and selects the maximizing action under existential pressure. PCE can be "defeated, misdirected, or routed through distorted projections" — these failure modes are application-relevant for suicidality and self-sacrifice cases.
+Source-level PCE operates on actions, evaluates them via projection through Π over MSI, and orients toward maximizing continuation under existential pressure. The verified Lean layer separates this into a foundation-default `PCE` and an application-ready `ProjectedPCE`: foundation-default `PCE` is action-constant over arbitrary `Act`, while action-sensitive evaluation is handled by `ProjectedPCE`.
 
 ### 6.2 Type signature and composite definition
 
-**Definition 6.2.1** (PCE type signature and definition).
+**Definition 6.2.1** (source-level projected PCE target).
 
 $$\mathsf{PCE}_{m, t} : \mathsf{Actions}_{m, t} \to \mathbb{R}_{\ge 0},$$
 
 $$\mathsf{PCE}_{m, t}(a) := \mathbb{E}_{P' \sim \mathsf{Project}_{m, t}(a, P^\rho_{m, t})}\left[\Pi_{m, t + \Delta}(P' \cap \mathsf{MSI}^m_{t + \Delta})\right].$$
 
-PCE evaluates an action by projecting forward under Project, intersecting the projected profile with the projected MSI, and ranking under Π. The expectation handles stochastic Project; in the deterministic case it reduces to the Π-value of the projected MSI.
+This is the application target captured by Lean's `ProjectedPCE` in deterministic form. `ProjectedPCE` evaluates an action by projecting forward under `ProjectMap α Act`, assigning a future MSI to the projected profile with `FutureMSIModel`, lifting the future MSI contents into the universal content type, and ranking them with `GlobalPreservationRanking`.
 
-**The action-selection principle:**
+The verified foundation-default `PCE` is deliberately weaker:
+
+$$\mathsf{PCE}(\mathsf{msi}, \Pi, \mathsf{proj}, a) = \Pi(\mathsf{msi.contents}).$$
+
+Thus `PCE` remains action-constant over arbitrary `Act`. This constancy is by foundation-default definition, not because the action type is singleton-like. Do not read foundation-default `PCE` as differentiating actions.
+
+**The projected action-selection principle:**
 
 $$a^\star_{m, t} \in \arg\max_{a \in \mathsf{Actions}_{m, t}} \mathsf{PCE}_{m, t}(a).$$
 
-Under existential pressure (when $\Pi_{m, t}(\mathfrak{L}^m_t)$ is at risk of dropping significantly), this selection operates as the I's dominant action-orientation; otherwise other criteria may co-operate.
+Under existential pressure (when $\Pi_{m, t}(\mathfrak{L}^m_t)$ is at risk of dropping significantly), this selection operates as the I's dominant action-orientation; otherwise other criteria may co-operate. Lean currently represents maximizer predicates and witnesses only relative to supplied data; it does not assert global maximizer existence.
 
 ### 6.3 Axioms
 
-**Axiom 6.3.1** (well-definedness). For every $a \in \mathsf{Actions}_{m, t}$, $\mathsf{PCE}_{m, t}(a)$ is well-defined as a non-negative real (or $+\infty$ if the Π codomain is extended).
+**Axiom 6.3.1** (well-definedness). For every $a \in \mathsf{Actions}_{m, t}$, the projected continuation appraisal is well-defined as a non-negative real (or $+\infty$ if the Π codomain is extended).
 
-**Axiom 6.3.2** (existential-pressure activation). When $\Pi_{m, t}(\mathfrak{L}^m_t) < \theta^{\text{ex}}_{m, t}$ for some "existential threshold" $\theta^{\text{ex}}_{m, t}$, the PCE-maximizing selection operates as the dominant action-orientation. Otherwise PCE co-operates with other criteria (effort-economy, social engagement, etc.).
+**Axiom 6.3.2** (existential-pressure activation). When $\Pi_{m, t}(\mathfrak{L}^m_t) < \theta^{\text{ex}}_{m, t}$ for some "existential threshold" $\theta^{\text{ex}}_{m, t}$, projected-PCE-maximizing selection operates as the dominant action-orientation. Otherwise PCE co-operates with other criteria (effort-economy, social engagement, etc.).
 
-**Axiom 6.3.3** (cogito-orientation under typical conditions). Under typical conditions (accurate Project, undisturbed Π, well-formed MSI), $\arg\max \mathsf{PCE}$ favors actions that preserve the MSI (and hence preserve the cogito by MSI-axiom 3.3.1).
+**Axiom 6.3.3** (cogito-orientation under typical conditions). Under typical conditions (accurate Project, undisturbed Π, well-formed MSI), the projected-PCE maximizer favors actions that preserve the MSI (and hence preserve the cogito by MSI-axiom 3.3.1).
 
 **Axiom 6.3.4** (defeat conditions). PCE can fail to produce cogito-preserving selection when any of:
 
@@ -356,24 +369,27 @@ The composite Definition 6.2.1 is itself a functional form. Alternatives within 
 
 The architecture commits that self-sacrifice is structurally compatible with PCE: "*self-sacrifice does not refute the cogito-anchoring $\rho_m(\hat\iota_m) = 1$, does not require any non-core $\rho$ to exceed 1, and does not require a hidden valuation coordinate beyond the existing apparatus*." Cf. §10.7.
 
-In the formalism: when a high-ρ non-core network member is in $\mathsf{MSI}^m_t$ (e.g., a beloved child), and an action $a$ has $\mathsf{Project}_{m, t}(a) \cap \mathsf{MSI}^m_{t + \Delta}$ containing that member but not the modeling-I's substrate, $\Pi_{m, t + \Delta}$ on that projected configuration can exceed $\Pi$ on configurations preserving the substrate but losing the high-ρ member. PCE then selects $a$. Self-sacrifice is therefore a PCE-maximizing selection under non-distorted apparatus, not a refutation of PCE.
+In the formalism: when a high-ρ non-core network member is in $\mathsf{MSI}^m_t$ (e.g., a beloved child), and an action $a$ has $\mathsf{Project}_{m, t}(a) \cap \mathsf{MSI}^m_{t + \Delta}$ containing that member but not the modeling-I's substrate, $\Pi_{m, t + \Delta}$ on that projected configuration can exceed $\Pi$ on configurations preserving the substrate but losing the high-ρ member. Projected PCE then selects $a$. Self-sacrifice is therefore a projected-PCE-maximizing selection under non-distorted apparatus, not a refutation of PCE.
 
 This is a foundation commitment, recoverable from the composite Definition 6.2.1 without further axioms.
 
 ### 6.6 Suicidality as a PCE-defeat compound (architectural commitment)
 
-The architecture identifies severe-depression-with-suicidality as a compound of D1, D2, and D3 of Axiom 6.3.4: distorted projection (depressive futures appear hopeless), distorted Π (death-content appears preservation-positive), and malformed MSI (cogito/thought partition functional collapse — §16.12 of the Rosetta stone — produces an MSI containing depressive content as core). PCE then selects actions whose projected outcome involves substrate cessation because the apparatus has been disturbed such that this appears preservation-optimal.
+The architecture identifies severe-depression-with-suicidality as a compound of D1, D2, and D3 of Axiom 6.3.4: distorted projection (depressive futures appear hopeless), distorted Π (death-content appears preservation-positive), and malformed MSI (cogito/thought partition functional collapse — §16.12 of the Rosetta stone — produces an MSI containing depressive content as core). Projected PCE then selects actions whose projected outcome involves substrate cessation because the apparatus has been disturbed such that this appears preservation-optimal.
 
 This is the four-mechanism analysis of §10.7 with the three-condition formalism of Axiom 6.3.4. The architecture's careful "PCE is structurally primary, not metaphysically inviolable" stance is recoverable from this analysis.
 
 ### 6.7 Lean encoding
 
 ```
-noncomputable def PCE (m : ModelI) (t : Time m) (Δ : Time m)
-  (msi : MSI m t) (π : PreservationRanking m (t + Δ) (msiAt (t + Δ)))
-  (proj : ProjectMap m t Δ) (a : Action m t) : ℝ≥0 :=
-  expectation (fun P' => π.rank (P'.contents ∩ (msiAt (t + Δ)).contents))
-              (proj.project a (currentProfile m t))
+noncomputable def PCE (msi : MSI α) (π : PreservationRanking msi)
+  (proj : ProjectMap α Act) (a : Act) : ℝ :=
+  π.rank msi.contents
+
+def ProjectedPCE (fam : FutureMSIModel α)
+  (globalRank : GlobalPreservationRanking α)
+  (proj : ProjectMap α Act) (P : ScalarProfile α) (a : Act) : ℝ :=
+  globalRank.rank (futureMSIContents fam proj P a)
 ```
 
 ---
