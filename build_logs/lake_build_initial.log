@@ -1,0 +1,57 @@
+✔ [1288/1306] Built TLICA.Profile
+✔ [1289/1306] Built TLICA.Basic
+✔ [1290/1306] Built TLICA.IntegrationGraph
+⚠ [1291/1306] Built TLICA.ProjectMap
+warning: ././././TLICA/ProjectMap.lean:38:10: The namespace 'ProjectMap' is duplicated in the declaration 'TLICA.ProjectMap.ProjectMap'
+note: this linter can be disabled with `set_option linter.dupNamespace false`
+warning: ././././TLICA/ProjectMap.lean:55:8: The namespace 'ProjectMap' is duplicated in the declaration 'TLICA.ProjectMap.ProjectMap.noAction_projects'
+note: this linter can be disabled with `set_option linter.dupNamespace false`
+⚠ [1292/1306] Built TLICA.MSI
+warning: ././././TLICA/MSI.lean:35:10: The namespace 'MSI' is duplicated in the declaration 'TLICA.MSI.MSI'
+note: this linter can be disabled with `set_option linter.dupNamespace false`
+warning: ././././TLICA/MSI.lean:60:8: The namespace 'MSI' is duplicated in the declaration 'TLICA.MSI.MSI.cogito_is_supremum'
+note: this linter can be disabled with `set_option linter.dupNamespace false`
+warning: ././././TLICA/MSI.lean:67:8: The namespace 'MSI' is duplicated in the declaration 'TLICA.MSI.MSI.nonCogito_has_threshold_value'
+note: this linter can be disabled with `set_option linter.dupNamespace false`
+warning: ././././TLICA/MSI.lean:73:8: The namespace 'MSI' is duplicated in the declaration 'TLICA.MSI.MSI.mem_msi_positive'
+note: this linter can be disabled with `set_option linter.dupNamespace false`
+✔ [1293/1306] Built TLICA.ProfileComparison.Pointwise
+✖ [1294/1306] Building TLICA.PreservationRanking
+trace: .> LEAN_PATH=././.lake/packages/batteries/.lake/build/lib:././.lake/packages/Qq/.lake/build/lib:././.lake/packages/aesop/.lake/build/lib:././.lake/packages/proofwidgets/.lake/build/lib:././.lake/packages/Cli/.lake/build/lib:././.lake/packages/importGraph/.lake/build/lib:././.lake/packages/mathlib/.lake/build/lib:././.lake/build/lib LD_LIBRARY_PATH= /home/leah/.elan/toolchains/leanprover--lean4---v4.11.0/bin/lean ././././TLICA/PreservationRanking.lean -R ./././. -o ././.lake/build/lib/TLICA/PreservationRanking.olean -i ././.lake/build/lib/TLICA/PreservationRanking.ilean -c ././.lake/build/ir/TLICA/PreservationRanking.c --json
+warning: ././././TLICA/PreservationRanking.lean:31:10: The namespace 'PreservationRanking' is duplicated in the declaration 'TLICA.PreservationRanking.PreservationRanking'
+note: this linter can be disabled with `set_option linter.dupNamespace false`
+error: ././././TLICA/PreservationRanking.lean:53:36: unexpected token 'Π'; expected '_' or identifier
+error: ././././TLICA/PreservationRanking.lean:58:43: unexpected token 'Π'; expected '_' or identifier
+error: Lean exited with code 1
+⚠ [1296/1306] Built TLICA.PtCns
+warning: ././././TLICA/PtCns.lean:57:10: The namespace 'PtCns' is duplicated in the declaration 'TLICA.PtCns.PtCns'
+note: this linter can be disabled with `set_option linter.dupNamespace false`
+warning: ././././TLICA/PtCns.lean:68:4: The namespace 'PtCns' is duplicated in the declaration 'TLICA.PtCns.PtCns.positiveContents'
+note: this linter can be disabled with `set_option linter.dupNamespace false`
+warning: ././././TLICA/PtCns.lean:72:4: The namespace 'PtCns' is duplicated in the declaration 'TLICA.PtCns.PtCns.negativeContents'
+note: this linter can be disabled with `set_option linter.dupNamespace false`
+warning: ././././TLICA/PtCns.lean:76:4: The namespace 'PtCns' is duplicated in the declaration 'TLICA.PtCns.PtCns.neutralContents'
+note: this linter can be disabled with `set_option linter.dupNamespace false`
+warning: ././././TLICA/PtCns.lean:80:8: The namespace 'PtCns' is duplicated in the declaration 'TLICA.PtCns.PtCns.cogito_in_positive'
+note: this linter can be disabled with `set_option linter.dupNamespace false`
+warning: ././././TLICA/PtCns.lean:86:8: The namespace 'PtCns' is duplicated in the declaration 'TLICA.PtCns.PtCns.cogito_not_negative'
+note: this linter can be disabled with `set_option linter.dupNamespace false`
+warning: ././././TLICA/PtCns.lean:92:8: The namespace 'PtCns' is duplicated in the declaration 'TLICA.PtCns.PtCns.cogito_not_neutral'
+note: this linter can be disabled with `set_option linter.dupNamespace false`
+warning: ././././TLICA/PtCns.lean:98:8: The namespace 'PtCns' is duplicated in the declaration 'TLICA.PtCns.PtCns.partition_disjoint'
+note: this linter can be disabled with `set_option linter.dupNamespace false`
+✔ [1297/1306] Built TLICA.PhiCoordinate
+✖ [1298/1306] Building TLICA.ProfileComparison.PseudoEMetric
+trace: .> LEAN_PATH=././.lake/packages/batteries/.lake/build/lib:././.lake/packages/Qq/.lake/build/lib:././.lake/packages/aesop/.lake/build/lib:././.lake/packages/proofwidgets/.lake/build/lib:././.lake/packages/Cli/.lake/build/lib:././.lake/packages/importGraph/.lake/build/lib:././.lake/packages/mathlib/.lake/build/lib:././.lake/build/lib LD_LIBRARY_PATH= /home/leah/.elan/toolchains/leanprover--lean4---v4.11.0/bin/lean ././././TLICA/ProfileComparison/PseudoEMetric.lean -R ./././. -o ././.lake/build/lib/TLICA/ProfileComparison/PseudoEMetric.olean -i ././.lake/build/lib/TLICA/ProfileComparison/PseudoEMetric.ilean -c ././.lake/build/ir/TLICA/ProfileComparison/PseudoEMetric.c --json
+error: ././././TLICA/ProfileComparison/PseudoEMetric.lean:35:0: failed to compile definition, consider marking it as 'noncomputable' because it depends on 'TLICA.ProfileComparison.Pointwise.dInfUnion', and it does not have executable code
+error: Lean exited with code 1
+✔ [1299/1306] Built TLICA.Modes
+✔ [1300/1306] Built TLICA.IBoundary
+✔ [1301/1306] Built TLICA.ModeAggregation
+✔ [1302/1306] Built TLICA.ProfileComparison.ShellRefinement
+✔ [1303/1306] Built TLICA.Dynamics
+✔ [1304/1306] Built TLICA.NonReducibility
+Some required builds logged failures:
+- TLICA.PreservationRanking
+- TLICA.ProfileComparison.PseudoEMetric
+error: build failed

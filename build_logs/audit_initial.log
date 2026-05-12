@@ -1,0 +1,5 @@
+== TLICA Lean audit ==
+OK: no sorry/admit found in imported Lean files.
+OK: no global axiom declarations found in imported Lean files.
+OK: MAPPING.md exists.
+OK: Rosetta math-first ledger exists.
