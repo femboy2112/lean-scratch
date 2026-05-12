@@ -94,9 +94,9 @@ Free will is modeled here as a structural witness theory over agency, not as bar
 
 This branch gives no universal existence theorem for free will. It only proves consequences from witnesses or hypotheses. If all feasible actions have the same branch future contents, then no branch-distinct free-will witness can exist.
 
-PCE-differentiated free will is stronger than branch-distinct free will: `PCEFreeWillWitness` requires the selected action and live alternative to have different generalized projected-PCE values. Stochastic projection, incompatibilist/compatibilist metaphysical claims, and richer branch semantics remain deferred.
+PCE-differentiated free will is machine-verified as stronger than branch-distinct free will: projected-PCE value difference implies branch future content difference, so every `PCEFreeWillWitness` yields a `FreeWillWitness`. Branch collapse excludes both witness types, and projected-PCE collapse excludes PCE-differentiated free-will witnesses. Stochastic projection, incompatibilist/compatibilist metaphysical claims, and richer branch semantics remain deferred.
 
-Lean carriers: `branchProfile`, `branchFutureContents`, `branchDistinctAlternative`, `pceBranchDistinctAlternative`, `openAlternatives`, `FreeWillWitness`, `PCEFreeWillWitness`, `no_freeWillWitness_of_all_branch_contents_equal`.
+Lean carriers: `branchProfile`, `branchFutureContents`, `branchDistinctAlternative`, `pceBranchDistinctAlternative`, `openAlternatives`, `FreeWillWitness`, `PCEFreeWillWitness`, `freeWillWitness_of_pceFreeWillWitness`, `no_freeWillWitness_of_all_branch_contents_equal`, `no_pceFreeWillWitness_of_all_branch_contents_equal`, `no_pceFreeWillWitness_of_all_pce_equal`.
 
 ## 9. Consistency classification and mode selection
 

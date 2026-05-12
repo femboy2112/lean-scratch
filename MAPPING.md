@@ -218,17 +218,26 @@ by an explicit `selectsFeasibleAction` hypothesis.
 | `branchDistinctAlternative` | Live feasible alternatives with distinct future contents | Encoded definition |
 | `pceBranchDistinctAlternative` | Live feasible alternatives with distinct projected-PCE values | Encoded definition |
 | `openAlternatives` | Feasible action set as open alternatives | Encoded definition |
+| `branchFutureContents_ne_of_pce_ne` | Projected-PCE difference implies branch future content difference | Encoded with proof |
+| `branchDistinctAlternative_of_pceBranchDistinctAlternative` | PCE-branch distinct alternatives imply branch-distinct alternatives | Encoded with proof |
 | `FreeWillWitness` | Branch-sensitive agency witness with selected action and branch-distinct live alternative | Encoded structure |
 | `PCEFreeWillWitness` | Stronger witness with projected-PCE-distinct live alternative | Encoded structure |
 | `FreeWillWitness.hasLiveAlternatives` | Free-will witness implies live alternatives | Encoded with proof |
 | `FreeWillWitness.exists_distinct_feasible` | Free-will witness implies two distinct feasible actions | Encoded with proof |
 | `FreeWillWitness.branchDistinctAlternative` | Free-will witness packages branch-distinct alternatives | Encoded with proof |
+| `PCEFreeWillWitness.toFreeWillWitness`, `freeWillWitness_of_pceFreeWillWitness` | PCE-differentiated free will implies branch-distinct free will | Encoded definitions |
+| `PCEFreeWillWitness.hasLiveAlternatives` | PCE-free-will witness implies live alternatives | Encoded with proof |
 | `PCEFreeWillWitness.pceDifferentiatedAlternative` | PCE-free-will witness implies agency-layer PCE differentiation | Encoded with proof |
 | `PCEFreeWillWitness.pceBranchDistinctAlternative` | PCE-free-will witness packages PCE-branch-distinct alternatives | Encoded with proof |
 | `pceFreeWillWitness_of_selected_strictly_beats` | Strict projected-PCE victory over a live alternative constructs a PCE-free-will witness | Encoded definition |
+| `freeWillWitness_of_selected_strictly_beats` | Strict projected-PCE victory over a live alternative constructs a branch-distinct free-will witness | Encoded definition |
 | `no_freeWillWitness_of_all_branch_contents_equal` | If all feasible branch future contents are equal, no branch-distinct free-will witness exists | Encoded with proof |
+| `no_pceFreeWillWitness_of_all_branch_contents_equal` | Branch collapse excludes PCE-free-will witnesses | Encoded with proof |
+| `no_pceFreeWillWitness_of_all_pce_equal` | Projected-PCE collapse excludes PCE-free-will witnesses | Encoded with proof |
 
 The free-will layer depends on `Agency`. It is a structural witness theory, not
-a universal existence theorem. PCE-differentiated free will is stronger than
-branch-distinct free will. Stochastic projection and metaphysical
+a universal existence theorem. PCE-differentiated free will is now
+machine-verified as stronger than branch-distinct free will. Branch collapse
+excludes both witness types, and projected-PCE collapse excludes PCE-free-will
+witnesses. Stochastic projection and metaphysical
 incompatibilism/compatibilism claims remain deferred.

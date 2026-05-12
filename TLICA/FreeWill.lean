@@ -46,6 +46,28 @@ def pceBranchDistinctAlternative (ctx : AgencyContext α Act)
 def openAlternatives (ctx : AgencyContext α Act) (P : ScalarProfile α) : Set Act :=
   {a | a ∈ ctx.feasible P}
 
+/-- If two branches have different projected-PCE values, their lifted future
+    contents cannot be equal. -/
+theorem branchFutureContents_ne_of_pce_ne
+    (ctx : AgencyContext α Act) (P : ScalarProfile α) (a b : Act)
+    (h : feasibleProjectedPCE ctx P a ≠ feasibleProjectedPCE ctx P b) :
+    branchFutureContents ctx P a ≠ branchFutureContents ctx P b := by
+  intro hcontents
+  apply h
+  have hfuture :
+      generalFutureMSIContents ctx.fam ctx.proj P a =
+        generalFutureMSIContents ctx.fam ctx.proj P b := by
+    simpa [branchFutureContents] using hcontents
+  unfold feasibleProjectedPCE GeneralProjectedPCE
+  rw [hfuture]
+
+/-- PCE-branch distinct alternatives are branch-distinct alternatives. -/
+theorem branchDistinctAlternative_of_pceBranchDistinctAlternative
+    (ctx : AgencyContext α Act) (P : ScalarProfile α) (a b : Act)
+    (h : pceBranchDistinctAlternative ctx P a b) :
+    branchDistinctAlternative ctx P a b :=
+  ⟨h.1, branchFutureContents_ne_of_pce_ne ctx P a b h.2⟩
+
 /-- Free-will witness: selected agency plus a live feasible alternative whose
     projected future contents differ from the selected branch. -/
 structure FreeWillWitness (ctx : AgencyContext α Act) (P : ScalarProfile α) where
@@ -102,6 +124,22 @@ namespace PCEFreeWillWitness
 
 variable {ctx : AgencyContext α Act} {P : ScalarProfile α}
 
+/-- PCE-differentiated free will is formally stronger than branch-distinct
+    free will. -/
+def toFreeWillWitness (w : PCEFreeWillWitness ctx P) :
+    FreeWillWitness ctx P where
+  selected := w.selected
+  selected_agency := w.selected_agency
+  alternative := w.alternative
+  alternative_live := w.alternative_live
+  branch_distinct :=
+    branchFutureContents_ne_of_pce_ne ctx P w.selected w.alternative w.pce_distinct
+
+/-- A PCE-differentiated free-will witness implies live alternatives. -/
+theorem hasLiveAlternatives (w : PCEFreeWillWitness ctx P) :
+    hasLiveAlternatives ctx P :=
+  w.toFreeWillWitness.hasLiveAlternatives
+
 /-- A PCE-differentiated free-will witness implies a PCE-differentiated
     feasible alternative in the agency layer. -/
 theorem pceDifferentiatedAlternative (w : PCEFreeWillWitness ctx P) :
@@ -115,6 +153,14 @@ theorem pceBranchDistinctAlternative (w : PCEFreeWillWitness ctx P) :
   ⟨w.alternative_live, w.pce_distinct⟩
 
 end PCEFreeWillWitness
+
+/-- PCE-differentiated free will is formally stronger than branch-distinct
+    free will. -/
+def freeWillWitness_of_pceFreeWillWitness
+    (ctx : AgencyContext α Act) (P : ScalarProfile α)
+    (w : PCEFreeWillWitness ctx P) :
+    FreeWillWitness ctx P :=
+  w.toFreeWillWitness
 
 /-- If a selected action strictly beats a feasible live alternative in
     projected PCE, then a PCE-differentiated free-will witness exists. -/
@@ -131,6 +177,18 @@ def pceFreeWillWitness_of_selected_strictly_beats
   alternative_live := hlive
   pce_distinct := ne_of_gt hgt
 
+/-- If a selected action strictly beats a feasible live alternative in
+    projected PCE, then a branch-distinct free-will witness exists. -/
+def freeWillWitness_of_selected_strictly_beats
+    (ctx : AgencyContext α Act) (P : ScalarProfile α) (selected alternative : Act)
+    (hsel : selectsFeasibleAction ctx P selected)
+    (hlive : liveAlternative ctx P selected alternative)
+    (hgt : feasibleProjectedPCE ctx P alternative <
+      feasibleProjectedPCE ctx P selected) :
+    FreeWillWitness ctx P :=
+  freeWillWitness_of_pceFreeWillWitness ctx P
+    (pceFreeWillWitness_of_selected_strictly_beats ctx P selected alternative hsel hlive hgt)
+
 /-- If all feasible actions have equal branch future contents, then no
     branch-distinct free-will witness exists. -/
 theorem no_freeWillWitness_of_all_branch_contents_equal
@@ -143,5 +201,28 @@ theorem no_freeWillWitness_of_all_branch_contents_equal
   have h_selected : w.selected ∈ ctx.feasible P := w.selected_agency.1
   have h_alternative : w.alternative ∈ ctx.feasible P := w.alternative_live.2.1
   exact w.branch_distinct (h w.selected w.alternative h_selected h_alternative)
+
+/-- Branch collapse also excludes PCE-differentiated free-will witnesses. -/
+theorem no_pceFreeWillWitness_of_all_branch_contents_equal
+    (ctx : AgencyContext α Act) (P : ScalarProfile α)
+    (h : ∀ a b, a ∈ ctx.feasible P → b ∈ ctx.feasible P →
+      branchFutureContents ctx P a = branchFutureContents ctx P b) :
+    ¬ ∃ _w : PCEFreeWillWitness ctx P, True := by
+  intro hw
+  rcases hw with ⟨w, hw_true⟩
+  exact no_freeWillWitness_of_all_branch_contents_equal ctx P h
+    ⟨freeWillWitness_of_pceFreeWillWitness ctx P w, hw_true⟩
+
+/-- PCE collapse excludes PCE-differentiated free-will witnesses. -/
+theorem no_pceFreeWillWitness_of_all_pce_equal
+    (ctx : AgencyContext α Act) (P : ScalarProfile α)
+    (h : ∀ a b, a ∈ ctx.feasible P → b ∈ ctx.feasible P →
+      feasibleProjectedPCE ctx P a = feasibleProjectedPCE ctx P b) :
+    ¬ ∃ _w : PCEFreeWillWitness ctx P, True := by
+  intro hw
+  rcases hw with ⟨w, _hw_true⟩
+  have h_selected : w.selected ∈ ctx.feasible P := w.selected_agency.1
+  have h_alternative : w.alternative ∈ ctx.feasible P := w.alternative_live.2.1
+  exact w.pce_distinct (h w.selected w.alternative h_selected h_alternative)
 
 end TLICA.FreeWill
