@@ -207,4 +207,28 @@ stochastic projection remains deferred.
 
 The agency layer depends on `GeneralActionProjection`. It does not assert that
 selected actions exist globally; existence is represented by `AgencyWitness` or
-by an explicit `selectsFeasibleAction` hypothesis. Free will remains deferred.
+by an explicit `selectsFeasibleAction` hypothesis.
+
+## Free-will layer
+
+| Lean declaration | Working-paper reference | Status |
+|---|---|---|
+| `branchProfile` | Action branch as deterministic projected profile | Encoded definition |
+| `branchFutureContents` | Lifted future MSI contents of an action branch | Encoded definition |
+| `branchDistinctAlternative` | Live feasible alternatives with distinct future contents | Encoded definition |
+| `pceBranchDistinctAlternative` | Live feasible alternatives with distinct projected-PCE values | Encoded definition |
+| `openAlternatives` | Feasible action set as open alternatives | Encoded definition |
+| `FreeWillWitness` | Branch-sensitive agency witness with selected action and branch-distinct live alternative | Encoded structure |
+| `PCEFreeWillWitness` | Stronger witness with projected-PCE-distinct live alternative | Encoded structure |
+| `FreeWillWitness.hasLiveAlternatives` | Free-will witness implies live alternatives | Encoded with proof |
+| `FreeWillWitness.exists_distinct_feasible` | Free-will witness implies two distinct feasible actions | Encoded with proof |
+| `FreeWillWitness.branchDistinctAlternative` | Free-will witness packages branch-distinct alternatives | Encoded with proof |
+| `PCEFreeWillWitness.pceDifferentiatedAlternative` | PCE-free-will witness implies agency-layer PCE differentiation | Encoded with proof |
+| `PCEFreeWillWitness.pceBranchDistinctAlternative` | PCE-free-will witness packages PCE-branch-distinct alternatives | Encoded with proof |
+| `pceFreeWillWitness_of_selected_strictly_beats` | Strict projected-PCE victory over a live alternative constructs a PCE-free-will witness | Encoded definition |
+| `no_freeWillWitness_of_all_branch_contents_equal` | If all feasible branch future contents are equal, no branch-distinct free-will witness exists | Encoded with proof |
+
+The free-will layer depends on `Agency`. It is a structural witness theory, not
+a universal existence theorem. PCE-differentiated free will is stronger than
+branch-distinct free will. Stochastic projection and metaphysical
+incompatibilism/compatibilism claims remain deferred.

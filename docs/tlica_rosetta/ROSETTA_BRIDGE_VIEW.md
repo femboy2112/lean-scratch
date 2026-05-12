@@ -25,4 +25,7 @@ This document records the mapping relation. Codex should expand it as Lean cover
 | B-AGY-002 | Feasible selection | Selected action maximizes generalized projected PCE among feasible alternatives | `selectsFeasibleAction`, `AgencyWitness` | machine_verified definitions/theorems; no global existence claim |
 | B-AGY-003 | Nontrivial agency | Existence of distinct feasible actions | `liveAlternative`, `hasLiveAlternatives` | machine_verified definitions/theorem |
 | B-AGY-004 | PCE-differentiated agency | Feasible alternatives receive different generalized projected-PCE values | `pceDifferentiatedAlternative`, `pceDifferentiatedAlternative_of_selected_strictly_beats` | machine_verified definitions/theorem |
-| B-FWL-001 | Free will | Branch/action-space semantics beyond agency selection | none | application_deferred |
+| B-FWL-001 | Free will witness | Selected feasible agency plus live branch-distinct alternative | `FreeWillWitness`, `branchDistinctAlternative` | machine_verified structure/definitions/theorems; no global existence claim |
+| B-FWL-002 | PCE-differentiated free will | Free-will witness strengthened by projected-PCE-distinct live alternative | `PCEFreeWillWitness`, `pceBranchDistinctAlternative` | machine_verified structure/definitions/theorems |
+| B-FWL-003 | Branch collapse excludes free-will witness | Equal future contents for all feasible branches rules out branch-distinct free-will witness | `no_freeWillWitness_of_all_branch_contents_equal` | machine_verified conditional theorem |
+| B-FWL-004 | Stochastic/free-will metaphysics | Stochastic projection and incompatibilist/compatibilist claims | none | application_deferred |

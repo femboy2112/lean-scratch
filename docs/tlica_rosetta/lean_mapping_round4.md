@@ -139,5 +139,6 @@ action-calibrated deterministic projected-PCE interface over the current
 singleton-like `Action α`. `TLICA.GeneralActionProjection` supplies the
 application-ready arbitrary-action version for agency/free-will work.
 `TLICA.Agency` supplies the first agency layer as feasible action selection
-under generalized projected PCE. Stochastic projection, refined boundary
-structure, and free-will branch semantics remain deferred.
+under generalized projected PCE. `TLICA.FreeWill` supplies the first
+branch-sensitive agency witness layer. Stochastic projection, refined boundary
+structure, and richer free-will branch semantics remain deferred.

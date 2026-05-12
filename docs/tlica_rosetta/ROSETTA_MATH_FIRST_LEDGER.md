@@ -56,6 +56,10 @@ This ledger starts from the round-4 Lean handoff and should be expanded by Codex
 | AGY-004 | Live alternatives | Nontrivial agency as existence of distinct feasible actions | `liveAlternative`, `hasLiveAlternatives`, `exists_distinct_feasible_of_hasLiveAlternatives` | machine_verified definitions/theorem | agency layer |
 | AGY-005 | PCE-differentiated alternatives | Feasible alternatives with different generalized projected-PCE values | `pceDifferentiatedAlternative`, `not_exists_feasible_strictly_higher_of_selects`, `pceDifferentiatedAlternative_of_selected_strictly_beats` | machine_verified definitions/theorems | agency layer |
 | AGY-006 | Finite feasible maximizer existence | Future finite-action sufficient condition for maximizer existence | `finiteFeasibleSelection_deferred` | deferred target marker; not a verified theorem | agency layer |
+| FWL-002 | Branch profile and branch contents | Deterministic projected branch profile and lifted future MSI contents | `branchProfile`, `branchFutureContents`, `openAlternatives` | machine_verified definitions | free-will layer |
+| FWL-003 | Branch-distinct free-will witness | Selected agency plus live alternative with distinct future branch contents | `FreeWillWitness`, `branchDistinctAlternative`, `FreeWillWitness.hasLiveAlternatives`, `FreeWillWitness.exists_distinct_feasible`, `FreeWillWitness.branchDistinctAlternative` | machine_verified definition/theorems; no global existence claim | free-will layer |
+| FWL-004 | PCE-differentiated free-will witness | Stronger witness with live alternative whose projected-PCE value differs | `PCEFreeWillWitness`, `pceBranchDistinctAlternative`, `PCEFreeWillWitness.pceDifferentiatedAlternative`, `PCEFreeWillWitness.pceBranchDistinctAlternative`, `pceFreeWillWitness_of_selected_strictly_beats` | machine_verified definitions/theorems | free-will layer |
+| FWL-005 | No free will under branch collapse | If all feasible branch future contents are equal, no branch-distinct free-will witness exists | `no_freeWillWitness_of_all_branch_contents_equal` | machine_verified conditional theorem | free-will layer |
 
 ## Application signature targets
 
@@ -65,7 +69,7 @@ These should be added only after the foundation layer compiles and the mathemati
 |---|---|---|---|
 | TMP-001 | Temporal phenomenology | Indexed transition/duration structure over profile states | application_deferred |
 | AGY-001 | Agency | Feasible action selection constrained by deterministic projection, future MSI model, and global preservation ranking | formalized via `AgencyContext` and `selectsFeasibleAction`; richer application semantics deferred |
-| FWL-001 | Free will | Family of admissible action branches modulo identity-preservation constraints | use generalized action-space layer; branch semantics still application_deferred |
+| FWL-001 | Free will | Branch-sensitive agency with live feasible alternatives | first structural witness layer formalized; richer branch semantics still application_deferred |
 | AFF-001 | Differentiated affect | Valenced profile-difference / appraisal functional | application_deferred |
 | RCX-001 | Religiously charged experience | High-salience transformation/attractor pattern over identity-correlation structure | application_deferred |
 
