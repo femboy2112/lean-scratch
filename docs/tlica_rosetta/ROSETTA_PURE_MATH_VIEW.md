@@ -98,6 +98,18 @@ PCE-differentiated free will is machine-verified as stronger than branch-distinc
 
 Lean carriers: `branchProfile`, `branchFutureContents`, `branchDistinctAlternative`, `pceBranchDistinctAlternative`, `openAlternatives`, `FreeWillWitness`, `PCEFreeWillWitness`, `freeWillWitness_of_pceFreeWillWitness`, `no_freeWillWitness_of_all_branch_contents_equal`, `no_pceFreeWillWitness_of_all_branch_contents_equal`, `no_pceFreeWillWitness_of_all_pce_equal`.
 
+## 8.5 Deterministic temporal trajectories
+
+A temporal trajectory is modeled as a natural-number-indexed sequence of scalar profiles. An action schedule is a natural-number-indexed sequence of actions. This layer depends on `FreeWill`, and through it on `Agency` and `GeneralActionProjection`. The `generatedBy` predicate states that a supplied trajectory follows the deterministic generalized projection at every successor step under the supplied schedule; it does not assert that every initial condition or schedule has a globally existing trajectory.
+
+The scheduled branch future contents at time `n` are the existing free-will branch future contents applied to the profile at `n` and the scheduled action at `n`. Adjacent-time stability is measured through the existing profile-comparison distances: union-domain distance `dInfUnion` and shared-domain distance `dInfShared`. Uniform and eventual union-step stability are predicates over these adjacent-time distances.
+
+Branch-sensitive temporal divergence is represented by supplied trajectories with a witnessed time at which their profile states differ. Separately, a `FreeWillWitness` gives one-step branch-sensitive divergence data: selected and alternative live feasible actions have distinct branch future contents. A `PCEFreeWillWitness` gives the same one-step branch-future distinction through its induced `FreeWillWitness`.
+
+Stochastic trajectories and phenomenological duration remain deferred. Differentiated affect is not yet formalized, but this layer prepares the profile-difference and time-indexed base needed for later affect and religiously charged transformation work.
+
+Lean carriers: `ProfileTrajectory`, `ActionSchedule`, `generatedBy`, `trajectoryFutureContents`, `stepUnionDistance`, `stepSharedDistance`, `unionStepStable`, `eventuallyUnionStepStable`, `DivergentTrajectories`, `oneStepBranch`, `freeWillWitness_live_branch_contents_distinct`, `freeWillWitness_oneStep_branch_contents_distinct`, `pceFreeWillWitness_oneStep_branch_contents_distinct`, `stochasticTrajectory_deferred`, `phenomenologicalDuration_deferred`, `temporalContinuityMetric_deferred`.
+
 ## 9. Consistency classification and mode selection
 
 A ternary evaluation classifies elements as positive, neutral, or negative relative to a consistency criterion. A finite mode operator is selected from this evaluation. Boundary operators are definable from the induced partition.

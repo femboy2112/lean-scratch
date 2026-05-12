@@ -241,3 +241,31 @@ machine-verified as stronger than branch-distinct free will. Branch collapse
 excludes both witness types, and projected-PCE collapse excludes PCE-free-will
 witnesses. Stochastic projection and metaphysical
 incompatibilism/compatibilism claims remain deferred.
+
+## Temporal-trajectory layer
+
+| Lean declaration | Working-paper reference | Status |
+|---|---|---|
+| `ProfileTrajectory` | Natural-time indexed sequence of scalar profiles | Encoded structure |
+| `ActionSchedule` | Natural-time indexed action schedule | Encoded structure |
+| `generatedBy` | Predicate that a supplied trajectory follows deterministic action-indexed projection | Encoded definition |
+| `trajectoryFutureContents` | Lifted future MSI contents of the scheduled branch at a trajectory time | Encoded definition |
+| `stepUnionDistance` | Adjacent-time union-domain profile distance | Encoded definition |
+| `stepSharedDistance` | Adjacent-time shared-domain profile distance | Encoded definition |
+| `unionStepStable` | Uniform stepwise temporal stability via `dInfUnion` | Encoded definition |
+| `eventuallyUnionStepStable` | Eventual stepwise temporal stability via `dInfUnion` | Encoded definition |
+| `DivergentTrajectories` | Supplied trajectories with a witnessed profile difference at some time | Encoded structure |
+| `oneStepBranch` | One-step deterministic branch profile naming bridge | Encoded definition |
+| `freeWillWitness_live_branch_contents_distinct` | Free-will witness supplies live feasible actions with distinct branch future contents | Encoded with proof |
+| `freeWillWitness_oneStep_branch_contents_distinct` | Selected and alternative one-step branch futures of a free-will witness differ | Encoded with proof |
+| `pceFreeWillWitness_oneStep_branch_contents_distinct` | PCE-free-will witness gives the same branch-future distinction through `toFreeWillWitness` | Encoded with proof |
+| `stochasticTrajectory_deferred` | Stochastic trajectory models | Non-substantive deferred target marker; no theorem claim |
+| `phenomenologicalDuration_deferred` | Phenomenological duration model | Non-substantive deferred target marker; no theorem claim |
+| `temporalContinuityMetric_deferred` | Richer temporal-continuity metric | Non-substantive deferred target marker; no theorem claim |
+
+The temporal-trajectory layer depends on `FreeWill`, and through it on
+`Agency` and `GeneralActionProjection`; it also uses the existing pointwise
+profile-comparison distances. Trajectories are supplied as indexed data and are
+verified by `generatedBy` when appropriate. The layer does not assert global
+trajectory existence, stochastic dynamics, phenomenological duration, or
+differentiated affect.

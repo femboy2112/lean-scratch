@@ -60,6 +60,11 @@ This ledger starts from the round-4 Lean handoff and should be expanded by Codex
 | FWL-003 | Branch-distinct free-will witness | Selected agency plus live alternative with distinct future branch contents | `FreeWillWitness`, `branchDistinctAlternative`, `FreeWillWitness.hasLiveAlternatives`, `FreeWillWitness.exists_distinct_feasible`, `FreeWillWitness.branchDistinctAlternative` | machine_verified definition/theorems; no global existence claim | free-will layer |
 | FWL-004 | PCE-differentiated free-will witness | Stronger witness with live alternative whose projected-PCE value differs | `PCEFreeWillWitness`, `pceBranchDistinctAlternative`, `branchFutureContents_ne_of_pce_ne`, `branchDistinctAlternative_of_pceBranchDistinctAlternative`, `PCEFreeWillWitness.toFreeWillWitness`, `freeWillWitness_of_pceFreeWillWitness`, `PCEFreeWillWitness.hasLiveAlternatives`, `PCEFreeWillWitness.pceDifferentiatedAlternative`, `PCEFreeWillWitness.pceBranchDistinctAlternative`, `pceFreeWillWitness_of_selected_strictly_beats`, `freeWillWitness_of_selected_strictly_beats` | machine_verified definitions/theorems; formally stronger than branch-distinct free will | free-will layer |
 | FWL-005 | No free will under branch/PCE collapse | Branch collapse excludes both free-will witness types; PCE collapse excludes PCE-free-will witnesses | `no_freeWillWitness_of_all_branch_contents_equal`, `no_pceFreeWillWitness_of_all_branch_contents_equal`, `no_pceFreeWillWitness_of_all_pce_equal` | machine_verified conditional theorems | free-will layer |
+| TMP-002 | Temporal profile trajectory | Natural-time indexed sequence of scalar profiles and action schedule | `ProfileTrajectory`, `ActionSchedule` | machine_verified structures; supplied data only | temporal-trajectory layer |
+| TMP-003 | Deterministic generated trajectory | Predicate that a supplied trajectory follows generalized deterministic projection under a supplied schedule | `generatedBy`, `trajectoryFutureContents`, `oneStepBranch` | machine_verified definitions; no global existence assertion | temporal-trajectory layer |
+| TMP-004 | Stepwise temporal stability | Adjacent-time profile comparison using existing union/shared distances | `stepUnionDistance`, `stepSharedDistance`, `unionStepStable`, `eventuallyUnionStepStable` | machine_verified definitions | temporal-trajectory layer |
+| TMP-005 | Branch-sensitive temporal divergence | Supplied trajectories with a witnessed time-indexed profile difference; free-will witnesses provide one-step branch-future divergence data | `DivergentTrajectories`, `freeWillWitness_live_branch_contents_distinct`, `freeWillWitness_oneStep_branch_contents_distinct`, `pceFreeWillWitness_oneStep_branch_contents_distinct` | machine_verified structure/conditional theorems | temporal-trajectory layer |
+| TMP-006 | Deferred temporal enrichments | Stochastic trajectory, phenomenological duration, and richer temporal-continuity metric | `stochasticTrajectory_deferred`, `phenomenologicalDuration_deferred`, `temporalContinuityMetric_deferred` | deferred markers only; not theorem claims | temporal-trajectory layer |
 
 ## Application signature targets
 
@@ -67,10 +72,10 @@ These should be added only after the foundation layer compiles and the mathemati
 
 | ID | Paper | Candidate pure math object | Lean target status |
 |---|---|---|---|
-| TMP-001 | Temporal phenomenology | Indexed transition/duration structure over profile states | application_deferred |
+| TMP-001 | Temporal phenomenology | Indexed transition/duration structure over profile states | partially formalized by deterministic indexed profile trajectories; phenomenological duration still application_deferred |
 | AGY-001 | Agency | Feasible action selection constrained by deterministic projection, future MSI model, and global preservation ranking | formalized via `AgencyContext` and `selectsFeasibleAction`; richer application semantics deferred |
 | FWL-001 | Free will | Branch-sensitive agency with live feasible alternatives | first structural witness layer formalized; richer branch semantics still application_deferred |
-| AFF-001 | Differentiated affect | Valenced profile-difference / appraisal functional | application_deferred |
+| AFF-001 | Differentiated affect | Valenced profile-difference / appraisal functional | application_deferred; temporal profile-difference base now available |
 | RCX-001 | Religiously charged experience | High-salience transformation/attractor pattern over identity-correlation structure | application_deferred |
 
 ## Codex expansion task
