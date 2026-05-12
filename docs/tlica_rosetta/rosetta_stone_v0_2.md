@@ -991,7 +991,7 @@ The application-level items resolve to typed signatures whose final functional f
 
 ## Closing note
 
-This v0.2 of the Rosetta stone extends the foundation-level treatment of v0.1 (sections 1–12, preserved unchanged) with the full application-level mapping for all five application papers (sections 13–17, new in v0.2). Approximately 70 new entries cover temporal phenomenology (§13), agency (§14), free will (§15), differentiated affect (§16), and religiously charged experience (§17). The status field is now populated for every entry, with three new categories specific to application-level concepts (foundation-supported, foundation-deferred, signature-pending) sitting alongside the foundation-level categories (machine-verified, encoded, signature-declared, named-but-unformalized).
+This v0.2 of the Rosetta stone extends the foundation-level treatment of v0.1 (sections 1–12, preserved unchanged) with a broad application-level mapping for all five application papers (sections 13–17, new in v0.2). Approximately 70 new entries cover temporal phenomenology (§13), agency (§14), free will (§15), differentiated affect (§16), and religiously charged experience (§17). The status field is now populated for every entry, with three new categories specific to application-level concepts (foundation-supported, foundation-deferred, signature-pending) sitting alongside the foundation-level categories (machine-verified, encoded, signature-declared, named-but-unformalized).
 
 The open sub-questions registry (§18) now consolidates 47 items: the eighteen foundation-level items inherited from v0.1, plus 29 application-level signature-pending items surfaced by the v0.2 application sections. Each application-level item resolves to a typed signature whose final functional form is the application paper's calibration responsibility, but the *signatures* are foundation-level work that uniformizes the types across applications.
 
@@ -1005,7 +1005,7 @@ Third, the *cogito-functional-collapse pattern* (§16.12 severe depression, §17
 
 The natural next phase is v0.3 of this document, which would: (i) fold in the alphabetical bidirectional indexes (§A theory-to-math, §B math-to-theory) that v0.1 and v0.2 have deferred; (ii) commit the foundation to typed signatures for the highest-impact application-level signature-pending items (the foundation-orphan cluster MSI/PtCns/PCE/Π/Project, the $(\rho^{\text{struct}}, \rho^{\text{func}})$ pair, and the application-level profile-object family component spaces); (iii) consolidate cross-references across the application sections (currently each section is self-contained; v0.3 should cross-reference where applications share structural objects, e.g. between §16.12 and §17.8 for the functional-collapse pattern).
 
-A v1.0 of this document would have every concept entered, every math object cross-referenced, every Lean declaration accounted for, every gap registered, and the alphabetical bidirectional indexes complete. v0.2 establishes the full Rosetta-stone coverage; v0.3 will be the final closure-and-indexing pass.
+A v1.0 of this document would have every concept entered, every math object cross-referenced, every Lean declaration accounted for, every gap registered, and the alphabetical bidirectional indexes complete. v0.2 establishes broad Rosetta-stone coverage; v0.3 will be the final closure-and-indexing pass.
 
 ---
 
