@@ -1,6 +1,6 @@
 # Rosetta Coverage Audit
 
-This file audits the Rosetta-to-Lean direction after v0.4.1 consolidation and v0.4.1 Rosetta normalization.
+This file audits the Rosetta-to-Lean direction after foundation v0.4.1 consolidation and Rosetta normalization. Active application rows use normalized IDs; historical application IDs are crosswalk-only.
 
 Coverage classifications:
 
@@ -8,7 +8,7 @@ Coverage classifications:
 - has multiple Lean declarations
 - deferred marker only
 - prose-only / not ready for Lean
-- superseded by v0.4.1 refactor
+- historical / superseded by normalization
 
 | Rosetta ID | Rosetta object | Coverage classification | Lean coverage | Notes |
 |---|---|---|---|---|
@@ -27,7 +27,7 @@ Coverage classifications:
 | ORP-003 | Deterministic projection | has multiple Lean declarations | `ProjectMap`, `Action`, `DefaultAction`, `DefaultProjectMap`, `UnitDefaultProjectMap`, `noAction_projects` | `ProjectMap α Act` is primary; singleton defaults are degenerate compatibility. |
 | ORP-004 | Foundation-default PCE | has multiple Lean declarations | `PCE`, `PCE.*` | Action-constant over arbitrary `Act`; action sensitivity lives in `ProjectedPCE`. |
 | ORP-005 to ORP-007 | Consistency, modes, boundary | has multiple Lean declarations | `PtCns`, `ModeOp`, `IBoundary` families | Foundation orphan-cluster coverage. |
-| historical ORP-008 to ORP-015 | Action/projection application refinements | superseded by v0.4.1 refactor | See `ACT-001` to `ACT-009` | Historical IDs retained in crosswalk only. |
+| historical ORP-008 to ORP-015 | Action/projection application refinements | historical / superseded by normalization | See `ACT-001` to `ACT-009` | Historical IDs retained in crosswalk only, not active Rosetta rows. |
 | ACT-001 | Future MSI model | has Lean declaration | `FutureMSIModel` | Weak `domain_match` remains default. |
 | ACT-002 | Optional future-MSI profile coherence | has multiple Lean declarations | `ProfileIso`, `CoherentFutureMSIModel`, bridge theorem | Optional stronger coherence, not forced downstream. |
 | ACT-003 | Global preservation ranking | has Lean declaration | `GlobalPreservationRanking` | Rank/projection bridge. |

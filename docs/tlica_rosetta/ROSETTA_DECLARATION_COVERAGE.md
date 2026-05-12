@@ -1,6 +1,6 @@
 # Rosetta Declaration Coverage Audit
 
-This file maps the declarations listed in `docs/tlica_codex/lean_declaration_inventory.md` to normalized Rosetta IDs and exact status categories.
+This file maps the declarations listed in `docs/tlica_codex/lean_declaration_inventory.md` to normalized Rosetta IDs and exact status categories. Historical application IDs are not used as active coverage targets; they are accounted for through the ledger crosswalk only.
 
 Status categories are restricted to:
 `machine_verified_definition`, `machine_verified_theorem`, `machine_verified_structure`, `primitive_structure_field`, `compatibility_alias`, `compatibility_theorem`, `deferred_marker_not_theorem`, `application_deferred`, `prose_only_unformalized`, and `deprecated_or_superseded`.

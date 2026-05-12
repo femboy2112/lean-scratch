@@ -2,7 +2,7 @@
 
 This ledger starts from the round-4 Lean handoff and should be expanded by Codex. It is not the final Rosetta stone. It is the math-first working ledger.
 
-## v0.4.1 Rosetta normalization
+## A. Status key
 
 This file now uses the following stable object-ID families:
 
@@ -31,45 +31,9 @@ Status values are restricted to these exact categories. Rows that collect both a
 | `prose_only_unformalized` | Rosetta/prose item not yet prepared as a Lean target. |
 | `deprecated_or_superseded` | Historical row/name retained only through a crosswalk or compatibility note. |
 
-### ID crosswalk
+## B. Active normalized ledger
 
-| Old ID | New ID | Referent | Lean declaration(s) |
-|---|---|---|---|
-| `ORP-008` | `ACT-001` | Future MSI model | `FutureMSIModel` |
-| `ORP-008A` | `ACT-002` | Optional future-MSI profile coherence | `ProfileIso`, `CoherentFutureMSIModel` |
-| `ORP-009` | `ACT-003` | Universal-domain preservation ranking | `GlobalPreservationRanking` |
-| `ORP-010` | `ACT-004` | Lifted projected profile/future contents | `liftSet`, `liftMSIContents`, `projectedProfile`, `futureMSI`, `futureMSIContents` |
-| `ORP-011` | `ACT-005` | Primary action-calibrated projected PCE | `ProjectedPCE` and theorem namespace |
-| `ORP-012` | `ACT-006` | Primary projected action selection | `ProjectedPCE.selectsProjectedAction`, `selected_has_max_projectedPCE` |
-| `ORP-013` | `ACT-007` | General projection compatibility layer | `GeneralProjectMap`, `general*` names |
-| `ORP-014` | `ACT-008` | General projected PCE compatibility | `GeneralProjectedPCE`, `generalProjectedPCE_eq_projectedPCE` |
-| `ORP-015` | `ACT-009` | General projected action selection compatibility | `GeneralProjectedPCE.selectsGeneralProjectedAction`, `selected_has_max_generalProjectedPCE` |
-| historical `AGY-001` application target | `deprecated_or_superseded` | Broad agency target | Superseded by `AGY-001`-`AGY-005` below. |
-| `AGY-002` | `AGY-001` | Agency context and feasibility model | `FeasibilityModel`, `AgencyContext` |
-| `AGY-003` | `AGY-002` | Feasible projected-PCE selection | `selectsFeasibleAction`, `AgencyWitness` |
-| `AGY-004` | `AGY-003` | Live alternatives | `liveAlternative`, `hasLiveAlternatives` |
-| `AGY-005` | `AGY-004` | PCE-differentiated alternatives | `pceDifferentiatedAlternative` |
-| `AGY-006` | `AGY-005` | Finite feasible maximizer existence | `finiteFeasibleSelection_deferred` |
-| historical `FWL-001` application target | `deprecated_or_superseded` | Broad free-will target | Superseded by `FWL-001`-`FWL-004` below. |
-| `FWL-002` | `FWL-001` | Branch profile and branch contents | `branchProfile`, `branchFutureContents` |
-| `FWL-003` | `FWL-002` | Branch-distinct free-will witness | `FreeWillWitness` |
-| `FWL-004` | `FWL-003` | PCE-free-will witness | `PCEFreeWillWitness` |
-| `FWL-005` | `FWL-004` | Branch/PCE collapse exclusions | `no_freeWillWitness_of_all_branch_contents_equal`, related theorems |
-| historical `TMP-001` application target | `deprecated_or_superseded` | Broad temporal target | Superseded by `TMP-001`-`TMP-005` below. |
-| `TMP-002` | `TMP-001` | Indexed trajectories and schedules | `ProfileTrajectory`, `ActionSchedule` |
-| `TMP-003` | `TMP-002` | Deterministic generated trajectory predicate | `generatedBy`, `trajectoryFutureContents` |
-| `TMP-004` | `TMP-003` | Stepwise temporal stability | `stepUnionDistance`, `unionStepStable`, related definitions |
-| `TMP-005` | `TMP-004` | Branch-sensitive temporal divergence | `DivergentTrajectories`, bridge theorems |
-| `TMP-006` | `TMP-005` | Deferred temporal enrichments | `stochasticTrajectory_deferred`, related markers |
-| historical `AFF-001` application target | `deprecated_or_superseded` | Broad affect target | Superseded by `AFF-001`-`AFF-007` below. |
-| `AFF-002` | `AFF-001` | Baseline-relative PCE valence | `relativePCEDelta`, `pceSupportive`, `pceDefeating`, `pceNeutral` |
-| `AFF-003` | `AFF-002` | Branch-profile shift | `branchProfileShift`, branch-profile bridge theorems |
-| `AFF-004` | `AFF-003` | Affect witness structures | `PCESupportAffectWitness`, `AffectKernelWitness`, related structures |
-| `AFF-005` | `AFF-004` | Bridges into affect kernel | `affectKernel_of_*` definitions |
-| `AFF-006` | `AFF-005` | Affect-kernel collapse exclusion | `no_affectKernel_of_branch_and_pce_collapse` |
-| `AFF-007` | `AFF-006` | Temporal affect-intensity bridge | `temporalAffectIntensity`, related theorems |
-| `AFF-008` | `AFF-007` | Deferred named/pathway affect work | `namedAffectTaxonomy_deferred`, related markers |
-| `RCX-001` | `RCX-DEFERRED` | Religiously charged experience | No Lean declaration; prose-only and not Lean-ready. |
+Active rows use only the normalized ID families listed above. Historical IDs appear only in the crosswalk below.
 
 ### Normalized application-layer rows
 
@@ -109,7 +73,7 @@ Status values are restricted to these exact categories. Rows that collect both a
 
 `RCX-DEFERRED` is intentionally not a Lean module. The source paper still needs prose/math refinement around charged vs sacred terminology, source opacity, positive/negative/ambivalent transformations, high-salience attractor structure, relation to affect and temporal transformation, and avoiding theological overcommitment.
 
-## Foundation layer
+### Foundation layer
 
 | ID | TLICA referent | Pure math referent | Lean declaration(s) | Status | Source |
 |---|---|---|---|---|---|
@@ -126,7 +90,7 @@ Status values are restricted to these exact categories. Rows that collect both a
 | FND-011 | Uniform convergence of mode aggregation | Weierstrass M-test for mode series | `mode_aggregation_uniform_convergent` | `machine_verified_theorem` | `05_dynamics.md` §5.7 |
 | FND-012 | Coordinate non-reducibility | No coordinate is a function of the other two in general | `CoordinateTriple`, `no_F_rho`, `no_F_phi`, `no_F_kappa`, `formal_non_reducibility` | `machine_verified_theorem` | `06_independence_lemmas.md` §§6.2-6.5 |
 
-## Profile-comparison layer
+### Profile-comparison layer
 
 | ID | TLICA referent | Pure math referent | Lean declaration(s) | Status | Source |
 |---|---|---|---|---|---|
@@ -139,7 +103,7 @@ Status values are restricted to these exact categories. Rows that collect both a
 | PRF-007 | General shell-stratified bound | Bound by maximum shell gap and shell distance | `shellStratifiedBound_deferred` | `deferred_marker_not_theorem` | `profile_comparison_v0_2.md` §5.3 |
 | PRF-008 | Pseudo-emetric promotion | Extended pseudometric structure on profile space | `ProfileSpace`, `PseudoEMetricSpace` instance | `machine_verified_definition` | round-3/4 follow-up |
 
-## Foundation orphan-cluster layer
+### Foundation orphan-cluster layer
 
 | ID | TLICA referent | Pure math referent | Lean declaration(s) | Status | Source |
 |---|---|---|---|---|---|
@@ -150,38 +114,50 @@ Status values are restricted to these exact categories. Rows that collect both a
 | ORP-005 | Prerogative of consistency | Ternary consistency evaluation over contents/actions/states | `ConsistencyEval`, `ConsistencyEval.toInt`, `PtCns`, `PtCns.partition_disjoint`, `PtCns.partition_cover` | `machine_verified_structure`; `primitive_structure_field` | `orphan_cluster_v0_1.md` §7 |
 | ORP-006 | Modes A/B/C | Finite mode operator selected by consistency evaluation | `ModeOp`, `ModeOp.fromEval`, `ModeOp.cogito_triggers_modeC` | `machine_verified_theorem` | `orphan_cluster_v0_1.md` §8 |
 | ORP-007 | I/not-I boundary | Boundary operator separating positive from negative/non-neutral consistency classes | `IBoundary.boundary`, `IBoundary.boundary_excludes_neutral`, `IBoundary.cogito_in_boundary`, `IBoundary.mem_boundary_iff`, `IBoundary.boundary_not_neutral` | `machine_verified_theorem` | `orphan_cluster_v0_1.md` §9 |
-| ORP-008 | Action-calibrated future MSI model | Assignment of an MSI to each deterministic projected profile, with domain compatibility | `FutureMSIModel`, `FutureMSIModel.msiOf`, `FutureMSIModel.domain_match` | `machine_verified_definition`; `primitive_structure_field`| action-projection refinement |
-| ORP-008A | Optional profile-isomorphism coherence | Extensional domain/value coherence between profiles and stronger future-MSI model projecting to `FutureMSIModel` | `ProfileIso`, `ProfileIso.refl`, `ProfileIso.symm`, `ProfileIso.trans`, `CoherentFutureMSIModel`, `CoherentFutureMSIModel.toFutureMSIModel`, `CoherentFutureMSIModel.toFutureMSIModel_domain_match` | `machine_verified_structure`; `machine_verified_definition`; `machine_verified_theorem`; existing `domain_match` remains default weak condition | v0.4/v0.4.1 foundation refinement |
-| ORP-009 | Universal-domain preservation ranking | Ranking over `Set α` for comparing lifted future MSI contents across projected profiles | `GlobalPreservationRanking`, `rank_nonneg`, `monotone` | `machine_verified_definition`; `primitive_structure_field`| action-projection refinement |
-| ORP-010 | Lifted future MSI contents | Image of subtype-domain MSI contents in the universal content type | `liftSet`, `liftMSIContents`, `projectedProfile`, `futureMSI`, `futureMSIContents` | `machine_verified_definition` | action-projection refinement |
-| ORP-011 | Action-calibrated projected PCE interface | Primary application-ready projected PCE over parameterized foundation `ProjectMap α Act` | `ProjectedPCE`, `ProjectedPCE.nonneg`, `ProjectedPCE.eq_of_future_contents_eq`, `ProjectedPCE.ge_of_rank_ge`, `ProjectedPCE.monotone_of_future_contents_subset`, `ProjectedPCE.strictly_differentiates_of_rank_lt` | `machine_verified_definition`; `machine_verified_theorem`; arbitrary `Act` supported | action-projection refinement; v0.4/v0.4.1 refinement |
-| ORP-012 | Projected action selection | Maximizer predicate for action-calibrated projected PCE | `ProjectedPCE.selectsProjectedAction`, `ProjectedPCE.selected_has_max_projectedPCE` | `machine_verified_definition`; `machine_verified_theorem` | action-projection refinement |
-| ORP-013 | General deterministic action projection compatibility | Compatibility names over parameterized foundation `ProjectMap α Act`; no duplicate primitive projection structure | `GeneralProjectMap`, `generalProjectMapOfProjectMap`, `generalProjectedProfile_eq_projectedProfile`, `generalFutureMSI_eq_futureMSI`, `generalFutureMSIContents_eq_futureMSIContents` | `compatibility_alias`; `machine_verified_definition`; `compatibility_theorem` | general-action-space compatibility; v0.4/v0.4.1 refinement |
-| ORP-014 | General projected PCE compatibility | Compatibility wrapper for primary `ProjectedPCE` over arbitrary action type `Act` | `GeneralProjectedPCE`, `generalProjectedPCE_eq_projectedPCE`, `GeneralProjectedPCE.nonneg`, `GeneralProjectedPCE.eq_of_future_contents_eq`, `GeneralProjectedPCE.ge_of_rank_ge`, `GeneralProjectedPCE.monotone_of_future_contents_subset`, `GeneralProjectedPCE.strictly_differentiates_of_rank_lt`, `generalProjectedPCE_strictly_differentiates_of_rank_lt` | `machine_verified_definition`; `machine_verified_theorem`; `compatibility_alias` | general-action-space compatibility |
-| ORP-015 | General projected action selection | Maximizer predicate for arbitrary action spaces | `GeneralProjectedPCE.selectsGeneralProjectedAction`, `GeneralProjectedPCE.selected_has_max_generalProjectedPCE` | `machine_verified_definition`; `machine_verified_theorem` | general-action-space refinement |
-| AGY-002 | Agency context | Feasible action model with projected-PCE calibration, using reusable project-map-indexed feasibility | `FeasibilityModel`, `FeasibilityModel.noAction_feasible`, `AgencyContext`, `AgencyContext.feasibility`, `AgencyContext.feasible`, `AgencyContext.noAction_feasible`, `AgencyContext.mkFromFeasible` | `machine_verified_definition`; `primitive_structure_field` | agency layer; v0.4/v0.4.1 refinement |
-| AGY-003 | Feasible projected PCE selection | Selection among feasible alternatives by generalized projected PCE | `feasibleProjectedPCE`, `selectsFeasibleAction`, `AgencyWitness`, `witness_of_selectsFeasibleAction`, `selectsFeasibleAction_of_witness` | `machine_verified_definition`; `machine_verified_theorem` | agency layer |
-| AGY-004 | Live alternatives | Nontrivial agency as existence of distinct feasible actions | `liveAlternative`, `hasLiveAlternatives`, `exists_distinct_feasible_of_hasLiveAlternatives` | `machine_verified_definition`; `machine_verified_theorem` | agency layer |
-| AGY-005 | PCE-differentiated alternatives | Feasible alternatives with different generalized projected-PCE values | `pceDifferentiatedAlternative`, `not_exists_feasible_strictly_higher_of_selects`, `pceDifferentiatedAlternative_of_selected_strictly_beats` | `machine_verified_definition`; `machine_verified_theorem` | agency layer |
-| AGY-006 | Finite feasible maximizer existence | Future finite-action sufficient condition for maximizer existence | `finiteFeasibleSelection_deferred` | `deferred_marker_not_theorem` | agency layer |
-| FWL-002 | Branch profile and branch contents | Deterministic projected branch profile and lifted future MSI contents | `branchProfile`, `branchFutureContents`, `openAlternatives` | `machine_verified_definition` | free-will layer |
-| FWL-003 | Branch-distinct free-will witness | Selected agency plus live alternative with distinct future branch contents | `FreeWillWitness`, `branchDistinctAlternative`, `FreeWillWitness.hasLiveAlternatives`, `FreeWillWitness.exists_distinct_feasible`, `FreeWillWitness.branchDistinctAlternative` | `machine_verified_definition`; `machine_verified_theorem` | free-will layer |
-| FWL-004 | PCE-differentiated free-will witness | Stronger witness with live alternative whose projected-PCE value differs | `PCEFreeWillWitness`, `pceBranchDistinctAlternative`, `branchFutureContents_ne_of_pce_ne`, `branchDistinctAlternative_of_pceBranchDistinctAlternative`, `PCEFreeWillWitness.toFreeWillWitness`, `freeWillWitness_of_pceFreeWillWitness`, `PCEFreeWillWitness.hasLiveAlternatives`, `PCEFreeWillWitness.pceDifferentiatedAlternative`, `PCEFreeWillWitness.pceBranchDistinctAlternative`, `pceFreeWillWitness_of_selected_strictly_beats`, `freeWillWitness_of_selected_strictly_beats` | `machine_verified_definition`; `machine_verified_theorem` | free-will layer |
-| FWL-005 | No free will under branch/PCE collapse | Branch collapse excludes both free-will witness types; PCE collapse excludes PCE-free-will witnesses | `no_freeWillWitness_of_all_branch_contents_equal`, `no_pceFreeWillWitness_of_all_branch_contents_equal`, `no_pceFreeWillWitness_of_all_pce_equal` | `machine_verified_theorem` | free-will layer |
-| TMP-002 | Temporal profile trajectory | Natural-time indexed sequence of scalar profiles and action schedule | `ProfileTrajectory`, `ActionSchedule` | `machine_verified_structure` | temporal-trajectory layer |
-| TMP-003 | Deterministic generated trajectory | Predicate that a supplied trajectory follows generalized deterministic projection under a supplied schedule | `generatedBy`, `trajectoryFutureContents`, `oneStepBranch` | `machine_verified_definition` | temporal-trajectory layer |
-| TMP-004 | Stepwise temporal stability | Adjacent-time profile comparison using existing union/shared distances | `stepUnionDistance`, `stepSharedDistance`, `unionStepStable`, `eventuallyUnionStepStable` | `machine_verified_definition` | temporal-trajectory layer |
-| TMP-005 | Branch-sensitive temporal divergence | Supplied trajectories with a witnessed time-indexed profile difference; free-will witnesses provide one-step branch-future divergence data | `DivergentTrajectories`, `freeWillWitness_live_branch_contents_distinct`, `freeWillWitness_oneStep_branch_contents_distinct`, `pceFreeWillWitness_oneStep_branch_contents_distinct` | `machine_verified_structure`; `machine_verified_theorem` | temporal-trajectory layer |
-| TMP-006 | Deferred temporal enrichments | Stochastic trajectory, phenomenological duration, and richer temporal-continuity metric | `stochasticTrajectory_deferred`, `phenomenologicalDuration_deferred`, `temporalContinuityMetric_deferred` | `deferred_marker_not_theorem` | temporal-trajectory layer |
-| AFF-002 | Relative projected-PCE valence | PCE-support, neutrality, and defeat measured against a baseline action | `relativePCEDelta`, `pceSupportive`, `pceNeutral`, `pceDefeating`, `pceSupportive_iff`, `pceNeutral_iff`, `pceDefeating_iff`, `pceValence_trichotomy`, `pceSupportive_not_neutral`, `pceSupportive_not_defeating`, `pceDefeating_not_neutral` | `machine_verified_definition`; `machine_verified_theorem` | differentiated-affect layer |
-| AFF-003 | Branch-profile shift | Profile-distance and equality-based branch-shift predicates over deterministic action branches | `branchUnionDistance`, `branchSharedDistance`, `branchProfileShift`, `branchFutureContents_eq_of_branchProfile_eq`, `branchProfile_ne_of_branchFutureContents_ne` | `machine_verified_definition`; `machine_verified_theorem` | differentiated-affect layer |
-| AFF-004 | Affect-kernel witnesses | Feasible-action witnesses for relative PCE support/defeat/neutrality, profile shift, and minimal structural perturbation | `PCESupportAffectWitness`, `PCEDefeatAffectWitness`, `PCENeutralAffectWitness`, `ProfileShiftAffectWitness`, `AffectKernelWitness` | `machine_verified_structure`; no named affect taxonomy claim | differentiated-affect layer |
-| AFF-005 | Witness bridges into affect kernel | PCE support/defeat/profile shift, free-will, and PCE-free-will witnesses imply affect-kernel witnesses | `affectKernel_of_pceSupport`, `affectKernel_of_pceDefeat`, `affectKernel_of_profileShift`, `profileShiftAffectWitness_of_freeWillWitness`, `affectKernel_of_freeWillWitness`, `affectKernel_of_pceFreeWillWitness` | `machine_verified_definition` | differentiated-affect layer |
-| AFF-006 | Affect-kernel collapse exclusion | Branch-profile and projected-PCE collapse rules out generic affect-kernel witnesses | `no_affectKernel_of_branch_and_pce_collapse` | `machine_verified_theorem` | differentiated-affect layer |
-| AFF-007 | Temporal affect-intensity bridge | Adjacent union-profile distance as a naming bridge for future affect intensity | `temporalAffectIntensity`, `temporalAffectIntensity_nonneg`, `temporalAffectIntensity_le_of_unionStepStable` | `machine_verified_definition`; `machine_verified_theorem` | differentiated-affect layer |
-| AFF-008 | Deferred affect enrichments | Named affect taxonomy, love as constitutive extension, substrate pathway, and source-opacity pathway | `namedAffectTaxonomy_deferred`, `loveConstitutiveExtension_deferred`, `substrateAffectPathway_deferred`, `sourceOpacityAffect_deferred` | `deferred_marker_not_theorem` | differentiated-affect layer |
 
-## Application signature targets
+## C. Historical ID crosswalk
+
+The rows below are historical or superseded names only. They are not active ledger rows.
+
+| Old ID | New ID / status | Referent | Lean declaration(s) |
+|---|---|---|---|
+| `ORP-008` | `ACT-001` | Future MSI model | `FutureMSIModel` |
+| `ORP-008A` | `ACT-002` | Optional future-MSI profile coherence | `ProfileIso`, `CoherentFutureMSIModel` |
+| `ORP-009` | `ACT-003` | Universal-domain preservation ranking | `GlobalPreservationRanking` |
+| `ORP-010` | `ACT-004` | Lifted projected profile/future contents | `liftSet`, `liftMSIContents`, `projectedProfile`, `futureMSI`, `futureMSIContents` |
+| `ORP-011` | `ACT-005` | Primary action-calibrated projected PCE | `ProjectedPCE` and theorem namespace |
+| `ORP-012` | `ACT-006` | Primary projected action selection | `ProjectedPCE.selectsProjectedAction`, `selected_has_max_projectedPCE` |
+| `ORP-013` | `ACT-007` | General projection compatibility layer | `GeneralProjectMap`, `general*` names |
+| `ORP-014` | `ACT-008` | General projected PCE compatibility | `GeneralProjectedPCE`, `generalProjectedPCE_eq_projectedPCE` |
+| `ORP-015` | `ACT-009` | General projected action selection compatibility | `GeneralProjectedPCE.selectsGeneralProjectedAction`, `selected_has_max_generalProjectedPCE` |
+| historical `AGY-001` application target | `deprecated_or_superseded` | Broad agency target | Superseded by `AGY-001`-`AGY-005`. |
+| `AGY-002` | `AGY-001` | Agency context and feasibility model | `FeasibilityModel`, `AgencyContext` |
+| `AGY-003` | `AGY-002` | Feasible projected-PCE selection | `selectsFeasibleAction`, `AgencyWitness` |
+| `AGY-004` | `AGY-003` | Live alternatives | `liveAlternative`, `hasLiveAlternatives` |
+| `AGY-005` | `AGY-004` | PCE-differentiated alternatives | `pceDifferentiatedAlternative` |
+| `AGY-006` | `AGY-005` | Finite feasible maximizer existence | `finiteFeasibleSelection_deferred` |
+| historical `FWL-001` application target | `deprecated_or_superseded` | Broad free-will target | Superseded by `FWL-001`-`FWL-004`. |
+| `FWL-002` | `FWL-001` | Branch profile and branch contents | `branchProfile`, `branchFutureContents` |
+| `FWL-003` | `FWL-002` | Branch-distinct free-will witness | `FreeWillWitness` |
+| `FWL-004` | `FWL-003` | PCE-free-will witness | `PCEFreeWillWitness` |
+| `FWL-005` | `FWL-004` | Branch/PCE collapse exclusions | `no_freeWillWitness_of_all_branch_contents_equal`, related theorems |
+| historical `TMP-001` application target | `deprecated_or_superseded` | Broad temporal target | Superseded by `TMP-001`-`TMP-005`. |
+| `TMP-002` | `TMP-001` | Indexed trajectories and schedules | `ProfileTrajectory`, `ActionSchedule` |
+| `TMP-003` | `TMP-002` | Deterministic generated trajectory predicate | `generatedBy`, `trajectoryFutureContents` |
+| `TMP-004` | `TMP-003` | Stepwise temporal stability | `stepUnionDistance`, `unionStepStable`, related definitions |
+| `TMP-005` | `TMP-004` | Branch-sensitive temporal divergence | `DivergentTrajectories`, bridge theorems |
+| `TMP-006` | `TMP-005` | Deferred temporal enrichments | `stochasticTrajectory_deferred`, related markers |
+| historical `AFF-001` application target | `deprecated_or_superseded` | Broad affect target | Superseded by `AFF-001`-`AFF-007`. |
+| `AFF-002` | `AFF-001` | Baseline-relative PCE valence | `relativePCEDelta`, `pceSupportive`, `pceDefeating`, `pceNeutral` |
+| `AFF-003` | `AFF-002` | Branch-profile shift | `branchProfileShift`, branch-profile bridge theorems |
+| `AFF-004` | `AFF-003` | Affect witness structures | `PCESupportAffectWitness`, `AffectKernelWitness`, related structures |
+| `AFF-005` | `AFF-004` | Bridges into affect kernel | `affectKernel_of_*` definitions |
+| `AFF-006` | `AFF-005` | Affect-kernel collapse exclusion | `no_affectKernel_of_branch_and_pce_collapse` |
+| `AFF-007` | `AFF-006` | Temporal affect-intensity bridge | `temporalAffectIntensity`, related theorems |
+| `AFF-008` | `AFF-007` | Deferred named/pathway affect work | `namedAffectTaxonomy_deferred`, related markers |
+| `RCX-001` | `RCX-DEFERRED` | Religiously charged experience | No Lean declaration; prose-only and not Lean-ready. |
+
+## D. Deferred/prose-only application targets
 
 These should be added only after the foundation layer compiles and the mathematical signatures are stable.
 
