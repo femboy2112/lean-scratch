@@ -17,6 +17,7 @@ open TLICA.Profile
 open TLICA.ProfileComparison.Pointwise
 open TLICA.Agency
 open TLICA.FreeWill
+open TLICA.ActionProjection
 open TLICA.GeneralActionProjection
 open scoped ENNReal
 
@@ -40,11 +41,38 @@ def generatedBy (ctx : AgencyContext α Act)
   ∀ n, traj.profileAt (n + 1) =
     generalProjectedProfile ctx.proj (traj.profileAt n) (sched.actionAt n)
 
+/-- Named one-step equation for a generated trajectory. -/
+theorem generatedBy_step
+    {ctx : AgencyContext α Act} {traj : ProfileTrajectory α}
+    {sched : ActionSchedule Act}
+    (h : generatedBy ctx traj sched) (n : ℕ) :
+    traj.profileAt (n + 1) =
+      generalProjectedProfile ctx.proj (traj.profileAt n) (sched.actionAt n) :=
+  h n
+
+/-- Direct projected-profile spelling of the generated one-step equation. -/
+theorem generatedBy_step_projectedProfile
+    {ctx : AgencyContext α Act} {traj : ProfileTrajectory α}
+    {sched : ActionSchedule Act}
+    (h : generatedBy ctx traj sched) (n : ℕ) :
+    traj.profileAt (n + 1) =
+      projectedProfile ctx.proj (traj.profileAt n) (sched.actionAt n) := by
+  rw [generatedBy_step h n, generalProjectedProfile_eq_projectedProfile]
+
 /-- Future MSI contents of the scheduled branch at a time along a trajectory. -/
 def trajectoryFutureContents (ctx : AgencyContext α Act)
     (traj : ProfileTrajectory α) (sched : ActionSchedule Act) (n : ℕ) :
     Set α :=
   branchFutureContents ctx (traj.profileAt n) (sched.actionAt n)
+
+/-- `trajectoryFutureContents` unfolds to the branch-future contents at the
+    scheduled action. -/
+theorem trajectoryFutureContents_eq_branchFutureContents
+    (ctx : AgencyContext α Act)
+    (traj : ProfileTrajectory α) (sched : ActionSchedule Act) (n : ℕ) :
+    trajectoryFutureContents ctx traj sched n =
+      branchFutureContents ctx (traj.profileAt n) (sched.actionAt n) :=
+  rfl
 
 /-- Union-domain profile distance between adjacent times. -/
 noncomputable def stepUnionDistance (traj : ProfileTrajectory α) (n : ℕ) :

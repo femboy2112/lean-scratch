@@ -29,19 +29,28 @@ coverage.
 |---|---|---|---|---|---|---|---|
 | Completed P1 preparation | Interior shell-distance and profile-level pointwise bounds | Substantially prepares the shell-stratified target without overclaiming boundary-shell semantics. | `ShellThresholds`, `shellOf`, `sameShellBound`, `dInfShared` | `codex/tlica-shell-stratified-bound-v0` | `TLICA/ProfileComparison/ShellRefinement.lean` | `MAPPING.md`, ledger, coverage docs, matrix, report, inventory | Added `interiorShellIndexDistance`, `sameInteriorShell_distance_bound`, `interiorShell_pair_bound`, and `shellStableDistanceBound_of_pointwise`; full seven-shell theorem remains deferred. |
 
+## A3. Completed in `codex/tlica-shell-boundary-conventions-v0`
+
+| Priority | Target | Why it matters | Required dependencies | Branch name | Lean files | Docs updated | Result |
+|---|---|---|---|---|---|---|---|
+| Completed P1 | Full seven-shell pointwise shell-stratified bound | Resolves the source-level boundary convention blocker for Proposition 5.3.1. | Source-fixed shell 0/6 conventions, `ShellThresholds`, interior preparation theorems. | `codex/tlica-shell-boundary-conventions-v0` | `TLICA/ProfileComparison/ShellRefinement.lean` | `SHELL_BOUNDARY_CONVENTION_AUDIT.md`, mapping, ledger, coverage docs, matrix, report, inventory | Added `ShellIndex7`, `shellOf7`, boundary helper lemmas, and `fullShellStratifiedBound`; legacy marker superseded. |
+| Completed P2 | Agency finite-selection wrappers and direct PCE bridge | Makes the finite feasible-selection theorem easier to apply and clarifies primary `ProjectedPCE` usage. | Existing finset theorem, `Set.Finite.toFinset`, `ProjectedPCE`. | `codex/tlica-shell-boundary-conventions-v0` | `TLICA/Agency.lean` | Mapping, ledger, coverage docs, matrix, report, inventory | Added `feasibleProjectedPCE_eq_projectedPCE`, `exists_selectsFeasibleAction_of_finite_feasible`, and `exists_selectsFeasibleAction_of_fintype`. |
+| Completed P2 | Generated trajectory helper API | Adds low-risk theorem names around `generatedBy`. | Existing deterministic projection definitions. | `codex/tlica-shell-boundary-conventions-v0` | `TLICA/TemporalTrajectory.lean` | Mapping, ledger, coverage docs, matrix, report, inventory | Added `generatedBy_step`, `generatedBy_step_projectedProfile`, and `trajectoryFutureContents_eq_branchFutureContents`. |
+| Completed P2 | Branch-distance helper expansion | Exposes reflexivity, symmetry, and triangle for branch union distance. | Existing `dInfUnion` theorem package. | `codex/tlica-shell-boundary-conventions-v0` | `TLICA/DifferentiatedAffect.lean` | Mapping, ledger, coverage docs, matrix, report, inventory | Added `branchUnionDistance_self`, `branchUnionDistance_symm`, and `branchUnionDistance_triangle`. |
+| Completed audit | Contestable boundary source/Lean readiness audit | Prevents over-formalizing `contestableBoundary` before the source chooses a refinement predicate. | `IBoundary`, orphan-cluster boundary candidates. | `codex/tlica-shell-boundary-conventions-v0` | None | `CONTESTABLE_BOUNDARY_AUDIT.md`, matrix, backlog, report | Audit says contestable boundary is not Lean-ready beyond current stub. |
+
 ## B. Remaining Immediate Lean-Ready Theorem Targets
 
 | Priority | Target | Why it matters | Required dependencies | Proposed branch name | Expected Lean files | Expected docs to update | Risk |
 |---|---|---|---|---|---|---|---|
-| P1 | Full seven-shell shell-stratified bound | Closes the remaining profile-comparison theorem marker. | Explicit shell 0/6 boundary convention, endpoint inclusivity convention, `ShellThresholds`, interior preparation theorems, `dInfShared`/`dInfUnion` target choice. | `codex/tlica-full-shell-bound-boundary-conventions` | `TLICA/ProfileComparison/ShellRefinement.lean` | `MAPPING.md`, ledger, matrix, coverage docs | Medium-high until source convention is fixed |
-| P2 | Direct `ProjectedPCE` aliases replacing compatibility usage | Reduces dependence on `GeneralProjectedPCE` compatibility names in newer modules. | Existing equality theorem `generalProjectedPCE_eq_projectedPCE`. | `codex/tlica-direct-projected-pce-api` | `TLICA/Agency.lean`, dependent modules if touched | `MAPPING.md`, ledger, coverage audit | Medium |
+| P2 | Profile-level shell-stratified shared/union bound | Packages `fullShellStratifiedBound` over `dInfShared` or `dInfUnion`. | Boundary-aware pointwise theorem, chosen profile-distance target, pointwise shell assignment hypotheses. | `codex/tlica-profile-shell-bound-corollary` | `TLICA/ProfileComparison/ShellRefinement.lean` | `MAPPING.md`, ledger, matrix, coverage docs | Medium |
+| P2 | Direct `ProjectedPCE` API cleanup | Reduces dependence on compatibility names in comments and downstream helper statements. | Existing equality theorem `generalProjectedPCE_eq_projectedPCE`; new agency bridge. | `codex/tlica-direct-projected-pce-api` | Dependent modules if touched | `MAPPING.md`, ledger, coverage audit | Low-medium |
 
 ## C. Lean-Ready Structure Targets
 
 | Priority | Target | Why it matters | Required dependencies | Proposed branch name | Expected Lean files | Expected docs to update | Risk |
 |---|---|---|---|---|---|---|---|
-| P2 | Generated trajectory helper API | Adds low-risk theorem names around `generatedBy` without changing semantics. | Existing deterministic projection definitions. | `codex/tlica-generated-trajectory-api` | `TLICA/TemporalTrajectory.lean` | `MAPPING.md`, ledger | Low |
-| P2 | Contestable boundary signature clarification | Turns `contestableBoundary` from a bare named set into a documented structure or theorem target if the source settles it. | PtCns/IBoundary source clarification. | `codex/tlica-contestable-boundary-signature` | `TLICA/IBoundary.lean` | `MAPPING.md`, ledger, source-alignment audit | Medium |
+| P3 | Contestable boundary signature clarification | Turns `contestableBoundary` from a bare named set into a documented structure or theorem target after source refinement. | Choice among perturbation sensitivity, Mode A/C dual candidacy, projection-induced class change, or temporal instability. | `codex/tlica-contestable-boundary-signature` | `TLICA/IBoundary.lean` after source work | `MAPPING.md`, ledger, source-alignment audit | Medium |
 | P2 | Pseudo-emetric convenience lemmas | Makes the profile-space instance easier to cite. | Existing `ProfileSpace` and `edist_def`. | `codex/tlica-profile-space-helpers` | `TLICA/ProfileComparison/PseudoEMetric.lean` | `MAPPING.md`, ledger | Low |
 
 ## D. Prose-First Targets

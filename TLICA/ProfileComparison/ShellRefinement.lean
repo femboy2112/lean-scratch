@@ -67,6 +67,37 @@ def shellOf (rs : ShellThresholds) (i : Fin 5) (a : ℝ) : Prop :=
 def interiorShellIndexDistance (i j : Fin 5) : Nat :=
   if i.val ≤ j.val then j.val - i.val else i.val - j.val
 
+/-- Seven shell indices from the source convention: cogito, five interior
+    threshold shells, and the outer low-correlation shell. -/
+inductive ShellIndex7 where
+  | cogito
+  | interior : Fin 5 → ShellIndex7
+  | outer
+  deriving DecidableEq
+
+/-- Lower scalar endpoint for a source-level seven-shell index. -/
+def shellLowerEndpoint (rs : ShellThresholds) : ShellIndex7 → ℝ
+  | ShellIndex7.cogito => 1
+  | ShellIndex7.interior i => rs.r ⟨i.val + 1, by omega⟩
+  | ShellIndex7.outer => 0
+
+/-- Upper scalar endpoint for a source-level seven-shell index. -/
+def shellUpperEndpoint (rs : ShellThresholds) : ShellIndex7 → ℝ
+  | ShellIndex7.cogito => 1
+  | ShellIndex7.interior i => rs.r ⟨i.val, by omega⟩
+  | ShellIndex7.outer => rs.r 5
+
+/-- Boundary-aware scalar shell membership.
+
+    This is additive over the existing interior `shellOf`. It records the
+    source convention from Definition 4.3.1: shell 0 is the cogito singleton,
+    shells 1-5 are the existing half-open threshold intervals, and shell 6 is
+    the low-correlation interval `[0, r_5)`. -/
+def shellOf7 (rs : ShellThresholds) : ShellIndex7 → ℝ → Prop
+  | ShellIndex7.cogito, a => a = 1
+  | ShellIndex7.interior i, a => shellOf rs i a
+  | ShellIndex7.outer, a => 0 ≤ a ∧ a < rs.r 5
+
 /-- Interior-shell members are nonnegative under the current threshold
     convention. -/
 theorem shellOf_nonneg (rs : ShellThresholds) (i : Fin 5) (a : ℝ)
@@ -96,6 +127,64 @@ theorem shellOf_le_one (rs : ShellThresholds) (i : Fin 5) (a : ℝ)
       have hlt := rs.r_strict_anti hpos
       linarith [rs.r_zero]
   exact le_trans ha.2.le hle
+
+/-- Seven-shell membership gives the lower endpoint bound. -/
+theorem shellOf7_lower_le (rs : ShellThresholds) (s : ShellIndex7) (a : ℝ)
+    (ha : shellOf7 rs s a) :
+    shellLowerEndpoint rs s ≤ a := by
+  cases s with
+  | cogito =>
+      simp [shellOf7] at ha
+      subst a
+      norm_num [shellLowerEndpoint]
+  | interior i =>
+      exact ha.1
+  | outer =>
+      exact ha.1
+
+/-- Seven-shell membership gives the upper endpoint bound. -/
+theorem shellOf7_le_upper (rs : ShellThresholds) (s : ShellIndex7) (a : ℝ)
+    (ha : shellOf7 rs s a) :
+    a ≤ shellUpperEndpoint rs s := by
+  cases s with
+  | cogito =>
+      simp [shellOf7] at ha
+      subst a
+      norm_num [shellUpperEndpoint]
+  | interior i =>
+      exact ha.2.le
+  | outer =>
+      exact ha.2.le
+
+/-- Every boundary-aware shell member lies in the normalized interval `[0, 1]`. -/
+theorem shellOf7_mem_Icc_zero_one (rs : ShellThresholds) (s : ShellIndex7) (a : ℝ)
+    (ha : shellOf7 rs s a) :
+    0 ≤ a ∧ a ≤ 1 := by
+  cases s with
+  | cogito =>
+      simp [shellOf7] at ha
+      subst a
+      norm_num
+  | interior i =>
+      exact ⟨shellOf_nonneg rs i a ha, shellOf_le_one rs i a ha⟩
+  | outer =>
+      have hlt : rs.r 5 < 1 := by
+        have hstrict := rs.r_strict_anti (by decide : (0 : Fin 6) < 5)
+        linarith [rs.r_zero]
+      exact ⟨ha.1, le_trans ha.2.le hlt.le⟩
+
+/-- Cogito-shell scalar members have value `1`. -/
+theorem shellOf7_cogito_value (rs : ShellThresholds) (a : ℝ)
+    (ha : shellOf7 rs ShellIndex7.cogito a) :
+    a = 1 :=
+  ha
+
+/-- Outer-shell scalar members are exactly in the low-correlation interval
+    `[0, r_5)`. -/
+theorem shellOf7_outer_bound (rs : ShellThresholds) (a : ℝ)
+    (ha : shellOf7 rs ShellIndex7.outer a) :
+    0 ≤ a ∧ a < rs.r 5 :=
+  ha
 
 /-- **Same-shell bound** (the tractable load-bearing case of Proposition 5.3.1).
 
@@ -145,13 +234,61 @@ theorem interiorShell_pair_bound
   rw [abs_sub_le_iff]
   constructor <;> linarith
 
-/-- Deferred target marker for Proposition 5.3.1, the general
-    shell-stratified bound.
+/-- Same-shell bound for the cogito singleton shell. -/
+theorem sameCogitoShell_bound (rs : ShellThresholds) (a b : ℝ)
+    (ha : shellOf7 rs ShellIndex7.cogito a)
+    (hb : shellOf7 rs ShellIndex7.cogito b) :
+    |a - b| = 0 := by
+  rw [shellOf7_cogito_value rs a ha, shellOf7_cogito_value rs b hb, sub_self, abs_zero]
 
-    The general case requires a `Fin 7 × Fin 7` case analysis with boundary
-    conventions for shells 0 (cogito) and 6 (outer). This is intentionally a
-    non-substantive definition, not a theorem and not counted as
-    machine-verified mathematics. -/
+/-- Same-shell bound for the outer low-correlation shell. -/
+theorem sameOuterShell_bound (rs : ShellThresholds) (a b : ℝ)
+    (ha : shellOf7 rs ShellIndex7.outer a)
+    (hb : shellOf7 rs ShellIndex7.outer b) :
+    |a - b| < rs.r 5 := by
+  rcases le_or_lt a b with hab | hab
+  · rw [abs_of_nonpos (by linarith)]
+    linarith [ha.1, hb.2]
+  · rw [abs_of_pos (by linarith)]
+    linarith [ha.2, hb.1]
+
+/-- Endpoint form for distances between two interval-bounded scalar values. -/
+theorem abs_sub_le_max_endpoint_abs
+    {l₁ u₁ l₂ u₂ a b : ℝ}
+    (ha_lower : l₁ ≤ a) (ha_upper : a ≤ u₁)
+    (hb_lower : l₂ ≤ b) (hb_upper : b ≤ u₂) :
+    |a - b| ≤ max |u₁ - l₂| |l₁ - u₂| := by
+  rw [abs_sub_le_iff]
+  constructor
+  · exact le_trans (by linarith)
+      (le_trans (le_abs_self _) (le_max_left _ _))
+  · have h_abs : u₂ - l₁ ≤ |l₁ - u₂| := by
+      have := neg_le_abs (l₁ - u₂)
+      linarith
+    exact le_trans (by linarith)
+      (le_trans h_abs (le_max_right _ _))
+
+/-- Full boundary-aware scalar shell-stratified bound.
+
+    This is the pointwise content of Proposition 5.3.1 under the explicit
+    seven-shell convention: shell 0 is the cogito singleton, shells 1-5 are
+    the half-open threshold intervals, and shell 6 is `[0, r_5)`. -/
+theorem fullShellStratifiedBound
+    (rs : ShellThresholds) (a b : ℝ) (i j : ShellIndex7)
+    (ha : shellOf7 rs i a) (hb : shellOf7 rs j b) :
+    |a - b| ≤
+      max |shellUpperEndpoint rs i - shellLowerEndpoint rs j|
+        |shellLowerEndpoint rs i - shellUpperEndpoint rs j| :=
+  abs_sub_le_max_endpoint_abs
+    (shellOf7_lower_le rs i a ha) (shellOf7_le_upper rs i a ha)
+    (shellOf7_lower_le rs j b hb) (shellOf7_le_upper rs j b hb)
+
+/-- Legacy marker for Proposition 5.3.1, retained only for compatibility with
+    older Rosetta inventories.
+
+    The boundary-aware pointwise scalar theorem is now
+    `fullShellStratifiedBound`; profile-level corollaries may still build on
+    that theorem plus `shellStableDistanceBound_of_pointwise`. -/
 def shellStratifiedBound_deferred : Prop := True
 
 /-- Profile-level shared-distance bound from an explicit pointwise bound.

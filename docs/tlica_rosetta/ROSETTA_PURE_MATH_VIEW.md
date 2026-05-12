@@ -10,7 +10,7 @@ The normalized Rosetta status categories are:
 
 The foundation primitives are `KField`, `ScalarProfile`, `MSI`, `PreservationRanking`, `ProjectMap α Act`, `FutureMSIModel`, `GlobalPreservationRanking`, and `FeasibilityModel`. Derived/application structures include `AgencyContext`, `AgencyWitness`, `FreeWillWitness`, `PCEFreeWillWitness`, `ProfileTrajectory`, `ActionSchedule`, `AffectKernelWitness`, and the affect witness structures. Compatibility names include `GeneralProjectMap`, `GeneralProjectedPCE`, and the `general*` projected-profile/future-content names.
 
-No global existence of agency, free will, trajectories, or affect kernels is asserted. Stochastic projection, phenomenological duration, the full shell-stratified bound, named affect taxonomy, substrate affect pathways, source-opacity affect, and religiously charged experience formalization remain deferred.
+No global existence of agency, free will, trajectories, or affect kernels is asserted. Stochastic projection, phenomenological duration, profile-level packaging of the full shell-stratified bound, named affect taxonomy, substrate affect pathways, source-opacity affect, and religiously charged experience formalization remain deferred.
 
 ## 1. Ordered non-Archimedean coefficient structure
 
@@ -48,9 +48,9 @@ Lean carriers: `ScalarProfile`, `zeroExtend`, `dInfUnion`, `dInfUnion_*`, `dInfS
 
 ## 6. Shell partitions and coarse stability
 
-Thresholds partition scalar values into interior half-open shells via `shellOf`. If two points lie in the same shell, their absolute scalar difference is bounded by that adjacent threshold gap. Interior shell membership is machine-verified to imply membership in `[0,1]`, yielding a conservative cross-interior-shell `≤ 1` bound. A reusable pointwise shared-distance theorem abstracts the profile-level supremum step. A full shell-stratified bound across all boundary shells remains deferred because the cogito and outer-shell conventions require additional source-grounded structure.
+Thresholds partition scalar values into interior half-open shells via `shellOf` and into the source-level seven-shell convention via `shellOf7`. If two points lie in the same interior shell, their absolute scalar difference is bounded by that adjacent threshold gap. Boundary-aware shell membership is machine-verified to imply membership in `[0,1]`, with cogito as the singleton value `1` and the outer shell as `[0,r_5)`. The full pointwise seven-shell endpoint bound is machine-verified as `fullShellStratifiedBound`. A reusable pointwise shared-distance theorem abstracts the profile-level supremum step for later profile-distance corollaries.
 
-Lean carriers: `ShellThresholds`, `shellOf`, `interiorShellIndexDistance`, `shellOf_nonneg`, `shellOf_le_one`, `sameShellBound`, `sameShellBound_of_shellOf`, `sameInteriorShell_distance_bound`, `interiorShell_pair_bound`, `shellStableDistanceBound_of_pointwise`, `shellStableDistanceVanishing_simple`, `shellStratifiedBound_deferred`.
+Lean carriers: `ShellThresholds`, `shellOf`, `ShellIndex7`, `shellOf7`, `shellOf7_*`, `sameShellBound`, `sameInteriorShell_distance_bound`, `interiorShell_pair_bound`, `sameCogitoShell_bound`, `sameOuterShell_bound`, `fullShellStratifiedBound`, `shellStableDistanceBound_of_pointwise`, `shellStableDistanceVanishing_simple`.
 
 ## 7. Distinguished self-substructure and preservation ranking
 

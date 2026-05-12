@@ -134,6 +134,28 @@ theorem branchUnionDistance_le_one
   unfold branchUnionDistance
   exact dInfUnion_le_one _ _
 
+/-- Branch union distance is reflexive. -/
+theorem branchUnionDistance_self
+    (ctx : AgencyContext α Act) (P : ScalarProfile α) (a : Act) :
+    branchUnionDistance ctx P a a = 0 := by
+  unfold branchUnionDistance
+  exact dInfUnion_self _
+
+/-- Branch union distance is symmetric. -/
+theorem branchUnionDistance_symm
+    (ctx : AgencyContext α Act) (P : ScalarProfile α) (a b : Act) :
+    branchUnionDistance ctx P a b = branchUnionDistance ctx P b a := by
+  unfold branchUnionDistance
+  exact dInfUnion_symm _ _
+
+/-- Branch union distance satisfies the triangle inequality. -/
+theorem branchUnionDistance_triangle
+    (ctx : AgencyContext α Act) (P : ScalarProfile α) (a b c : Act) :
+    branchUnionDistance ctx P a c ≤
+      branchUnionDistance ctx P a b + branchUnionDistance ctx P b c := by
+  unfold branchUnionDistance
+  exact dInfUnion_triangle _ _ _
+
 /-- Shared-domain distance between two deterministic action branches. -/
 noncomputable def branchSharedDistance (ctx : AgencyContext α Act)
     (P : ScalarProfile α) (a b : Act) : ℝ≥0∞ :=

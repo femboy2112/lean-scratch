@@ -125,11 +125,11 @@ All five priority theorems have type-checking proofs in the project and are mach
 | `dInfShared_le_one_or_top` | Combined bound | `machine_verified_definition` |
 | `dInfShared_triangle_of_bridge` | §5.2.6 (qualified triangle inequality, bridge-domain form) | `machine_verified_theorem` |
 | `structure ShellThresholds` | v0.3.1 rigorous edition 04_profiles.md §4.3.1 | `machine_verified_structure` |
-| `shellOf`, `interiorShellIndexDistance` | Helper definitions for interior half-open shell membership and interior shell-index distance | `machine_verified_definition` |
-| `shellOf_nonneg`, `shellOf_le_one` | Interior shell-membership bounds induced by threshold normalization | `machine_verified_theorem` |
+| `shellOf`, `interiorShellIndexDistance`, `ShellIndex7`, `shellLowerEndpoint`, `shellUpperEndpoint`, `shellOf7` | Helper definitions for interior and boundary-aware shell membership | `machine_verified_definition` |
+| `shellOf_nonneg`, `shellOf_le_one`, `shellOf7_lower_le`, `shellOf7_le_upper`, `shellOf7_mem_Icc_zero_one`, `shellOf7_cogito_value`, `shellOf7_outer_bound` | Interior and boundary-aware shell-membership bounds induced by threshold normalization | `machine_verified_theorem` |
 | `sameShellBound_of_shellOf`, `sameInteriorShell_distance_bound` | Predicate-form same-shell/interior-shell case of profile_comparison_v0_2.md §5.3 | `machine_verified_theorem` |
-| `interiorShell_pair_bound` | Conservative cross-interior-shell distance bound under the current interior shell convention | `machine_verified_theorem` |
-| `shellStratifiedBound_deferred` | profile_comparison_v0_2.md §5.3 (Proposition 5.3.1 general case) | `deferred_marker_not_theorem` |
+| `interiorShell_pair_bound`, `sameCogitoShell_bound`, `sameOuterShell_bound`, `abs_sub_le_max_endpoint_abs`, `fullShellStratifiedBound` | Conservative cross-interior bound, boundary same-shell bounds, and full boundary-aware pointwise shell-stratified bound | `machine_verified_theorem` |
+| `shellStratifiedBound_deferred` | profile_comparison_v0_2.md §5.3 legacy marker superseded by `fullShellStratifiedBound` | `deprecated_or_superseded` |
 | `shellStableDistanceBound_of_pointwise`, `shellStableDistanceVanishing_simple` | profile_comparison_v0_2.md §5.3 (profile-level shared-distance shell-stability bounds) | `machine_verified_theorem` |
 
 The qualified triangle inequality for `dInfShared` is encoded in bridge-domain form:
@@ -142,8 +142,8 @@ mediates the pointwise comparison and `dInfShared f h ≤ dInfShared f g + dInfS
 |---|---|---|
 | `ShellThresholds.maxGap`, `adjacent_gap_pos` | profile_comparison_v0_2.md §5.3 | `machine_verified_definition` |
 | `sameShellBound` | Same-shell case of Proposition 5.3.1 | `machine_verified_theorem` |
-| `sameInteriorShell_distance_bound`, `interiorShell_pair_bound`, `shellStableDistanceBound_of_pointwise`, `shellStableDistanceVanishing_simple` | Interior/general pointwise shell-bound preparation for Proposition 5.3.1 and Corollary 5.3.2 | `machine_verified_theorem` |
-| `shellStratifiedBound_deferred` | Proposition 5.3.1 general | `deferred_marker_not_theorem` |
+| `ShellIndex7`, `shellOf7`, `sameInteriorShell_distance_bound`, `interiorShell_pair_bound`, `sameCogitoShell_bound`, `sameOuterShell_bound`, `fullShellStratifiedBound`, `shellStableDistanceBound_of_pointwise`, `shellStableDistanceVanishing_simple` | Boundary-aware and interior shell-bound package for Proposition 5.3.1 and Corollary 5.3.2 | `machine_verified_theorem` |
+| `shellStratifiedBound_deferred` | Proposition 5.3.1 legacy marker | `deprecated_or_superseded` |
 | `ProfileSpace`, `instance : EDist`, `PseudoEMetricSpace` | Round-3 follow-up: pseudo-emetric promotion | `machine_verified_definition` |
 | `MSI` structure (cogito_in, density, threshold) | orphan_cluster_v0_1.md §3, Definition 3.2.1 | `machine_verified_definition` |
 | `MSI.cogito_is_supremum`, `nonCogito_has_threshold_value`, `mem_msi_positive` | Derived facts from MSI axioms | `machine_verified_theorem` |
@@ -231,7 +231,7 @@ stochastic projection remains deferred.
 | `AgencyContext.fam`, `globalRank`, `proj` | Projected-PCE calibration objects | `primitive_structure_field` |
 | `FeasibilityModel`, `FeasibilityModel.feasible`, `FeasibilityModel.noAction_feasible` | Project-map-indexed feasible-action model with no-action feasibility | `machine_verified_structure`; `primitive_structure_field` |
 | `AgencyContext.feasibility`, `AgencyContext.feasible`, `AgencyContext.noAction_feasible`, `AgencyContext.mkFromFeasible` | Agency feasibility supplied by reusable `FeasibilityModel`, with constructor from explicit feasible-set data | `machine_verified_definition` |
-| `feasibleProjectedPCE` | Projected PCE evaluated in an agency context through the compatibility wrapper | `machine_verified_definition` |
+| `feasibleProjectedPCE`, `feasibleProjectedPCE_eq_projectedPCE` | Projected PCE evaluated in an agency context, with direct `ProjectedPCE` API bridge | `machine_verified_definition`; `machine_verified_theorem` |
 | `selectsFeasibleAction` | Feasible maximizer predicate over available alternatives | `machine_verified_definition` |
 | `liveAlternative`, `hasLiveAlternatives` | Nontrivial agency via distinct feasible actions | `machine_verified_definition` |
 | `pceDifferentiatedAlternative` | Feasible alternatives with different projected-PCE values | `machine_verified_definition` |
@@ -242,7 +242,7 @@ stochastic projection remains deferred.
 | `not_exists_feasible_strictly_higher_of_selects` | Selected feasible action excludes feasible alternatives with strictly higher projected PCE | `machine_verified_theorem` |
 | `exists_distinct_feasible_of_hasLiveAlternatives` | Live alternatives imply two distinct feasible actions | `machine_verified_theorem` |
 | `pceDifferentiatedAlternative_of_selected_strictly_beats` | Strictly beating a feasible alternative gives PCE differentiation | `machine_verified_theorem` |
-| `exists_selectsFeasibleAction_of_finset` | Finset-enumerated finite feasible-action maximizer existence | `machine_verified_theorem` |
+| `exists_selectsFeasibleAction_of_finset`, `exists_selectsFeasibleAction_of_finite_feasible`, `exists_selectsFeasibleAction_of_fintype` | Finite feasible-action maximizer existence wrappers | `machine_verified_theorem` |
 
 The agency layer depends on `GeneralActionProjection` compatibility names over
 the parameterized foundation `ProjectMap`. It does not assert that selected
@@ -288,8 +288,8 @@ incompatibilism/compatibilism claims remain deferred.
 |---|---|---|
 | `ProfileTrajectory` | Natural-time indexed sequence of scalar profiles | `machine_verified_structure` |
 | `ActionSchedule` | Natural-time indexed action schedule | `machine_verified_structure` |
-| `generatedBy` | Predicate that a supplied trajectory follows deterministic action-indexed projection | `machine_verified_definition` |
-| `trajectoryFutureContents` | Lifted future MSI contents of the scheduled branch at a trajectory time | `machine_verified_definition` |
+| `generatedBy`, `generatedBy_step`, `generatedBy_step_projectedProfile` | Predicate that a supplied trajectory follows deterministic action-indexed projection, plus named step equations | `machine_verified_definition`; `machine_verified_theorem` |
+| `trajectoryFutureContents`, `trajectoryFutureContents_eq_branchFutureContents` | Lifted future MSI contents of the scheduled branch at a trajectory time | `machine_verified_definition`; `machine_verified_theorem` |
 | `stepUnionDistance`, `stepUnionDistance_nonneg`, `stepUnionDistance_le_one` | Adjacent-time union-domain profile distance and basic bounds | `machine_verified_definition`; `machine_verified_theorem` |
 | `stepSharedDistance` | Adjacent-time shared-domain profile distance | `machine_verified_definition` |
 | `unionStepStable`, `unionStepStable_step_le` | Uniform stepwise temporal stability via `dInfUnion` and pointwise elimination | `machine_verified_definition`; `machine_verified_theorem` |
@@ -319,7 +319,7 @@ differentiated affect.
 | `pceSupportive_iff`, `pceNeutral_iff`, `pceDefeating_iff` | Real-arithmetic characterizations of relative PCE valence | `machine_verified_theorem` |
 | `pceValence_trichotomy` | Relative PCE valence is supportive, neutral, or defeating | `machine_verified_theorem` |
 | `pceSupportive_not_neutral`, `pceSupportive_not_defeating`, `pceDefeating_not_neutral` | Basic mutual exclusions for PCE valence | `machine_verified_theorem` |
-| `branchUnionDistance`, `branchUnionDistance_nonneg`, `branchUnionDistance_le_one`, `branchSharedDistance` | Profile distances between deterministic action branches and union-distance bounds | `machine_verified_definition`; `machine_verified_theorem` |
+| `branchUnionDistance`, `branchUnionDistance_nonneg`, `branchUnionDistance_le_one`, `branchUnionDistance_self`, `branchUnionDistance_symm`, `branchUnionDistance_triangle`, `branchSharedDistance` | Profile distances between deterministic action branches and union-distance bounds/metric-style helpers | `machine_verified_definition`; `machine_verified_theorem` |
 | `branchProfileShift` | Equality-based branch-profile shift predicate | `machine_verified_definition` |
 | `branchFutureContents_eq_of_branchProfile_eq`, `branchProfile_ne_of_branchFutureContents_ne` | Branch-profile equality implies future-content equality; branch future-content difference implies profile shift | `machine_verified_theorem` |
 | `PCESupportAffectWitness`, `PCEDefeatAffectWitness`, `PCENeutralAffectWitness`, `pceSupportAffectWitness_pce_ne` | Feasible-action witnesses for relative PCE appraisal and support non-neutrality | `machine_verified_structure`; `machine_verified_theorem` |

@@ -14,6 +14,7 @@ Free-will branch semantics remain deferred.
 
 import TLICA.GeneralActionProjection
 import Mathlib.Data.Finset.Lattice
+import Mathlib.Data.Set.Finite
 
 namespace TLICA.Agency
 
@@ -93,6 +94,16 @@ end AgencyContext
 def feasibleProjectedPCE (ctx : AgencyContext α Act)
     (P : ScalarProfile α) (a : Act) : ℝ :=
   GeneralProjectedPCE ctx.fam ctx.globalRank ctx.proj P a
+
+/-- Agency-context projected PCE is definitionally the direct `ProjectedPCE`
+    API; the `GeneralProjectedPCE` name is retained only as a compatibility
+    wrapper. -/
+theorem feasibleProjectedPCE_eq_projectedPCE
+    (ctx : AgencyContext α Act)
+    (P : ScalarProfile α) (a : Act) :
+    feasibleProjectedPCE ctx P a =
+      ProjectedPCE ctx.fam ctx.globalRank ctx.proj P a :=
+  rfl
 
 /-- Feasible action selection: `a` is feasible and maximizes projected PCE over
     all feasible alternatives. -/
@@ -217,5 +228,33 @@ theorem exists_selectsFeasibleAction_of_finset
   · exact (hs_correct a).1 ha
   · intro b hb
     exact hmax b ((hs_correct b).2 hb)
+
+/-- Finite feasible-set sufficient condition for feasible-action selection.
+
+This wraps `exists_selectsFeasibleAction_of_finset` using mathlib's
+`Set.Finite.toFinset` enumeration. -/
+theorem exists_selectsFeasibleAction_of_finite_feasible
+    (ctx : AgencyContext α Act) (P : ScalarProfile α)
+    [DecidableEq Act]
+    (hfinite : (ctx.feasible P).Finite)
+    (hnonempty : (ctx.feasible P).Nonempty) :
+    ∃ a, selectsFeasibleAction ctx P a :=
+  exists_selectsFeasibleAction_of_finset ctx P hfinite.toFinset
+    (fun _ => hfinite.mem_toFinset)
+    ((hfinite.toFinset_nonempty).2 hnonempty)
+
+/-- Fintype sufficient condition for feasible-action selection. -/
+theorem exists_selectsFeasibleAction_of_fintype
+    (ctx : AgencyContext α Act) (P : ScalarProfile α)
+    [Fintype Act] [DecidableEq Act]
+    (hnonempty : (ctx.feasible P).Nonempty) :
+    ∃ a, selectsFeasibleAction ctx P a := by
+  classical
+  let s : Finset Act := Finset.univ.filter (fun a => a ∈ ctx.feasible P)
+  apply exists_selectsFeasibleAction_of_finset ctx P s
+  · intro a
+    simp [s]
+  · rcases hnonempty with ⟨a, ha⟩
+    exact ⟨a, by simp [s, ha]⟩
 
 end TLICA.Agency
