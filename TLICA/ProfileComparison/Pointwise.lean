@@ -208,6 +208,72 @@ theorem dInfShared_top_iff (f g : ScalarProfile α) :
   · intro h
     rw [if_neg h]
 
+/-- **Proposition 5.2.6** (qualified triangle inequality, bridge form).
+
+    If every point in the `f`/`h` shared domain also lies in `g.domain`, then
+    `g` can mediate the pointwise triangle comparison on the whole domain used
+    by `dInfShared f h`. -/
+theorem dInfShared_triangle_of_bridge
+    (f g h : ScalarProfile α)
+    (hfh : (f.domain ∩ h.domain).Nonempty)
+    (hbridge : f.domain ∩ h.domain ⊆ g.domain) :
+    dInfShared f h ≤ dInfShared f g + dInfShared g h := by
+  unfold dInfShared
+  have hfg : (f.domain ∩ g.domain).Nonempty := by
+    rcases hfh with ⟨x, hx⟩
+    exact ⟨x, ⟨hx.1, hbridge hx⟩⟩
+  have hgh : (g.domain ∩ h.domain).Nonempty := by
+    rcases hfh with ⟨x, hx⟩
+    exact ⟨x, ⟨hbridge hx, hx.2⟩⟩
+  rw [if_pos hfh, if_pos hfg, if_pos hgh]
+  apply iSup_le
+  intro x
+  apply iSup_le
+  intro hx
+  have hxg : x ∈ g.domain := hbridge hx
+  have hxfg : x ∈ f.domain ∩ g.domain := ⟨hx.1, hxg⟩
+  have hxgh : x ∈ g.domain ∩ h.domain := ⟨hxg, hx.2⟩
+  have left_le :
+      ENNReal.ofReal |f.zeroExtend x - g.zeroExtend x| ≤
+        (⨆ y : α, ⨆ _ : y ∈ f.domain ∩ g.domain,
+          ENNReal.ofReal |f.zeroExtend y - g.zeroExtend y|) := by
+    exact le_trans
+      (le_iSup
+        (fun _ : x ∈ f.domain ∩ g.domain =>
+          ENNReal.ofReal |f.zeroExtend x - g.zeroExtend x|) hxfg)
+      (le_iSup
+        (fun y : α => ⨆ _ : y ∈ f.domain ∩ g.domain,
+          ENNReal.ofReal |f.zeroExtend y - g.zeroExtend y|) x)
+  have right_le :
+      ENNReal.ofReal |g.zeroExtend x - h.zeroExtend x| ≤
+        (⨆ y : α, ⨆ _ : y ∈ g.domain ∩ h.domain,
+          ENNReal.ofReal |g.zeroExtend y - h.zeroExtend y|) := by
+    exact le_trans
+      (le_iSup
+        (fun _ : x ∈ g.domain ∩ h.domain =>
+          ENNReal.ofReal |g.zeroExtend x - h.zeroExtend x|) hxgh)
+      (le_iSup
+        (fun y : α => ⨆ _ : y ∈ g.domain ∩ h.domain,
+          ENNReal.ofReal |g.zeroExtend y - h.zeroExtend y|) x)
+  have triangle_pt : |f.zeroExtend x - h.zeroExtend x|
+      ≤ |f.zeroExtend x - g.zeroExtend x| + |g.zeroExtend x - h.zeroExtend x| := by
+    have h_rewrite : (f.zeroExtend x - h.zeroExtend x) =
+        (f.zeroExtend x - g.zeroExtend x) + (g.zeroExtend x - h.zeroExtend x) := by ring
+    rw [h_rewrite]
+    exact abs_add _ _
+  calc ENNReal.ofReal |f.zeroExtend x - h.zeroExtend x|
+      ≤ ENNReal.ofReal (|f.zeroExtend x - g.zeroExtend x| +
+                        |g.zeroExtend x - h.zeroExtend x|) :=
+        ENNReal.ofReal_le_ofReal triangle_pt
+    _ = ENNReal.ofReal |f.zeroExtend x - g.zeroExtend x| +
+        ENNReal.ofReal |g.zeroExtend x - h.zeroExtend x| :=
+        ENNReal.ofReal_add (abs_nonneg _) (abs_nonneg _)
+    _ ≤ (⨆ y : α, ⨆ _ : y ∈ f.domain ∩ g.domain,
+          ENNReal.ofReal |f.zeroExtend y - g.zeroExtend y|) +
+        (⨆ y : α, ⨆ _ : y ∈ g.domain ∩ h.domain,
+          ENNReal.ofReal |g.zeroExtend y - h.zeroExtend y|) :=
+        add_le_add left_le right_le
+
 /-! ### The bounded-domain bound for the shared form
 
 When the shared subdomain is non-empty, `dInfShared` is the supremum of

@@ -1,74 +1,54 @@
 # 1. Build status.
 
-`lake exe cache get` completed successfully after fetching/unpacking mathlib dependencies.
+Baseline `lake build` on branch `codex/tlica-math-rosetta-v1` succeeded before edits.
 
-Initial `lake build` failed in:
+Baseline `bash scripts/audit_lean.sh` succeeded:
 
-- `TLICA.PreservationRanking`: Category 2 syntax/scope issue from using `Π` as a binder name.
-- `TLICA.ProfileComparison.PseudoEMetric`: Category 2 computability annotation issue for the `EDist` instance.
-- `TLICA.PCE`: Category 2 syntax/scope issue from using `Π` as a binder name.
+- no `sorry` in imported Lean files,
+- no `admit` in imported Lean files,
+- no global `axiom` declarations in imported Lean files.
 
-Fixes applied:
+After the math-first cleanup, `lake build` succeeds. Remaining output is warning-only, mostly existing duplicate-namespace lints and deterministic-default unused-variable warnings.
 
-- Renamed Lean binders from `Π` to `pi`.
-- Marked the standalone `EDist` instance as `noncomputable`.
-
-Final build status: `lake build` succeeds. Remaining output is warnings only, primarily duplicate-namespace lints and unused variables in deterministic default definitions.
-
-Audit status: `bash scripts/audit_lean.sh` succeeds. No `sorry`, `admit`, or global `axiom` declarations were found in imported Lean files.
+Final audit status: `bash scripts/audit_lean.sh` succeeds with zero `sorry`/`admit`/global-axiom findings.
 
 # 2. Files changed.
 
-- `.gitignore`
-- `TLICA/PreservationRanking.lean`
-- `TLICA/ProfileComparison/PseudoEMetric.lean`
-- `TLICA/PCE.lean`
-- `TLICA/PtCns.lean`
-- `TLICA/IBoundary.lean`
+- `TLICA/ProfileComparison/Pointwise.lean`
+- `TLICA/ProfileComparison/ShellRefinement.lean`
 - `MAPPING.md`
+- `docs/tlica_codex/LEAN_VERIFICATION_REPORT.md`
+- `docs/tlica_codex/lean_declaration_inventory.md`
 - `docs/tlica_rosetta/ROSETTA_MATH_FIRST_LEDGER.md`
 - `docs/tlica_rosetta/ROSETTA_PURE_MATH_VIEW.md`
 - `docs/tlica_rosetta/ROSETTA_BRIDGE_VIEW.md`
-- `docs/tlica_codex/lean_declaration_inventory.md`
-- `docs/tlica_codex/LEAN_VERIFICATION_REPORT.md`
-- `build_logs/lake_build_initial.log`
-- `build_logs/audit_initial.log`
-- `build_logs/lake_build_after_fix_1.log`
-- `build_logs/lake_build_after_fix_2.log`
-- `build_logs/lake_build_after_expansion.log`
-- `build_logs/lake_build_after_expansion_fix_1.log`
 
 # 3. Lean declarations added/modified.
 
-Modified for compilation:
-
-- `TLICA.PreservationRanking.PreservationRanking.msi_rank_max`
-- `TLICA.PreservationRanking.PreservationRanking.no_cogito_zero_rank`
-- `TLICA.ProfileComparison.PseudoEMetric.instEDistProfileSpace`
-- `TLICA.PCE.PCE`
-- `TLICA.PCE.PCE.nonneg`
-- `TLICA.PCE.PCE.bounded_by_msi_max`
-- `TLICA.PCE.PCE.selectsAction`
-- `TLICA.PCE.PCE.every_action_maximizes`
-
 Added and machine-verified:
 
-- `TLICA.PtCns.PtCns.partition_cover`
-- `TLICA.IBoundary.mem_boundary_iff`
-- `TLICA.IBoundary.boundary_not_neutral`
-- `TLICA.PCE.PCE.eq_rank_msi_contents`
-- `TLICA.PCE.PCE.all_actions_equal`
+- `TLICA.ProfileComparison.Pointwise.dInfShared_triangle_of_bridge`
+- `TLICA.ProfileComparison.ShellRefinement.shellOf`
+- `TLICA.ProfileComparison.ShellRefinement.sameShellBound_of_shellOf`
+
+Modified:
+
+- `TLICA.ProfileComparison.ShellRefinement.shellStableDistanceVanishing_simple` now uses `shellOf` in its hypotheses.
+
+Demoted:
+
+- Removed theorem `TLICA.ProfileComparison.ShellRefinement.shellStratifiedBound_TODO`, whose conclusion was only `True`.
+- Added `TLICA.ProfileComparison.ShellRefinement.shellStratifiedBound_deferred` as an explicit non-substantive deferred target marker. It is not counted as a machine-verified theorem.
 
 # 4. Rosetta entries added/modified.
 
-- Updated `MAPPING.md` to mark the verified round-4 compile status and add the new PtCns, boundary, and PCE default-model lemmas.
-- Updated `ROSETTA_MATH_FIRST_LEDGER.md` statuses from `encoded_pending_compile` to `machine_verified` where the local build now verifies them.
-- Updated `ROSETTA_PURE_MATH_VIEW.md` with the deterministic PCE constant-value fact and the PtCns partition/boundary facts.
-- Updated `ROSETTA_BRIDGE_VIEW.md` with machine-verified orphan-cluster bridge statuses and the new Lean declarations.
+- Updated `MAPPING.md` to record `dInfShared_triangle_of_bridge`, `shellOf`, `sameShellBound_of_shellOf`, and the deferred status of the general shell-stratified bound.
+- Updated `ROSETTA_MATH_FIRST_LEDGER.md` to distinguish machine-verified definitions, machine-verified theorems, primitive structure-field assumptions, and deferred target markers.
+- Updated `ROSETTA_PURE_MATH_VIEW.md` to include the bridge-domain shared triangle theorem and remove overclaiming around the general shell-stratified bound.
+- Updated `ROSETTA_BRIDGE_VIEW.md` to replace `shellStratifiedBound_TODO` with `shellStratifiedBound_deferred` and mark it as deferred only.
 
 # 5. Open mathematical issues requiring user/ChatGPT review.
 
-- The general shell-stratified bound remains deferred as `shellStratifiedBound_TODO`; only the same-shell case is machine-verified.
-- The shared-domain qualified triangle theorem for `dInfShared` is still not encoded.
-- The deterministic foundation default for `PCE` is intentionally constant across actions. Differentiated action choice requires an application-calibrated projection/ranking refinement rather than a foundation theorem.
-- `IBoundary.contestableBoundary` is currently definitionally equal to `boundary`; a refined contestability boundary needs additional source-grounded structure before Lean should encode stronger claims.
+- The full general shell-stratified bound remains deferred. The current Lean foundation verifies the interior same-shell case; boundary shells 0 and 6 need explicit source-grounded conventions before a stronger theorem should be stated.
+- `IBoundary.contestableBoundary` remains definitionally equal to `boundary`; a refined contestability boundary still needs additional structure.
+- The deterministic foundation default for `PCE` remains constant across actions. Differentiated action choice belongs in an application-calibrated projection/ranking refinement.

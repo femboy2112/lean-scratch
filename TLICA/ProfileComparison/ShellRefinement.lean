@@ -1,16 +1,15 @@
 /-
 TLICA.ProfileComparison.ShellRefinement — Shell-stratified distance bounds.
 
-This module encodes Proposition 5.3.1 and Corollary 5.3.2 of the v0.2
-profile-comparison working paper. Round 3 declared statement placeholders
-(`True` bodies); round 4 replaces them with substantive theorem signatures
-and proves the tractable cases.
+This module encodes tractable shell-stratified distance bounds from Proposition
+5.3.1 and Corollary 5.3.2 of the v0.2 profile-comparison working paper.
 
 The strategy: prove the same-shell bound (`sameShellBound`) as the
-load-bearing tractable case. The general `shellStratifiedBound` requires a
-case analysis on `Fin 7 × Fin 7` and is left as a TODO. The downstream
-corollary `shellStableDistanceVanishing_simple` is derivable from
-`sameShellBound` under the single-shell hypothesis.
+load-bearing tractable case. The general `shellStratifiedBound` requires more
+source-grounded boundary conventions for shell 0 (cogito) and shell 6 (outer),
+so it is recorded as an explicit deferred target rather than as a theorem.
+The downstream corollary `shellStableDistanceVanishing_simple` is derivable
+from `sameShellBound` under the single-shell hypothesis.
 
 Reference: v0.3.1 rigorous edition + profile_comparison_v0_2.md,
   - 04_profiles.md §4.3.1 (shell stratification).
@@ -55,6 +54,15 @@ theorem adjacent_gap_pos (i : Fin 5) :
 
 end ShellThresholds
 
+/-- Membership in shell `i`, represented as the half-open interval
+    `[r_(i+1), r_i)`.
+
+    This covers the five interior shells determined directly by the six
+    encoded thresholds. Boundary shells 0 and 6 from the prose source need
+    additional conventions and are not included in this predicate. -/
+def shellOf (rs : ShellThresholds) (i : Fin 5) (a : ℝ) : Prop :=
+  rs.r ⟨i.val + 1, by omega⟩ ≤ a ∧ a < rs.r ⟨i.val, by omega⟩
+
 /-- **Same-shell bound** (the tractable load-bearing case of Proposition 5.3.1).
 
     If two profile values `a, b` both lie in the half-open interval
@@ -73,15 +81,20 @@ theorem sameShellBound (rs : ShellThresholds) (a b : ℝ)
   · rw [abs_of_pos (by linarith)]
     linarith
 
-/-- **Proposition 5.3.1 statement** (shell-stratified bound, general case).
+/-- Same-shell bound stated through the `shellOf` predicate. -/
+theorem sameShellBound_of_shellOf (rs : ShellThresholds) (a b : ℝ)
+    (i : Fin 5) (ha : shellOf rs i a) (hb : shellOf rs i b) :
+    |a - b| < rs.r ⟨i.val, by omega⟩ - rs.r ⟨i.val + 1, by omega⟩ :=
+  sameShellBound rs a b i ha.1 ha.2 hb.1 hb.2
+
+/-- Deferred target marker for Proposition 5.3.1, the general
+    shell-stratified bound.
 
     The general case requires a `Fin 7 × Fin 7` case analysis with boundary
-    conventions for shells 0 (cogito) and 6 (outer). Left as TODO for round 5;
-    statement skeleton retained so downstream theorems can reference. -/
-theorem shellStratifiedBound_TODO (_rs : ShellThresholds)
-    (a b : ℝ) (_ha_unit : 0 ≤ a ∧ a ≤ 1) (_hb_unit : 0 ≤ b ∧ b ≤ 1) :
-    True := by
-  trivial
+    conventions for shells 0 (cogito) and 6 (outer). This is intentionally a
+    non-substantive definition, not a theorem and not counted as
+    machine-verified mathematics. -/
+def shellStratifiedBound_deferred : Prop := True
 
 /-- **Corollary 5.3.2 simplified** (shell-stable distance vanishing).
 
@@ -93,12 +106,10 @@ theorem shellStableDistanceVanishing_simple
     (h_nonempty : (f.domain ∩ g.domain).Nonempty)
     (h_f_in_shell : ∀ x ∈ f.domain ∩ g.domain,
       ∀ h : x ∈ f.domain,
-        rs.r ⟨i.val + 1, by omega⟩ ≤ f.toFun ⟨x, h⟩ ∧
-        f.toFun ⟨x, h⟩ < rs.r ⟨i.val, by omega⟩)
+        shellOf rs i (f.toFun ⟨x, h⟩))
     (h_g_in_shell : ∀ x ∈ f.domain ∩ g.domain,
       ∀ h : x ∈ g.domain,
-        rs.r ⟨i.val + 1, by omega⟩ ≤ g.toFun ⟨x, h⟩ ∧
-        g.toFun ⟨x, h⟩ < rs.r ⟨i.val, by omega⟩) :
+        shellOf rs i (g.toFun ⟨x, h⟩)) :
     dInfShared f g ≤
       ENNReal.ofReal (rs.r ⟨i.val, by omega⟩ - rs.r ⟨i.val + 1, by omega⟩) := by
   unfold dInfShared
@@ -109,12 +120,12 @@ theorem shellStableDistanceVanishing_simple
   intro hx
   by_cases hfx : x ∈ f.domain
   · by_cases hgx : x ∈ g.domain
-    · obtain ⟨hfa, hfb⟩ := h_f_in_shell x hx hfx
-      obtain ⟨hga, hgb⟩ := h_g_in_shell x hx hgx
+    · have hf_shell := h_f_in_shell x hx hfx
+      have hg_shell := h_g_in_shell x hx hgx
       rw [f.zeroExtend_of_mem x hfx, g.zeroExtend_of_mem x hgx]
       have h_bound : |f.toFun ⟨x, hfx⟩ - g.toFun ⟨x, hgx⟩| <
                      rs.r ⟨i.val, by omega⟩ - rs.r ⟨i.val + 1, by omega⟩ :=
-        sameShellBound rs _ _ i hfa hfb hga hgb
+        sameShellBound_of_shellOf rs _ _ i hf_shell hg_shell
       apply ENNReal.ofReal_le_ofReal
       linarith
     · exact absurd hx.2 hgx

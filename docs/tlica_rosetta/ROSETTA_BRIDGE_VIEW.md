@@ -8,8 +8,8 @@ This document records the mapping relation. Codex should expand it as Lean cover
 | B-FND-002 | Cogito φ-supremum | Distinguished point with unique maximal coordinate | `cogito_unique_phi_supremum` | machine_verified |
 | B-FND-003 | Mode aggregation | Summable nonnegative weighted series with bounds | `mode_aggregation_*` | machine_verified |
 | B-FND-004 | Coordinate non-reducibility | No coordinate projection factors through the other two in general | `formal_non_reducibility` | machine_verified |
-| B-PRF-001 | Scalar profile comparison | Extended sup-distance over union/shared domains | `dInfUnion`, `dInfShared` | machine_verified |
-| B-PRF-002 | Shell stability | Threshold partition bound | `sameShellBound`, `shellStratifiedBound_TODO` | partial: same-shell machine_verified; general theorem skeleton deferred |
+| B-PRF-001 | Scalar profile comparison | Extended sup-distance over union/shared domains, with bridge-domain shared triangle inequality | `dInfUnion`, `dInfShared`, `dInfShared_triangle_of_bridge` | machine_verified definitions/theorems |
+| B-PRF-002 | Shell stability | Interior-shell predicate and same-shell threshold bound | `shellOf`, `sameShellBound`, `sameShellBound_of_shellOf`, `shellStableDistanceVanishing_simple`, `shellStratifiedBound_deferred` | partial: same-shell machine_verified; general bound deferred marker only |
 | B-ORP-001 | Maximally self-defined I | Distinguished subset/substructure with inclusion/density axioms | `MSI`, `MSI.*` | machine_verified / primitive fields |
 | B-ORP-002 | Preservation ranking | Ranking functional/order with preservation axioms | `PreservationRanking`, `PreservationRanking.msi_rank_max`, `PreservationRanking.no_cogito_zero_rank` | machine_verified / primitive fields |
 | B-ORP-003 | Future projection | Action-indexed transition map | `ProjectMap`, `ProjectMap.noAction_projects` | machine_verified / primitive field |

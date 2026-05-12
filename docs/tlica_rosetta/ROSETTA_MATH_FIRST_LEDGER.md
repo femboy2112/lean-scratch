@@ -16,21 +16,21 @@ This ledger starts from the round-4 Lean handoff and should be expanded by Codex
 | FND-008 | Cogito as unique φ-supremum | Unique maximal element of φ-coordinate among admissible contents | `cogito_unique_phi_supremum` | machine_verified | `03_coordinates.md` §3.3.6 |
 | FND-009 | Admissible φ-domain repair | Proper domain `D_φ` with repaired non-reducibility witness | `DPhi`, `two_delta_minus_real_in_DPhi` | machine_verified | `06_independence_lemmas.md` §6.5 |
 | FND-010 | Scalar mode aggregation | Infinite weighted sum bounded in `[0,1]` and strict off cogito | `mode_aggregation_summable`, `mode_aggregation_nonneg`, `mode_aggregation_le_one`, `mode_aggregation_lt_one` | machine_verified | `02_graph_theory.md` §2.5 |
-| FND-011 | Uniform convergence of mode aggregation | Weierstrass M-test for mode series | `mode_aggregation_uniform_convergent` | machine_verified per handoff / verify locally | `05_dynamics.md` §5.7 |
+| FND-011 | Uniform convergence of mode aggregation | Weierstrass M-test for mode series | `mode_aggregation_uniform_convergent` | machine_verified theorem | `05_dynamics.md` §5.7 |
 | FND-012 | Coordinate non-reducibility | No coordinate is a function of the other two in general | `CoordinateTriple`, `no_F_rho`, `no_F_phi`, `no_F_kappa`, `formal_non_reducibility` | machine_verified | `06_independence_lemmas.md` §§6.2-6.5 |
 
 ## Profile-comparison layer
 
 | ID | TLICA referent | Pure math referent | Lean declaration(s) | Status | Source |
 |---|---|---|---|---|---|
-| PRF-001 | Scalar profile | Partial/nonnegative bounded scalar function over a domain | `ScalarProfile` | machine_verified | `profile_comparison_v0_2.md` §4-§5 |
-| PRF-002 | Zero extension | Extension of partial profile to ambient union by zero | `ScalarProfile.zeroExtend` | machine_verified | `profile_comparison_v0_2.md` §5.2bis.1 |
+| PRF-001 | Scalar profile | Partial/nonnegative bounded scalar function over a domain | `ScalarProfile` | machine_verified definition | `profile_comparison_v0_2.md` §4-§5 |
+| PRF-002 | Zero extension | Extension of partial profile to ambient union by zero | `ScalarProfile.zeroExtend` | machine_verified definition | `profile_comparison_v0_2.md` §5.2bis.1 |
 | PRF-003 | Union L∞ distance | Supremum/extended distance over union domain | `dInfUnion`, `dInfUnion_nonneg`, `dInfUnion_symm`, `dInfUnion_self`, `dInfUnion_triangle` | machine_verified | `profile_comparison_v0_2.md` §5.2bis |
-| PRF-004 | Shared-domain L∞ distance | Extended distance over intersection/shared subdomain | `dInfShared`, `dInfShared_*` | machine_verified | `profile_comparison_v0_2.md` §5.1-§5.2 |
-| PRF-005 | Shell thresholds | Ordered thresholds partitioning profile values into shells | `ShellThresholds`, `shellOf` | machine_verified | `04_profiles.md` §4.3.1 |
-| PRF-006 | Same-shell bound | Bound on distance for profiles in the same shell | `sameShellBound` | machine_verified | `profile_comparison_v0_2.md` §5.3 |
-| PRF-007 | General shell-stratified bound | Bound by maximum shell gap and shell distance | `shellStratifiedBound_TODO` | theorem_skeleton_nonimported / round-5 target | `profile_comparison_v0_2.md` §5.3 |
-| PRF-008 | Pseudo-emetric promotion | Extended pseudometric structure on profile space | `ProfileSpace`, `PseudoEMetricSpace` instance | machine_verified | round-3/4 follow-up |
+| PRF-004 | Shared-domain L∞ distance | Extended distance over intersection/shared subdomain, with bridge-domain qualified triangle inequality | `dInfShared`, `dInfShared_*`, `dInfShared_triangle_of_bridge` | machine_verified definition/theorems | `profile_comparison_v0_2.md` §5.1-§5.2 |
+| PRF-005 | Shell thresholds | Ordered thresholds and interior half-open shell-membership predicate | `ShellThresholds`, `shellOf` | machine_verified definitions / primitive structure fields | `04_profiles.md` §4.3.1 |
+| PRF-006 | Same-shell bound | Bound on distance for profiles in the same shell | `sameShellBound`, `sameShellBound_of_shellOf`, `shellStableDistanceVanishing_simple` | machine_verified theorems | `profile_comparison_v0_2.md` §5.3 |
+| PRF-007 | General shell-stratified bound | Bound by maximum shell gap and shell distance | `shellStratifiedBound_deferred` | deferred target marker; not a verified theorem | `profile_comparison_v0_2.md` §5.3 |
+| PRF-008 | Pseudo-emetric promotion | Extended pseudometric structure on profile space | `ProfileSpace`, `PseudoEMetricSpace` instance | machine_verified definition/instance | round-3/4 follow-up |
 
 ## Foundation orphan-cluster layer
 

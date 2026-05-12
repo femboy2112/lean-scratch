@@ -32,15 +32,15 @@ Lean carriers: `CoordinateTriple`, `no_F_rho`, `no_F_phi`, `no_F_kappa`, `formal
 
 ## 5. Profiles as bounded scalar functions
 
-A profile is modeled as a bounded scalar assignment over a domain. Profiles admit zero-extension to an ambient union domain. The induced extended `L^∞`-style union distance is nonnegative, symmetric, reflexive, bounded, and satisfies the triangle inequality.
+A profile is modeled as a bounded scalar assignment over a domain. Profiles admit zero-extension to an ambient union domain. The induced extended `L^∞`-style union distance is nonnegative, symmetric, reflexive, bounded, and satisfies the triangle inequality. The shared-domain distance has the expected bridge-domain triangle inequality: if every point shared by two endpoint profiles is also present in the bridge profile, then the bridge profile mediates the triangle comparison.
 
-Lean carriers: `ScalarProfile`, `zeroExtend`, `dInfUnion`, `dInfUnion_*`.
+Lean carriers: `ScalarProfile`, `zeroExtend`, `dInfUnion`, `dInfUnion_*`, `dInfShared`, `dInfShared_triangle_of_bridge`.
 
 ## 6. Shell partitions and coarse stability
 
-Thresholds partition scalar values into shells. If two points lie in the same shell, their absolute scalar difference is bounded by the maximum adjacent threshold gap. A full shell-stratified bound remains a target theorem.
+Thresholds partition scalar values into interior half-open shells via `shellOf`. If two points lie in the same shell, their absolute scalar difference is bounded by that adjacent threshold gap. The simplified shared-profile same-shell corollary is machine-verified. A full shell-stratified bound across all boundary shells remains deferred because the cogito and outer-shell conventions require additional source-grounded structure.
 
-Lean carriers: `ShellThresholds`, `sameShellBound`, `shellStratifiedBound_TODO`.
+Lean carriers: `ShellThresholds`, `shellOf`, `sameShellBound`, `sameShellBound_of_shellOf`, `shellStableDistanceVanishing_simple`, `shellStratifiedBound_deferred`.
 
 ## 7. Distinguished self-substructure and preservation ranking
 

@@ -98,12 +98,16 @@ All five priority theorems have type-checking proofs in the project and are mach
 | `dInfShared_le_one_of_nonempty` | §5.1.1 (bound when non-empty) | Encoded |
 | `dInfShared_top_iff` | §5.1.1 (⊤ exactly on empty intersection) | Encoded |
 | `dInfShared_le_one_or_top` | Combined bound | Encoded |
+| `dInfShared_triangle_of_bridge` | §5.2.6 (qualified triangle inequality, bridge-domain form) | Encoded with full proof |
 | `structure ShellThresholds` | v0.3.1 rigorous edition 04_profiles.md §4.3.1 | Encoded (structure only) |
-| `shellOf` | Helper for shell membership | Encoded |
-| `shellStratifiedBound` | profile_comparison_v0_2.md §5.3 (Proposition 5.3.1) | Statement placeholder; deferred full proof |
-| `shellStableDistanceVanishing` | profile_comparison_v0_2.md §5.3 (Corollary 5.3.2) | Statement placeholder; deferred full proof |
+| `shellOf` | Helper for interior half-open shell membership | Encoded definition |
+| `sameShellBound_of_shellOf` | Predicate-form same-shell case of profile_comparison_v0_2.md §5.3 | Encoded with full proof |
+| `shellStratifiedBound_deferred` | profile_comparison_v0_2.md §5.3 (Proposition 5.3.1 general case) | Non-substantive deferred target marker; not counted as machine-verified theorem |
+| `shellStableDistanceVanishing_simple` | profile_comparison_v0_2.md §5.3 (Corollary 5.3.2 simplified) | Encoded with full proof |
 
-The qualified triangle inequality for `dInfShared` (Proposition 5.2.6, which requires the three pairwise shared subdomains to coincide) is not yet encoded; it can be added in a subsequent round once the subdomain-coincidence hypothesis is formalized.
+The qualified triangle inequality for `dInfShared` is encoded in bridge-domain form:
+if every point compared by `dInfShared f h` lies in `g.domain`, then `g`
+mediates the pointwise comparison and `dInfShared f h ≤ dInfShared f g + dInfShared g h`.
 
 ## Round 4 — Profile-comparison completion + foundation orphan cluster
 
@@ -112,7 +116,7 @@ The qualified triangle inequality for `dInfShared` (Proposition 5.2.6, which req
 | `ShellThresholds.maxGap`, `adjacent_gap_pos` | profile_comparison_v0_2.md §5.3 | Encoded |
 | `sameShellBound` | Same-shell case of Proposition 5.3.1 | Encoded with full proof |
 | `shellStableDistanceVanishing_simple` | Simplified Corollary 5.3.2 | Encoded with full proof |
-| `shellStratifiedBound_TODO` | Proposition 5.3.1 general | Statement placeholder (round 5 target) |
+| `shellStratifiedBound_deferred` | Proposition 5.3.1 general | Deferred target marker only; no theorem claim |
 | `ProfileSpace`, `instance : EDist`, `PseudoEMetricSpace` | Round-3 follow-up: pseudo-emetric promotion | Encoded and machine-verified |
 | `MSI` structure (cogito_in, density, threshold) | orphan_cluster_v0_1.md §3, Definition 3.2.1 | Encoded |
 | `MSI.cogito_is_supremum`, `nonCogito_has_threshold_value`, `mem_msi_positive` | Derived facts from MSI axioms | Encoded with proofs |
