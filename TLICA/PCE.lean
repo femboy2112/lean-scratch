@@ -27,7 +27,7 @@ open Classical
 
 variable {α Act : Type*}
 
-/-- The PCE evaluation of an action, in the deterministic variant.
+/-- The PCE evaluation of an action, in the deterministic foundation default.
 
     Given a modeling I's MSI `msi`, its preservation-ranking `Π`, its
     projection map `proj`, and a candidate action `a`, the PCE value is
@@ -38,6 +38,10 @@ variable {α Act : Type*}
     may differ from the original profile's domain, we evaluate `Π.rank` over
     a subset specified by membership predicate. This is a simplification of
     the working paper's set-theoretic intersection.
+
+    This default is action-constant over arbitrary action type `Act`; that
+    constancy is not caused by singleton action typing. Action-sensitive
+    evaluation lives in `TLICA.ActionProjection.ProjectedPCE`.
 
     Reference: orphan_cluster_v0_1.md Definition 6.2.1 (deterministic). -/
 noncomputable def PCE (msi : MSI α) (pi : PreservationRanking msi)
@@ -92,7 +96,10 @@ theorem every_action_maximizes (msi : MSI α) (pi : PreservationRanking msi)
   exact le_refl _
 
 /-- In the deterministic foundation default, all actions receive the same PCE
-    value. Differentiated action choice is an application-calibrated extension. -/
+    value over arbitrary action type `Act`. This is a theorem about the
+    foundation-default functional, not an artifact of singleton action typing.
+    Differentiated action choice is handled by application-calibrated
+    `ProjectedPCE`. -/
 theorem all_actions_equal (msi : MSI α) (pi : PreservationRanking msi)
     (proj : ProjectMap α Act) (a b : Act) :
     PCE msi pi proj a = PCE msi pi proj b :=

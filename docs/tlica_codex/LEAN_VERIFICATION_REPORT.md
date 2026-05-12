@@ -1,10 +1,10 @@
 # 1. Build status.
 
-Baseline `lake build` on branch `codex/tlica-differentiated-affect-v0` succeeded before v0.4 foundation-refinement edits.
+Baseline `lake build` on branch `codex/tlica-foundation-refinement-v0_4` succeeded before v0.4.1 consolidation edits.
 
 Baseline `bash scripts/audit_lean.sh` succeeded with zero `sorry`, zero `admit`, and zero global `axiom` declarations in imported Lean files.
 
-After the v0.4 foundation refinement, `lake build` succeeds. Remaining output is warning-only and comes from existing duplicate-namespace lints plus deterministic-default unused-variable warnings.
+After the v0.4.1 consolidation, `lake build` succeeds. Remaining output is warning-only and comes from existing duplicate-namespace lints plus deterministic-default unused-variable warnings.
 
 Final audit status: `bash scripts/audit_lean.sh` succeeds with zero `sorry`/`admit`/global-axiom findings.
 
@@ -12,12 +12,9 @@ Final audit status: `bash scripts/audit_lean.sh` succeeds with zero `sorry`/`adm
 
 - `TLICA/ProjectMap.lean`
 - `TLICA/PCE.lean`
-- `TLICA/ProfileIso.lean`
 - `TLICA/ActionProjection.lean`
 - `TLICA/GeneralActionProjection.lean`
 - `TLICA/Agency.lean`
-- `TLICA/FreeWill.lean`
-- `TLICA.lean`
 - `MAPPING.md`
 - `docs/tlica_codex/LEAN_VERIFICATION_REPORT.md`
 - `docs/tlica_codex/lean_declaration_inventory.md`
@@ -25,62 +22,51 @@ Final audit status: `bash scripts/audit_lean.sh` succeeds with zero `sorry`/`adm
 - `docs/tlica_rosetta/ROSETTA_PURE_MATH_VIEW.md`
 - `docs/tlica_rosetta/ROSETTA_BRIDGE_VIEW.md`
 
-# 3. Inherited application stack confirmed before editing.
+# 3. Consolidation summary.
 
-- `TLICA.ActionProjection`
-- `TLICA.GeneralActionProjection`
-- `TLICA.Agency`
-- `TLICA.FreeWill`
-- `TLICA.TemporalTrajectory`
-- `TLICA.DifferentiatedAffect`
+v0.4.1 is a consolidation of v0.4, not a new theory layer.
 
-# 4. Foundation refinements.
+Confirmed:
 
-Application pressure revealed that singleton `Action α` was too weak. The primitive deterministic projection structure is now:
+- The only primitive deterministic projection structure is `TLICA.ProjectMap.ProjectMap (α Act : Type*)`.
+- `TLICA.GeneralActionProjection.GeneralProjectMap` is an abbreviation for `ProjectMap α Act`.
+- `ProjectedPCE` is the primary application-ready projected-PCE definition over parameterized `ProjectMap α Act`.
+- `GeneralProjectedPCE` is retained as a compatibility wrapper for older branch continuity.
 
-- `TLICA.ProjectMap.ProjectMap (α Act : Type*)`
-- `TLICA.ProjectMap.ProjectMap.noAction`
-- `TLICA.ProjectMap.ProjectMap.project`
-- `TLICA.ProjectMap.ProjectMap.identity_action_natural`
+# 4. Lean declarations added.
 
-The old singleton/default action case is preserved:
+Default-action compatibility:
 
-- `TLICA.ProjectMap.Action`
-- `TLICA.ProjectMap.Action.noAction`
-- `TLICA.ProjectMap.DefaultAction`
-- `TLICA.ProjectMap.DefaultProjectMap`
+- `TLICA.ProjectMap.UnitDefaultProjectMap`
 
-`TLICA.GeneralActionProjection.GeneralProjectMap` is retained only as a compatibility abbreviation for `ProjectMap α Act`; there is no duplicate primitive deterministic projection structure.
+General-to-primary compatibility equalities:
 
-The deterministic foundation-default `TLICA.PCE.PCE` is now parameterized over arbitrary `Act`, and its constant-action theorems still hold:
+- `TLICA.GeneralActionProjection.generalProjectedProfile_eq_projectedProfile`
+- `TLICA.GeneralActionProjection.generalFutureMSI_eq_futureMSI`
+- `TLICA.GeneralActionProjection.generalFutureMSIContents_eq_futureMSIContents`
+- `TLICA.GeneralActionProjection.generalProjectedPCE_eq_projectedPCE`
 
-- `TLICA.PCE.PCE.nonneg`
-- `TLICA.PCE.PCE.eq_rank_msi_contents`
-- `TLICA.PCE.PCE.bounded_by_msi_max`
-- `TLICA.PCE.PCE.every_action_maximizes`
-- `TLICA.PCE.PCE.all_actions_equal`
+Coherent model weak-domain-match bridge:
 
-# 5. Coherence and feasibility additions.
+- `TLICA.ActionProjection.CoherentFutureMSIModel.toFutureMSIModel_domain_match`
 
-Added optional profile-coherence layer:
+Agency construction helper:
 
-- `TLICA.ProfileIso.ProfileIso`
-- `TLICA.ProfileIso.ProfileIso.refl`
-- `TLICA.ProfileIso.ProfileIso.symm`
-- `TLICA.ProfileIso.ProfileIso.trans`
-- `TLICA.ActionProjection.CoherentFutureMSIModel`
-- `TLICA.ActionProjection.CoherentFutureMSIModel.toFutureMSIModel`
+- `TLICA.Agency.AgencyContext.mkFromFeasible`
 
-Existing `FutureMSIModel.domain_match` remains the default weak compatibility condition. The optional coherent model projects to the weaker model.
+# 5. Preserved interpretations.
 
-Added reusable no-action feasibility:
-
-- `TLICA.Agency.FeasibilityModel`
-- `TLICA.Agency.FeasibilityModel.feasible`
-- `TLICA.Agency.FeasibilityModel.noAction_feasible`
-- `TLICA.Agency.AgencyContext.feasibility`
-- `TLICA.Agency.AgencyContext.feasible`
-- `TLICA.Agency.AgencyContext.noAction_feasible`
+- The old singleton action case is preserved only as a degenerate default:
+  - `Action α` is the old wrapper compatibility type.
+  - `DefaultAction α := Unit` is the simplest degenerate action carrier.
+  - `DefaultProjectMap` uses the old wrapper for backward compatibility.
+  - `UnitDefaultProjectMap` uses the direct unit carrier.
+- `PCE.all_actions_equal` is now about deterministic foundation-default PCE being action-constant over arbitrary `Act`; it is not caused by singleton action typing.
+- Action-sensitive evaluation lives in `ProjectedPCE`.
+- `FutureMSIModel + GlobalPreservationRanking` remain the rank/projection bridge.
+- `ProfileIso` and `CoherentFutureMSIModel` are optional stronger coherence tools.
+- `FeasibilityModel` remains the reusable no-action-feasibility structure.
+- `ctx.feasible P` notation remains available through `AgencyContext.feasible`.
 
 # 6. Application stack preservation.
 
@@ -92,14 +78,12 @@ The following meanings remain intact:
 - `PCEFreeWillWitness` still implies `FreeWillWitness`.
 - `AffectKernelWitness` still receives bridges from `FreeWillWitness` and `PCEFreeWillWitness`.
 
-`FutureMSIModel + GlobalPreservationRanking` held up across agency, free-will, temporal, and differentiated-affect layers.
-
 # 7. Rosetta entries added/modified.
 
-- Updated `MAPPING.md` with parameterized `ProjectMap`, compatibility `GeneralProjectMap`, `ProfileIso`, `CoherentFutureMSIModel`, and `FeasibilityModel`.
-- Updated `ROSETTA_MATH_FIRST_LEDGER.md` with v0.4 projection, coherence, projected-PCE, and feasibility refinements.
-- Updated `ROSETTA_PURE_MATH_VIEW.md` to state that the singleton action design was too weak and is now a degenerate default.
-- Updated `ROSETTA_BRIDGE_VIEW.md` with compatibility-layer and no-duplicate-primitive-projection notes.
+- Updated `MAPPING.md` with v0.4.1 compatibility equalities and direct-primary API language.
+- Updated `ROSETTA_MATH_FIRST_LEDGER.md` with `UnitDefaultProjectMap`, compatibility equality theorems, `toFutureMSIModel_domain_match`, and `AgencyContext.mkFromFeasible`.
+- Updated `ROSETTA_PURE_MATH_VIEW.md` to mark `ProjectedPCE` as primary and `GeneralProjectedPCE` as compatibility.
+- Updated `ROSETTA_BRIDGE_VIEW.md` with v0.4.1 consolidation notes.
 - Regenerated `lean_declaration_inventory.md`.
 
 # 8. Open mathematical issues requiring user/ChatGPT review.
@@ -107,4 +91,4 @@ The following meanings remain intact:
 - No global existence of agency, free will, trajectory, or affect is asserted.
 - Stochastic projection remains deferred.
 - `GeneralActionProjection` remains as compatibility names, not as a second primitive projection structure.
-- `ProfileIso` is optional stronger coherence; `FutureMSIModel.domain_match` remains the default weak condition.
+- `FutureMSIModel.domain_match` remains the default weak condition.

@@ -50,7 +50,7 @@ Lean carriers: `MSI`, `PreservationRanking`.
 
 ## 8. Projection and prerogative functionals
 
-Actions induce future-state projections. Application pressure from agency, free will, temporal trajectories, and differentiated affect revealed that the old singleton-like `Action α` default was too weak, so the foundation projection map is now parameterized over an arbitrary action type `Act`. The old singleton/default action case is preserved as a degenerate instance.
+Actions induce future-state projections. Application pressure from agency, free will, temporal trajectories, and differentiated affect revealed that the old singleton-like `Action α` default was too weak, so the foundation projection map is now parameterized over an arbitrary action type `Act`. The old wrapper `Action α` and the simple unit carrier `DefaultAction α := Unit` are preserved only as degenerate default cases. The v0.4.1 pass is a consolidation of v0.4, not a new theory layer.
 
 Composite objective functionals are defined over projected future states. Some foundation-level properties are pure consequences of nonnegativity and boundedness; differentiated action choice is deferred to richer application-calibrated projection models.
 
@@ -58,29 +58,29 @@ In the deterministic foundation default currently encoded in Lean, the continued
 
 Stochastic projection remains deferred.
 
-Lean carriers: `Action`, `DefaultAction`, `DefaultProjectMap`, `ProjectMap`, `PCE`, `PCE.eq_rank_msi_contents`, `PCE.all_actions_equal`.
+Lean carriers: `Action`, `DefaultAction`, `DefaultProjectMap`, `UnitDefaultProjectMap`, `ProjectMap`, `PCE`, `PCE.eq_rank_msi_contents`, `PCE.all_actions_equal`.
 
 ## 8.1 Action-calibrated projected PCE
 
-The application-ready refinement keeps deterministic projection but evaluates the MSI assigned to each projected future profile. A `FutureMSIModel` supplies this cross-time MSI assignment. It uses the weaker `domain_match` condition rather than full profile equality, because full equality of `ScalarProfile` values involves dependent functions over subtype domains; projected PCE only ranks lifted MSI content sets in the universal type. The optional `ProfileIso` relation and `CoherentFutureMSIModel` provide a stronger profile-coherence route while preserving `FutureMSIModel` as the default weak compatibility condition.
+The application-ready refinement keeps deterministic projection but evaluates the MSI assigned to each projected future profile. A `FutureMSIModel` supplies this cross-time MSI assignment, and a `GlobalPreservationRanking` supplies the rank/projection bridge. `FutureMSIModel` uses the weaker `domain_match` condition rather than full profile equality, because full equality of `ScalarProfile` values involves dependent functions over subtype domains; projected PCE only ranks lifted MSI content sets in the universal type. The optional `ProfileIso` relation and `CoherentFutureMSIModel` provide a stronger profile-coherence route while preserving `FutureMSIModel` as the default weak compatibility condition.
 
 A `GlobalPreservationRanking` ranks universal-domain content sets with non-negativity and monotonicity assumptions. `ProjectedPCE` applies that ranking to the lifted future MSI contents of each action in the parameterized foundation action space. It is nonnegative, respects equality and inclusion of lifted future contents, defines projected action selection, and strictly differentiates actions whenever an application supplies a strict global-rank inequality between their lifted future MSI contents.
 
-`ProjectedPCE` now works over the parameterized foundation `ProjectMap α Act`. The combination of `FutureMSIModel` and `GlobalPreservationRanking` held up across the agency, free-will, temporal, and differentiated-affect layers.
+`ProjectedPCE` now works over the parameterized foundation `ProjectMap α Act` and is the primary application-ready projected-PCE definition. The combination of `FutureMSIModel` and `GlobalPreservationRanking` held up across the agency, free-will, temporal, and differentiated-affect layers.
 
 Stochastic projection is deferred; this layer uses the existing deterministic `ProjectMap`.
 
-Lean carriers: `FutureMSIModel`, `ProfileIso`, `CoherentFutureMSIModel`, `CoherentFutureMSIModel.toFutureMSIModel`, `GlobalPreservationRanking`, `liftSet`, `liftMSIContents`, `projectedProfile`, `futureMSI`, `futureMSIContents`, `ProjectedPCE`, `ProjectedPCE.*`.
+Lean carriers: `FutureMSIModel`, `ProfileIso`, `CoherentFutureMSIModel`, `CoherentFutureMSIModel.toFutureMSIModel`, `CoherentFutureMSIModel.toFutureMSIModel_domain_match`, `GlobalPreservationRanking`, `liftSet`, `liftMSIContents`, `projectedProfile`, `futureMSI`, `futureMSIContents`, `ProjectedPCE`, `ProjectedPCE.*`.
 
 ## 8.2 General action-space projected PCE
 
 The generalized deterministic layer is now a compatibility naming layer. `GeneralProjectMap α Act` is an abbreviation for the parameterized foundation `ProjectMap α Act`; there is only one primitive deterministic projection structure. The old `generalProjectMapOfProjectMap` bridge is retained as an identity-style compatibility definition for the degenerate action wrapper.
 
-`GeneralProjectedPCE` is retained for the agency/free-will/temporal/affect stack. It has the same nonnegativity, equality, rank-comparison, monotonicity, selection, and conditional strict-differentiation theorems as `ProjectedPCE`, but no longer requires a duplicate primitive project-map structure. It still does not assert that differentiating actions exist; strict differentiation remains conditional on a supplied strict global-rank inequality.
+`GeneralProjectedPCE` is retained for older branch continuity in the agency/free-will/temporal/affect stack. It is a compatibility wrapper for `ProjectedPCE`. It has the same nonnegativity, equality, rank-comparison, monotonicity, selection, and conditional strict-differentiation theorems as `ProjectedPCE`, but no longer requires a duplicate primitive project-map structure. It still does not assert that differentiating actions exist; strict differentiation remains conditional on a supplied strict global-rank inequality.
 
 Deterministic projection remains the current layer; stochastic projection remains deferred.
 
-Lean carriers: `GeneralProjectMap`, `generalProjectMapOfProjectMap`, `generalProjectedProfile`, `generalFutureMSI`, `generalFutureMSIContents`, `GeneralProjectedPCE`, `GeneralProjectedPCE.*`, `generalProjectedPCE_strictly_differentiates_of_rank_lt`.
+Lean carriers: `GeneralProjectMap`, `generalProjectMapOfProjectMap`, `generalProjectedProfile`, `generalProjectedProfile_eq_projectedProfile`, `generalFutureMSI`, `generalFutureMSI_eq_futureMSI`, `generalFutureMSIContents`, `generalFutureMSIContents_eq_futureMSIContents`, `GeneralProjectedPCE`, `generalProjectedPCE_eq_projectedPCE`, `GeneralProjectedPCE.*`, `generalProjectedPCE_strictly_differentiates_of_rank_lt`.
 
 ## 8.3 Agency as feasible projected-PCE selection
 
@@ -90,7 +90,7 @@ Agency is modeled as a feasible action-selection context over the generalized ac
 
 Finite feasible-set assumptions for proving selected-action existence are deferred. Free will remains deferred; this branch only formalizes agency selection.
 
-Lean carriers: `FeasibilityModel`, `AgencyContext`, `AgencyContext.feasible`, `AgencyContext.noAction_feasible`, `feasibleProjectedPCE`, `selectsFeasibleAction`, `liveAlternative`, `hasLiveAlternatives`, `pceDifferentiatedAlternative`, `AgencyWitness`, `finiteFeasibleSelection_deferred`.
+Lean carriers: `FeasibilityModel`, `AgencyContext`, `AgencyContext.feasible`, `AgencyContext.noAction_feasible`, `AgencyContext.mkFromFeasible`, `feasibleProjectedPCE`, `selectsFeasibleAction`, `liveAlternative`, `hasLiveAlternatives`, `pceDifferentiatedAlternative`, `AgencyWitness`, `finiteFeasibleSelection_deferred`.
 
 ## 8.4 Free will as branch-sensitive agency
 

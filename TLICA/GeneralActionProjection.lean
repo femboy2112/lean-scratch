@@ -35,15 +35,38 @@ def generalProjectedProfile (proj : GeneralProjectMap α Act)
     (P : ScalarProfile α) (a : Act) : ScalarProfile α :=
   proj.project a P
 
+/-- Compatibility theorem: general projected profile is the direct
+    `ActionProjection.projectedProfile` over the parameterized foundation
+    `ProjectMap`. -/
+theorem generalProjectedProfile_eq_projectedProfile
+    (proj : GeneralProjectMap α Act) (P : ScalarProfile α) (a : Act) :
+    generalProjectedProfile proj P a = projectedProfile proj P a :=
+  rfl
+
 /-- Future MSI assigned to the general deterministic projected profile. -/
 def generalFutureMSI (fam : FutureMSIModel α) (proj : GeneralProjectMap α Act)
     (P : ScalarProfile α) (a : Act) : MSI α :=
   fam.msiOf (generalProjectedProfile proj P a)
 
+/-- Compatibility theorem: general future MSI is the direct `futureMSI`. -/
+theorem generalFutureMSI_eq_futureMSI
+    (fam : FutureMSIModel α) (proj : GeneralProjectMap α Act)
+    (P : ScalarProfile α) (a : Act) :
+    generalFutureMSI fam proj P a = futureMSI fam proj P a :=
+  rfl
+
 /-- Universal-domain future content set for the generalized projected PCE. -/
 def generalFutureMSIContents (fam : FutureMSIModel α) (proj : GeneralProjectMap α Act)
     (P : ScalarProfile α) (a : Act) : Set α :=
   liftMSIContents (generalFutureMSI fam proj P a)
+
+/-- Compatibility theorem: general future contents are the direct
+    `futureMSIContents`. -/
+theorem generalFutureMSIContents_eq_futureMSIContents
+    (fam : FutureMSIModel α) (proj : GeneralProjectMap α Act)
+    (P : ScalarProfile α) (a : Act) :
+    generalFutureMSIContents fam proj P a = futureMSIContents fam proj P a :=
+  rfl
 
 /-- Projected PCE over an arbitrary action type.
 
@@ -54,6 +77,15 @@ def GeneralProjectedPCE (fam : FutureMSIModel α)
     (globalRank : GlobalPreservationRanking α) (proj : GeneralProjectMap α Act)
     (P : ScalarProfile α) (a : Act) : ℝ :=
   ProjectedPCE fam globalRank proj P a
+
+/-- Compatibility theorem: `GeneralProjectedPCE` is the direct
+    `ProjectedPCE` over the parameterized foundation `ProjectMap`. -/
+theorem generalProjectedPCE_eq_projectedPCE
+    (fam : FutureMSIModel α) (globalRank : GlobalPreservationRanking α)
+    (proj : GeneralProjectMap α Act) (P : ScalarProfile α) (a : Act) :
+    GeneralProjectedPCE fam globalRank proj P a =
+      ProjectedPCE fam globalRank proj P a :=
+  rfl
 
 namespace GeneralProjectedPCE
 

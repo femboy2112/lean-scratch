@@ -55,6 +55,10 @@ structure ProjectMap (α Act : Type*) where
     projection map. New code should prefer `ProjectMap α Act`. -/
 abbrev DefaultProjectMap (α : Type*) := ProjectMap α (Action α)
 
+/-- Compatibility abbreviation for the simplest unit-carrier default projection
+    map. This avoids the old wrapper when no wrapper compatibility is needed. -/
+abbrev UnitDefaultProjectMap (α : Type*) := ProjectMap α (DefaultAction α)
+
 namespace ProjectMap
 
 variable {α Act : Type*}

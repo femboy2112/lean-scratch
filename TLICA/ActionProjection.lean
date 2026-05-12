@@ -57,6 +57,12 @@ def toFutureMSIModel (model : CoherentFutureMSIModel α) : FutureMSIModel α whe
     ext x
     exact (model.profile_iso P).dom_iff x
 
+/-- The weaker model induced by a coherent model has the expected domain match. -/
+theorem toFutureMSIModel_domain_match
+    (model : CoherentFutureMSIModel α) (P : ScalarProfile α) :
+    ((model.toFutureMSIModel).msiOf P).profile.domain = P.domain :=
+  (model.toFutureMSIModel).domain_match P
+
 end CoherentFutureMSIModel
 
 /-- A global preservation ranking over universal-domain content sets.

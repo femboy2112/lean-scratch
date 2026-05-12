@@ -63,6 +63,24 @@ theorem noAction_feasible (ctx : AgencyContext α Act) (P : ScalarProfile α) :
     ctx.proj.noAction ∈ ctx.feasible P :=
   ctx.feasibility.noAction_feasible P
 
+/-- Constructor from an explicit feasible-set function and no-action
+    feasibility proof. This preserves the ergonomic pre-v0.4 construction
+    pattern while storing feasibility in `FeasibilityModel`. -/
+def mkFromFeasible
+    (fam : FutureMSIModel α)
+    (globalRank : GlobalPreservationRanking α)
+    (proj : GeneralProjectMap α Act)
+    (feasible : ScalarProfile α → Set Act)
+    (noAction_feasible : ∀ P, proj.noAction ∈ feasible P) :
+    AgencyContext α Act where
+  fam := fam
+  globalRank := globalRank
+  proj := proj
+  feasibility := {
+    feasible := feasible
+    noAction_feasible := noAction_feasible
+  }
+
 end AgencyContext
 
 /-- Projected PCE evaluated in an agency context. Feasibility is kept as a
