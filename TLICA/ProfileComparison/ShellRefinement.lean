@@ -87,6 +87,12 @@ def shellUpperEndpoint (rs : ShellThresholds) : ShellIndex7 → ℝ
   | ShellIndex7.interior i => rs.r ⟨i.val, by omega⟩
   | ShellIndex7.outer => rs.r 5
 
+/-- Endpoint-bound value used by the full seven-shell scalar estimate. -/
+noncomputable def shellEndpointBound
+    (rs : ShellThresholds) (i j : ShellIndex7) : ℝ :=
+  max |shellUpperEndpoint rs i - shellLowerEndpoint rs j|
+    |shellLowerEndpoint rs i - shellUpperEndpoint rs j|
+
 /-- Boundary-aware scalar shell membership.
 
     This is additive over the existing interior `shellOf`. It records the
@@ -283,12 +289,43 @@ theorem fullShellStratifiedBound
     (shellOf7_lower_le rs i a ha) (shellOf7_le_upper rs i a ha)
     (shellOf7_lower_le rs j b hb) (shellOf7_le_upper rs j b hb)
 
+/-- Endpoint-bound naming bridge for the full boundary-aware scalar theorem. -/
+theorem fullShellStratifiedBound_endpointBound
+    (rs : ShellThresholds) (a b : ℝ) (i j : ShellIndex7)
+    (ha : shellOf7 rs i a) (hb : shellOf7 rs j b) :
+    |a - b| ≤ shellEndpointBound rs i j := by
+  simpa [shellEndpointBound] using fullShellStratifiedBound rs a b i j ha hb
+
+/-- The endpoint shell bound is nonnegative. -/
+theorem shellEndpointBound_nonneg
+    (rs : ShellThresholds) (i j : ShellIndex7) :
+    0 ≤ shellEndpointBound rs i j := by
+  unfold shellEndpointBound
+  exact le_trans (abs_nonneg _) (le_max_left _ _)
+
+/-- The cogito/cogito endpoint bound is zero. -/
+theorem shellEndpointBound_self_cogito
+    (rs : ShellThresholds) :
+    shellEndpointBound rs ShellIndex7.cogito ShellIndex7.cogito = 0 := by
+  norm_num [shellEndpointBound, shellLowerEndpoint, shellUpperEndpoint]
+
+/-- The endpoint shell bound is symmetric in its shell indices. -/
+theorem shellEndpointBound_symm
+    (rs : ShellThresholds) (i j : ShellIndex7) :
+    shellEndpointBound rs i j = shellEndpointBound rs j i := by
+  unfold shellEndpointBound
+  rw [abs_sub_comm (shellUpperEndpoint rs j) (shellLowerEndpoint rs i),
+    abs_sub_comm (shellLowerEndpoint rs j) (shellUpperEndpoint rs i)]
+  exact max_comm _ _
+
 /-- Legacy marker for Proposition 5.3.1, retained only for compatibility with
     older Rosetta inventories.
 
     The boundary-aware pointwise scalar theorem is now
-    `fullShellStratifiedBound`; profile-level corollaries may still build on
-    that theorem plus `shellStableDistanceBound_of_pointwise`. -/
+    `fullShellStratifiedBound`; shared-domain profile corollaries are exported
+    through endpoint-bound theorems below. Union-domain shell bounds remain a
+    separate hypothesis-design target because zero-extension introduces `0`
+    outside one profile's domain. -/
 def shellStratifiedBound_deferred : Prop := True
 
 /-- Profile-level shared-distance bound from an explicit pointwise bound.
@@ -311,6 +348,95 @@ theorem shellStableDistanceBound_of_pointwise
   apply iSup_le
   intro hx
   exact ENNReal.ofReal_le_ofReal (h_pointwise x hx)
+
+/-- Shared-domain shell bound stated directly over zero-extended values.
+
+    If every shared-domain zero-extended value of `f` lies in shell `i` and
+    every shared-domain zero-extended value of `g` lies in shell `j`, then the
+    shared `L∞` distance is bounded by the seven-shell endpoint bound. -/
+theorem dInfShared_le_shellEndpointBound_zeroExtend
+    (rs : ShellThresholds)
+    (f g : ScalarProfile α)
+    (i j : ShellIndex7)
+    (h_nonempty : (f.domain ∩ g.domain).Nonempty)
+    (hf_shell :
+      ∀ x ∈ f.domain ∩ g.domain,
+        shellOf7 rs i (f.zeroExtend x))
+    (hg_shell :
+      ∀ x ∈ f.domain ∩ g.domain,
+        shellOf7 rs j (g.zeroExtend x)) :
+    dInfShared f g ≤ ENNReal.ofReal (shellEndpointBound rs i j) := by
+  apply shellStableDistanceBound_of_pointwise f g h_nonempty
+  intro x hx
+  exact fullShellStratifiedBound_endpointBound rs
+    (f.zeroExtend x) (g.zeroExtend x) i j (hf_shell x hx) (hg_shell x hx)
+
+/-- Shared-domain shell bound with shell hypotheses over profile-domain
+    subtype values. -/
+theorem dInfShared_le_shellEndpointBound
+    (rs : ShellThresholds)
+    (f g : ScalarProfile α)
+    (i j : ShellIndex7)
+    (h_nonempty : (f.domain ∩ g.domain).Nonempty)
+    (hf_shell :
+      ∀ x ∈ f.domain ∩ g.domain,
+        ∀ hfx : x ∈ f.domain,
+          shellOf7 rs i (f.toFun ⟨x, hfx⟩))
+    (hg_shell :
+      ∀ x ∈ f.domain ∩ g.domain,
+        ∀ hgx : x ∈ g.domain,
+          shellOf7 rs j (g.toFun ⟨x, hgx⟩)) :
+    dInfShared f g ≤ ENNReal.ofReal (shellEndpointBound rs i j) := by
+  apply dInfShared_le_shellEndpointBound_zeroExtend rs f g i j h_nonempty
+  · intro x hx
+    rw [f.zeroExtend_of_mem x hx.1]
+    exact hf_shell x hx hx.1
+  · intro x hx
+    rw [g.zeroExtend_of_mem x hx.2]
+    exact hg_shell x hx hx.2
+
+/-- Shared-domain shell bound with pointwise shell indices allowed to vary,
+    provided each pointwise endpoint bound is uniformly bounded by `B`. -/
+theorem dInfShared_le_of_pointwise_shellEndpointBound
+    (rs : ShellThresholds)
+    (f g : ScalarProfile α)
+    (B : ℝ)
+    (h_nonempty : (f.domain ∩ g.domain).Nonempty)
+    (h_point :
+      ∀ x ∈ f.domain ∩ g.domain,
+        ∃ i j,
+          shellOf7 rs i (f.zeroExtend x) ∧
+          shellOf7 rs j (g.zeroExtend x) ∧
+          shellEndpointBound rs i j ≤ B) :
+    dInfShared f g ≤ ENNReal.ofReal B := by
+  apply shellStableDistanceBound_of_pointwise f g h_nonempty
+  intro x hx
+  rcases h_point x hx with ⟨i, j, hf_shell, hg_shell, hB⟩
+  exact le_trans
+    (fullShellStratifiedBound_endpointBound rs
+      (f.zeroExtend x) (g.zeroExtend x) i j hf_shell hg_shell)
+    hB
+
+/-- Same-interior-shell shared-profile bound as an endpoint-bound corollary. -/
+theorem dInfShared_le_sameInteriorShellEndpointBound
+    (rs : ShellThresholds)
+    (f g : ScalarProfile α)
+    (i : Fin 5)
+    (h_nonempty : (f.domain ∩ g.domain).Nonempty)
+    (hf_shell :
+      ∀ x ∈ f.domain ∩ g.domain,
+        ∀ hfx : x ∈ f.domain,
+          shellOf rs i (f.toFun ⟨x, hfx⟩))
+    (hg_shell :
+      ∀ x ∈ f.domain ∩ g.domain,
+        ∀ hgx : x ∈ g.domain,
+          shellOf rs i (g.toFun ⟨x, hgx⟩)) :
+    dInfShared f g ≤
+      ENNReal.ofReal
+        (shellEndpointBound rs (ShellIndex7.interior i) (ShellIndex7.interior i)) := by
+  exact dInfShared_le_shellEndpointBound rs f g
+    (ShellIndex7.interior i) (ShellIndex7.interior i) h_nonempty
+    hf_shell hg_shell
 
 /-- **Corollary 5.3.2 simplified** (shell-stable distance vanishing).
 

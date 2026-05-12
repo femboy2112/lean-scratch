@@ -39,12 +39,20 @@ coverage.
 | Completed P2 | Branch-distance helper expansion | Exposes reflexivity, symmetry, and triangle for branch union distance. | Existing `dInfUnion` theorem package. | `codex/tlica-shell-boundary-conventions-v0` | `TLICA/DifferentiatedAffect.lean` | Mapping, ledger, coverage docs, matrix, report, inventory | Added `branchUnionDistance_self`, `branchUnionDistance_symm`, and `branchUnionDistance_triangle`. |
 | Completed audit | Contestable boundary source/Lean readiness audit | Prevents over-formalizing `contestableBoundary` before the source chooses a refinement predicate. | `IBoundary`, orphan-cluster boundary candidates. | `codex/tlica-shell-boundary-conventions-v0` | None | `CONTESTABLE_BOUNDARY_AUDIT.md`, matrix, backlog, report | Audit says contestable boundary is not Lean-ready beyond current stub. |
 
+## A4. Completed in `codex/tlica-profile-shell-bound-corollary-v0`
+
+| Priority | Target | Why it matters | Required dependencies | Branch name | Lean files | Docs updated | Result |
+|---|---|---|---|---|---|---|---|
+| Completed P2 | Shared-domain profile shell-stratified corollaries | Packages `fullShellStratifiedBound` over `dInfShared` without changing the distance definitions. | `shellEndpointBound`, `fullShellStratifiedBound`, `shellStableDistanceBound_of_pointwise`. | `codex/tlica-profile-shell-bound-corollary-v0` | `TLICA/ProfileComparison/ShellRefinement.lean` | Mapping, ledger, coverage docs, matrix, backlog, report, inventory | Added endpoint-bound helper lemmas, uniform shared-domain theorem, zero-extension preferred API variant, variable-shell shared-domain theorem, and same-interior endpoint bridge. |
+| Completed audit | Union-domain shell-bound audit | Prevents overclaiming a `dInfUnion` shell theorem before zero-extension shell hypotheses are fixed. | `dInfUnion`, zero-extension convention. | `codex/tlica-profile-shell-bound-corollary-v0` | None | `SHELL_BOUNDARY_CONVENTION_AUDIT.md`, `NEXT_LEAN_FRONTIER.md`, matrix, backlog, report | Documents that union-domain shell bounds need hypotheses over `f.domain ∪ g.domain`, including absent values as zero. |
+| Completed P2 | Direct projected-profile/future-content aliases | Reduces compatibility-name friction without refactoring downstream modules. | Existing general/direct equality theorems. | `codex/tlica-profile-shell-bound-corollary-v0` | `TLICA/FreeWill.lean`, `TLICA/TemporalTrajectory.lean` | Mapping, ledger, coverage docs, matrix, report, inventory | Added branch and trajectory direct future-content bridges, plus a temporal one-step branch union-distance definition and unfold theorem. |
+
 ## B. Remaining Immediate Lean-Ready Theorem Targets
 
 | Priority | Target | Why it matters | Required dependencies | Proposed branch name | Expected Lean files | Expected docs to update | Risk |
 |---|---|---|---|---|---|---|---|
-| P2 | Profile-level shell-stratified shared/union bound | Packages `fullShellStratifiedBound` over `dInfShared` or `dInfUnion`. | Boundary-aware pointwise theorem, chosen profile-distance target, pointwise shell assignment hypotheses. | `codex/tlica-profile-shell-bound-corollary` | `TLICA/ProfileComparison/ShellRefinement.lean` | `MAPPING.md`, ledger, matrix, coverage docs | Medium |
-| P2 | Direct `ProjectedPCE` API cleanup | Reduces dependence on compatibility names in comments and downstream helper statements. | Existing equality theorem `generalProjectedPCE_eq_projectedPCE`; new agency bridge. | `codex/tlica-direct-projected-pce-api` | Dependent modules if touched | `MAPPING.md`, ledger, coverage audit | Low-medium |
+| P2 | Union-domain profile shell-stratified bound | Packages `fullShellStratifiedBound` over `dInfUnion` once zero-extension shell-assignment hypotheses over `f.domain ∪ g.domain` are fixed. | Boundary-aware pointwise theorem, union-domain hypothesis design, absent values treated as zero. | `codex/tlica-union-shell-bound-v0` | `TLICA/ProfileComparison/ShellRefinement.lean` if hypothesis shape is clean | `MAPPING.md`, ledger, matrix, coverage docs, shell audit | Medium |
+| P2 | Direct `ProjectedPCE` API cleanup | Reduces dependence on compatibility names in comments and downstream helper statements. | Existing equality theorem `generalProjectedPCE_eq_projectedPCE`; branch/trajectory direct API bridges. | `codex/tlica-direct-projected-pce-api-v0` | Dependent modules if touched | `MAPPING.md`, ledger, coverage audit | Low-medium |
 
 ## C. Lean-Ready Structure Targets
 

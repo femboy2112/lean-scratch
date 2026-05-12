@@ -16,6 +16,7 @@ namespace TLICA.FreeWill
 
 open TLICA.Profile
 open TLICA.Agency
+open TLICA.ActionProjection
 open TLICA.GeneralActionProjection
 
 variable {α Act : Type*}
@@ -25,10 +26,23 @@ def branchProfile (ctx : AgencyContext α Act) (P : ScalarProfile α) (a : Act) 
     ScalarProfile α :=
   generalProjectedProfile ctx.proj P a
 
+/-- Branch profiles are definitionally the direct projected profiles. -/
+theorem branchProfile_eq_projectedProfile
+    (ctx : AgencyContext α Act) (P : ScalarProfile α) (a : Act) :
+    branchProfile ctx P a = projectedProfile ctx.proj P a := by
+  rw [branchProfile, generalProjectedProfile_eq_projectedProfile]
+
 /-- The lifted future MSI contents for an action branch. -/
 def branchFutureContents (ctx : AgencyContext α Act)
     (P : ScalarProfile α) (a : Act) : Set α :=
   generalFutureMSIContents ctx.fam ctx.proj P a
+
+/-- Branch future contents are definitionally the direct future-MSI contents. -/
+theorem branchFutureContents_eq_futureMSIContents
+    (ctx : AgencyContext α Act) (P : ScalarProfile α) (a : Act) :
+    branchFutureContents ctx P a =
+      futureMSIContents ctx.fam ctx.proj P a := by
+  rw [branchFutureContents, generalFutureMSIContents_eq_futureMSIContents]
 
 /-- Live alternatives whose projected future contents differ. -/
 def branchDistinctAlternative (ctx : AgencyContext α Act)

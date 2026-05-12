@@ -2,99 +2,121 @@
 
 ## 1. Branch scope
 
-- Base branch: `codex/tlica-shell-stratified-bound-v0`
-- Current branch: `codex/tlica-shell-boundary-conventions-v0`
+- Base branch: `codex/tlica-shell-boundary-conventions-v0`
+- Current branch: `codex/tlica-profile-shell-bound-corollary-v0`
 
-This branch resolves the source-level shell boundary convention blocker and
-continues with low-risk theorem wrappers in agency, temporal trajectories, and
-branch distances. It also audits contestable-boundary readiness without adding
-new boundary theory.
+This branch packages the scalar seven-shell theorem into shared-domain
+profile-level shell-stability corollaries. It also adds low-risk endpoint-bound
+helper lemmas, direct projected-profile/future-content bridge aliases, a
+one-step branch union-distance naming bridge, a union-domain shell-bound audit,
+and the next-frontier planning document.
 
 It does not add religious-experience formalization, named affect taxonomy,
-stochastic projection, phenomenological duration, or theological/religious
-formalization.
+stochastic projection, phenomenological duration, or new contestable-boundary
+Lean theory.
 
 ## 2. Inherited branch verification
 
 Commands run before branching:
 
 - `git fetch --all`: succeeded.
-- `git checkout codex/tlica-shell-stratified-bound-v0`: succeeded.
+- `git checkout codex/tlica-shell-boundary-conventions-v0`: succeeded.
 - `git pull`: already up to date.
 - `lake build`: succeeded, with existing warning-only lints.
 - `bash scripts/audit_lean.sh`: succeeded.
 
 ## 3. Completed phases
 
-- Shell source convention audit: completed in
-  `docs/tlica_rosetta/SHELL_BOUNDARY_CONVENTION_AUDIT.md`.
-- Boundary-aware shell Lean encoding: completed additively in
-  `TLICA/ProfileComparison/ShellRefinement.lean`.
-- Full pointwise shell-stratified bound: proved as `fullShellStratifiedBound`.
-- Agency finite-selection strengthening: added finite-set and fintype wrappers.
-- Direct ProjectedPCE API audit: added `feasibleProjectedPCE_eq_projectedPCE`.
-- Generated trajectory helper lemmas: added named generated-step helpers.
-- Branch-distance helper expansion: added reflexivity, symmetry, and triangle.
-- Contestable boundary audit: completed in
-  `docs/tlica_rosetta/CONTESTABLE_BOUNDARY_AUDIT.md`.
-- Matrix, backlog, coverage, ledger, mapping, and inventory docs updated.
+- Phase 1: inspected `TLICA/ProfileComparison/ShellRefinement.lean` and the
+  shell/Rosetta audit docs; confirmed `ShellIndex7`, `shellOf7`,
+  `shellLowerEndpoint`, `shellUpperEndpoint`, `fullShellStratifiedBound`, and
+  `shellStableDistanceBound_of_pointwise`.
+- Phase 2: added `shellEndpointBound` and
+  `fullShellStratifiedBound_endpointBound`.
+- Phase 3: added the uniform shared-domain theorem
+  `dInfShared_le_shellEndpointBound`.
+- Phase 4: added the variable-shell shared-domain theorem
+  `dInfShared_le_of_pointwise_shellEndpointBound`.
+- Phase 5: did not add a `dInfUnion` theorem; documented the union-domain
+  zero-extension hypothesis issue.
+- Phase 6: updated the compatibility comment for
+  `shellStratifiedBound_deferred`.
+- Phase 7 and Phase 11: added
+  `dInfShared_le_sameInteriorShellEndpointBound`.
+- Phase 12: added `shellEndpointBound_nonneg`,
+  `shellEndpointBound_self_cogito`, and `shellEndpointBound_symm`.
+- Phase 13: added the preferred zero-extension API theorem
+  `dInfShared_le_shellEndpointBound_zeroExtend`.
+- Phase 14: updated `SHELL_BOUNDARY_CONVENTION_AUDIT.md` with the union-domain
+  shell-bound audit.
+- Phase 15: added direct projected-profile/future-content aliases in
+  `TLICA/FreeWill.lean` and `TLICA/TemporalTrajectory.lean`.
+- Phase 16: added `oneStepBranchUnionDistance` and
+  `oneStepBranchUnionDistance_eq_dInfUnion`; the direct alias to
+  `branchUnionDistance` is deferred because importing `DifferentiatedAffect`
+  into temporal would create a module cycle.
+- Phase 17: added `docs/tlica_rosetta/NEXT_LEAN_FRONTIER.md`.
+- Phases 8, 18, and 19: updated mapping, ledger, coverage, matrix, backlog,
+  shell audit, declaration inventory, and this report.
 
 ## 4. Theorem names added
 
 Shell refinement:
 
-- `ShellIndex7`
-- `shellLowerEndpoint`
-- `shellUpperEndpoint`
-- `shellOf7`
-- `shellOf7_lower_le`
-- `shellOf7_le_upper`
-- `shellOf7_mem_Icc_zero_one`
-- `shellOf7_cogito_value`
-- `shellOf7_outer_bound`
-- `sameCogitoShell_bound`
-- `sameOuterShell_bound`
-- `abs_sub_le_max_endpoint_abs`
-- `fullShellStratifiedBound`
+- `shellEndpointBound`
+- `fullShellStratifiedBound_endpointBound`
+- `shellEndpointBound_nonneg`
+- `shellEndpointBound_self_cogito`
+- `shellEndpointBound_symm`
+- `dInfShared_le_shellEndpointBound_zeroExtend`
+- `dInfShared_le_shellEndpointBound`
+- `dInfShared_le_of_pointwise_shellEndpointBound`
+- `dInfShared_le_sameInteriorShellEndpointBound`
 
-Agency:
+Free will:
 
-- `feasibleProjectedPCE_eq_projectedPCE`
-- `exists_selectsFeasibleAction_of_finite_feasible`
-- `exists_selectsFeasibleAction_of_fintype`
+- `branchProfile_eq_projectedProfile`
+- `branchFutureContents_eq_futureMSIContents`
 
 Temporal trajectory:
 
-- `generatedBy_step`
-- `generatedBy_step_projectedProfile`
-- `trajectoryFutureContents_eq_branchFutureContents`
+- `trajectoryFutureContents_eq_futureMSIContents`
+- `oneStepBranchUnionDistance`
+- `oneStepBranchUnionDistance_eq_dInfUnion`
 
-Differentiated affect:
+## 5. Profile-level theorem status
 
-- `branchUnionDistance_self`
-- `branchUnionDistance_symm`
-- `branchUnionDistance_triangle`
+- Scalar seven-shell theorem: machine verified as `fullShellStratifiedBound`;
+  endpoint-bound bridge verified as `fullShellStratifiedBound_endpointBound`.
+- Shared-domain uniform-shell profile corollary: machine verified as
+  `dInfShared_le_shellEndpointBound`.
+- Shared-domain zero-extension shell-assignment variant: machine verified as
+  `dInfShared_le_shellEndpointBound_zeroExtend`; this is the preferred API
+  when callers already reason about `zeroExtend`.
+- Shared-domain variable-shell profile corollary: machine verified as
+  `dInfShared_le_of_pointwise_shellEndpointBound`.
+- Same-interior-shell endpoint bridge: machine verified as
+  `dInfShared_le_sameInteriorShellEndpointBound`.
+- Union-domain profile shell theorem: not added; audited as future work because
+  shell assignments must cover zero-extended values over `f.domain ∪ g.domain`.
 
-## 5. Blocked or skipped phases
+## 6. Blocked or skipped phases
 
-- The source-level shell boundary blocker is resolved: conventions are
-  source-fixed in `04_profiles.md` and `profile_comparison_v0_2.md`.
-- The remaining shell work is profile-level packaging, not boundary semantics:
-  choose whether the next exported theorem should target `dInfShared`,
-  `dInfUnion`, or another profile-level shell assignment form.
-- Contestable boundary remains source-ambiguous. The audit classifies current
-  `contestableBoundary` as a stub equal to `boundary`; no new Lean theory was
-  added because the source has not chosen among perturbation sensitivity, Mode
-  A/C dual candidacy, projection-induced class change, or temporal instability.
+- `dInfUnion` shell theorem skipped: the shared-domain hypotheses do not
+  control zero-extension values outside one profile's domain.
+- `oneStepBranchUnionDistance_eq_branchUnionDistance` skipped in temporal:
+  `branchUnionDistance` lives in `TLICA.DifferentiatedAffect`, which imports
+  temporal, so the alias belongs in a future affect-side helper branch.
+- Contestable-boundary Lean theory skipped by instruction and because the
+  source ambiguity remains unresolved.
 
-## 6. Files changed
+## 7. Files changed
 
 Lean source:
 
 - `TLICA/ProfileComparison/ShellRefinement.lean`
-- `TLICA/Agency.lean`
+- `TLICA/FreeWill.lean`
 - `TLICA/TemporalTrajectory.lean`
-- `TLICA/DifferentiatedAffect.lean`
 
 Documentation and inventory:
 
@@ -102,16 +124,14 @@ Documentation and inventory:
 - `docs/tlica_codex/LEAN_VERIFICATION_REPORT.md`
 - `docs/tlica_codex/lean_declaration_inventory.md`
 - `docs/tlica_rosetta/SHELL_BOUNDARY_CONVENTION_AUDIT.md`
-- `docs/tlica_rosetta/CONTESTABLE_BOUNDARY_AUDIT.md`
+- `docs/tlica_rosetta/NEXT_LEAN_FRONTIER.md`
 - `docs/tlica_rosetta/ROSETTA_MATH_FIRST_LEDGER.md`
 - `docs/tlica_rosetta/ROSETTA_DECLARATION_COVERAGE.md`
 - `docs/tlica_rosetta/ROSETTA_COVERAGE_AUDIT.md`
 - `docs/tlica_rosetta/FEATURE_COMPLETENESS_MATRIX.md`
 - `docs/tlica_rosetta/LEAN_IMPROVEMENT_BACKLOG.md`
-- `docs/tlica_rosetta/ROSETTA_PURE_MATH_VIEW.md`
-- `docs/tlica_rosetta/ROSETTA_BRIDGE_VIEW.md`
 
-## 7. Verification status
+## 8. Verification status
 
 - `lake exe cache get`: succeeded.
 - `python3 scripts/extract_lean_decls.py > docs/tlica_codex/lean_declaration_inventory.md`: succeeded.
@@ -124,12 +144,13 @@ Audit target:
 - Zero `admit` in imported Lean files.
 - Zero global `axiom` declarations in imported Lean files.
 
-## 8. Next recommended branch
+## 9. Next recommended branch
 
 Recommended next branch:
 
-`codex/tlica-profile-shell-bound-corollary`
+`codex/tlica-union-shell-bound-v0`
 
-Purpose: package `fullShellStratifiedBound` into the chosen profile-level
-distance statement, probably using `shellStableDistanceBound_of_pointwise` once
-the shared-domain or union-domain hypothesis shape is fixed.
+Purpose: add a union-domain shell bound only after the theorem states explicit
+zero-extension shell assignments over the union domain. If that hypothesis shape
+is not settled, use `codex/tlica-direct-projected-pce-api-v0` for direct API
+migration instead.

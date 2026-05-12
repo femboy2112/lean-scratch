@@ -125,12 +125,12 @@ All five priority theorems have type-checking proofs in the project and are mach
 | `dInfShared_le_one_or_top` | Combined bound | `machine_verified_definition` |
 | `dInfShared_triangle_of_bridge` | §5.2.6 (qualified triangle inequality, bridge-domain form) | `machine_verified_theorem` |
 | `structure ShellThresholds` | v0.3.1 rigorous edition 04_profiles.md §4.3.1 | `machine_verified_structure` |
-| `shellOf`, `interiorShellIndexDistance`, `ShellIndex7`, `shellLowerEndpoint`, `shellUpperEndpoint`, `shellOf7` | Helper definitions for interior and boundary-aware shell membership | `machine_verified_definition` |
-| `shellOf_nonneg`, `shellOf_le_one`, `shellOf7_lower_le`, `shellOf7_le_upper`, `shellOf7_mem_Icc_zero_one`, `shellOf7_cogito_value`, `shellOf7_outer_bound` | Interior and boundary-aware shell-membership bounds induced by threshold normalization | `machine_verified_theorem` |
+| `shellOf`, `interiorShellIndexDistance`, `ShellIndex7`, `shellLowerEndpoint`, `shellUpperEndpoint`, `shellEndpointBound`, `shellOf7` | Helper definitions for interior and boundary-aware shell membership | `machine_verified_definition` |
+| `shellOf_nonneg`, `shellOf_le_one`, `shellOf7_lower_le`, `shellOf7_le_upper`, `shellOf7_mem_Icc_zero_one`, `shellOf7_cogito_value`, `shellOf7_outer_bound`, `shellEndpointBound_nonneg`, `shellEndpointBound_self_cogito`, `shellEndpointBound_symm` | Interior and boundary-aware shell-membership bounds induced by threshold normalization, plus endpoint-bound helper facts | `machine_verified_theorem` |
 | `sameShellBound_of_shellOf`, `sameInteriorShell_distance_bound` | Predicate-form same-shell/interior-shell case of profile_comparison_v0_2.md §5.3 | `machine_verified_theorem` |
-| `interiorShell_pair_bound`, `sameCogitoShell_bound`, `sameOuterShell_bound`, `abs_sub_le_max_endpoint_abs`, `fullShellStratifiedBound` | Conservative cross-interior bound, boundary same-shell bounds, and full boundary-aware pointwise shell-stratified bound | `machine_verified_theorem` |
+| `interiorShell_pair_bound`, `sameCogitoShell_bound`, `sameOuterShell_bound`, `abs_sub_le_max_endpoint_abs`, `fullShellStratifiedBound`, `fullShellStratifiedBound_endpointBound` | Conservative cross-interior bound, boundary same-shell bounds, and full boundary-aware pointwise shell-stratified bound | `machine_verified_theorem` |
 | `shellStratifiedBound_deferred` | profile_comparison_v0_2.md §5.3 legacy marker superseded by `fullShellStratifiedBound` | `deprecated_or_superseded` |
-| `shellStableDistanceBound_of_pointwise`, `shellStableDistanceVanishing_simple` | profile_comparison_v0_2.md §5.3 (profile-level shared-distance shell-stability bounds) | `machine_verified_theorem` |
+| `shellStableDistanceBound_of_pointwise`, `dInfShared_le_shellEndpointBound_zeroExtend`, `dInfShared_le_shellEndpointBound`, `dInfShared_le_of_pointwise_shellEndpointBound`, `dInfShared_le_sameInteriorShellEndpointBound`, `shellStableDistanceVanishing_simple` | profile_comparison_v0_2.md §5.3 (profile-level shared-distance shell-stability bounds) | `machine_verified_theorem` |
 
 The qualified triangle inequality for `dInfShared` is encoded in bridge-domain form:
 if every point compared by `dInfShared f h` lies in `g.domain`, then `g`
@@ -142,7 +142,7 @@ mediates the pointwise comparison and `dInfShared f h ≤ dInfShared f g + dInfS
 |---|---|---|
 | `ShellThresholds.maxGap`, `adjacent_gap_pos` | profile_comparison_v0_2.md §5.3 | `machine_verified_definition` |
 | `sameShellBound` | Same-shell case of Proposition 5.3.1 | `machine_verified_theorem` |
-| `ShellIndex7`, `shellOf7`, `sameInteriorShell_distance_bound`, `interiorShell_pair_bound`, `sameCogitoShell_bound`, `sameOuterShell_bound`, `fullShellStratifiedBound`, `shellStableDistanceBound_of_pointwise`, `shellStableDistanceVanishing_simple` | Boundary-aware and interior shell-bound package for Proposition 5.3.1 and Corollary 5.3.2 | `machine_verified_theorem` |
+| `ShellIndex7`, `shellOf7`, `shellEndpointBound`, `sameInteriorShell_distance_bound`, `interiorShell_pair_bound`, `sameCogitoShell_bound`, `sameOuterShell_bound`, `fullShellStratifiedBound`, `fullShellStratifiedBound_endpointBound`, `dInfShared_le_shellEndpointBound_zeroExtend`, `dInfShared_le_shellEndpointBound`, `dInfShared_le_of_pointwise_shellEndpointBound`, `dInfShared_le_sameInteriorShellEndpointBound`, `shellStableDistanceBound_of_pointwise`, `shellStableDistanceVanishing_simple` | Boundary-aware and interior shell-bound package for Proposition 5.3.1 and Corollary 5.3.2 | `machine_verified_theorem` |
 | `shellStratifiedBound_deferred` | Proposition 5.3.1 legacy marker | `deprecated_or_superseded` |
 | `ProfileSpace`, `instance : EDist`, `PseudoEMetricSpace` | Round-3 follow-up: pseudo-emetric promotion | `machine_verified_definition` |
 | `MSI` structure (cogito_in, density, threshold) | orphan_cluster_v0_1.md §3, Definition 3.2.1 | `machine_verified_definition` |
@@ -253,8 +253,8 @@ explicit `selectsFeasibleAction` hypothesis.
 
 | Lean declaration | Working-paper reference | Status |
 |---|---|---|
-| `branchProfile` | Action branch as deterministic projected profile | `machine_verified_definition` |
-| `branchFutureContents` | Lifted future MSI contents of an action branch | `machine_verified_definition` |
+| `branchProfile`, `branchProfile_eq_projectedProfile` | Action branch as deterministic projected profile, with direct projected-profile API bridge | `machine_verified_definition`; `machine_verified_theorem` |
+| `branchFutureContents`, `branchFutureContents_eq_futureMSIContents` | Lifted future MSI contents of an action branch, with direct future-MSI contents API bridge | `machine_verified_definition`; `machine_verified_theorem` |
 | `branchDistinctAlternative` | Live feasible alternatives with distinct future contents | `machine_verified_definition` |
 | `pceBranchDistinctAlternative` | Live feasible alternatives with distinct projected-PCE values | `machine_verified_definition` |
 | `openAlternatives` | Feasible action set as open alternatives | `machine_verified_definition` |
@@ -289,13 +289,13 @@ incompatibilism/compatibilism claims remain deferred.
 | `ProfileTrajectory` | Natural-time indexed sequence of scalar profiles | `machine_verified_structure` |
 | `ActionSchedule` | Natural-time indexed action schedule | `machine_verified_structure` |
 | `generatedBy`, `generatedBy_step`, `generatedBy_step_projectedProfile` | Predicate that a supplied trajectory follows deterministic action-indexed projection, plus named step equations | `machine_verified_definition`; `machine_verified_theorem` |
-| `trajectoryFutureContents`, `trajectoryFutureContents_eq_branchFutureContents` | Lifted future MSI contents of the scheduled branch at a trajectory time | `machine_verified_definition`; `machine_verified_theorem` |
+| `trajectoryFutureContents`, `trajectoryFutureContents_eq_branchFutureContents`, `trajectoryFutureContents_eq_futureMSIContents` | Lifted future MSI contents of the scheduled branch at a trajectory time, with branch and direct future-MSI contents API bridges | `machine_verified_definition`; `machine_verified_theorem` |
 | `stepUnionDistance`, `stepUnionDistance_nonneg`, `stepUnionDistance_le_one` | Adjacent-time union-domain profile distance and basic bounds | `machine_verified_definition`; `machine_verified_theorem` |
 | `stepSharedDistance` | Adjacent-time shared-domain profile distance | `machine_verified_definition` |
 | `unionStepStable`, `unionStepStable_step_le` | Uniform stepwise temporal stability via `dInfUnion` and pointwise elimination | `machine_verified_definition`; `machine_verified_theorem` |
 | `eventuallyUnionStepStable`, `eventuallyUnionStepStable_of_le_start`, `eventuallyUnionStepStable_of_unionStepStable` | Eventual stepwise temporal stability via `dInfUnion`, later-start monotonicity, and uniform-to-eventual bridge | `machine_verified_definition`; `machine_verified_theorem` |
 | `DivergentTrajectories` | Supplied trajectories with a witnessed profile difference at some time | `machine_verified_structure` |
-| `oneStepBranch` | One-step deterministic branch profile naming bridge | `machine_verified_definition` |
+| `oneStepBranch`, `oneStepBranchUnionDistance`, `oneStepBranchUnionDistance_eq_dInfUnion` | One-step deterministic branch profile and union-distance naming bridges | `machine_verified_definition`; `machine_verified_theorem` |
 | `freeWillWitness_live_branch_contents_distinct` | Free-will witness supplies live feasible actions with distinct branch future contents | `machine_verified_theorem` |
 | `freeWillWitness_oneStep_branch_contents_distinct` | Selected and alternative one-step branch futures of a free-will witness differ | `machine_verified_theorem` |
 | `pceFreeWillWitness_oneStep_branch_contents_distinct` | PCE-free-will witness gives the same branch-future distinction through `toFreeWillWitness` | `machine_verified_theorem` |

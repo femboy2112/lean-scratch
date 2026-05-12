@@ -74,6 +74,16 @@ theorem trajectoryFutureContents_eq_branchFutureContents
       branchFutureContents ctx (traj.profileAt n) (sched.actionAt n) :=
   rfl
 
+/-- Scheduled trajectory future contents are definitionally direct future-MSI
+    contents for the scheduled projected branch. -/
+theorem trajectoryFutureContents_eq_futureMSIContents
+    (ctx : AgencyContext α Act)
+    (traj : ProfileTrajectory α) (sched : ActionSchedule Act) (n : ℕ) :
+    trajectoryFutureContents ctx traj sched n =
+      futureMSIContents ctx.fam ctx.proj (traj.profileAt n) (sched.actionAt n) := by
+  rw [trajectoryFutureContents_eq_branchFutureContents,
+    branchFutureContents_eq_futureMSIContents]
+
 /-- Union-domain profile distance between adjacent times. -/
 noncomputable def stepUnionDistance (traj : ProfileTrajectory α) (n : ℕ) :
     ℝ≥0∞ :=
@@ -142,6 +152,19 @@ structure DivergentTrajectories
 def oneStepBranch (ctx : AgencyContext α Act) (P : ScalarProfile α) (a : Act) :
     ScalarProfile α :=
   branchProfile ctx P a
+
+/-- Union-domain distance between two one-step deterministic branches. -/
+noncomputable def oneStepBranchUnionDistance
+    (ctx : AgencyContext α Act) (P : ScalarProfile α) (a b : Act) : ℝ≥0∞ :=
+  dInfUnion (oneStepBranch ctx P a) (oneStepBranch ctx P b)
+
+/-- The one-step branch union distance unfolds to the union distance between
+    the corresponding branch profiles. -/
+theorem oneStepBranchUnionDistance_eq_dInfUnion
+    (ctx : AgencyContext α Act) (P : ScalarProfile α) (a b : Act) :
+    oneStepBranchUnionDistance ctx P a b =
+      dInfUnion (branchProfile ctx P a) (branchProfile ctx P b) :=
+  rfl
 
 /-- A free-will witness supplies live feasible actions whose future contents
     differ. This is the temporal-trajectory naming bridge for the existing
