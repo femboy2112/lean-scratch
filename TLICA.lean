@@ -30,6 +30,7 @@ This module is the top-level entry point. It imports every encoded submodule.
 	   20. TLICA.Agency                               — Feasible action selection under projected PCE.
 	   21. TLICA.FreeWill                             — Branch-sensitive agency witnesses.
 	   22. TLICA.TemporalTrajectory                   — Deterministic indexed profile trajectories.
+	   23. TLICA.DifferentiatedAffect                 — Profile/PCE affect kernel.
 
 The mapping from each Lean declaration to its location in the v0.3.2 rigorous
 edition (or v0.2 working papers for round-3/4 declarations) is recorded in
@@ -58,3 +59,4 @@ import TLICA.GeneralActionProjection
 import TLICA.Agency
 import TLICA.FreeWill
 import TLICA.TemporalTrajectory
+import TLICA.DifferentiatedAffect

@@ -110,6 +110,18 @@ Stochastic trajectories and phenomenological duration remain deferred. Different
 
 Lean carriers: `ProfileTrajectory`, `ActionSchedule`, `generatedBy`, `trajectoryFutureContents`, `stepUnionDistance`, `stepSharedDistance`, `unionStepStable`, `eventuallyUnionStepStable`, `DivergentTrajectories`, `oneStepBranch`, `freeWillWitness_live_branch_contents_distinct`, `freeWillWitness_oneStep_branch_contents_distinct`, `pceFreeWillWitness_oneStep_branch_contents_distinct`, `stochasticTrajectory_deferred`, `phenomenologicalDuration_deferred`, `temporalContinuityMetric_deferred`.
 
+## 8.6 Differentiated-affect kernel
+
+Differentiated affect is represented here only by a generic profile/PCE kernel. Given a baseline action and a comparison action, the relative projected-PCE delta is the comparison action's projected PCE minus the baseline action's projected PCE. PCE-support, PCE-defeat, and PCE-neutrality are therefore relative to a baseline action, and the real-arithmetic equivalences with strict improvement, strict loss, and equality are machine-verified.
+
+The branch-profile side defines union/shared distances between deterministic action branches and an equality-based `branchProfileShift` predicate. Equal branch profiles imply equal branch future contents, so a free-will branch future-content distinction yields a branch-profile shift.
+
+Witness structures package PCE-support, PCE-defeat, PCE-neutrality, profile shift, and a generic `AffectKernelWitness` over feasible actions. The generic kernel requires only a branch-profile shift or projected-PCE differentiation; it is not a named affect category. Free-will witnesses yield profile-shift affect kernels, and PCE-free-will witnesses yield PCE-differentiated affect kernels. If all feasible actions have equal branch profiles and equal projected-PCE values, no affect-kernel witness exists.
+
+`DifferentiatedAffect` depends on `TemporalTrajectory`, and through it on `FreeWill`, `Agency`, and `GeneralActionProjection`. Named affect taxonomy remains deferred. Substrate and source-opacity affect pathways remain deferred.
+
+Lean carriers: `relativePCEDelta`, `pceSupportive`, `pceNeutral`, `pceDefeating`, `pceSupportive_iff`, `pceNeutral_iff`, `pceDefeating_iff`, `pceValence_trichotomy`, `branchUnionDistance`, `branchSharedDistance`, `branchProfileShift`, `branchFutureContents_eq_of_branchProfile_eq`, `branchProfile_ne_of_branchFutureContents_ne`, `PCESupportAffectWitness`, `PCEDefeatAffectWitness`, `PCENeutralAffectWitness`, `ProfileShiftAffectWitness`, `AffectKernelWitness`, `affectKernel_of_freeWillWitness`, `affectKernel_of_pceFreeWillWitness`, `no_affectKernel_of_branch_and_pce_collapse`, `temporalAffectIntensity`, `namedAffectTaxonomy_deferred`, `loveConstitutiveExtension_deferred`, `substrateAffectPathway_deferred`, `sourceOpacityAffect_deferred`.
+
 ## 9. Consistency classification and mode selection
 
 A ternary evaluation classifies elements as positive, neutral, or negative relative to a consistency criterion. A finite mode operator is selected from this evaluation. Boundary operators are definable from the induced partition.

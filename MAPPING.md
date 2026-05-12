@@ -269,3 +269,31 @@ profile-comparison distances. Trajectories are supplied as indexed data and are
 verified by `generatedBy` when appropriate. The layer does not assert global
 trajectory existence, stochastic dynamics, phenomenological duration, or
 differentiated affect.
+
+## Differentiated-affect layer
+
+| Lean declaration | Working-paper reference | Status |
+|---|---|---|
+| `relativePCEDelta` | Projected-PCE delta of an action relative to a baseline action | Encoded definition |
+| `pceSupportive`, `pceNeutral`, `pceDefeating` | Relative PCE-support, PCE-neutrality, and PCE-defeat predicates | Encoded definitions |
+| `pceSupportive_iff`, `pceNeutral_iff`, `pceDefeating_iff` | Real-arithmetic characterizations of relative PCE valence | Encoded with proofs |
+| `pceValence_trichotomy` | Relative PCE valence is supportive, neutral, or defeating | Encoded with proof |
+| `pceSupportive_not_neutral`, `pceSupportive_not_defeating`, `pceDefeating_not_neutral` | Basic mutual exclusions for PCE valence | Encoded with proofs |
+| `branchUnionDistance`, `branchSharedDistance` | Profile distances between deterministic action branches | Encoded definitions |
+| `branchProfileShift` | Equality-based branch-profile shift predicate | Encoded definition |
+| `branchFutureContents_eq_of_branchProfile_eq`, `branchProfile_ne_of_branchFutureContents_ne` | Branch-profile equality implies future-content equality; branch future-content difference implies profile shift | Encoded with proofs |
+| `PCESupportAffectWitness`, `PCEDefeatAffectWitness`, `PCENeutralAffectWitness` | Feasible-action witnesses for relative PCE appraisal | Encoded structures |
+| `ProfileShiftAffectWitness` | Feasible-action witness for branch-profile shift | Encoded structure |
+| `AffectKernelWitness` | Minimal affect-relevant structural perturbation: branch-profile shift or PCE differentiation | Encoded structure |
+| `affectKernel_of_pceSupport`, `affectKernel_of_pceDefeat`, `affectKernel_of_profileShift` | Support/defeat/profile-shift witnesses imply affect-kernel witnesses | Encoded definitions |
+| `profileShiftAffectWitness_of_freeWillWitness`, `affectKernel_of_freeWillWitness` | Free-will witness yields profile-shift affect kernel | Encoded definitions |
+| `affectKernel_of_pceFreeWillWitness` | PCE-free-will witness yields PCE-differentiated affect kernel | Encoded definition |
+| `no_affectKernel_of_branch_and_pce_collapse` | Branch-profile and projected-PCE collapse excludes affect-kernel witnesses | Encoded with proof |
+| `temporalAffectIntensity`, `temporalAffectIntensity_nonneg`, `temporalAffectIntensity_le_of_unionStepStable` | Temporal affect-intensity naming bridge via adjacent union-profile distance | Encoded definition/theorems |
+| `namedAffectTaxonomy_deferred`, `loveConstitutiveExtension_deferred`, `substrateAffectPathway_deferred`, `sourceOpacityAffect_deferred` | Named affect taxonomy and non-profile/PCE pathways | Non-substantive deferred target markers; no theorem claim |
+
+The differentiated-affect layer depends on `TemporalTrajectory`, and through it
+on `FreeWill`, `Agency`, and `GeneralActionProjection`. It formalizes only the
+first profile/PCE affect kernel. PCE-support, PCE-defeat, and PCE-neutrality are
+relative to a baseline action. Named affect taxonomy, substrate affect pathways,
+and source-opacity pathways remain deferred.
