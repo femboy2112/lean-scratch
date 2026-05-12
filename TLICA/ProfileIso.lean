@@ -26,6 +26,23 @@ structure ProfileIso (P Q : ScalarProfile α) where
 
 namespace ProfileIso
 
+/-- Domain membership can be transported across a profile isomorphism. -/
+theorem dom_mem_iff {P Q : ScalarProfile α} (h : ProfileIso P Q) (x : α) :
+    x ∈ P.domain ↔ x ∈ Q.domain :=
+  h.dom_iff x
+
+/-- Profile values agree after transporting a left-domain membership proof. -/
+theorem val_eq_left {P Q : ScalarProfile α} (h : ProfileIso P Q)
+    {x : α} (hP : x ∈ P.domain) :
+    P.toFun ⟨x, hP⟩ = Q.toFun ⟨x, (h.dom_iff x).1 hP⟩ :=
+  h.val_eq x hP ((h.dom_iff x).1 hP)
+
+/-- Profile values agree after transporting a right-domain membership proof. -/
+theorem val_eq_right {P Q : ScalarProfile α} (h : ProfileIso P Q)
+    {x : α} (hQ : x ∈ Q.domain) :
+    P.toFun ⟨x, (h.dom_iff x).2 hQ⟩ = Q.toFun ⟨x, hQ⟩ :=
+  h.val_eq x ((h.dom_iff x).2 hQ) hQ
+
 /-- Profile isomorphism is reflexive. -/
 def refl (P : ScalarProfile α) : ProfileIso P P where
   dom_iff := by

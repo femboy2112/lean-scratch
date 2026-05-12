@@ -14,27 +14,31 @@ coverage.
 | P3 | Prose/math refinement needed before Lean. |
 | P4 | Deliberately deferred or not current target. |
 
-## A. Immediate Lean-Ready Theorem Targets
+## A. Completed in `codex/tlica-p1-lean-improvement-batch-v0`
 
 | Priority | Target | Why it matters | Required dependencies | Proposed branch name | Expected Lean files | Expected docs to update | Risk |
 |---|---|---|---|---|---|---|---|
-| P1 | Finite feasible-action maximizer theorem | Replaces `finiteFeasibleSelection_deferred` with a real sufficient condition for agency selection. | Finite nonempty feasible set, `selectsFeasibleAction`, projected-PCE order facts. | `codex/tlica-finite-agency-selection` | `TLICA/Agency.lean` | `MAPPING.md`, `ROSETTA_MATH_FIRST_LEDGER.md`, feature matrix | Medium |
+| Completed P1 | Finset-enumerated finite feasible-action maximizer theorem | Replaced `finiteFeasibleSelection_deferred` with `exists_selectsFeasibleAction_of_finset`. | Finset correctness, nonempty feasible enumeration, `selectsFeasibleAction`, projected-PCE order facts. | `codex/tlica-p1-lean-improvement-batch-v0` | `TLICA/Agency.lean` | Done in this branch | Completed |
+| Completed P1 | Temporal stability lemmas from `dInfUnion` | Added step union-distance bounds, pointwise stability elimination, later-start monotonicity, and uniform-to-eventual bridge. | `stepUnionDistance`, `unionStepStable`, `eventuallyUnionStepStable`, `dInfUnion_le_one`. | `codex/tlica-p1-lean-improvement-batch-v0` | `TLICA/TemporalTrajectory.lean` | Done in this branch | Completed |
+| Completed P1 | ProfileIso / CoherentFutureMSIModel coherence helpers | Added membership/value transport helpers and coherent-model domain/assignment helpers. | `ProfileIso.refl/symm/trans`, `CoherentFutureMSIModel.toFutureMSIModel`. | `codex/tlica-p1-lean-improvement-batch-v0` | `TLICA/ProfileIso.lean`, `TLICA/ActionProjection.lean` | Done in this branch | Completed |
+| Completed P1/P2 | Branch-distance and affect-kernel helper lemmas | Added branch union-distance bounds, temporal affect-intensity unit bound, and PCE-support non-neutrality. | `dInfUnion_le_one`, existing affect witness structures. | `codex/tlica-p1-lean-improvement-batch-v0` | `TLICA/DifferentiatedAffect.lean` | Done in this branch | Completed |
+
+## B. Remaining Immediate Lean-Ready Theorem Targets
+
+| Priority | Target | Why it matters | Required dependencies | Proposed branch name | Expected Lean files | Expected docs to update | Risk |
+|---|---|---|---|---|---|---|---|
 | P1 | Full shell-stratified bound | Closes the largest remaining profile-comparison theorem marker. | Explicit boundary shell convention, `ShellThresholds`, `sameShellBound`, `dInfUnion`. | `codex/tlica-shell-stratified-bound` | `TLICA/ProfileComparison/ShellRefinement.lean` | `MAPPING.md`, ledger, matrix | Medium |
-| P1 | Temporal stability lemmas from `dInfUnion` | Gives the deterministic trajectory substrate basic reusable calculus. | `stepUnionDistance`, `unionStepStable`, `eventuallyUnionStepStable`, `dInfUnion_nonneg`, `dInfUnion_le_one`, monotonicity of thresholds. | `codex/tlica-temporal-stability-lemmas` | `TLICA/TemporalTrajectory.lean` | `MAPPING.md`, ledger, matrix | Low |
-| P1 | Affect-kernel implication refinements | Strengthens the profile/PCE affect kernel without adding named affect taxonomy. | Existing affect witness structures and collapse theorem. | `codex/tlica-affect-kernel-refinements` | `TLICA/DifferentiatedAffect.lean` | `MAPPING.md`, ledger, matrix | Low |
-| P1 | ProfileIso / CoherentFutureMSIModel coherence lemmas | Makes optional coherence tooling easier to use downstream. | `ProfileIso.refl/symm/trans`, `CoherentFutureMSIModel.toFutureMSIModel`. | `codex/tlica-profile-coherence-lemmas` | `TLICA/ProfileIso.lean`, `TLICA/ActionProjection.lean` | `MAPPING.md`, ledger, matrix | Low |
 | P2 | Direct `ProjectedPCE` aliases replacing compatibility usage | Reduces dependence on `GeneralProjectedPCE` compatibility names in newer modules. | Existing equality theorem `generalProjectedPCE_eq_projectedPCE`. | `codex/tlica-direct-projected-pce-api` | `TLICA/Agency.lean`, dependent modules if touched | `MAPPING.md`, ledger, coverage audit | Medium |
 
-## B. Lean-Ready Structure Targets
+## C. Lean-Ready Structure Targets
 
 | Priority | Target | Why it matters | Required dependencies | Proposed branch name | Expected Lean files | Expected docs to update | Risk |
 |---|---|---|---|---|---|---|---|
 | P2 | Generated trajectory helper API | Adds low-risk theorem names around `generatedBy` without changing semantics. | Existing deterministic projection definitions. | `codex/tlica-generated-trajectory-api` | `TLICA/TemporalTrajectory.lean` | `MAPPING.md`, ledger | Low |
-| P2 | Branch-distance bound helpers | Gives affect and temporal modules direct nonnegativity/bound lemmas for branch distances. | `dInfUnion_nonneg`, `dInfUnion_le_one`, `branchUnionDistance`. | `codex/tlica-branch-distance-helpers` | `TLICA/DifferentiatedAffect.lean` | `MAPPING.md`, ledger | Low |
 | P2 | Contestable boundary signature clarification | Turns `contestableBoundary` from a bare named set into a documented structure or theorem target if the source settles it. | PtCns/IBoundary source clarification. | `codex/tlica-contestable-boundary-signature` | `TLICA/IBoundary.lean` | `MAPPING.md`, ledger, source-alignment audit | Medium |
 | P2 | Pseudo-emetric convenience lemmas | Makes the profile-space instance easier to cite. | Existing `ProfileSpace` and `edist_def`. | `codex/tlica-profile-space-helpers` | `TLICA/ProfileComparison/PseudoEMetric.lean` | `MAPPING.md`, ledger | Low |
 
-## C. Prose-First Targets
+## D. Prose-First Targets
 
 | Priority | Target | Why it matters | Required dependencies | Proposed branch name | Expected Lean files | Expected docs to update | Risk |
 |---|---|---|---|---|---|---|---|
@@ -45,7 +49,7 @@ coverage.
 | P3 | Phenomenological duration | Current temporal layer is deterministic profile trajectory substrate only. | Duration object, metric, and relation to trajectory/profile distances. | `codex/tlica-phenomenological-duration-source` | None expected | Temporal source docs, matrix | High |
 | P3 | Stochastic projection | Lean should wait until deterministic/stochastic boundaries are fully specified. | Stochastic process type, action schedule interaction, deterministic limit case. | `codex/tlica-stochastic-projection-source` | None expected initially | Temporal/action projection docs, matrix | High |
 
-## D. Compatibility Cleanup Targets
+## E. Compatibility Cleanup Targets
 
 | Priority | Target | Why it matters | Required dependencies | Proposed branch name | Expected Lean files | Expected docs to update | Risk |
 |---|---|---|---|---|---|---|---|
@@ -54,7 +58,7 @@ coverage.
 | P2 | Old singleton `Action` wrapper cleanup | Reduces confusion around `Action α` versus arbitrary `Act`. | `DefaultAction`, `DefaultProjectMap`, `UnitDefaultProjectMap`. | `codex/tlica-action-wrapper-cleanup` | `TLICA/ProjectMap.lean`, docs only if possible | `MAPPING.md`, source-alignment audit | Medium |
 | P2 | Default-action naming cleanup | Clarifies foundation default versus application action carriers. | Current `ProjectMap` compatibility names. | `codex/tlica-default-action-naming` | `TLICA/ProjectMap.lean` if needed | `MAPPING.md`, ledger | Medium |
 
-## E. Deferred / Blocked Targets
+## F. Deferred / Blocked Targets
 
 | Priority | Target | Why it matters | Required dependencies | Proposed branch name | Expected Lean files | Expected docs to update | Risk |
 |---|---|---|---|---|---|---|---|

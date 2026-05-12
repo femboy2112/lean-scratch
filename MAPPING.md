@@ -174,8 +174,8 @@ deferred.
 |---|---|---|
 | `FutureMSIModel` | Application-ready cross-time MSI assignment for projected profiles | `machine_verified_structure`; uses `domain_match`, not full profile equality |
 | `FutureMSIModel.domain_match` | Compatibility between assigned future MSI domain and projected profile domain | `primitive_structure_field` |
-| `ProfileIso`, `ProfileIso.refl`, `ProfileIso.symm`, `ProfileIso.trans` | Optional extensional profile-coherence relation | `machine_verified_structure`/definitions |
-| `CoherentFutureMSIModel`, `CoherentFutureMSIModel.toFutureMSIModel`, `CoherentFutureMSIModel.toFutureMSIModel_domain_match` | Optional stronger future-MSI model with profile-isomorphism coherence, projected to the weaker model | `machine_verified_structure`; `machine_verified_definition`; `machine_verified_theorem` |
+| `ProfileIso`, `ProfileIso.dom_mem_iff`, `ProfileIso.val_eq_left`, `ProfileIso.val_eq_right`, `ProfileIso.refl`, `ProfileIso.symm`, `ProfileIso.trans` | Optional extensional profile-coherence relation and membership/value transport helpers | `machine_verified_structure`/definitions; `machine_verified_theorem` |
+| `CoherentFutureMSIModel`, `CoherentFutureMSIModel.toFutureMSIModel`, `CoherentFutureMSIModel.toFutureMSIModel_domain_match`, `CoherentFutureMSIModel.profile_iso_to_domain_match`, `CoherentFutureMSIModel.toFutureMSIModel_msiOf` | Optional stronger future-MSI model with profile-isomorphism coherence, projected to the weaker model | `machine_verified_structure`; `machine_verified_definition`; `machine_verified_theorem` |
 | `GlobalPreservationRanking` | Application-calibrated universal-domain ranking over `Set α` | `machine_verified_structure` |
 | `GlobalPreservationRanking.rank_nonneg`, `monotone` | Non-negativity and monotonicity calibration conditions | `primitive_structure_field` |
 | `liftSet`, `liftMSIContents` | Subtype-domain content-set lift into the universal content type | `machine_verified_definition` |
@@ -225,11 +225,11 @@ stochastic projection remains deferred.
 
 | Lean declaration | Working-paper reference | Status |
 |---|---|---|
-| `AgencyContext` | Agency as feasible action context over generalized projected PCE | `machine_verified_structure` |
-| `AgencyContext.fam`, `globalRank`, `proj` | Generalized projected-PCE calibration objects | `primitive_structure_field` |
+| `AgencyContext` | Agency as feasible action context over projected PCE, using compatibility names over primary `ProjectedPCE` | `machine_verified_structure` |
+| `AgencyContext.fam`, `globalRank`, `proj` | Projected-PCE calibration objects | `primitive_structure_field` |
 | `FeasibilityModel`, `FeasibilityModel.feasible`, `FeasibilityModel.noAction_feasible` | Project-map-indexed feasible-action model with no-action feasibility | `machine_verified_structure`; `primitive_structure_field` |
 | `AgencyContext.feasibility`, `AgencyContext.feasible`, `AgencyContext.noAction_feasible`, `AgencyContext.mkFromFeasible` | Agency feasibility supplied by reusable `FeasibilityModel`, with constructor from explicit feasible-set data | `machine_verified_definition` |
-| `feasibleProjectedPCE` | General projected PCE evaluated in an agency context | `machine_verified_definition` |
+| `feasibleProjectedPCE` | Projected PCE evaluated in an agency context through the compatibility wrapper | `machine_verified_definition` |
 | `selectsFeasibleAction` | Feasible maximizer predicate over available alternatives | `machine_verified_definition` |
 | `liveAlternative`, `hasLiveAlternatives` | Nontrivial agency via distinct feasible actions | `machine_verified_definition` |
 | `pceDifferentiatedAlternative` | Feasible alternatives with different projected-PCE values | `machine_verified_definition` |
@@ -240,7 +240,7 @@ stochastic projection remains deferred.
 | `not_exists_feasible_strictly_higher_of_selects` | Selected feasible action excludes feasible alternatives with strictly higher projected PCE | `machine_verified_theorem` |
 | `exists_distinct_feasible_of_hasLiveAlternatives` | Live alternatives imply two distinct feasible actions | `machine_verified_theorem` |
 | `pceDifferentiatedAlternative_of_selected_strictly_beats` | Strictly beating a feasible alternative gives PCE differentiation | `machine_verified_theorem` |
-| `finiteFeasibleSelection_deferred` | Deferred marker for finite feasible-action maximizer existence | `deferred_marker_not_theorem` |
+| `exists_selectsFeasibleAction_of_finset` | Finset-enumerated finite feasible-action maximizer existence | `machine_verified_theorem` |
 
 The agency layer depends on `GeneralActionProjection` compatibility names over
 the parameterized foundation `ProjectMap`. It does not assert that selected
@@ -288,10 +288,10 @@ incompatibilism/compatibilism claims remain deferred.
 | `ActionSchedule` | Natural-time indexed action schedule | `machine_verified_structure` |
 | `generatedBy` | Predicate that a supplied trajectory follows deterministic action-indexed projection | `machine_verified_definition` |
 | `trajectoryFutureContents` | Lifted future MSI contents of the scheduled branch at a trajectory time | `machine_verified_definition` |
-| `stepUnionDistance` | Adjacent-time union-domain profile distance | `machine_verified_definition` |
+| `stepUnionDistance`, `stepUnionDistance_nonneg`, `stepUnionDistance_le_one` | Adjacent-time union-domain profile distance and basic bounds | `machine_verified_definition`; `machine_verified_theorem` |
 | `stepSharedDistance` | Adjacent-time shared-domain profile distance | `machine_verified_definition` |
-| `unionStepStable` | Uniform stepwise temporal stability via `dInfUnion` | `machine_verified_definition` |
-| `eventuallyUnionStepStable` | Eventual stepwise temporal stability via `dInfUnion` | `machine_verified_definition` |
+| `unionStepStable`, `unionStepStable_step_le` | Uniform stepwise temporal stability via `dInfUnion` and pointwise elimination | `machine_verified_definition`; `machine_verified_theorem` |
+| `eventuallyUnionStepStable`, `eventuallyUnionStepStable_of_le_start`, `eventuallyUnionStepStable_of_unionStepStable` | Eventual stepwise temporal stability via `dInfUnion`, later-start monotonicity, and uniform-to-eventual bridge | `machine_verified_definition`; `machine_verified_theorem` |
 | `DivergentTrajectories` | Supplied trajectories with a witnessed profile difference at some time | `machine_verified_structure` |
 | `oneStepBranch` | One-step deterministic branch profile naming bridge | `machine_verified_definition` |
 | `freeWillWitness_live_branch_contents_distinct` | Free-will witness supplies live feasible actions with distinct branch future contents | `machine_verified_theorem` |
@@ -317,17 +317,17 @@ differentiated affect.
 | `pceSupportive_iff`, `pceNeutral_iff`, `pceDefeating_iff` | Real-arithmetic characterizations of relative PCE valence | `machine_verified_theorem` |
 | `pceValence_trichotomy` | Relative PCE valence is supportive, neutral, or defeating | `machine_verified_theorem` |
 | `pceSupportive_not_neutral`, `pceSupportive_not_defeating`, `pceDefeating_not_neutral` | Basic mutual exclusions for PCE valence | `machine_verified_theorem` |
-| `branchUnionDistance`, `branchSharedDistance` | Profile distances between deterministic action branches | `machine_verified_definition` |
+| `branchUnionDistance`, `branchUnionDistance_nonneg`, `branchUnionDistance_le_one`, `branchSharedDistance` | Profile distances between deterministic action branches and union-distance bounds | `machine_verified_definition`; `machine_verified_theorem` |
 | `branchProfileShift` | Equality-based branch-profile shift predicate | `machine_verified_definition` |
 | `branchFutureContents_eq_of_branchProfile_eq`, `branchProfile_ne_of_branchFutureContents_ne` | Branch-profile equality implies future-content equality; branch future-content difference implies profile shift | `machine_verified_theorem` |
-| `PCESupportAffectWitness`, `PCEDefeatAffectWitness`, `PCENeutralAffectWitness` | Feasible-action witnesses for relative PCE appraisal | `machine_verified_structure`s |
+| `PCESupportAffectWitness`, `PCEDefeatAffectWitness`, `PCENeutralAffectWitness`, `pceSupportAffectWitness_pce_ne` | Feasible-action witnesses for relative PCE appraisal and support non-neutrality | `machine_verified_structure`; `machine_verified_theorem` |
 | `ProfileShiftAffectWitness` | Feasible-action witness for branch-profile shift | `machine_verified_structure` |
 | `AffectKernelWitness` | Minimal affect-relevant structural perturbation: branch-profile shift or PCE differentiation | `machine_verified_structure` |
 | `affectKernel_of_pceSupport`, `affectKernel_of_pceDefeat`, `affectKernel_of_profileShift` | Support/defeat/profile-shift witnesses imply affect-kernel witnesses | `machine_verified_definition` |
 | `profileShiftAffectWitness_of_freeWillWitness`, `affectKernel_of_freeWillWitness` | Free-will witness yields profile-shift affect kernel | `machine_verified_definition` |
 | `affectKernel_of_pceFreeWillWitness` | PCE-free-will witness yields PCE-differentiated affect kernel | `machine_verified_definition` |
 | `no_affectKernel_of_branch_and_pce_collapse` | Branch-profile and projected-PCE collapse excludes affect-kernel witnesses | `machine_verified_theorem` |
-| `temporalAffectIntensity`, `temporalAffectIntensity_nonneg`, `temporalAffectIntensity_le_of_unionStepStable` | Temporal affect-intensity naming bridge via adjacent union-profile distance | `machine_verified_definition`; `machine_verified_theorem` |
+| `temporalAffectIntensity`, `temporalAffectIntensity_nonneg`, `temporalAffectIntensity_le_of_unionStepStable`, `temporalAffectIntensity_le_one` | Temporal affect-intensity naming bridge via adjacent union-profile distance | `machine_verified_definition`; `machine_verified_theorem` |
 | `namedAffectTaxonomy_deferred`, `loveConstitutiveExtension_deferred`, `substrateAffectPathway_deferred`, `sourceOpacityAffect_deferred` | Named affect taxonomy and non-profile/PCE pathways | `deferred_marker_not_theorem` |
 
 The differentiated-affect layer depends on `TemporalTrajectory`, and through it

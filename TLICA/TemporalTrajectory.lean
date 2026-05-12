@@ -51,6 +51,17 @@ noncomputable def stepUnionDistance (traj : ProfileTrajectory α) (n : ℕ) :
     ℝ≥0∞ :=
   dInfUnion (traj.profileAt n) (traj.profileAt (n + 1))
 
+/-- Adjacent union-domain distance is nonnegative by codomain. -/
+theorem stepUnionDistance_nonneg (traj : ProfileTrajectory α) (n : ℕ) :
+    0 ≤ stepUnionDistance traj n :=
+  bot_le
+
+/-- Adjacent union-domain distance is bounded by the profile-comparison bound. -/
+theorem stepUnionDistance_le_one (traj : ProfileTrajectory α) (n : ℕ) :
+    stepUnionDistance traj n ≤ 1 := by
+  unfold stepUnionDistance
+  exact dInfUnion_le_one _ _
+
 /-- Shared-domain profile distance between adjacent times. -/
 noncomputable def stepSharedDistance (traj : ProfileTrajectory α) (n : ℕ) :
     ℝ≥0∞ :=
@@ -60,10 +71,34 @@ noncomputable def stepSharedDistance (traj : ProfileTrajectory α) (n : ℕ) :
 def unionStepStable (traj : ProfileTrajectory α) (ε : ℝ≥0∞) : Prop :=
   ∀ n, stepUnionDistance traj n ≤ ε
 
+/-- Uniform step stability gives the stated bound at each step. -/
+theorem unionStepStable_step_le
+    {traj : ProfileTrajectory α} {ε : ℝ≥0∞}
+    (h : unionStepStable traj ε) (n : ℕ) :
+    stepUnionDistance traj n ≤ ε :=
+  h n
+
 /-- Eventual stepwise temporal stability measured by union-domain distance. -/
 def eventuallyUnionStepStable
     (traj : ProfileTrajectory α) (ε : ℝ≥0∞) (N : ℕ) : Prop :=
   ∀ n, N ≤ n → stepUnionDistance traj n ≤ ε
+
+/-- Eventual step stability persists if the start index is moved later. -/
+theorem eventuallyUnionStepStable_of_le_start
+    {traj : ProfileTrajectory α} {ε : ℝ≥0∞} {N M : ℕ}
+    (h : eventuallyUnionStepStable traj ε N)
+    (hN : N ≤ M) :
+    eventuallyUnionStepStable traj ε M := by
+  intro n hn
+  exact h n (Nat.le_trans hN hn)
+
+/-- Uniform step stability implies eventual step stability from any start. -/
+theorem eventuallyUnionStepStable_of_unionStepStable
+    {traj : ProfileTrajectory α} {ε : ℝ≥0∞} (N : ℕ)
+    (h : unionStepStable traj ε) :
+    eventuallyUnionStepStable traj ε N := by
+  intro n _hn
+  exact h n
 
 /-- Temporal divergence between two supplied trajectories, witnessed by a time
     at which their profile states are not equal. -/

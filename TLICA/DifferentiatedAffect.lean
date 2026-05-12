@@ -121,6 +121,19 @@ noncomputable def branchUnionDistance (ctx : AgencyContext α Act)
     (P : ScalarProfile α) (a b : Act) : ℝ≥0∞ :=
   dInfUnion (branchProfile ctx P a) (branchProfile ctx P b)
 
+/-- Branch union distance is nonnegative by codomain. -/
+theorem branchUnionDistance_nonneg
+    (ctx : AgencyContext α Act) (P : ScalarProfile α) (a b : Act) :
+    0 ≤ branchUnionDistance ctx P a b :=
+  bot_le
+
+/-- Branch union distance is bounded by the union-distance profile bound. -/
+theorem branchUnionDistance_le_one
+    (ctx : AgencyContext α Act) (P : ScalarProfile α) (a b : Act) :
+    branchUnionDistance ctx P a b ≤ 1 := by
+  unfold branchUnionDistance
+  exact dInfUnion_le_one _ _
+
 /-- Shared-domain distance between two deterministic action branches. -/
 noncomputable def branchSharedDistance (ctx : AgencyContext α Act)
     (P : ScalarProfile α) (a b : Act) : ℝ≥0∞ :=
@@ -298,6 +311,21 @@ theorem temporalAffectIntensity_le_of_unionStepStable
     (h : unionStepStable traj ε) (n : ℕ) :
     temporalAffectIntensity traj n ≤ ε :=
   h n
+
+/-- Temporal affect intensity is bounded by the union-distance profile bound. -/
+theorem temporalAffectIntensity_le_one
+    (traj : ProfileTrajectory α) (n : ℕ) :
+    temporalAffectIntensity traj n ≤ 1 := by
+  unfold temporalAffectIntensity
+  exact stepUnionDistance_le_one traj n
+
+/-- PCE-support witnesses are necessarily PCE-non-neutral. -/
+theorem pceSupportAffectWitness_pce_ne
+    {ctx : AgencyContext α Act} {P : ScalarProfile α}
+    (w : PCESupportAffectWitness ctx P) :
+    feasibleProjectedPCE ctx P w.baseline ≠ feasibleProjectedPCE ctx P w.action := by
+  have hlt := (pceSupportive_iff ctx P w.baseline w.action).1 w.support
+  exact ne_of_lt hlt
 
 /-- Deferred marker: named affect taxonomy is not formalized in this kernel.
     This is not a theorem claim. -/

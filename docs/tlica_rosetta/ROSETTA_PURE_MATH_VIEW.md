@@ -94,13 +94,13 @@ Lean carriers: `GeneralProjectMap`, `generalProjectMapOfProjectMap`, `generalPro
 
 ## 8.3 Agency as feasible projected-PCE selection
 
-Agency is modeled as a feasible action-selection context over the generalized action-space compatibility layer. An `AgencyContext` supplies a future-MSI model, a global preservation ranking, a deterministic projection map, and a project-map-indexed `FeasibilityModel`. This lifts no-action feasibility into reusable foundation-level structure. The no-action element is required to be feasible, but existence of a maximizing selected action is not asserted globally.
+Agency is modeled as a feasible action-selection context over projected PCE, with the current implementation still using the generalized action-space compatibility names. An `AgencyContext` supplies a future-MSI model, a global preservation ranking, a deterministic projection map, and a project-map-indexed `FeasibilityModel`. This lifts no-action feasibility into reusable foundation-level structure. The no-action element is required to be feasible, but unrestricted existence of a maximizing selected action is not asserted globally.
 
-`selectsFeasibleAction` says that an action is feasible and maximizes `GeneralProjectedPCE` over feasible alternatives. `AgencyWitness` packages a selected feasible maximizer when such a witness is supplied. Nontrivial agency requires live alternatives, i.e. at least two distinct feasible actions. PCE-differentiated agency requires feasible alternatives with different projected-PCE values.
+`selectsFeasibleAction` says that an action is feasible and maximizes projected PCE over feasible alternatives. `AgencyWitness` packages a selected feasible maximizer when such a witness is supplied. Nontrivial agency requires live alternatives, i.e. at least two distinct feasible actions. PCE-differentiated agency requires feasible alternatives with different projected-PCE values.
 
-Finite feasible-set assumptions for proving selected-action existence are deferred. This is a first structural witness layer for agency selection, not a claim that all application-level agency semantics are complete.
+The finset-enumerated theorem `exists_selectsFeasibleAction_of_finset` proves selected-action existence when a nonempty finset enumerates exactly the feasible actions. This is still not an unrestricted global agency-existence theorem. This remains a first structural witness layer for agency selection, not a claim that all application-level agency semantics are complete.
 
-Lean carriers: `FeasibilityModel`, `AgencyContext`, `AgencyContext.feasible`, `AgencyContext.noAction_feasible`, `AgencyContext.mkFromFeasible`, `feasibleProjectedPCE`, `selectsFeasibleAction`, `liveAlternative`, `hasLiveAlternatives`, `pceDifferentiatedAlternative`, `AgencyWitness`, `finiteFeasibleSelection_deferred`.
+Lean carriers: `FeasibilityModel`, `AgencyContext`, `AgencyContext.feasible`, `AgencyContext.noAction_feasible`, `AgencyContext.mkFromFeasible`, `feasibleProjectedPCE`, `selectsFeasibleAction`, `liveAlternative`, `hasLiveAlternatives`, `pceDifferentiatedAlternative`, `AgencyWitness`, `exists_selectsFeasibleAction_of_finset`.
 
 ## 8.4 Free will as branch-sensitive agency
 

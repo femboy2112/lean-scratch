@@ -63,6 +63,21 @@ theorem toFutureMSIModel_domain_match
     ((model.toFutureMSIModel).msiOf P).profile.domain = P.domain :=
   (model.toFutureMSIModel).domain_match P
 
+/-- The coherent profile isomorphism directly yields the weak domain-match
+    condition used by `FutureMSIModel`. -/
+theorem profile_iso_to_domain_match
+    (model : CoherentFutureMSIModel α) (P : ScalarProfile α) :
+    (model.msiOf P).profile.domain = P.domain := by
+  ext x
+  exact (model.profile_iso P).dom_iff x
+
+/-- The weak model induced by a coherent model preserves the original MSI
+    assignment. -/
+theorem toFutureMSIModel_msiOf
+    (model : CoherentFutureMSIModel α) (P : ScalarProfile α) :
+    (model.toFutureMSIModel).msiOf P = model.msiOf P :=
+  rfl
+
 end CoherentFutureMSIModel
 
 /-- A global preservation ranking over universal-domain content sets.

@@ -1,16 +1,19 @@
 /-
-TLICA.Agency — Feasible action selection under generalized projected PCE.
+TLICA.Agency — Feasible action selection under projected PCE.
 
 Agency is modeled as more than action occurrence: an agency context provides a
-generalized deterministic projection layer, a feasible action set for each
-profile, and evaluation by `GeneralProjectedPCE`. Selection is only stated
-relative to feasible alternatives. This module does not assert global existence
-of maximizers.
+deterministic projection layer, a feasible action set for each profile, and
+action-sensitive continuation appraisal by projected PCE. The implementation
+still uses the `GeneralProjectMap` / `GeneralProjectedPCE` compatibility names,
+but `ProjectMap α Act` and `ProjectedPCE` are the primary objects. Selection is
+only stated relative to feasible alternatives. Global maximizer existence is
+proved only under an explicit finite nonempty feasible-action hypothesis.
 
 Free-will branch semantics remain deferred.
 -/
 
 import TLICA.GeneralActionProjection
+import Mathlib.Data.Finset.Lattice
 
 namespace TLICA.Agency
 
@@ -43,7 +46,8 @@ structure AgencyContext (α Act : Type*) where
   fam : FutureMSIModel α
   /-- Universal-domain preservation ranking. -/
   globalRank : GlobalPreservationRanking α
-  /-- Deterministic generalized projection over `Act`. -/
+  /-- Deterministic projection over `Act`. Uses the compatibility name for the
+      primary `ProjectMap α Act`. -/
   proj : GeneralProjectMap α Act
   /-- Feasibility model for this projection context. -/
   feasibility : FeasibilityModel α Act proj
@@ -84,13 +88,14 @@ def mkFromFeasible
 end AgencyContext
 
 /-- Projected PCE evaluated in an agency context. Feasibility is kept as a
-    separate predicate so infeasible alternatives can be excluded explicitly. -/
+    separate predicate so infeasible alternatives can be excluded explicitly.
+    This uses the compatibility wrapper for the primary `ProjectedPCE`. -/
 def feasibleProjectedPCE (ctx : AgencyContext α Act)
     (P : ScalarProfile α) (a : Act) : ℝ :=
   GeneralProjectedPCE ctx.fam ctx.globalRank ctx.proj P a
 
-/-- Feasible action selection: `a` is feasible and maximizes generalized
-    projected PCE over all feasible alternatives. -/
+/-- Feasible action selection: `a` is feasible and maximizes projected PCE over
+    all feasible alternatives. -/
 def selectsFeasibleAction (ctx : AgencyContext α Act)
     (P : ScalarProfile α) (a : Act) : Prop :=
   a ∈ ctx.feasible P ∧
@@ -120,7 +125,7 @@ structure AgencyWitness (ctx : AgencyContext α Act) (P : ScalarProfile α) wher
   selected : Act
   /-- The selected action is feasible. -/
   selected_feasible : selected ∈ ctx.feasible P
-  /-- The selected action maximizes generalized projected PCE over feasible alternatives. -/
+  /-- The selected action maximizes projected PCE over feasible alternatives. -/
   selected_max :
     ∀ b, b ∈ ctx.feasible P →
       feasibleProjectedPCE ctx P b ≤ feasibleProjectedPCE ctx P selected
@@ -165,7 +170,7 @@ theorem selectsFeasibleAction_of_witness
   w.selects_selected
 
 /-- A selected feasible action rules out any feasible alternative with strictly
-    higher generalized projected PCE. -/
+    higher projected PCE. -/
 theorem not_exists_feasible_strictly_higher_of_selects
     (ctx : AgencyContext α Act) (P : ScalarProfile α) (a : Act)
     (hsel : selectsFeasibleAction ctx P a) :
@@ -193,10 +198,24 @@ theorem pceDifferentiatedAlternative_of_selected_strictly_beats
     pceDifferentiatedAlternative ctx P a b :=
   ⟨hsel.1, hb, ne_of_gt hgt⟩
 
-/-- Deferred marker for a future finite-feasible-action extension.
+/-- Finset sufficient condition for finite feasible-action selection.
 
-Existence of feasible maximizers should be proved only after adding finite or
-compact feasible-set hypotheses. -/
-def finiteFeasibleSelection_deferred : Prop := True
+If a finite nonempty finset enumerates exactly the feasible actions at `P`, then
+one of those feasible actions maximizes projected PCE over all feasible actions.
+This is the finite-action replacement for the previous deferred marker. -/
+theorem exists_selectsFeasibleAction_of_finset
+    (ctx : AgencyContext α Act) (P : ScalarProfile α)
+    [DecidableEq Act]
+    (s : Finset Act)
+    (hs_correct : ∀ a, a ∈ s ↔ a ∈ ctx.feasible P)
+    (hs_nonempty : s.Nonempty) :
+    ∃ a, selectsFeasibleAction ctx P a := by
+  rcases Finset.exists_max_image s (fun a => feasibleProjectedPCE ctx P a) hs_nonempty with
+    ⟨a, ha, hmax⟩
+  refine ⟨a, ?_⟩
+  constructor
+  · exact (hs_correct a).1 ha
+  · intro b hb
+    exact hmax b ((hs_correct b).2 hb)
 
 end TLICA.Agency
