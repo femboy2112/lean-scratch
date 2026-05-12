@@ -21,3 +21,8 @@ This document records the mapping relation. Codex should expand it as Lean cover
 | B-ORP-009 | Conditional action differentiation | Strict projected-PCE difference follows from strict global-rank difference; no foundation-level existence claim | `GeneralProjectedPCE.strictly_differentiates_of_rank_lt`, `generalProjectedPCE_strictly_differentiates_of_rank_lt` | machine_verified conditional theorem |
 | B-ORP-010 | Foundation projection embedding | Existing `ProjectMap α` embeds into generalized action-space projection over `Action α` | `generalProjectMapOfProjectMap` | machine_verified definition |
 | B-ORP-011 | Stochastic projected PCE | Probability-valued or expected projected future profile/rank model | none | application_deferred |
+| B-AGY-001 | Agency context | Feasible action model plus generalized projected-PCE calibration | `AgencyContext`, `feasibleProjectedPCE` | machine_verified definitions; feasibility fields primitive |
+| B-AGY-002 | Feasible selection | Selected action maximizes generalized projected PCE among feasible alternatives | `selectsFeasibleAction`, `AgencyWitness` | machine_verified definitions/theorems; no global existence claim |
+| B-AGY-003 | Nontrivial agency | Existence of distinct feasible actions | `liveAlternative`, `hasLiveAlternatives` | machine_verified definitions/theorem |
+| B-AGY-004 | PCE-differentiated agency | Feasible alternatives receive different generalized projected-PCE values | `pceDifferentiatedAlternative`, `pceDifferentiatedAlternative_of_selected_strictly_beats` | machine_verified definitions/theorem |
+| B-FWL-001 | Free will | Branch/action-space semantics beyond agency selection | none | application_deferred |

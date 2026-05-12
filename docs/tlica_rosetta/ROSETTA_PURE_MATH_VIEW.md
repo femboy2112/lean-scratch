@@ -78,6 +78,16 @@ Deterministic projection remains the current layer; stochastic projection remain
 
 Lean carriers: `GeneralProjectMap`, `generalProjectMapOfProjectMap`, `generalProjectedProfile`, `generalFutureMSI`, `generalFutureMSIContents`, `GeneralProjectedPCE`, `GeneralProjectedPCE.*`, `generalProjectedPCE_strictly_differentiates_of_rank_lt`.
 
+## 8.3 Agency as feasible projected-PCE selection
+
+Agency is modeled as a feasible action-selection context over the generalized action-space layer. An `AgencyContext` supplies a future-MSI model, a global preservation ranking, a generalized deterministic projection map, and a feasible action set at each profile. The no-action element is required to be feasible, but existence of a maximizing selected action is not asserted globally.
+
+`selectsFeasibleAction` says that an action is feasible and maximizes `GeneralProjectedPCE` over feasible alternatives. `AgencyWitness` packages a selected feasible maximizer when such a witness is supplied. Nontrivial agency requires live alternatives, i.e. at least two distinct feasible actions. PCE-differentiated agency requires feasible alternatives with different projected-PCE values.
+
+Finite feasible-set assumptions for proving selected-action existence are deferred. Free will remains deferred; this branch only formalizes agency selection.
+
+Lean carriers: `AgencyContext`, `feasibleProjectedPCE`, `selectsFeasibleAction`, `liveAlternative`, `hasLiveAlternatives`, `pceDifferentiatedAlternative`, `AgencyWitness`, `finiteFeasibleSelection_deferred`.
+
 ## 9. Consistency classification and mode selection
 
 A ternary evaluation classifies elements as positive, neutral, or negative relative to a consistency criterion. A finite mode operator is selected from this evaluation. Boundary operators are definable from the induced partition.

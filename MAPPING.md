@@ -184,3 +184,27 @@ space.
 Agency and free-will formalization should use `GeneralActionProjection` with an
 application-supplied `Act`. Deterministic projection remains the current layer;
 stochastic projection remains deferred.
+
+## Agency layer
+
+| Lean declaration | Working-paper reference | Status |
+|---|---|---|
+| `AgencyContext` | Agency as feasible action context over generalized projected PCE | Encoded structure |
+| `AgencyContext.fam`, `globalRank`, `proj` | Generalized projected-PCE calibration objects | Structure fields |
+| `AgencyContext.feasible`, `noAction_feasible` | Feasible action set and no-action feasibility | Primitive structure-field assumptions |
+| `feasibleProjectedPCE` | General projected PCE evaluated in an agency context | Encoded definition |
+| `selectsFeasibleAction` | Feasible maximizer predicate over available alternatives | Encoded definition |
+| `liveAlternative`, `hasLiveAlternatives` | Nontrivial agency via distinct feasible actions | Encoded definitions |
+| `pceDifferentiatedAlternative` | Feasible alternatives with different projected-PCE values | Encoded definition |
+| `AgencyWitness` | Witness packaging a selected feasible maximizer | Encoded structure |
+| `AgencyWitness.selected_is_feasible`, `selected_maximizes`, `selects_selected` | Witness consequences | Encoded with proofs |
+| `witness_of_selectsFeasibleAction` | Construct witness from selection predicate | Encoded definition |
+| `selectsFeasibleAction_of_witness` | Recover selection predicate from witness | Encoded with proof |
+| `not_exists_feasible_strictly_higher_of_selects` | Selected feasible action excludes feasible alternatives with strictly higher projected PCE | Encoded with proof |
+| `exists_distinct_feasible_of_hasLiveAlternatives` | Live alternatives imply two distinct feasible actions | Encoded with proof |
+| `pceDifferentiatedAlternative_of_selected_strictly_beats` | Strictly beating a feasible alternative gives PCE differentiation | Encoded with proof |
+| `finiteFeasibleSelection_deferred` | Deferred marker for finite feasible-action maximizer existence | Non-substantive deferred target marker; no theorem claim |
+
+The agency layer depends on `GeneralActionProjection`. It does not assert that
+selected actions exist globally; existence is represented by `AgencyWitness` or
+by an explicit `selectsFeasibleAction` hypothesis. Free will remains deferred.
