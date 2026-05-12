@@ -22,9 +22,10 @@ This module is the top-level entry point. It imports every encoded submodule.
    12. TLICA.PreservationRanking                  — Π preservation-ranking.
    13. TLICA.PtCns                                — Prerogative of consistency.
    14. TLICA.Modes                                — Modes A, B, C as ModeOp.
-   15. TLICA.IBoundary                            — I/not-I boundary.
-   16. TLICA.ProjectMap                           — Future-state projection (deterministic).
-   17. TLICA.PCE                                  — Prerogative of continued existence.
+	   15. TLICA.IBoundary                            — I/not-I boundary.
+	   16. TLICA.ProjectMap                           — Future-state projection (deterministic).
+	   17. TLICA.PCE                                  — Prerogative of continued existence.
+	   18. TLICA.ActionProjection                     — Action-calibrated projected PCE.
 
 The mapping from each Lean declaration to its location in the v0.3.2 rigorous
 edition (or v0.2 working papers for round-3/4 declarations) is recorded in
@@ -48,3 +49,4 @@ import TLICA.Modes
 import TLICA.IBoundary
 import TLICA.ProjectMap
 import TLICA.PCE
+import TLICA.ActionProjection

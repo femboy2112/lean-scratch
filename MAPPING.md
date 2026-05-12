@@ -132,4 +132,29 @@ mediates the pointwise comparison and `dInfShared f h ≤ dInfShared f g + dInfS
 | `Action` opaque structure, `ProjectMap` with identity-action axiom | orphan_cluster_v0_1.md §5 (deterministic) | Encoded |
 | `PCE` definition, `nonneg`, `eq_rank_msi_contents`, `bounded_by_msi_max`, `every_action_maximizes`, `all_actions_equal` | orphan_cluster_v0_1.md §6 (deterministic foundation default) | Encoded with proofs |
 
-The foundation orphan cluster is encoded at signature-and-default level. Functional-form refinement (application-calibrated PCE that differentiates actions, stochastic projection, refined boundary) is left for subsequent rounds as applications calibrate their specific instantiations.
+The foundation orphan cluster is encoded at signature-and-default level. The
+deterministic foundation default `PCE` remains intentionally constant across
+actions. Stochastic projection and refined boundary structure remain deferred.
+
+## Action-calibrated projected PCE
+
+| Lean declaration | Working-paper reference | Status |
+|---|---|---|
+| `FutureMSIModel` | Application-ready cross-time MSI assignment for projected profiles | Encoded structure; uses `domain_match`, not full profile equality |
+| `FutureMSIModel.domain_match` | Compatibility between assigned future MSI domain and projected profile domain | Primitive structure-field assumption |
+| `GlobalPreservationRanking` | Application-calibrated universal-domain ranking over `Set α` | Encoded structure |
+| `GlobalPreservationRanking.rank_nonneg`, `monotone` | Non-negativity and monotonicity calibration conditions | Primitive structure-field assumptions |
+| `liftSet`, `liftMSIContents` | Subtype-domain content-set lift into the universal content type | Encoded definitions |
+| `projectedProfile`, `futureMSI`, `futureMSIContents` | Deterministic projected profile and future-MSI helper definitions | Encoded definitions |
+| `ProjectedPCE` | Action-calibrated projected continued-existence score | Encoded definition |
+| `ProjectedPCE.nonneg` | Non-negativity of projected PCE | Encoded with proof |
+| `ProjectedPCE.eq_of_future_contents_eq` | Equal lifted future MSI contents imply equal projected PCE | Encoded with proof |
+| `ProjectedPCE.ge_of_rank_ge` | Rank comparison implies projected-PCE comparison | Encoded with proof |
+| `ProjectedPCE.monotone_of_future_contents_subset` | Future-content inclusion implies projected-PCE monotonicity | Encoded with proof |
+| `ProjectedPCE.selectsProjectedAction`, `selected_has_max_projectedPCE` | Projected action-selection and maximality by definition | Encoded definition/proof |
+| `ProjectedPCE.strictly_differentiates_of_rank_lt` | Conditional non-degeneracy under strict global-rank inequality | Encoded with proof; no existence claim |
+
+`FutureMSIModel` uses the weaker `domain_match` field because full equality of
+`ScalarProfile` values involves dependent functions over subtype domains. This
+is sufficient for the projected-PCE layer, which ranks `liftMSIContents` in the
+universal content type rather than comparing projected profile functions.

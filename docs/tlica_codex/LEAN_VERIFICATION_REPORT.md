@@ -1,21 +1,17 @@
 # 1. Build status.
 
-Baseline `lake build` on branch `codex/tlica-math-rosetta-v1` succeeded before edits.
+Baseline `lake build` on branch `codex/tlica-action-projection-v0` succeeded before edits.
 
-Baseline `bash scripts/audit_lean.sh` succeeded:
+Baseline `bash scripts/audit_lean.sh` succeeded with zero `sorry`, zero `admit`, and zero global `axiom` declarations in imported Lean files.
 
-- no `sorry` in imported Lean files,
-- no `admit` in imported Lean files,
-- no global `axiom` declarations in imported Lean files.
-
-After the math-first cleanup, `lake build` succeeds. Remaining output is warning-only, mostly existing duplicate-namespace lints and deterministic-default unused-variable warnings.
+After adding the action-calibrated projected-PCE layer, `lake build` succeeds. Remaining output is warning-only and comes from existing duplicate-namespace lints plus deterministic-default unused-variable warnings.
 
 Final audit status: `bash scripts/audit_lean.sh` succeeds with zero `sorry`/`admit`/global-axiom findings.
 
 # 2. Files changed.
 
-- `TLICA/ProfileComparison/Pointwise.lean`
-- `TLICA/ProfileComparison/ShellRefinement.lean`
+- `TLICA.lean`
+- `TLICA/ActionProjection.lean`
 - `MAPPING.md`
 - `docs/tlica_codex/LEAN_VERIFICATION_REPORT.md`
 - `docs/tlica_codex/lean_declaration_inventory.md`
@@ -27,28 +23,45 @@ Final audit status: `bash scripts/audit_lean.sh` succeeds with zero `sorry`/`adm
 
 Added and machine-verified:
 
-- `TLICA.ProfileComparison.Pointwise.dInfShared_triangle_of_bridge`
-- `TLICA.ProfileComparison.ShellRefinement.shellOf`
-- `TLICA.ProfileComparison.ShellRefinement.sameShellBound_of_shellOf`
+- `TLICA.ActionProjection.FutureMSIModel`
+- `TLICA.ActionProjection.FutureMSIModel.msiOf`
+- `TLICA.ActionProjection.FutureMSIModel.domain_match`
+- `TLICA.ActionProjection.GlobalPreservationRanking`
+- `TLICA.ActionProjection.GlobalPreservationRanking.rank`
+- `TLICA.ActionProjection.GlobalPreservationRanking.rank_nonneg`
+- `TLICA.ActionProjection.GlobalPreservationRanking.monotone`
+- `TLICA.ActionProjection.liftSet`
+- `TLICA.ActionProjection.liftMSIContents`
+- `TLICA.ActionProjection.projectedProfile`
+- `TLICA.ActionProjection.futureMSI`
+- `TLICA.ActionProjection.futureMSIContents`
+- `TLICA.ActionProjection.ProjectedPCE`
+- `TLICA.ActionProjection.ProjectedPCE.nonneg`
+- `TLICA.ActionProjection.ProjectedPCE.eq_of_future_contents_eq`
+- `TLICA.ActionProjection.ProjectedPCE.ge_of_rank_ge`
+- `TLICA.ActionProjection.ProjectedPCE.monotone_of_future_contents_subset`
+- `TLICA.ActionProjection.ProjectedPCE.selectsProjectedAction`
+- `TLICA.ActionProjection.ProjectedPCE.selected_has_max_projectedPCE`
+- `TLICA.ActionProjection.ProjectedPCE.strictly_differentiates_of_rank_lt`
 
 Modified:
 
-- `TLICA.ProfileComparison.ShellRefinement.shellStableDistanceVanishing_simple` now uses `shellOf` in its hypotheses.
+- `TLICA.lean` now imports `TLICA.ActionProjection`.
 
-Demoted:
+Preserved:
 
-- Removed theorem `TLICA.ProfileComparison.ShellRefinement.shellStratifiedBound_TODO`, whose conclusion was only `True`.
-- Added `TLICA.ProfileComparison.ShellRefinement.shellStratifiedBound_deferred` as an explicit non-substantive deferred target marker. It is not counted as a machine-verified theorem.
+- Existing `TLICA.PCE.PCE` and all deterministic foundation-default theorems are unchanged. That layer remains intentionally constant across actions.
 
 # 4. Rosetta entries added/modified.
 
-- Updated `MAPPING.md` to record `dInfShared_triangle_of_bridge`, `shellOf`, `sameShellBound_of_shellOf`, and the deferred status of the general shell-stratified bound.
-- Updated `ROSETTA_MATH_FIRST_LEDGER.md` to distinguish machine-verified definitions, machine-verified theorems, primitive structure-field assumptions, and deferred target markers.
-- Updated `ROSETTA_PURE_MATH_VIEW.md` to include the bridge-domain shared triangle theorem and remove overclaiming around the general shell-stratified bound.
-- Updated `ROSETTA_BRIDGE_VIEW.md` to replace `shellStratifiedBound_TODO` with `shellStratifiedBound_deferred` and mark it as deferred only.
+- Updated `MAPPING.md` with a new action-calibrated projected-PCE section.
+- Updated `ROSETTA_MATH_FIRST_LEDGER.md` with entries for `FutureMSIModel`, `GlobalPreservationRanking`, lifted future MSI contents, `ProjectedPCE`, projected action selection, and conditional strict differentiation.
+- Updated `ROSETTA_PURE_MATH_VIEW.md` to distinguish deterministic foundation `PCE` from action-calibrated `ProjectedPCE`.
+- Updated `ROSETTA_BRIDGE_VIEW.md` with bridge rows for action-calibrated projected PCE, conditional action differentiation, and deferred stochastic projection.
 
 # 5. Open mathematical issues requiring user/ChatGPT review.
 
-- The full general shell-stratified bound remains deferred. The current Lean foundation verifies the interior same-shell case; boundary shells 0 and 6 need explicit source-grounded conventions before a stronger theorem should be stated.
-- `IBoundary.contestableBoundary` remains definitionally equal to `boundary`; a refined contestability boundary still needs additional structure.
-- The deterministic foundation default for `PCE` remains constant across actions. Differentiated action choice belongs in an application-calibrated projection/ranking refinement.
+- `FutureMSIModel` uses `domain_match` rather than full `profile_match`. This avoids dependent-subtype equality over `ScalarProfile.toFun`; it is sufficient here because projected PCE ranks lifted content sets rather than directly comparing profile functions.
+- `GlobalPreservationRanking.rank_nonneg` and `GlobalPreservationRanking.monotone` are primitive calibration fields, not proved consequences of the foundation.
+- Strict action differentiation is conditional on a supplied strict global-rank inequality. The foundation does not assert that differentiating actions exist.
+- Stochastic projection remains deferred; this branch uses only deterministic `ProjectMap.project`.

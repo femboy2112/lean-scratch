@@ -132,4 +132,8 @@ mediates the shared-distance triangle comparison.
 | `Action` opaque structure, `ProjectMap` with identity-action axiom | orphan_cluster_v0_1.md §5 (deterministic) | Encoded |
 | `PCE` definition, `nonneg`, `bounded_by_msi_max`, `every_action_maximizes` | orphan_cluster_v0_1.md §6 (deterministic foundation default) | Encoded |
 
-The foundation orphan cluster is encoded at signature-and-default level. Functional-form refinement (application-calibrated PCE that differentiates actions, stochastic projection, refined boundary) is left for subsequent rounds as applications calibrate their specific instantiations.
+The foundation orphan cluster is encoded at signature-and-default level. The
+deterministic foundation default `PCE` remains intentionally constant across
+actions. A later additive module, `TLICA.ActionProjection`, supplies an
+action-calibrated deterministic projected-PCE refinement. Stochastic projection
+and refined boundary structure remain deferred.

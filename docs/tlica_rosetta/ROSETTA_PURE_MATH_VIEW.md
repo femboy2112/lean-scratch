@@ -56,6 +56,16 @@ In the deterministic foundation default currently encoded in Lean, the continued
 
 Lean carriers: `Action`, `ProjectMap`, `PCE`, `PCE.eq_rank_msi_contents`, `PCE.all_actions_equal`.
 
+## 8.1 Action-calibrated projected PCE
+
+The application-ready refinement keeps deterministic projection but evaluates the MSI assigned to each projected future profile. A `FutureMSIModel` supplies this cross-time MSI assignment. It uses the weaker `domain_match` condition rather than full profile equality, because full equality of `ScalarProfile` values involves dependent functions over subtype domains; projected PCE only ranks lifted MSI content sets in the universal type.
+
+A `GlobalPreservationRanking` ranks universal-domain content sets with non-negativity and monotonicity assumptions. `ProjectedPCE` applies that ranking to the lifted future MSI contents of each action. It is nonnegative, respects equality and inclusion of lifted future contents, defines projected action selection, and strictly differentiates actions whenever an application supplies a strict global-rank inequality between their lifted future MSI contents.
+
+Stochastic projection is deferred; this layer uses the existing deterministic `ProjectMap`.
+
+Lean carriers: `FutureMSIModel`, `GlobalPreservationRanking`, `liftSet`, `liftMSIContents`, `projectedProfile`, `futureMSI`, `futureMSIContents`, `ProjectedPCE`, `ProjectedPCE.*`.
+
 ## 9. Consistency classification and mode selection
 
 A ternary evaluation classifies elements as positive, neutral, or negative relative to a consistency criterion. A finite mode operator is selected from this evaluation. Boundary operators are definable from the induced partition.
