@@ -60,11 +60,23 @@ Lean carriers: `Action`, `ProjectMap`, `PCE`, `PCE.eq_rank_msi_contents`, `PCE.a
 
 The application-ready refinement keeps deterministic projection but evaluates the MSI assigned to each projected future profile. A `FutureMSIModel` supplies this cross-time MSI assignment. It uses the weaker `domain_match` condition rather than full profile equality, because full equality of `ScalarProfile` values involves dependent functions over subtype domains; projected PCE only ranks lifted MSI content sets in the universal type.
 
-A `GlobalPreservationRanking` ranks universal-domain content sets with non-negativity and monotonicity assumptions. `ProjectedPCE` applies that ranking to the lifted future MSI contents of each action. It is nonnegative, respects equality and inclusion of lifted future contents, defines projected action selection, and strictly differentiates actions whenever an application supplies a strict global-rank inequality between their lifted future MSI contents.
+A `GlobalPreservationRanking` ranks universal-domain content sets with non-negativity and monotonicity assumptions. `ProjectedPCE` applies that ranking to the lifted future MSI contents of each existing foundation action. It is nonnegative, respects equality and inclusion of lifted future contents, defines projected action selection, and strictly differentiates actions whenever an application supplies a strict global-rank inequality between their lifted future MSI contents.
+
+This `ProjectedPCE` layer is still indexed by the current foundation `Action α`, which is singleton-like because it stores only `Unit`. It is therefore an interface layer, not the final agency/free-will action-space model.
 
 Stochastic projection is deferred; this layer uses the existing deterministic `ProjectMap`.
 
 Lean carriers: `FutureMSIModel`, `GlobalPreservationRanking`, `liftSet`, `liftMSIContents`, `projectedProfile`, `futureMSI`, `futureMSIContents`, `ProjectedPCE`, `ProjectedPCE.*`.
+
+## 8.2 General action-space projected PCE
+
+The generalized deterministic layer replaces the foundation action type with an arbitrary application action type `Act`. A `GeneralProjectMap α Act` supplies a no-action element, deterministic projection, and natural-dynamics compatibility. The old `ProjectMap α` embeds into this layer by `generalProjectMapOfProjectMap`, preserving the foundation interface.
+
+`GeneralProjectedPCE` is the application-ready projected PCE for agency and free-will formalization. It has the same nonnegativity, equality, rank-comparison, monotonicity, selection, and conditional strict-differentiation theorems as `ProjectedPCE`, but it is no longer blocked by singleton-like action typing. It still does not assert that differentiating actions exist; strict differentiation remains conditional on a supplied strict global-rank inequality.
+
+Deterministic projection remains the current layer; stochastic projection remains deferred.
+
+Lean carriers: `GeneralProjectMap`, `generalProjectMapOfProjectMap`, `generalProjectedProfile`, `generalFutureMSI`, `generalFutureMSIContents`, `GeneralProjectedPCE`, `GeneralProjectedPCE.*`, `generalProjectedPCE_strictly_differentiates_of_rank_lt`.
 
 ## 9. Consistency classification and mode selection
 

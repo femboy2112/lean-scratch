@@ -26,6 +26,7 @@ This module is the top-level entry point. It imports every encoded submodule.
 	   16. TLICA.ProjectMap                           — Future-state projection (deterministic).
 	   17. TLICA.PCE                                  — Prerogative of continued existence.
 	   18. TLICA.ActionProjection                     — Action-calibrated projected PCE.
+	   19. TLICA.GeneralActionProjection              — Projected PCE over arbitrary action spaces.
 
 The mapping from each Lean declaration to its location in the v0.3.2 rigorous
 edition (or v0.2 working papers for round-3/4 declarations) is recorded in
@@ -50,3 +51,4 @@ import TLICA.IBoundary
 import TLICA.ProjectMap
 import TLICA.PCE
 import TLICA.ActionProjection
+import TLICA.GeneralActionProjection

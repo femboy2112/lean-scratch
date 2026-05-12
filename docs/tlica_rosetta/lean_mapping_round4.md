@@ -135,5 +135,7 @@ mediates the shared-distance triangle comparison.
 The foundation orphan cluster is encoded at signature-and-default level. The
 deterministic foundation default `PCE` remains intentionally constant across
 actions. A later additive module, `TLICA.ActionProjection`, supplies an
-action-calibrated deterministic projected-PCE refinement. Stochastic projection
-and refined boundary structure remain deferred.
+action-calibrated deterministic projected-PCE interface over the current
+singleton-like `Action α`. `TLICA.GeneralActionProjection` supplies the
+application-ready arbitrary-action version for agency/free-will work.
+Stochastic projection and refined boundary structure remain deferred.

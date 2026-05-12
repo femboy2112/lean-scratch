@@ -158,3 +158,29 @@ actions. Stochastic projection and refined boundary structure remain deferred.
 `ScalarProfile` values involves dependent functions over subtype domains. This
 is sufficient for the projected-PCE layer, which ranks `liftMSIContents` in the
 universal content type rather than comparing projected profile functions.
+
+`ActionProjection.ProjectedPCE` is an interface layer over the current
+foundation `Action α`. Since `Action α` stores only `Unit`, it is
+singleton-like and should not be used as the final agency/free-will action
+space.
+
+## Generalized action-space projected PCE
+
+| Lean declaration | Working-paper reference | Status |
+|---|---|---|
+| `GeneralProjectMap` | Application-ready deterministic projection over arbitrary action type `Act` | Encoded structure |
+| `GeneralProjectMap.noAction`, `project`, `identity_action_natural` | Null action, deterministic projection, and natural-dynamics compatibility | Primitive structure-field assumptions |
+| `generalProjectMapOfProjectMap` | Embedding of existing `ProjectMap α` into the generalized action-space layer | Encoded definition |
+| `generalProjectedProfile`, `generalFutureMSI`, `generalFutureMSIContents` | Generic projected-profile and future-MSI helper definitions | Encoded definitions |
+| `GeneralProjectedPCE` | Action-calibrated projected PCE over arbitrary action type `Act` | Encoded definition |
+| `GeneralProjectedPCE.nonneg` | Non-negativity of generic projected PCE | Encoded with proof |
+| `GeneralProjectedPCE.eq_of_future_contents_eq` | Equal lifted future MSI contents imply equal generic projected PCE | Encoded with proof |
+| `GeneralProjectedPCE.ge_of_rank_ge` | Rank comparison implies generic projected-PCE comparison | Encoded with proof |
+| `GeneralProjectedPCE.monotone_of_future_contents_subset` | Future-content inclusion implies generic projected-PCE monotonicity | Encoded with proof |
+| `GeneralProjectedPCE.selectsGeneralProjectedAction`, `selected_has_max_generalProjectedPCE` | Generic action-selection and maximality by definition | Encoded definition/proof |
+| `GeneralProjectedPCE.strictly_differentiates_of_rank_lt` | Conditional strict differentiation over arbitrary action type | Encoded with proof; no existence claim |
+| `generalProjectedPCE_strictly_differentiates_of_rank_lt` | Explicit top-level conditional theorem that strict differentiation is not blocked by singleton action typing | Encoded with proof; no existence claim |
+
+Agency and free-will formalization should use `GeneralActionProjection` with an
+application-supplied `Act`. Deterministic projection remains the current layer;
+stochastic projection remains deferred.

@@ -46,8 +46,11 @@ This ledger starts from the round-4 Lean handoff and should be expanded by Codex
 | ORP-008 | Action-calibrated future MSI model | Assignment of an MSI to each deterministic projected profile, with domain compatibility | `FutureMSIModel`, `FutureMSIModel.msiOf`, `FutureMSIModel.domain_match` | machine_verified definition / primitive structure-field assumption | action-projection refinement |
 | ORP-009 | Universal-domain preservation ranking | Ranking over `Set α` for comparing lifted future MSI contents across projected profiles | `GlobalPreservationRanking`, `rank_nonneg`, `monotone` | machine_verified definition / primitive structure-field assumptions | action-projection refinement |
 | ORP-010 | Lifted future MSI contents | Image of subtype-domain MSI contents in the universal content type | `liftSet`, `liftMSIContents`, `projectedProfile`, `futureMSI`, `futureMSIContents` | machine_verified definitions | action-projection refinement |
-| ORP-011 | Action-calibrated projected PCE | Non-constant application-ready PCE refinement over deterministic projected future MSI contents | `ProjectedPCE`, `ProjectedPCE.nonneg`, `ProjectedPCE.eq_of_future_contents_eq`, `ProjectedPCE.ge_of_rank_ge`, `ProjectedPCE.monotone_of_future_contents_subset`, `ProjectedPCE.strictly_differentiates_of_rank_lt` | machine_verified definition/theorems; conditional non-degeneracy only | action-projection refinement |
+| ORP-011 | Foundation-action projected PCE interface | Projected PCE over existing singleton-like `Action α` (`data : Unit`) | `ProjectedPCE`, `ProjectedPCE.nonneg`, `ProjectedPCE.eq_of_future_contents_eq`, `ProjectedPCE.ge_of_rank_ge`, `ProjectedPCE.monotone_of_future_contents_subset`, `ProjectedPCE.strictly_differentiates_of_rank_lt` | machine_verified definition/theorems; interface layer only | action-projection refinement |
 | ORP-012 | Projected action selection | Maximizer predicate for action-calibrated projected PCE | `ProjectedPCE.selectsProjectedAction`, `ProjectedPCE.selected_has_max_projectedPCE` | machine_verified definition/theorem | action-projection refinement |
+| ORP-013 | General deterministic action projection | Project map over arbitrary application action type `Act` | `GeneralProjectMap`, `generalProjectMapOfProjectMap` | machine_verified definition / primitive structure-field assumptions | general-action-space refinement |
+| ORP-014 | General projected PCE | Application-ready projected PCE over arbitrary action type `Act` | `GeneralProjectedPCE`, `GeneralProjectedPCE.nonneg`, `GeneralProjectedPCE.eq_of_future_contents_eq`, `GeneralProjectedPCE.ge_of_rank_ge`, `GeneralProjectedPCE.monotone_of_future_contents_subset`, `GeneralProjectedPCE.strictly_differentiates_of_rank_lt`, `generalProjectedPCE_strictly_differentiates_of_rank_lt` | machine_verified definition/theorems; conditional non-degeneracy only | general-action-space refinement |
+| ORP-015 | General projected action selection | Maximizer predicate for arbitrary action spaces | `GeneralProjectedPCE.selectsGeneralProjectedAction`, `GeneralProjectedPCE.selected_has_max_generalProjectedPCE` | machine_verified definition/theorem | general-action-space refinement |
 
 ## Application signature targets
 
@@ -56,8 +59,8 @@ These should be added only after the foundation layer compiles and the mathemati
 | ID | Paper | Candidate pure math object | Lean target status |
 |---|---|---|---|
 | TMP-001 | Temporal phenomenology | Indexed transition/duration structure over profile states | application_deferred |
-| AGY-001 | Agency | Action-selection structure constrained by deterministic projection, future MSI model, and global preservation ranking | foundation_refinement_available via `ProjectedPCE`; richer agency still application_deferred |
-| FWL-001 | Free will | Family of admissible action branches modulo identity-preservation constraints | application_deferred |
+| AGY-001 | Agency | Action-selection structure constrained by deterministic projection, future MSI model, and global preservation ranking | foundation_refinement_available via `GeneralProjectedPCE`; richer agency still application_deferred |
+| FWL-001 | Free will | Family of admissible action branches modulo identity-preservation constraints | use generalized action-space layer; branch semantics still application_deferred |
 | AFF-001 | Differentiated affect | Valenced profile-difference / appraisal functional | application_deferred |
 | RCX-001 | Religiously charged experience | High-salience transformation/attractor pattern over identity-correlation structure | application_deferred |
 
