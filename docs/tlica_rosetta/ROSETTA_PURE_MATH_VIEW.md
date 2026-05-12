@@ -2,6 +2,16 @@
 
 This document removes TLICA-specific vocabulary and expresses the formal apparatus as mathematics.
 
+## Status and boundary convention
+
+The normalized Rosetta status categories are:
+
+`machine_verified_definition`, `machine_verified_theorem`, `machine_verified_structure`, `primitive_structure_field`, `compatibility_alias`, `compatibility_theorem`, `deferred_marker_not_theorem`, `application_deferred`, `prose_only_unformalized`, and `deprecated_or_superseded`.
+
+The foundation primitives are `KField`, `ScalarProfile`, `MSI`, `PreservationRanking`, `ProjectMap α Act`, `FutureMSIModel`, `GlobalPreservationRanking`, and `FeasibilityModel`. Derived/application structures include `AgencyContext`, `AgencyWitness`, `FreeWillWitness`, `PCEFreeWillWitness`, `ProfileTrajectory`, `ActionSchedule`, `AffectKernelWitness`, and the affect witness structures. Compatibility names include `GeneralProjectMap`, `GeneralProjectedPCE`, and the `general*` projected-profile/future-content names.
+
+No global existence of agency, free will, trajectories, or affect kernels is asserted. Stochastic projection, phenomenological duration, the full shell-stratified bound, named affect taxonomy, substrate affect pathways, source-opacity affect, and religiously charged experience formalization remain deferred.
+
 ## 1. Ordered non-Archimedean coefficient structure
 
 Let `K` be a linearly ordered field equipped with an element `δ : K` satisfying:
@@ -88,7 +98,7 @@ Agency is modeled as a feasible action-selection context over the generalized ac
 
 `selectsFeasibleAction` says that an action is feasible and maximizes `GeneralProjectedPCE` over feasible alternatives. `AgencyWitness` packages a selected feasible maximizer when such a witness is supplied. Nontrivial agency requires live alternatives, i.e. at least two distinct feasible actions. PCE-differentiated agency requires feasible alternatives with different projected-PCE values.
 
-Finite feasible-set assumptions for proving selected-action existence are deferred. Free will remains deferred; this branch only formalizes agency selection.
+Finite feasible-set assumptions for proving selected-action existence are deferred. This is a first structural witness layer for agency selection, not a claim that all application-level agency semantics are complete.
 
 Lean carriers: `FeasibilityModel`, `AgencyContext`, `AgencyContext.feasible`, `AgencyContext.noAction_feasible`, `AgencyContext.mkFromFeasible`, `feasibleProjectedPCE`, `selectsFeasibleAction`, `liveAlternative`, `hasLiveAlternatives`, `pceDifferentiatedAlternative`, `AgencyWitness`, `finiteFeasibleSelection_deferred`.
 
@@ -110,7 +120,7 @@ The scheduled branch future contents at time `n` are the existing free-will bran
 
 Branch-sensitive temporal divergence is represented by supplied trajectories with a witnessed time at which their profile states differ. Separately, a `FreeWillWitness` gives one-step branch-sensitive divergence data: selected and alternative live feasible actions have distinct branch future contents. A `PCEFreeWillWitness` gives the same one-step branch-future distinction through its induced `FreeWillWitness`.
 
-Stochastic trajectories and phenomenological duration remain deferred. Differentiated affect is not yet formalized, but this layer prepares the profile-difference and time-indexed base needed for later affect and religiously charged transformation work.
+Stochastic trajectories and phenomenological duration remain deferred. This deterministic trajectory substrate prepares the profile-difference and time-indexed base needed for later affect and religiously charged transformation work.
 
 Lean carriers: `ProfileTrajectory`, `ActionSchedule`, `generatedBy`, `trajectoryFutureContents`, `stepUnionDistance`, `stepSharedDistance`, `unionStepStable`, `eventuallyUnionStepStable`, `DivergentTrajectories`, `oneStepBranch`, `freeWillWitness_live_branch_contents_distinct`, `freeWillWitness_oneStep_branch_contents_distinct`, `pceFreeWillWitness_oneStep_branch_contents_distinct`, `stochasticTrajectory_deferred`, `phenomenologicalDuration_deferred`, `temporalContinuityMetric_deferred`.
 

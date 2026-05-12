@@ -4,67 +4,92 @@ Every Lean declaration in this project maps to a specific section, line, or
 named result in the v0.3.1 rigorous edition of the formal apparatus. This
 file is the cross-reference table that connects the two artifacts.
 
+## Normalized status key
+
+Current Rosetta normalization uses exactly these status categories:
+
+- `machine_verified_definition`
+- `machine_verified_theorem`
+- `machine_verified_structure`
+- `primitive_structure_field`
+- `compatibility_alias`
+- `compatibility_theorem`
+- `deferred_marker_not_theorem`
+- `application_deferred`
+- `prose_only_unformalized`
+- `deprecated_or_superseded`
+
+Earlier branches used broader status wording. This mapping now uses the normalized categories above, with per-declaration coverage recorded in `docs/tlica_rosetta/ROSETTA_DECLARATION_COVERAGE.md` and normalized object status recorded in `docs/tlica_rosetta/ROSETTA_MATH_FIRST_LEDGER.md`.
+
+## v0.4.1 normalized boundary
+
+`ProjectMap α Act` is the primary deterministic projection structure. `GeneralProjectMap`, `GeneralProjectedPCE`, and the `general*` projected-profile/future-content names are compatibility names only. `ProjectedPCE` is the primary application-ready projected-PCE definition over parameterized `ProjectMap α Act`.
+
+`Action α` is the old singleton wrapper default. `DefaultAction α := Unit` is the direct unit degenerate carrier. `DefaultProjectMap` and `UnitDefaultProjectMap` are degenerate/default compatibility forms.
+
+Foundation primitives include `KField`, `ScalarProfile`, `MSI`, `PreservationRanking`, `ProjectMap α Act`, `FutureMSIModel`, `GlobalPreservationRanking`, and `FeasibilityModel`. Derived/application structures include `AgencyContext`, `AgencyWitness`, `FreeWillWitness`, `PCEFreeWillWitness`, `ProfileTrajectory`, `ActionSchedule`, `AffectKernelWitness`, and the affect witness structures. No global existence of agency, free will, trajectory, or affect is asserted.
+
 ## TLICA.Basic
 
 | Lean declaration | v0.3.1 reference | Status |
 |---|---|---|
-| `class KField` | `00_signature.md` §0.3 (K-field requirements) | Encoded |
-| `KField.δ` | `00_signature.md` §0.3, §0.6 (positive infinitesimal δ) | Encoded |
-| `KField.δ_pos` | `00_signature.md` §0.3 (δ > 0) | Encoded |
-| `KField.δ_lt_one` | `00_signature.md` §0.3 (δ < 1) | Encoded |
-| `KField.δ_lt_rat` | `00_signature.md` §0.3 (non-Archimedean property) | Encoded |
-| `KField.one_sub_δ_pos`, `δ_lt_half` | Derived helpers used downstream | Encoded |
+| `class KField` | `00_signature.md` §0.3 (K-field requirements) | `machine_verified_definition` |
+| `KField.δ` | `00_signature.md` §0.3, §0.6 (positive infinitesimal δ) | `machine_verified_definition` |
+| `KField.δ_pos` | `00_signature.md` §0.3 (δ > 0) | `machine_verified_definition` |
+| `KField.δ_lt_one` | `00_signature.md` §0.3 (δ < 1) | `machine_verified_definition` |
+| `KField.δ_lt_rat` | `00_signature.md` §0.3 (non-Archimedean property) | `machine_verified_definition` |
+| `KField.one_sub_δ_pos`, `δ_lt_half` | Derived helpers used downstream | `machine_verified_definition` |
 
 ## TLICA.IntegrationGraph
 
 | Lean declaration | v0.3.1 reference | Status |
 |---|---|---|
-| `strict_rho_bound` | `02_graph_theory.md` §2.4 (Lemma 2.4.2) | Encoded (warm-up) |
-| `strict_quotient_bound_field` | Field-generic form of Lemma 2.4.2 | Encoded |
-| `rho_nonneg` | Range corollary of Lemma 2.4.2 | Encoded |
+| `strict_rho_bound` | `02_graph_theory.md` §2.4 (Lemma 2.4.2) | `machine_verified_theorem` |
+| `strict_quotient_bound_field` | Field-generic form of Lemma 2.4.2 | `machine_verified_definition` |
+| `rho_nonneg` | Range corollary of Lemma 2.4.2 | `machine_verified_definition` |
 
 ## TLICA.PhiCoordinate
 
 | Lean declaration | v0.3.1 reference | Status |
 |---|---|---|
-| `phiCogito` | `00_signature.md` §0.6 (cogito φ-axiom) | Encoded |
-| `phiTier3` | `03_coordinates.md` §3.3.3 (Tier-3 formula) | Encoded |
-| `PhiAdmissibility` | `00_signature.md` §0.14 (φ-admissibility axiom, lines 143-149) | Encoded |
-| `Tier3Strictness` | `00_signature.md` §0.14 (Tier-3 strictness axiom, lines 151-157) | Encoded |
-| `phi_tier3_nonneg` | `03_coordinates.md` §3.3.6 (a), lower half | Encoded |
-| `phi_tier3_le_phiCogito` | `03_coordinates.md` §3.3.6 (a), upper non-strict half | Encoded |
-| `phi_tier3_lt_phiCogito` | `03_coordinates.md` §3.3.6 (Proposition 3.3.7, strict form) | Encoded |
-| `cogito_unique_phi_supremum` | `03_coordinates.md` §3.3.6 (combined statement) | Encoded |
-| `DPhi` | `06_independence_lemmas.md` §6.5 (admissible φ-domain, v0.3.1 repair) | Encoded |
-| `two_delta_minus_real_in_DPhi` | `06_independence_lemmas.md` §6.5 (D_φ ⊋ (1-δ-ℝ_{≥0})) | Encoded |
+| `phiCogito` | `00_signature.md` §0.6 (cogito φ-axiom) | `machine_verified_definition` |
+| `phiTier3` | `03_coordinates.md` §3.3.3 (Tier-3 formula) | `machine_verified_definition` |
+| `PhiAdmissibility` | `00_signature.md` §0.14 (φ-admissibility axiom, lines 143-149) | `machine_verified_definition` |
+| `Tier3Strictness` | `00_signature.md` §0.14 (Tier-3 strictness axiom, lines 151-157) | `machine_verified_definition` |
+| `phi_tier3_nonneg` | `03_coordinates.md` §3.3.6 (a), lower half | `machine_verified_definition` |
+| `phi_tier3_le_phiCogito` | `03_coordinates.md` §3.3.6 (a), upper non-strict half | `machine_verified_definition` |
+| `phi_tier3_lt_phiCogito` | `03_coordinates.md` §3.3.6 (Proposition 3.3.7, strict form) | `machine_verified_definition` |
+| `cogito_unique_phi_supremum` | `03_coordinates.md` §3.3.6 (combined statement) | `machine_verified_definition` |
+| `DPhi` | `06_independence_lemmas.md` §6.5 (admissible φ-domain, v0.3.1 repair) | `machine_verified_definition` |
+| `two_delta_minus_real_in_DPhi` | `06_independence_lemmas.md` §6.5 (D_φ ⊋ (1-δ-ℝ_{≥0})) | `machine_verified_definition` |
 
 ## TLICA.ModeAggregation
 
 | Lean declaration | v0.3.1 reference | Status |
 |---|---|---|
-| `mode_aggregation_summable` | `02_graph_theory.md` §2.5 (i) (absolute convergence) | Encoded |
-| `mode_aggregation_nonneg` | `02_graph_theory.md` §2.5 (ii) lower bound | Encoded |
-| `mode_aggregation_le_one` | `02_graph_theory.md` §2.5 (ii) upper bound | Encoded |
-| `mode_aggregation_lt_one` | `02_graph_theory.md` §2.5 (iii) strict bound off cogito | Encoded |
+| `mode_aggregation_summable` | `02_graph_theory.md` §2.5 (i) (absolute convergence) | `machine_verified_definition` |
+| `mode_aggregation_nonneg` | `02_graph_theory.md` §2.5 (ii) lower bound | `machine_verified_definition` |
+| `mode_aggregation_le_one` | `02_graph_theory.md` §2.5 (ii) upper bound | `machine_verified_definition` |
+| `mode_aggregation_lt_one` | `02_graph_theory.md` §2.5 (iii) strict bound off cogito | `machine_verified_definition` |
 
 ## TLICA.Dynamics
 
 | Lean declaration | v0.3.1 reference | Status |
 |---|---|---|
-| `mode_aggregation_uniform_convergent` | `05_dynamics.md` §5.7 (Proposition 5.7.2) | Encoded and machine-verified (Weierstrass M-test via `tendstoUniformly_tsum`) |
+| `mode_aggregation_uniform_convergent` | `05_dynamics.md` §5.7 (Proposition 5.7.2) | `machine_verified_theorem` |
 
 ## TLICA.NonReducibility
 
 | Lean declaration | v0.3.1 reference | Status |
 |---|---|---|
-| `structure CoordinateTriple` | `06_independence_lemmas.md` §6.5 (admissible coordinate triples) | Encoded |
-| `witness_rho_1`, `witness_rho_2` | `06_independence_lemmas.md` §6.2 (Proposition 6.2.1 witnesses) | Encoded |
-| `no_F_rho` | `06_independence_lemmas.md` §6.2 (Proposition 6.2.1) | Encoded |
-| `witness_phi_1`, `witness_phi_2` | `06_independence_lemmas.md` §6.3 (Proposition 6.3.1 witnesses) | Encoded |
-| `no_F_phi` | `06_independence_lemmas.md` §6.3 (Proposition 6.3.1; depends on v0.3.1 D_φ repair) | Encoded |
-| `witness_kappa_1`, `witness_kappa_2` | `06_independence_lemmas.md` §6.4 (Proposition 6.4.1 witnesses) | Encoded |
-| `no_F_kappa` | `06_independence_lemmas.md` §6.4 (Proposition 6.4.1) | Encoded |
-| `formal_non_reducibility` | `06_independence_lemmas.md` §6.5 (Theorem 6.5.1) | Encoded |
+| `structure CoordinateTriple` | `06_independence_lemmas.md` §6.5 (admissible coordinate triples) | `machine_verified_definition` |
+| `witness_rho_1`, `witness_rho_2` | `06_independence_lemmas.md` §6.2 (Proposition 6.2.1 witnesses) | `machine_verified_definition` |
+| `no_F_rho` | `06_independence_lemmas.md` §6.2 (Proposition 6.2.1) | `machine_verified_definition` |
+| `witness_phi_1`, `witness_phi_2` | `06_independence_lemmas.md` §6.3 (Proposition 6.3.1 witnesses) | `machine_verified_definition` |
+| `no_F_phi` | `06_independence_lemmas.md` §6.3 (Proposition 6.3.1; depends on v0.3.1 D_φ repair) | `machine_verified_definition` |
+| `witness_kappa_1`, `witness_kappa_2` | `06_independence_lemmas.md` §6.4 (Proposition 6.4.1 witnesses) | `machine_verified_definition` |
+| `no_F_kappa` | `06_independence_lemmas.md` §6.4 (Proposition 6.4.1) | `machine_verified_definition` |
+| `formal_non_reducibility` | `06_independence_lemmas.md` §6.5 (Theorem 6.5.1) | `machine_verified_definition` |
 
 ## Coverage summary
 
@@ -82,28 +107,28 @@ All five priority theorems have type-checking proofs in the project and are mach
 
 | Lean declaration | v0.2 working paper reference | Status |
 |---|---|---|
-| `structure ScalarProfile` | profile_comparison_v0_2.md §4 (notation), §5.1 (foundation signature) | Encoded |
-| `ScalarProfile.zeroExtend` | profile_comparison_v0_2.md §5.2bis.1 | Encoded |
-| `ScalarProfile.zeroExtend_nonneg`, `zeroExtend_le_one`, `abs_sub_zeroExtend_le_one` | Supporting facts | Encoded |
-| `dInfUnion` | profile_comparison_v0_2.md §5.2bis.1 (Definition) | Encoded |
-| `dInfUnion_nonneg` | §5.2.1 / §5.2bis.2 (non-negativity) | Encoded |
-| `dInfUnion_symm` | §5.2.2 (symmetry) | Encoded |
-| `dInfUnion_self` | §5.2.3 (reflexivity) | Encoded |
-| `dInfUnion_le_one` | §5.1.1 codomain claim | Encoded |
-| `dInfUnion_triangle` | §5.2bis.2 (full triangle inequality) | Encoded |
-| `dInfShared` | profile_comparison_v0_2.md §5.1.1 (Definition) | Encoded |
-| `dInfShared_nonneg` | §5.2.1 (non-negativity) | Encoded |
-| `dInfShared_symm` | §5.2.2 (symmetry) | Encoded |
-| `dInfShared_self_of_nonempty` | §5.2.3 (reflexivity, qualified) | Encoded |
-| `dInfShared_le_one_of_nonempty` | §5.1.1 (bound when non-empty) | Encoded |
-| `dInfShared_top_iff` | §5.1.1 (⊤ exactly on empty intersection) | Encoded |
-| `dInfShared_le_one_or_top` | Combined bound | Encoded |
-| `dInfShared_triangle_of_bridge` | §5.2.6 (qualified triangle inequality, bridge-domain form) | Encoded with full proof |
-| `structure ShellThresholds` | v0.3.1 rigorous edition 04_profiles.md §4.3.1 | Encoded (structure only) |
-| `shellOf` | Helper for interior half-open shell membership | Encoded definition |
-| `sameShellBound_of_shellOf` | Predicate-form same-shell case of profile_comparison_v0_2.md §5.3 | Encoded with full proof |
-| `shellStratifiedBound_deferred` | profile_comparison_v0_2.md §5.3 (Proposition 5.3.1 general case) | Non-substantive deferred target marker; not counted as machine-verified theorem |
-| `shellStableDistanceVanishing_simple` | profile_comparison_v0_2.md §5.3 (Corollary 5.3.2 simplified) | Encoded with full proof |
+| `structure ScalarProfile` | profile_comparison_v0_2.md §4 (notation), §5.1 (foundation signature) | `machine_verified_definition` |
+| `ScalarProfile.zeroExtend` | profile_comparison_v0_2.md §5.2bis.1 | `machine_verified_definition` |
+| `ScalarProfile.zeroExtend_nonneg`, `zeroExtend_le_one`, `abs_sub_zeroExtend_le_one` | Supporting facts | `machine_verified_definition` |
+| `dInfUnion` | profile_comparison_v0_2.md §5.2bis.1 (Definition) | `machine_verified_definition` |
+| `dInfUnion_nonneg` | §5.2.1 / §5.2bis.2 (non-negativity) | `machine_verified_definition` |
+| `dInfUnion_symm` | §5.2.2 (symmetry) | `machine_verified_definition` |
+| `dInfUnion_self` | §5.2.3 (reflexivity) | `machine_verified_definition` |
+| `dInfUnion_le_one` | §5.1.1 codomain claim | `machine_verified_definition` |
+| `dInfUnion_triangle` | §5.2bis.2 (full triangle inequality) | `machine_verified_definition` |
+| `dInfShared` | profile_comparison_v0_2.md §5.1.1 (Definition) | `machine_verified_definition` |
+| `dInfShared_nonneg` | §5.2.1 (non-negativity) | `machine_verified_definition` |
+| `dInfShared_symm` | §5.2.2 (symmetry) | `machine_verified_definition` |
+| `dInfShared_self_of_nonempty` | §5.2.3 (reflexivity, qualified) | `machine_verified_definition` |
+| `dInfShared_le_one_of_nonempty` | §5.1.1 (bound when non-empty) | `machine_verified_definition` |
+| `dInfShared_top_iff` | §5.1.1 (⊤ exactly on empty intersection) | `machine_verified_definition` |
+| `dInfShared_le_one_or_top` | Combined bound | `machine_verified_definition` |
+| `dInfShared_triangle_of_bridge` | §5.2.6 (qualified triangle inequality, bridge-domain form) | `machine_verified_theorem` |
+| `structure ShellThresholds` | v0.3.1 rigorous edition 04_profiles.md §4.3.1 | `machine_verified_structure` |
+| `shellOf` | Helper for interior half-open shell membership | `machine_verified_definition` |
+| `sameShellBound_of_shellOf` | Predicate-form same-shell case of profile_comparison_v0_2.md §5.3 | `machine_verified_theorem` |
+| `shellStratifiedBound_deferred` | profile_comparison_v0_2.md §5.3 (Proposition 5.3.1 general case) | `deferred_marker_not_theorem` |
+| `shellStableDistanceVanishing_simple` | profile_comparison_v0_2.md §5.3 (Corollary 5.3.2 simplified) | `machine_verified_theorem` |
 
 The qualified triangle inequality for `dInfShared` is encoded in bridge-domain form:
 if every point compared by `dInfShared f h` lies in `g.domain`, then `g`
@@ -113,26 +138,26 @@ mediates the pointwise comparison and `dInfShared f h ≤ dInfShared f g + dInfS
 
 | Lean declaration | Working-paper reference | Status |
 |---|---|---|
-| `ShellThresholds.maxGap`, `adjacent_gap_pos` | profile_comparison_v0_2.md §5.3 | Encoded |
-| `sameShellBound` | Same-shell case of Proposition 5.3.1 | Encoded with full proof |
-| `shellStableDistanceVanishing_simple` | Simplified Corollary 5.3.2 | Encoded with full proof |
-| `shellStratifiedBound_deferred` | Proposition 5.3.1 general | Deferred target marker only; no theorem claim |
-| `ProfileSpace`, `instance : EDist`, `PseudoEMetricSpace` | Round-3 follow-up: pseudo-emetric promotion | Encoded and machine-verified |
-| `MSI` structure (cogito_in, density, threshold) | orphan_cluster_v0_1.md §3, Definition 3.2.1 | Encoded |
-| `MSI.cogito_is_supremum`, `nonCogito_has_threshold_value`, `mem_msi_positive` | Derived facts from MSI axioms | Encoded with proofs |
-| `PreservationRanking` structure with five axioms | orphan_cluster_v0_1.md §4, Definition 4.2.1 + Axioms 4.3.1–4.3.4 | Encoded |
-| `PreservationRanking.msi_rank_max`, `PreservationRanking.no_cogito_zero_rank` | Derived from preservation-ranking axioms | Encoded with proofs |
-| `ConsistencyEval` inductive type | orphan_cluster_v0_1.md §7.2.1 (Definition) | Encoded |
-| `PtCns` structure with cogito-invariance axiom | orphan_cluster_v0_1.md §7.3.1 | Encoded |
-| `PtCns.cogito_in_positive`, `cogito_not_negative`, `cogito_not_neutral` | Derived from cogito invariance | Encoded with proofs |
-| `PtCns.partition_disjoint`, `PtCns.partition_cover` | Three-way disjointness and coverage of evaluation classes | Encoded with proofs |
-| `ModeOp` inductive type | orphan_cluster_v0_1.md §8.2 | Encoded |
-| `ModeOp.fromEval`, `cogito_triggers_modeC` | PtCns-triggered mode selection (Axiom 7.3.3) | Encoded |
-| `IBoundary.boundary`, `boundary_excludes_neutral`, `cogito_in_boundary`, `mem_boundary_iff`, `boundary_not_neutral` | orphan_cluster_v0_1.md §9 | Encoded with proofs |
-| `Action`, `DefaultAction`, `Action.noAction` | Degenerate/singleton default action cases retained for compatibility; `Action α` is the old wrapper and `DefaultAction α := Unit` is the simplest carrier | Encoded |
-| `ProjectMap`, `ProjectMap.noAction`, `ProjectMap.project`, `ProjectMap.identity_action_natural`, `ProjectMap.noAction_projects` | orphan_cluster_v0_1.md §5 deterministic projection, now parameterized by arbitrary action type `Act` | Encoded structure / primitive structure-field assumption / proof |
-| `DefaultProjectMap`, `UnitDefaultProjectMap` | Compatibility abbreviations for old wrapper and unit-carrier degenerate projection shapes | Encoded abbreviations |
-| `PCE` definition, `nonneg`, `eq_rank_msi_contents`, `bounded_by_msi_max`, `every_action_maximizes`, `all_actions_equal` | orphan_cluster_v0_1.md §6 deterministic foundation default, now action-constant over arbitrary `Act` | Encoded with proofs |
+| `ShellThresholds.maxGap`, `adjacent_gap_pos` | profile_comparison_v0_2.md §5.3 | `machine_verified_definition` |
+| `sameShellBound` | Same-shell case of Proposition 5.3.1 | `machine_verified_theorem` |
+| `shellStableDistanceVanishing_simple` | Simplified Corollary 5.3.2 | `machine_verified_theorem` |
+| `shellStratifiedBound_deferred` | Proposition 5.3.1 general | `deferred_marker_not_theorem` |
+| `ProfileSpace`, `instance : EDist`, `PseudoEMetricSpace` | Round-3 follow-up: pseudo-emetric promotion | `machine_verified_definition` |
+| `MSI` structure (cogito_in, density, threshold) | orphan_cluster_v0_1.md §3, Definition 3.2.1 | `machine_verified_definition` |
+| `MSI.cogito_is_supremum`, `nonCogito_has_threshold_value`, `mem_msi_positive` | Derived facts from MSI axioms | `machine_verified_theorem` |
+| `PreservationRanking` structure with five axioms | orphan_cluster_v0_1.md §4, Definition 4.2.1 + Axioms 4.3.1–4.3.4 | `machine_verified_definition` |
+| `PreservationRanking.msi_rank_max`, `PreservationRanking.no_cogito_zero_rank` | Derived from preservation-ranking axioms | `machine_verified_theorem` |
+| `ConsistencyEval` inductive type | orphan_cluster_v0_1.md §7.2.1 (Definition) | `machine_verified_definition` |
+| `PtCns` structure with cogito-invariance axiom | orphan_cluster_v0_1.md §7.3.1 | `machine_verified_definition` |
+| `PtCns.cogito_in_positive`, `cogito_not_negative`, `cogito_not_neutral` | Derived from cogito invariance | `machine_verified_theorem` |
+| `PtCns.partition_disjoint`, `PtCns.partition_cover` | Three-way disjointness and coverage of evaluation classes | `machine_verified_theorem` |
+| `ModeOp` inductive type | orphan_cluster_v0_1.md §8.2 | `machine_verified_definition` |
+| `ModeOp.fromEval`, `cogito_triggers_modeC` | PtCns-triggered mode selection (Axiom 7.3.3) | `machine_verified_definition` |
+| `IBoundary.boundary`, `boundary_excludes_neutral`, `cogito_in_boundary`, `mem_boundary_iff`, `boundary_not_neutral` | orphan_cluster_v0_1.md §9 | `machine_verified_theorem` |
+| `Action`, `DefaultAction`, `Action.noAction` | Degenerate/singleton default action cases retained for compatibility; `Action α` is the old wrapper and `DefaultAction α := Unit` is the simplest carrier | `machine_verified_definition` |
+| `ProjectMap`, `ProjectMap.noAction`, `ProjectMap.project`, `ProjectMap.identity_action_natural`, `ProjectMap.noAction_projects` | orphan_cluster_v0_1.md §5 deterministic projection, now parameterized by arbitrary action type `Act` | `machine_verified_structure`; `primitive_structure_field`; `machine_verified_theorem` |
+| `DefaultProjectMap`, `UnitDefaultProjectMap` | Compatibility abbreviations for old wrapper and unit-carrier degenerate projection shapes | `compatibility_alias` |
+| `PCE` definition, `nonneg`, `eq_rank_msi_contents`, `bounded_by_msi_max`, `every_action_maximizes`, `all_actions_equal` | orphan_cluster_v0_1.md §6 deterministic foundation default, now action-constant over arbitrary `Act` | `machine_verified_theorem` |
 
 The v0.4.1 consolidation does not add a new theory layer. The foundation orphan cluster is encoded at signature-and-default level.
 Application pressure revealed that the old singleton `Action α` was too weak,
@@ -147,21 +172,21 @@ deferred.
 
 | Lean declaration | Working-paper reference | Status |
 |---|---|---|
-| `FutureMSIModel` | Application-ready cross-time MSI assignment for projected profiles | Encoded structure; uses `domain_match`, not full profile equality |
-| `FutureMSIModel.domain_match` | Compatibility between assigned future MSI domain and projected profile domain | Primitive structure-field assumption |
-| `ProfileIso`, `ProfileIso.refl`, `ProfileIso.symm`, `ProfileIso.trans` | Optional extensional profile-coherence relation | Encoded structure/definitions |
-| `CoherentFutureMSIModel`, `CoherentFutureMSIModel.toFutureMSIModel`, `CoherentFutureMSIModel.toFutureMSIModel_domain_match` | Optional stronger future-MSI model with profile-isomorphism coherence, projected to the weaker model | Encoded structure/definition/theorem |
-| `GlobalPreservationRanking` | Application-calibrated universal-domain ranking over `Set α` | Encoded structure |
-| `GlobalPreservationRanking.rank_nonneg`, `monotone` | Non-negativity and monotonicity calibration conditions | Primitive structure-field assumptions |
-| `liftSet`, `liftMSIContents` | Subtype-domain content-set lift into the universal content type | Encoded definitions |
-| `projectedProfile`, `futureMSI`, `futureMSIContents` | Deterministic projected profile and future-MSI helper definitions | Encoded definitions |
-| `ProjectedPCE` | Primary application-ready action-calibrated projected continued-existence score over `ProjectMap α Act` | Encoded definition |
-| `ProjectedPCE.nonneg` | Non-negativity of projected PCE | Encoded with proof |
-| `ProjectedPCE.eq_of_future_contents_eq` | Equal lifted future MSI contents imply equal projected PCE | Encoded with proof |
-| `ProjectedPCE.ge_of_rank_ge` | Rank comparison implies projected-PCE comparison | Encoded with proof |
-| `ProjectedPCE.monotone_of_future_contents_subset` | Future-content inclusion implies projected-PCE monotonicity | Encoded with proof |
-| `ProjectedPCE.selectsProjectedAction`, `selected_has_max_projectedPCE` | Projected action-selection and maximality by definition | Encoded definition/proof |
-| `ProjectedPCE.strictly_differentiates_of_rank_lt` | Conditional non-degeneracy under strict global-rank inequality | Encoded with proof; no existence claim |
+| `FutureMSIModel` | Application-ready cross-time MSI assignment for projected profiles | `machine_verified_structure`; uses `domain_match`, not full profile equality |
+| `FutureMSIModel.domain_match` | Compatibility between assigned future MSI domain and projected profile domain | `primitive_structure_field` |
+| `ProfileIso`, `ProfileIso.refl`, `ProfileIso.symm`, `ProfileIso.trans` | Optional extensional profile-coherence relation | `machine_verified_structure`/definitions |
+| `CoherentFutureMSIModel`, `CoherentFutureMSIModel.toFutureMSIModel`, `CoherentFutureMSIModel.toFutureMSIModel_domain_match` | Optional stronger future-MSI model with profile-isomorphism coherence, projected to the weaker model | `machine_verified_structure`; `machine_verified_definition`; `machine_verified_theorem` |
+| `GlobalPreservationRanking` | Application-calibrated universal-domain ranking over `Set α` | `machine_verified_structure` |
+| `GlobalPreservationRanking.rank_nonneg`, `monotone` | Non-negativity and monotonicity calibration conditions | `primitive_structure_field` |
+| `liftSet`, `liftMSIContents` | Subtype-domain content-set lift into the universal content type | `machine_verified_definition` |
+| `projectedProfile`, `futureMSI`, `futureMSIContents` | Deterministic projected profile and future-MSI helper definitions | `machine_verified_definition` |
+| `ProjectedPCE` | Primary application-ready action-calibrated projected continued-existence score over `ProjectMap α Act` | `machine_verified_definition` |
+| `ProjectedPCE.nonneg` | Non-negativity of projected PCE | `machine_verified_theorem` |
+| `ProjectedPCE.eq_of_future_contents_eq` | Equal lifted future MSI contents imply equal projected PCE | `machine_verified_theorem` |
+| `ProjectedPCE.ge_of_rank_ge` | Rank comparison implies projected-PCE comparison | `machine_verified_theorem` |
+| `ProjectedPCE.monotone_of_future_contents_subset` | Future-content inclusion implies projected-PCE monotonicity | `machine_verified_theorem` |
+| `ProjectedPCE.selectsProjectedAction`, `selected_has_max_projectedPCE` | Projected action-selection and maximality by definition | `machine_verified_definition`; `machine_verified_theorem` |
+| `ProjectedPCE.strictly_differentiates_of_rank_lt` | Conditional non-degeneracy under strict global-rank inequality | `machine_verified_theorem` |
 
 `FutureMSIModel` uses the weaker `domain_match` field by default. The optional
 `CoherentFutureMSIModel` records stronger `ProfileIso` coherence and projects
@@ -177,19 +202,19 @@ foundation `ProjectMap α Act`.
 
 | Lean declaration | Working-paper reference | Status |
 |---|---|---|
-| `GeneralProjectMap` | Compatibility alias for parameterized foundation `ProjectMap α Act` | Encoded abbreviation; no duplicate primitive projection structure |
-| `generalProjectMapOfProjectMap` | Identity compatibility bridge from `ProjectMap α (Action α)` to the general-name layer | Encoded definition |
-| `generalProjectedProfile`, `generalFutureMSI`, `generalFutureMSIContents` | Generic projected-profile and future-MSI compatibility helper definitions | Encoded definitions |
-| `generalProjectedProfile_eq_projectedProfile`, `generalFutureMSI_eq_futureMSI`, `generalFutureMSIContents_eq_futureMSIContents` | Compatibility equalities to the primary direct `ProjectMap α Act` API | Encoded with proofs |
-| `GeneralProjectedPCE` | Compatibility wrapper for `ProjectedPCE` over arbitrary action type `Act` | Encoded definition |
-| `generalProjectedPCE_eq_projectedPCE` | Compatibility equality to primary `ProjectedPCE` | Encoded with proof |
-| `GeneralProjectedPCE.nonneg` | Non-negativity of generic projected PCE | Encoded with proof |
-| `GeneralProjectedPCE.eq_of_future_contents_eq` | Equal lifted future MSI contents imply equal generic projected PCE | Encoded with proof |
-| `GeneralProjectedPCE.ge_of_rank_ge` | Rank comparison implies generic projected-PCE comparison | Encoded with proof |
-| `GeneralProjectedPCE.monotone_of_future_contents_subset` | Future-content inclusion implies generic projected-PCE monotonicity | Encoded with proof |
-| `GeneralProjectedPCE.selectsGeneralProjectedAction`, `selected_has_max_generalProjectedPCE` | Generic action-selection and maximality by definition | Encoded definition/proof |
-| `GeneralProjectedPCE.strictly_differentiates_of_rank_lt` | Conditional strict differentiation over arbitrary action type | Encoded with proof; no existence claim |
-| `generalProjectedPCE_strictly_differentiates_of_rank_lt` | Explicit top-level conditional theorem that strict differentiation is not blocked by singleton action typing | Encoded with proof; no existence claim |
+| `GeneralProjectMap` | Compatibility alias for parameterized foundation `ProjectMap α Act` | `compatibility_alias` |
+| `generalProjectMapOfProjectMap` | Identity compatibility bridge from `ProjectMap α (Action α)` to the general-name layer | `compatibility_alias` |
+| `generalProjectedProfile`, `generalFutureMSI`, `generalFutureMSIContents` | Generic projected-profile and future-MSI compatibility helper definitions | `compatibility_alias` |
+| `generalProjectedProfile_eq_projectedProfile`, `generalFutureMSI_eq_futureMSI`, `generalFutureMSIContents_eq_futureMSIContents` | Compatibility equalities to the primary direct `ProjectMap α Act` API | `compatibility_theorem` |
+| `GeneralProjectedPCE` | Compatibility wrapper for `ProjectedPCE` over arbitrary action type `Act` | `compatibility_alias` |
+| `generalProjectedPCE_eq_projectedPCE` | Compatibility equality to primary `ProjectedPCE` | `compatibility_theorem` |
+| `GeneralProjectedPCE.nonneg` | Non-negativity of generic projected PCE | `machine_verified_theorem` |
+| `GeneralProjectedPCE.eq_of_future_contents_eq` | Equal lifted future MSI contents imply equal generic projected PCE | `machine_verified_theorem` |
+| `GeneralProjectedPCE.ge_of_rank_ge` | Rank comparison implies generic projected-PCE comparison | `machine_verified_theorem` |
+| `GeneralProjectedPCE.monotone_of_future_contents_subset` | Future-content inclusion implies generic projected-PCE monotonicity | `machine_verified_theorem` |
+| `GeneralProjectedPCE.selectsGeneralProjectedAction`, `selected_has_max_generalProjectedPCE` | Generic action-selection and maximality by definition | `machine_verified_definition`; `machine_verified_theorem` |
+| `GeneralProjectedPCE.strictly_differentiates_of_rank_lt` | Conditional strict differentiation over arbitrary action type | `machine_verified_theorem` |
+| `generalProjectedPCE_strictly_differentiates_of_rank_lt` | Explicit top-level conditional theorem that strict differentiation is not blocked by singleton action typing | `machine_verified_theorem` |
 
 `GeneralActionProjection` is retained only as a compatibility naming layer.
 There is now one primitive deterministic projection structure:
@@ -200,22 +225,22 @@ stochastic projection remains deferred.
 
 | Lean declaration | Working-paper reference | Status |
 |---|---|---|
-| `AgencyContext` | Agency as feasible action context over generalized projected PCE | Encoded structure |
-| `AgencyContext.fam`, `globalRank`, `proj` | Generalized projected-PCE calibration objects | Structure fields |
-| `FeasibilityModel`, `FeasibilityModel.feasible`, `FeasibilityModel.noAction_feasible` | Project-map-indexed feasible-action model with no-action feasibility | Encoded structure / primitive structure-field assumption |
-| `AgencyContext.feasibility`, `AgencyContext.feasible`, `AgencyContext.noAction_feasible`, `AgencyContext.mkFromFeasible` | Agency feasibility supplied by reusable `FeasibilityModel`, with constructor from explicit feasible-set data | Encoded field/accessors/definition |
-| `feasibleProjectedPCE` | General projected PCE evaluated in an agency context | Encoded definition |
-| `selectsFeasibleAction` | Feasible maximizer predicate over available alternatives | Encoded definition |
-| `liveAlternative`, `hasLiveAlternatives` | Nontrivial agency via distinct feasible actions | Encoded definitions |
-| `pceDifferentiatedAlternative` | Feasible alternatives with different projected-PCE values | Encoded definition |
-| `AgencyWitness` | Witness packaging a selected feasible maximizer | Encoded structure |
-| `AgencyWitness.selected_is_feasible`, `selected_maximizes`, `selects_selected` | Witness consequences | Encoded with proofs |
-| `witness_of_selectsFeasibleAction` | Construct witness from selection predicate | Encoded definition |
-| `selectsFeasibleAction_of_witness` | Recover selection predicate from witness | Encoded with proof |
-| `not_exists_feasible_strictly_higher_of_selects` | Selected feasible action excludes feasible alternatives with strictly higher projected PCE | Encoded with proof |
-| `exists_distinct_feasible_of_hasLiveAlternatives` | Live alternatives imply two distinct feasible actions | Encoded with proof |
-| `pceDifferentiatedAlternative_of_selected_strictly_beats` | Strictly beating a feasible alternative gives PCE differentiation | Encoded with proof |
-| `finiteFeasibleSelection_deferred` | Deferred marker for finite feasible-action maximizer existence | Non-substantive deferred target marker; no theorem claim |
+| `AgencyContext` | Agency as feasible action context over generalized projected PCE | `machine_verified_structure` |
+| `AgencyContext.fam`, `globalRank`, `proj` | Generalized projected-PCE calibration objects | `primitive_structure_field` |
+| `FeasibilityModel`, `FeasibilityModel.feasible`, `FeasibilityModel.noAction_feasible` | Project-map-indexed feasible-action model with no-action feasibility | `machine_verified_structure`; `primitive_structure_field` |
+| `AgencyContext.feasibility`, `AgencyContext.feasible`, `AgencyContext.noAction_feasible`, `AgencyContext.mkFromFeasible` | Agency feasibility supplied by reusable `FeasibilityModel`, with constructor from explicit feasible-set data | `machine_verified_definition` |
+| `feasibleProjectedPCE` | General projected PCE evaluated in an agency context | `machine_verified_definition` |
+| `selectsFeasibleAction` | Feasible maximizer predicate over available alternatives | `machine_verified_definition` |
+| `liveAlternative`, `hasLiveAlternatives` | Nontrivial agency via distinct feasible actions | `machine_verified_definition` |
+| `pceDifferentiatedAlternative` | Feasible alternatives with different projected-PCE values | `machine_verified_definition` |
+| `AgencyWitness` | Witness packaging a selected feasible maximizer | `machine_verified_structure` |
+| `AgencyWitness.selected_is_feasible`, `selected_maximizes`, `selects_selected` | Witness consequences | `machine_verified_theorem` |
+| `witness_of_selectsFeasibleAction` | Construct witness from selection predicate | `machine_verified_definition` |
+| `selectsFeasibleAction_of_witness` | Recover selection predicate from witness | `machine_verified_theorem` |
+| `not_exists_feasible_strictly_higher_of_selects` | Selected feasible action excludes feasible alternatives with strictly higher projected PCE | `machine_verified_theorem` |
+| `exists_distinct_feasible_of_hasLiveAlternatives` | Live alternatives imply two distinct feasible actions | `machine_verified_theorem` |
+| `pceDifferentiatedAlternative_of_selected_strictly_beats` | Strictly beating a feasible alternative gives PCE differentiation | `machine_verified_theorem` |
+| `finiteFeasibleSelection_deferred` | Deferred marker for finite feasible-action maximizer existence | `deferred_marker_not_theorem` |
 
 The agency layer depends on `GeneralActionProjection` compatibility names over
 the parameterized foundation `ProjectMap`. It does not assert that selected
@@ -226,27 +251,27 @@ explicit `selectsFeasibleAction` hypothesis.
 
 | Lean declaration | Working-paper reference | Status |
 |---|---|---|
-| `branchProfile` | Action branch as deterministic projected profile | Encoded definition |
-| `branchFutureContents` | Lifted future MSI contents of an action branch | Encoded definition |
-| `branchDistinctAlternative` | Live feasible alternatives with distinct future contents | Encoded definition |
-| `pceBranchDistinctAlternative` | Live feasible alternatives with distinct projected-PCE values | Encoded definition |
-| `openAlternatives` | Feasible action set as open alternatives | Encoded definition |
-| `branchFutureContents_ne_of_pce_ne` | Projected-PCE difference implies branch future content difference | Encoded with proof |
-| `branchDistinctAlternative_of_pceBranchDistinctAlternative` | PCE-branch distinct alternatives imply branch-distinct alternatives | Encoded with proof |
-| `FreeWillWitness` | Branch-sensitive agency witness with selected action and branch-distinct live alternative | Encoded structure |
-| `PCEFreeWillWitness` | Stronger witness with projected-PCE-distinct live alternative | Encoded structure |
-| `FreeWillWitness.hasLiveAlternatives` | Free-will witness implies live alternatives | Encoded with proof |
-| `FreeWillWitness.exists_distinct_feasible` | Free-will witness implies two distinct feasible actions | Encoded with proof |
-| `FreeWillWitness.branchDistinctAlternative` | Free-will witness packages branch-distinct alternatives | Encoded with proof |
-| `PCEFreeWillWitness.toFreeWillWitness`, `freeWillWitness_of_pceFreeWillWitness` | PCE-differentiated free will implies branch-distinct free will | Encoded definitions |
-| `PCEFreeWillWitness.hasLiveAlternatives` | PCE-free-will witness implies live alternatives | Encoded with proof |
-| `PCEFreeWillWitness.pceDifferentiatedAlternative` | PCE-free-will witness implies agency-layer PCE differentiation | Encoded with proof |
-| `PCEFreeWillWitness.pceBranchDistinctAlternative` | PCE-free-will witness packages PCE-branch-distinct alternatives | Encoded with proof |
-| `pceFreeWillWitness_of_selected_strictly_beats` | Strict projected-PCE victory over a live alternative constructs a PCE-free-will witness | Encoded definition |
-| `freeWillWitness_of_selected_strictly_beats` | Strict projected-PCE victory over a live alternative constructs a branch-distinct free-will witness | Encoded definition |
-| `no_freeWillWitness_of_all_branch_contents_equal` | If all feasible branch future contents are equal, no branch-distinct free-will witness exists | Encoded with proof |
-| `no_pceFreeWillWitness_of_all_branch_contents_equal` | Branch collapse excludes PCE-free-will witnesses | Encoded with proof |
-| `no_pceFreeWillWitness_of_all_pce_equal` | Projected-PCE collapse excludes PCE-free-will witnesses | Encoded with proof |
+| `branchProfile` | Action branch as deterministic projected profile | `machine_verified_definition` |
+| `branchFutureContents` | Lifted future MSI contents of an action branch | `machine_verified_definition` |
+| `branchDistinctAlternative` | Live feasible alternatives with distinct future contents | `machine_verified_definition` |
+| `pceBranchDistinctAlternative` | Live feasible alternatives with distinct projected-PCE values | `machine_verified_definition` |
+| `openAlternatives` | Feasible action set as open alternatives | `machine_verified_definition` |
+| `branchFutureContents_ne_of_pce_ne` | Projected-PCE difference implies branch future content difference | `machine_verified_theorem` |
+| `branchDistinctAlternative_of_pceBranchDistinctAlternative` | PCE-branch distinct alternatives imply branch-distinct alternatives | `machine_verified_theorem` |
+| `FreeWillWitness` | Branch-sensitive agency witness with selected action and branch-distinct live alternative | `machine_verified_structure` |
+| `PCEFreeWillWitness` | Stronger witness with projected-PCE-distinct live alternative | `machine_verified_structure` |
+| `FreeWillWitness.hasLiveAlternatives` | Free-will witness implies live alternatives | `machine_verified_theorem` |
+| `FreeWillWitness.exists_distinct_feasible` | Free-will witness implies two distinct feasible actions | `machine_verified_theorem` |
+| `FreeWillWitness.branchDistinctAlternative` | Free-will witness packages branch-distinct alternatives | `machine_verified_theorem` |
+| `PCEFreeWillWitness.toFreeWillWitness`, `freeWillWitness_of_pceFreeWillWitness` | PCE-differentiated free will implies branch-distinct free will | `machine_verified_definition` |
+| `PCEFreeWillWitness.hasLiveAlternatives` | PCE-free-will witness implies live alternatives | `machine_verified_theorem` |
+| `PCEFreeWillWitness.pceDifferentiatedAlternative` | PCE-free-will witness implies agency-layer PCE differentiation | `machine_verified_theorem` |
+| `PCEFreeWillWitness.pceBranchDistinctAlternative` | PCE-free-will witness packages PCE-branch-distinct alternatives | `machine_verified_theorem` |
+| `pceFreeWillWitness_of_selected_strictly_beats` | Strict projected-PCE victory over a live alternative constructs a PCE-free-will witness | `machine_verified_definition` |
+| `freeWillWitness_of_selected_strictly_beats` | Strict projected-PCE victory over a live alternative constructs a branch-distinct free-will witness | `machine_verified_definition` |
+| `no_freeWillWitness_of_all_branch_contents_equal` | If all feasible branch future contents are equal, no branch-distinct free-will witness exists | `machine_verified_theorem` |
+| `no_pceFreeWillWitness_of_all_branch_contents_equal` | Branch collapse excludes PCE-free-will witnesses | `machine_verified_theorem` |
+| `no_pceFreeWillWitness_of_all_pce_equal` | Projected-PCE collapse excludes PCE-free-will witnesses | `machine_verified_theorem` |
 
 The free-will layer depends on `Agency`. It is a structural witness theory, not
 a universal existence theorem. PCE-differentiated free will is now
@@ -259,22 +284,22 @@ incompatibilism/compatibilism claims remain deferred.
 
 | Lean declaration | Working-paper reference | Status |
 |---|---|---|
-| `ProfileTrajectory` | Natural-time indexed sequence of scalar profiles | Encoded structure |
-| `ActionSchedule` | Natural-time indexed action schedule | Encoded structure |
-| `generatedBy` | Predicate that a supplied trajectory follows deterministic action-indexed projection | Encoded definition |
-| `trajectoryFutureContents` | Lifted future MSI contents of the scheduled branch at a trajectory time | Encoded definition |
-| `stepUnionDistance` | Adjacent-time union-domain profile distance | Encoded definition |
-| `stepSharedDistance` | Adjacent-time shared-domain profile distance | Encoded definition |
-| `unionStepStable` | Uniform stepwise temporal stability via `dInfUnion` | Encoded definition |
-| `eventuallyUnionStepStable` | Eventual stepwise temporal stability via `dInfUnion` | Encoded definition |
-| `DivergentTrajectories` | Supplied trajectories with a witnessed profile difference at some time | Encoded structure |
-| `oneStepBranch` | One-step deterministic branch profile naming bridge | Encoded definition |
-| `freeWillWitness_live_branch_contents_distinct` | Free-will witness supplies live feasible actions with distinct branch future contents | Encoded with proof |
-| `freeWillWitness_oneStep_branch_contents_distinct` | Selected and alternative one-step branch futures of a free-will witness differ | Encoded with proof |
-| `pceFreeWillWitness_oneStep_branch_contents_distinct` | PCE-free-will witness gives the same branch-future distinction through `toFreeWillWitness` | Encoded with proof |
-| `stochasticTrajectory_deferred` | Stochastic trajectory models | Non-substantive deferred target marker; no theorem claim |
-| `phenomenologicalDuration_deferred` | Phenomenological duration model | Non-substantive deferred target marker; no theorem claim |
-| `temporalContinuityMetric_deferred` | Richer temporal-continuity metric | Non-substantive deferred target marker; no theorem claim |
+| `ProfileTrajectory` | Natural-time indexed sequence of scalar profiles | `machine_verified_structure` |
+| `ActionSchedule` | Natural-time indexed action schedule | `machine_verified_structure` |
+| `generatedBy` | Predicate that a supplied trajectory follows deterministic action-indexed projection | `machine_verified_definition` |
+| `trajectoryFutureContents` | Lifted future MSI contents of the scheduled branch at a trajectory time | `machine_verified_definition` |
+| `stepUnionDistance` | Adjacent-time union-domain profile distance | `machine_verified_definition` |
+| `stepSharedDistance` | Adjacent-time shared-domain profile distance | `machine_verified_definition` |
+| `unionStepStable` | Uniform stepwise temporal stability via `dInfUnion` | `machine_verified_definition` |
+| `eventuallyUnionStepStable` | Eventual stepwise temporal stability via `dInfUnion` | `machine_verified_definition` |
+| `DivergentTrajectories` | Supplied trajectories with a witnessed profile difference at some time | `machine_verified_structure` |
+| `oneStepBranch` | One-step deterministic branch profile naming bridge | `machine_verified_definition` |
+| `freeWillWitness_live_branch_contents_distinct` | Free-will witness supplies live feasible actions with distinct branch future contents | `machine_verified_theorem` |
+| `freeWillWitness_oneStep_branch_contents_distinct` | Selected and alternative one-step branch futures of a free-will witness differ | `machine_verified_theorem` |
+| `pceFreeWillWitness_oneStep_branch_contents_distinct` | PCE-free-will witness gives the same branch-future distinction through `toFreeWillWitness` | `machine_verified_theorem` |
+| `stochasticTrajectory_deferred` | Stochastic trajectory models | `deferred_marker_not_theorem` |
+| `phenomenologicalDuration_deferred` | Phenomenological duration model | `deferred_marker_not_theorem` |
+| `temporalContinuityMetric_deferred` | Richer temporal-continuity metric | `deferred_marker_not_theorem` |
 
 The temporal-trajectory layer depends on `FreeWill`, and through it on
 `Agency` and `GeneralActionProjection`; it also uses the existing pointwise
@@ -287,23 +312,23 @@ differentiated affect.
 
 | Lean declaration | Working-paper reference | Status |
 |---|---|---|
-| `relativePCEDelta` | Projected-PCE delta of an action relative to a baseline action | Encoded definition |
-| `pceSupportive`, `pceNeutral`, `pceDefeating` | Relative PCE-support, PCE-neutrality, and PCE-defeat predicates | Encoded definitions |
-| `pceSupportive_iff`, `pceNeutral_iff`, `pceDefeating_iff` | Real-arithmetic characterizations of relative PCE valence | Encoded with proofs |
-| `pceValence_trichotomy` | Relative PCE valence is supportive, neutral, or defeating | Encoded with proof |
-| `pceSupportive_not_neutral`, `pceSupportive_not_defeating`, `pceDefeating_not_neutral` | Basic mutual exclusions for PCE valence | Encoded with proofs |
-| `branchUnionDistance`, `branchSharedDistance` | Profile distances between deterministic action branches | Encoded definitions |
-| `branchProfileShift` | Equality-based branch-profile shift predicate | Encoded definition |
-| `branchFutureContents_eq_of_branchProfile_eq`, `branchProfile_ne_of_branchFutureContents_ne` | Branch-profile equality implies future-content equality; branch future-content difference implies profile shift | Encoded with proofs |
-| `PCESupportAffectWitness`, `PCEDefeatAffectWitness`, `PCENeutralAffectWitness` | Feasible-action witnesses for relative PCE appraisal | Encoded structures |
-| `ProfileShiftAffectWitness` | Feasible-action witness for branch-profile shift | Encoded structure |
-| `AffectKernelWitness` | Minimal affect-relevant structural perturbation: branch-profile shift or PCE differentiation | Encoded structure |
-| `affectKernel_of_pceSupport`, `affectKernel_of_pceDefeat`, `affectKernel_of_profileShift` | Support/defeat/profile-shift witnesses imply affect-kernel witnesses | Encoded definitions |
-| `profileShiftAffectWitness_of_freeWillWitness`, `affectKernel_of_freeWillWitness` | Free-will witness yields profile-shift affect kernel | Encoded definitions |
-| `affectKernel_of_pceFreeWillWitness` | PCE-free-will witness yields PCE-differentiated affect kernel | Encoded definition |
-| `no_affectKernel_of_branch_and_pce_collapse` | Branch-profile and projected-PCE collapse excludes affect-kernel witnesses | Encoded with proof |
-| `temporalAffectIntensity`, `temporalAffectIntensity_nonneg`, `temporalAffectIntensity_le_of_unionStepStable` | Temporal affect-intensity naming bridge via adjacent union-profile distance | Encoded definition/theorems |
-| `namedAffectTaxonomy_deferred`, `loveConstitutiveExtension_deferred`, `substrateAffectPathway_deferred`, `sourceOpacityAffect_deferred` | Named affect taxonomy and non-profile/PCE pathways | Non-substantive deferred target markers; no theorem claim |
+| `relativePCEDelta` | Projected-PCE delta of an action relative to a baseline action | `machine_verified_definition` |
+| `pceSupportive`, `pceNeutral`, `pceDefeating` | Relative PCE-support, PCE-neutrality, and PCE-defeat predicates | `machine_verified_definition` |
+| `pceSupportive_iff`, `pceNeutral_iff`, `pceDefeating_iff` | Real-arithmetic characterizations of relative PCE valence | `machine_verified_theorem` |
+| `pceValence_trichotomy` | Relative PCE valence is supportive, neutral, or defeating | `machine_verified_theorem` |
+| `pceSupportive_not_neutral`, `pceSupportive_not_defeating`, `pceDefeating_not_neutral` | Basic mutual exclusions for PCE valence | `machine_verified_theorem` |
+| `branchUnionDistance`, `branchSharedDistance` | Profile distances between deterministic action branches | `machine_verified_definition` |
+| `branchProfileShift` | Equality-based branch-profile shift predicate | `machine_verified_definition` |
+| `branchFutureContents_eq_of_branchProfile_eq`, `branchProfile_ne_of_branchFutureContents_ne` | Branch-profile equality implies future-content equality; branch future-content difference implies profile shift | `machine_verified_theorem` |
+| `PCESupportAffectWitness`, `PCEDefeatAffectWitness`, `PCENeutralAffectWitness` | Feasible-action witnesses for relative PCE appraisal | `machine_verified_structure`s |
+| `ProfileShiftAffectWitness` | Feasible-action witness for branch-profile shift | `machine_verified_structure` |
+| `AffectKernelWitness` | Minimal affect-relevant structural perturbation: branch-profile shift or PCE differentiation | `machine_verified_structure` |
+| `affectKernel_of_pceSupport`, `affectKernel_of_pceDefeat`, `affectKernel_of_profileShift` | Support/defeat/profile-shift witnesses imply affect-kernel witnesses | `machine_verified_definition` |
+| `profileShiftAffectWitness_of_freeWillWitness`, `affectKernel_of_freeWillWitness` | Free-will witness yields profile-shift affect kernel | `machine_verified_definition` |
+| `affectKernel_of_pceFreeWillWitness` | PCE-free-will witness yields PCE-differentiated affect kernel | `machine_verified_definition` |
+| `no_affectKernel_of_branch_and_pce_collapse` | Branch-profile and projected-PCE collapse excludes affect-kernel witnesses | `machine_verified_theorem` |
+| `temporalAffectIntensity`, `temporalAffectIntensity_nonneg`, `temporalAffectIntensity_le_of_unionStepStable` | Temporal affect-intensity naming bridge via adjacent union-profile distance | `machine_verified_definition`; `machine_verified_theorem` |
+| `namedAffectTaxonomy_deferred`, `loveConstitutiveExtension_deferred`, `substrateAffectPathway_deferred`, `sourceOpacityAffect_deferred` | Named affect taxonomy and non-profile/PCE pathways | `deferred_marker_not_theorem` |
 
 The differentiated-affect layer depends on `TemporalTrajectory`, and through it
 on `FreeWill`, `Agency`, and `GeneralActionProjection`. It formalizes only the

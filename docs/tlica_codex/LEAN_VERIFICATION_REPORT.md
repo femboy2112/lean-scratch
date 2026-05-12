@@ -21,6 +21,9 @@ Final audit status: `bash scripts/audit_lean.sh` succeeds with zero `sorry`/`adm
 - `docs/tlica_rosetta/ROSETTA_MATH_FIRST_LEDGER.md`
 - `docs/tlica_rosetta/ROSETTA_PURE_MATH_VIEW.md`
 - `docs/tlica_rosetta/ROSETTA_BRIDGE_VIEW.md`
+- `docs/tlica_rosetta/ROSETTA_DECLARATION_COVERAGE.md`
+- `docs/tlica_rosetta/ROSETTA_COVERAGE_AUDIT.md`
+- `docs/tlica_rosetta/SOURCE_ALIGNMENT_AUDIT.md`
 
 # 3. Consolidation summary.
 
@@ -32,6 +35,8 @@ Confirmed:
 - `TLICA.GeneralActionProjection.GeneralProjectMap` is an abbreviation for `ProjectMap α Act`.
 - `ProjectedPCE` is the primary application-ready projected-PCE definition over parameterized `ProjectMap α Act`.
 - `GeneralProjectedPCE` is retained as a compatibility wrapper for older branch continuity.
+
+The v0.4.1 Rosetta-normalization branch is documentation/audit-only. It adds normalized Rosetta IDs, exact status categories, declaration coverage, source-alignment audit, and `RCX-DEFERRED` as prose-only/application-deferred. It does not add a religious-experience Lean module or any new application theory.
 
 # 4. Lean declarations added.
 
