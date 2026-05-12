@@ -48,9 +48,9 @@ Lean carriers: `ScalarProfile`, `zeroExtend`, `dInfUnion`, `dInfUnion_*`, `dInfS
 
 ## 6. Shell partitions and coarse stability
 
-Thresholds partition scalar values into interior half-open shells via `shellOf`. If two points lie in the same shell, their absolute scalar difference is bounded by that adjacent threshold gap. The simplified shared-profile same-shell corollary is machine-verified. A full shell-stratified bound across all boundary shells remains deferred because the cogito and outer-shell conventions require additional source-grounded structure.
+Thresholds partition scalar values into interior half-open shells via `shellOf`. If two points lie in the same shell, their absolute scalar difference is bounded by that adjacent threshold gap. Interior shell membership is machine-verified to imply membership in `[0,1]`, yielding a conservative cross-interior-shell `≤ 1` bound. A reusable pointwise shared-distance theorem abstracts the profile-level supremum step. A full shell-stratified bound across all boundary shells remains deferred because the cogito and outer-shell conventions require additional source-grounded structure.
 
-Lean carriers: `ShellThresholds`, `shellOf`, `sameShellBound`, `sameShellBound_of_shellOf`, `shellStableDistanceVanishing_simple`, `shellStratifiedBound_deferred`.
+Lean carriers: `ShellThresholds`, `shellOf`, `interiorShellIndexDistance`, `shellOf_nonneg`, `shellOf_le_one`, `sameShellBound`, `sameShellBound_of_shellOf`, `sameInteriorShell_distance_bound`, `interiorShell_pair_bound`, `shellStableDistanceBound_of_pointwise`, `shellStableDistanceVanishing_simple`, `shellStratifiedBound_deferred`.
 
 ## 7. Distinguished self-substructure and preservation ranking
 

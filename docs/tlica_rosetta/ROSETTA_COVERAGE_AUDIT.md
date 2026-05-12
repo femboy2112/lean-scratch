@@ -19,8 +19,8 @@ Coverage classifications:
 | FND-010 to FND-011 | Mode aggregation | has multiple Lean declarations | `mode_aggregation_*`, `mode_aggregation_uniform_convergent` | Machine-verified theorem families. |
 | FND-012 | Coordinate non-reducibility | has multiple Lean declarations | `CoordinateTriple`, witness definitions, `no_F_*`, `formal_non_reducibility` | Witness definitions are internal proof data. |
 | PRF-001 to PRF-004 | Scalar profile and profile distances | has multiple Lean declarations | `ScalarProfile`, `zeroExtend`, `dInfUnion`, `dInfShared` | Profile comparison layer. |
-| PRF-005 to PRF-006 | Shell thresholds and same-shell bound | has multiple Lean declarations | `ShellThresholds`, `shellOf`, `sameShellBound*` | Machine-verified definitions/theorems. |
-| PRF-007 | Full shell-stratified bound | deferred marker only | `shellStratifiedBound_deferred` | Not a theorem of the full bound. |
+| PRF-005 to PRF-006 | Shell thresholds and interior/same-shell bounds | has multiple Lean declarations | `ShellThresholds`, `shellOf`, `interiorShellIndexDistance`, `sameShellBound*`, `sameInteriorShell_distance_bound`, `interiorShell_pair_bound`, `shellStableDistanceBound_of_pointwise` | Machine-verified interior definitions/theorems; cross-shell theorem is the conservative `[0,1]` interior bound. |
+| PRF-007 | Full seven-shell shell-stratified bound | deferred marker only | `shellStratifiedBound_deferred` | Not a theorem of the full bound; boundary-shell conventions remain missing. |
 | PRF-008 | Pseudo-emetric profile space | has multiple Lean declarations | `ProfileSpace`, `edist_def` | Profile-comparison convenience layer. |
 | ORP-001 | MSI | has multiple Lean declarations | `MSI`, `MSI.*` | Primitive fields plus derived theorems. |
 | ORP-002 | Preservation ranking | has multiple Lean declarations | `PreservationRanking`, theorem namespace | Primitive fields plus derived theorems. |

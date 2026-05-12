@@ -2,78 +2,63 @@
 
 ## 1. Branch scope
 
-- Base branch: `codex/tlica-v0_4-completeness-and-release-audit`
-- Current branch: `codex/tlica-p1-lean-improvement-batch-v0`
+- Base branch: `codex/tlica-p1-lean-improvement-batch-v0`
+- Current branch: `codex/tlica-shell-stratified-bound-v0`
 
-This branch converts several Lean-ready v0.4 backlog items into imported,
-machine-verified Lean declarations. It does not add religious-experience
-formalization, named affect taxonomy, stochastic projection, phenomenological
-duration, or a new major application module.
+This branch addresses the shell-stratified-bound target conservatively. It adds
+machine-verified interior-shell and profile-level pointwise bound infrastructure
+while keeping the full seven-shell theorem deferred until boundary-shell
+semantics are source-fixed.
 
-## 2. Completed phases
+It does not add religious-experience formalization, named affect taxonomy,
+stochastic projection, or phenomenological duration.
 
-- Phase 1: replaced the finite feasible-selection deferred marker with a
-  finset-enumerated finite feasible-action maximizer theorem.
-- Phase 2: added temporal union-step distance and stability helper lemmas.
-- Phase 3: added `ProfileIso` transport helpers and coherent future-MSI model
-  convenience lemmas.
-- Phase 4: added branch union-distance bounds, temporal affect-intensity bound,
-  and a PCE-support non-neutrality helper.
-- Phase 5: cleaned touched agency comments so `ProjectedPCE`/`ProjectMap α Act`
-  remain primary and `GeneralProjectedPCE`/`GeneralProjectMap` remain
-  compatibility names.
-- Phase 6: updated Rosetta mapping, declaration coverage, coverage audit,
-  feature matrix, backlog, pure math view, and declaration inventory.
+## 2. Inherited branch verification
 
-## 3. Blocked or skipped phases
+Commands run before branching:
 
-- Full shell-stratified bound was skipped as requested; it remains the main
-  P1 theorem target because boundary conventions should be handled in a focused
-  branch.
-- Raw `Set.Finite` finite feasible-selection theorem was not needed for this
-  batch. The imported theorem uses an explicit nonempty `Finset Act` that
-  enumerates exactly the feasible set.
+- `git fetch --all`: succeeded.
+- `git checkout codex/tlica-p1-lean-improvement-batch-v0`: succeeded.
+- `git pull`: already up to date.
+- `lake build`: succeeded, with existing warning-only duplicate-namespace and
+  unused-variable lints outside this branch's touched module.
+- `bash scripts/audit_lean.sh`: succeeded.
 
-## 4. Theorem names added
+## 3. Completed theorem work
 
-Agency:
+Lean source changed:
 
-- `exists_selectsFeasibleAction_of_finset`
+- `TLICA/ProfileComparison/ShellRefinement.lean`
 
-Temporal trajectory:
+New declarations:
 
-- `stepUnionDistance_nonneg`
-- `stepUnionDistance_le_one`
-- `unionStepStable_step_le`
-- `eventuallyUnionStepStable_of_le_start`
-- `eventuallyUnionStepStable_of_unionStepStable`
+- `interiorShellIndexDistance`
+- `shellOf_nonneg`
+- `shellOf_le_one`
+- `sameInteriorShell_distance_bound`
+- `interiorShell_pair_bound`
+- `shellStableDistanceBound_of_pointwise`
 
-Profile coherence / action projection:
+Existing declarations retained:
 
-- `ProfileIso.dom_mem_iff`
-- `ProfileIso.val_eq_left`
-- `ProfileIso.val_eq_right`
-- `CoherentFutureMSIModel.profile_iso_to_domain_match`
-- `CoherentFutureMSIModel.toFutureMSIModel_msiOf`
+- `sameShellBound`
+- `sameShellBound_of_shellOf`
+- `shellStableDistanceVanishing_simple`
+- `shellStratifiedBound_deferred`
 
-Differentiated affect:
+## 4. Blocked theorem target
 
-- `branchUnionDistance_nonneg`
-- `branchUnionDistance_le_one`
-- `temporalAffectIntensity_le_one`
-- `pceSupportAffectWitness_pce_ne`
+The full seven-shell theorem remains deferred as
+`shellStratifiedBound_deferred`.
 
-## 5. Files changed
+Exact blocker: the current Lean convention defines only five interior
+half-open shells over `Fin 5`, using the intervals `[r_(i+1), r_i)`.
+The prose-level full bound needs explicit conventions for shell 0 (cogito),
+shell 6 (outer), endpoint inclusivity, and how the shell-distance term treats
+boundary shells. Those conventions are not encoded as definitions or structure
+fields, so this branch does not state the full theorem as proved.
 
-Lean source:
-
-- `TLICA/Agency.lean`
-- `TLICA/TemporalTrajectory.lean`
-- `TLICA/ProfileIso.lean`
-- `TLICA/ActionProjection.lean`
-- `TLICA/DifferentiatedAffect.lean`
-
-Documentation and inventory:
+## 5. Documentation updated
 
 - `MAPPING.md`
 - `docs/tlica_codex/LEAN_VERIFICATION_REPORT.md`
@@ -81,26 +66,17 @@ Documentation and inventory:
 - `docs/tlica_rosetta/ROSETTA_MATH_FIRST_LEDGER.md`
 - `docs/tlica_rosetta/ROSETTA_DECLARATION_COVERAGE.md`
 - `docs/tlica_rosetta/ROSETTA_COVERAGE_AUDIT.md`
+- `docs/tlica_rosetta/ROSETTA_PURE_MATH_VIEW.md`
+- `docs/tlica_rosetta/ROSETTA_BRIDGE_VIEW.md`
 - `docs/tlica_rosetta/FEATURE_COMPLETENESS_MATRIX.md`
 - `docs/tlica_rosetta/LEAN_IMPROVEMENT_BACKLOG.md`
-- `docs/tlica_rosetta/ROSETTA_PURE_MATH_VIEW.md`
 
-## 6. Verification status
-
-Inherited branch verification on `codex/tlica-v0_4-completeness-and-release-audit`:
-
-- `git fetch --all`: succeeded.
-- `git checkout codex/tlica-v0_4-completeness-and-release-audit`: succeeded.
-- `git pull`: already up to date.
-- `lake build`: succeeded, with existing warning-only duplicate-namespace and
-  unused-variable lints.
-- `bash scripts/audit_lean.sh`: succeeded.
-
-Current branch verification:
+## 6. Current branch verification
 
 - `python3 scripts/extract_lean_decls.py > docs/tlica_codex/lean_declaration_inventory.md`: succeeded.
+- `lake exe cache get`: succeeded; no files to download.
 - Final `lake build`: succeeded, with existing warning-only duplicate-namespace
-  and unused-variable lints.
+  and unused-variable lints outside this branch's touched module.
 - Final `bash scripts/audit_lean.sh`: succeeded.
 
 Audit target:
@@ -113,9 +89,8 @@ Audit target:
 
 Recommended next branch:
 
-`codex/tlica-shell-stratified-bound`
+`codex/tlica-full-shell-bound-boundary-conventions`
 
-Rationale: this batch closes the finite feasible-selection marker and several
-low-risk helper targets. The remaining high-value P1 item is the full
-shell-stratified bound, but it should be handled separately with explicit shell
-boundary conventions.
+Purpose: add a source-grounded boundary-augmented shell convention, then replace
+or strengthen `shellStratifiedBound_deferred` only under those explicit fields
+or definitions.

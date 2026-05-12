@@ -23,11 +23,17 @@ coverage.
 | Completed P1 | ProfileIso / CoherentFutureMSIModel coherence helpers | Added membership/value transport helpers and coherent-model domain/assignment helpers. | `ProfileIso.refl/symm/trans`, `CoherentFutureMSIModel.toFutureMSIModel`. | `codex/tlica-p1-lean-improvement-batch-v0` | `TLICA/ProfileIso.lean`, `TLICA/ActionProjection.lean` | Done in this branch | Completed |
 | Completed P1/P2 | Branch-distance and affect-kernel helper lemmas | Added branch union-distance bounds, temporal affect-intensity unit bound, and PCE-support non-neutrality. | `dInfUnion_le_one`, existing affect witness structures. | `codex/tlica-p1-lean-improvement-batch-v0` | `TLICA/DifferentiatedAffect.lean` | Done in this branch | Completed |
 
+## A2. Completed in `codex/tlica-shell-stratified-bound-v0`
+
+| Priority | Target | Why it matters | Required dependencies | Branch name | Lean files | Docs updated | Result |
+|---|---|---|---|---|---|---|---|
+| Completed P1 preparation | Interior shell-distance and profile-level pointwise bounds | Substantially prepares the shell-stratified target without overclaiming boundary-shell semantics. | `ShellThresholds`, `shellOf`, `sameShellBound`, `dInfShared` | `codex/tlica-shell-stratified-bound-v0` | `TLICA/ProfileComparison/ShellRefinement.lean` | `MAPPING.md`, ledger, coverage docs, matrix, report, inventory | Added `interiorShellIndexDistance`, `sameInteriorShell_distance_bound`, `interiorShell_pair_bound`, and `shellStableDistanceBound_of_pointwise`; full seven-shell theorem remains deferred. |
+
 ## B. Remaining Immediate Lean-Ready Theorem Targets
 
 | Priority | Target | Why it matters | Required dependencies | Proposed branch name | Expected Lean files | Expected docs to update | Risk |
 |---|---|---|---|---|---|---|---|
-| P1 | Full shell-stratified bound | Closes the largest remaining profile-comparison theorem marker. | Explicit boundary shell convention, `ShellThresholds`, `sameShellBound`, `dInfUnion`. | `codex/tlica-shell-stratified-bound` | `TLICA/ProfileComparison/ShellRefinement.lean` | `MAPPING.md`, ledger, matrix | Medium |
+| P1 | Full seven-shell shell-stratified bound | Closes the remaining profile-comparison theorem marker. | Explicit shell 0/6 boundary convention, endpoint inclusivity convention, `ShellThresholds`, interior preparation theorems, `dInfShared`/`dInfUnion` target choice. | `codex/tlica-full-shell-bound-boundary-conventions` | `TLICA/ProfileComparison/ShellRefinement.lean` | `MAPPING.md`, ledger, matrix, coverage docs | Medium-high until source convention is fixed |
 | P2 | Direct `ProjectedPCE` aliases replacing compatibility usage | Reduces dependence on `GeneralProjectedPCE` compatibility names in newer modules. | Existing equality theorem `generalProjectedPCE_eq_projectedPCE`. | `codex/tlica-direct-projected-pce-api` | `TLICA/Agency.lean`, dependent modules if touched | `MAPPING.md`, ledger, coverage audit | Medium |
 
 ## C. Lean-Ready Structure Targets

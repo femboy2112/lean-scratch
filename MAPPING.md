@@ -125,10 +125,12 @@ All five priority theorems have type-checking proofs in the project and are mach
 | `dInfShared_le_one_or_top` | Combined bound | `machine_verified_definition` |
 | `dInfShared_triangle_of_bridge` | §5.2.6 (qualified triangle inequality, bridge-domain form) | `machine_verified_theorem` |
 | `structure ShellThresholds` | v0.3.1 rigorous edition 04_profiles.md §4.3.1 | `machine_verified_structure` |
-| `shellOf` | Helper for interior half-open shell membership | `machine_verified_definition` |
-| `sameShellBound_of_shellOf` | Predicate-form same-shell case of profile_comparison_v0_2.md §5.3 | `machine_verified_theorem` |
+| `shellOf`, `interiorShellIndexDistance` | Helper definitions for interior half-open shell membership and interior shell-index distance | `machine_verified_definition` |
+| `shellOf_nonneg`, `shellOf_le_one` | Interior shell-membership bounds induced by threshold normalization | `machine_verified_theorem` |
+| `sameShellBound_of_shellOf`, `sameInteriorShell_distance_bound` | Predicate-form same-shell/interior-shell case of profile_comparison_v0_2.md §5.3 | `machine_verified_theorem` |
+| `interiorShell_pair_bound` | Conservative cross-interior-shell distance bound under the current interior shell convention | `machine_verified_theorem` |
 | `shellStratifiedBound_deferred` | profile_comparison_v0_2.md §5.3 (Proposition 5.3.1 general case) | `deferred_marker_not_theorem` |
-| `shellStableDistanceVanishing_simple` | profile_comparison_v0_2.md §5.3 (Corollary 5.3.2 simplified) | `machine_verified_theorem` |
+| `shellStableDistanceBound_of_pointwise`, `shellStableDistanceVanishing_simple` | profile_comparison_v0_2.md §5.3 (profile-level shared-distance shell-stability bounds) | `machine_verified_theorem` |
 
 The qualified triangle inequality for `dInfShared` is encoded in bridge-domain form:
 if every point compared by `dInfShared f h` lies in `g.domain`, then `g`
@@ -140,7 +142,7 @@ mediates the pointwise comparison and `dInfShared f h ≤ dInfShared f g + dInfS
 |---|---|---|
 | `ShellThresholds.maxGap`, `adjacent_gap_pos` | profile_comparison_v0_2.md §5.3 | `machine_verified_definition` |
 | `sameShellBound` | Same-shell case of Proposition 5.3.1 | `machine_verified_theorem` |
-| `shellStableDistanceVanishing_simple` | Simplified Corollary 5.3.2 | `machine_verified_theorem` |
+| `sameInteriorShell_distance_bound`, `interiorShell_pair_bound`, `shellStableDistanceBound_of_pointwise`, `shellStableDistanceVanishing_simple` | Interior/general pointwise shell-bound preparation for Proposition 5.3.1 and Corollary 5.3.2 | `machine_verified_theorem` |
 | `shellStratifiedBound_deferred` | Proposition 5.3.1 general | `deferred_marker_not_theorem` |
 | `ProfileSpace`, `instance : EDist`, `PseudoEMetricSpace` | Round-3 follow-up: pseudo-emetric promotion | `machine_verified_definition` |
 | `MSI` structure (cogito_in, density, threshold) | orphan_cluster_v0_1.md §3, Definition 3.2.1 | `machine_verified_definition` |
