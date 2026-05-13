@@ -1,0 +1,80 @@
+note: this linter can be disabled with `set_option linter.dupNamespace false`
+warning: ././././TLICA/ProfileIso.lean:35:8: The namespace 'ProfileIso' is duplicated in the declaration 'TLICA.ProfileIso.ProfileIso.val_eq_left'
+note: this linter can be disabled with `set_option linter.dupNamespace false`
+warning: ././././TLICA/ProfileIso.lean:41:8: The namespace 'ProfileIso' is duplicated in the declaration 'TLICA.ProfileIso.ProfileIso.val_eq_right'
+note: this linter can be disabled with `set_option linter.dupNamespace false`
+warning: ././././TLICA/ProfileIso.lean:47:4: The namespace 'ProfileIso' is duplicated in the declaration 'TLICA.ProfileIso.ProfileIso.refl'
+note: this linter can be disabled with `set_option linter.dupNamespace false`
+warning: ././././TLICA/ProfileIso.lean:56:4: The namespace 'ProfileIso' is duplicated in the declaration 'TLICA.ProfileIso.ProfileIso.symm'
+note: this linter can be disabled with `set_option linter.dupNamespace false`
+warning: ././././TLICA/ProfileIso.lean:65:4: The namespace 'ProfileIso' is duplicated in the declaration 'TLICA.ProfileIso.ProfileIso.trans'
+note: this linter can be disabled with `set_option linter.dupNamespace false`
+⚠ [1293/1313] Built TLICA.ProjectMap
+warning: ././././TLICA/ProjectMap.lean:41:10: The namespace 'ProjectMap' is duplicated in the declaration 'TLICA.ProjectMap.ProjectMap'
+note: this linter can be disabled with `set_option linter.dupNamespace false`
+warning: ././././TLICA/ProjectMap.lean:68:8: The namespace 'ProjectMap' is duplicated in the declaration 'TLICA.ProjectMap.ProjectMap.noAction_projects'
+note: this linter can be disabled with `set_option linter.dupNamespace false`
+✔ [1294/1313] Built TLICA.ProfileComparison.Pointwise
+⚠ [1295/1313] Built TLICA.PreservationRanking
+warning: ././././TLICA/PreservationRanking.lean:31:10: The namespace 'PreservationRanking' is duplicated in the declaration 'TLICA.PreservationRanking.PreservationRanking'
+note: this linter can be disabled with `set_option linter.dupNamespace false`
+warning: ././././TLICA/PreservationRanking.lean:53:8: The namespace 'PreservationRanking' is duplicated in the declaration 'TLICA.PreservationRanking.PreservationRanking.msi_rank_max'
+note: this linter can be disabled with `set_option linter.dupNamespace false`
+warning: ././././TLICA/PreservationRanking.lean:58:8: The namespace 'PreservationRanking' is duplicated in the declaration 'TLICA.PreservationRanking.PreservationRanking.no_cogito_zero_rank'
+note: this linter can be disabled with `set_option linter.dupNamespace false`
+⚠ [1296/1313] Built TLICA.PtCns
+warning: ././././TLICA/PtCns.lean:57:10: The namespace 'PtCns' is duplicated in the declaration 'TLICA.PtCns.PtCns'
+note: this linter can be disabled with `set_option linter.dupNamespace false`
+warning: ././././TLICA/PtCns.lean:68:4: The namespace 'PtCns' is duplicated in the declaration 'TLICA.PtCns.PtCns.positiveContents'
+note: this linter can be disabled with `set_option linter.dupNamespace false`
+warning: ././././TLICA/PtCns.lean:72:4: The namespace 'PtCns' is duplicated in the declaration 'TLICA.PtCns.PtCns.negativeContents'
+note: this linter can be disabled with `set_option linter.dupNamespace false`
+warning: ././././TLICA/PtCns.lean:76:4: The namespace 'PtCns' is duplicated in the declaration 'TLICA.PtCns.PtCns.neutralContents'
+note: this linter can be disabled with `set_option linter.dupNamespace false`
+warning: ././././TLICA/PtCns.lean:80:8: The namespace 'PtCns' is duplicated in the declaration 'TLICA.PtCns.PtCns.cogito_in_positive'
+note: this linter can be disabled with `set_option linter.dupNamespace false`
+warning: ././././TLICA/PtCns.lean:86:8: The namespace 'PtCns' is duplicated in the declaration 'TLICA.PtCns.PtCns.cogito_not_negative'
+note: this linter can be disabled with `set_option linter.dupNamespace false`
+warning: ././././TLICA/PtCns.lean:92:8: The namespace 'PtCns' is duplicated in the declaration 'TLICA.PtCns.PtCns.cogito_not_neutral'
+note: this linter can be disabled with `set_option linter.dupNamespace false`
+warning: ././././TLICA/PtCns.lean:98:8: The namespace 'PtCns' is duplicated in the declaration 'TLICA.PtCns.PtCns.partition_disjoint'
+note: this linter can be disabled with `set_option linter.dupNamespace false`
+warning: ././././TLICA/PtCns.lean:113:8: The namespace 'PtCns' is duplicated in the declaration 'TLICA.PtCns.PtCns.partition_cover'
+note: this linter can be disabled with `set_option linter.dupNamespace false`
+✔ [1297/1313] Built TLICA.PhiCoordinate
+✔ [1298/1313] Built TLICA.ActionProjection
+✔ [1299/1313] Built TLICA.ProfileComparison.PseudoEMetric
+✔ [1300/1313] Built TLICA.IBoundary
+✔ [1301/1313] Built TLICA.ModeAggregation
+✔ [1302/1313] Built TLICA.Modes
+⚠ [1303/1313] Built TLICA.PCE
+warning: ././././TLICA/PCE.lean:48:5: unused variable `proj`
+note: this linter can be disabled with `set_option linter.unusedVariables false`
+warning: ././././TLICA/PCE.lean:48:31: unused variable `a`
+note: this linter can be disabled with `set_option linter.unusedVariables false`
+warning: ././././TLICA/PCE.lean:47:18: The namespace 'PCE' is duplicated in the declaration 'TLICA.PCE.PCE'
+note: this linter can be disabled with `set_option linter.dupNamespace false`
+warning: ././././TLICA/PCE.lean:60:8: The namespace 'PCE' is duplicated in the declaration 'TLICA.PCE.PCE.nonneg'
+note: this linter can be disabled with `set_option linter.dupNamespace false`
+warning: ././././TLICA/PCE.lean:67:8: The namespace 'PCE' is duplicated in the declaration 'TLICA.PCE.PCE.eq_rank_msi_contents'
+note: this linter can be disabled with `set_option linter.dupNamespace false`
+warning: ././././TLICA/PCE.lean:77:8: The namespace 'PCE' is duplicated in the declaration 'TLICA.PCE.PCE.bounded_by_msi_max'
+note: this linter can be disabled with `set_option linter.dupNamespace false`
+warning: ././././TLICA/PCE.lean:86:4: The namespace 'PCE' is duplicated in the declaration 'TLICA.PCE.PCE.selectsAction'
+note: this linter can be disabled with `set_option linter.dupNamespace false`
+warning: ././././TLICA/PCE.lean:95:8: unused variable `b`
+note: this linter can be disabled with `set_option linter.unusedVariables false`
+warning: ././././TLICA/PCE.lean:91:8: The namespace 'PCE' is duplicated in the declaration 'TLICA.PCE.PCE.every_action_maximizes'
+note: this linter can be disabled with `set_option linter.dupNamespace false`
+warning: ././././TLICA/PCE.lean:103:8: The namespace 'PCE' is duplicated in the declaration 'TLICA.PCE.PCE.all_actions_equal'
+note: this linter can be disabled with `set_option linter.dupNamespace false`
+✔ [1304/1313] Built TLICA.GeneralActionProjection
+✔ [1305/1313] Built TLICA.Agency
+✔ [1306/1313] Built TLICA.Dynamics
+✔ [1307/1313] Built TLICA.ProfileComparison.ShellRefinement
+✔ [1308/1313] Built TLICA.FreeWill
+✔ [1309/1313] Built TLICA.TemporalTrajectory
+✔ [1310/1313] Built TLICA.NonReducibility
+✔ [1311/1313] Built TLICA.DifferentiatedAffect
+✔ [1312/1313] Built TLICA
+Build completed successfully.

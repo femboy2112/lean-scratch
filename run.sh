@@ -71,6 +71,13 @@ import TLICA
 #check @TLICA.ProfileComparison.Pointwise.dInfUnion_self
 #check @TLICA.ProfileComparison.Pointwise.dInfUnion_triangle
 #check @TLICA.ProfileComparison.Pointwise.dInfShared_top_iff
+
+-- Union-form shell-bound corollaries
+#check @TLICA.ProfileComparison.ShellRefinement.dInfUnion_le_of_pointwise
+#check @TLICA.ProfileComparison.ShellRefinement.dInfUnion_le_of_pointwise_union
+#check @TLICA.ProfileComparison.ShellRefinement.dInfUnion_le_shellEndpointBound_zeroExtend
+#check @TLICA.ProfileComparison.ShellRefinement.dInfUnion_le_threeWayMax_shellEndpointBound
+#check @TLICA.ProfileComparison.ShellRefinement.dInfUnion_le_of_pointwise_shellEndpointBound
 EOF
 
 LP=".lake/packages/batteries/.lake/build/lib"
