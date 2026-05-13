@@ -1,0 +1,29 @@
+✔ [6/17] (Optional) Fetched proofwidgets:optRelease
+✔ [9/17] Built Cache.IO
+✔ [10/17] Built Cache.Hashing
+✔ [11/17] Built Cache.Hashing:c.o
+✔ [12/17] Built Cache.Requests
+✔ [13/17] Built Cache.IO:c.o
+✔ [14/17] Built Cache.Main
+✔ [15/17] Built Cache.Requests:c.o
+✔ [16/17] Built Cache.Main:c.o
+✔ [17/17] Built cache
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100 1054k  100 1054k    0     0  2785k      0 --:--:-- --:--:-- --:--:-- 2785k
+
+installing leantar 0.1.13
+Attempting to download 5011 file(s)
+Downloaded: 1 file(s) [attempted 1/5011 = 0%]Downloaded: 50 file(s) [attempted 50/5011 = 0%]Downloaded: 109 file(s) [attempted 109/5011 = 2%]Downloaded: 171 file(s) [attempted 171/5011 = 3%]Downloaded: 236 file(s) [attempted 236/5011 = 4%]Downloaded: 300 file(s) [attempted 300/5011 = 5%]Downloaded: 369 file(s) [attempted 369/5011 = 7%]Downloaded: 443 file(s) [attempted 443/5011 = 8%]Downloaded: 517 file(s) [attempted 517/5011 = 10%]Downloaded: 584 file(s) [attempted 584/5011 = 11%]Downloaded: 655 file(s) [attempted 655/5011 = 13%]Downloaded: 710 file(s) [attempted 710/5011 = 14%]Downloaded: 763 file(s) [attempted 763/5011 = 15%]Downloaded: 822 file(s) [attempted 822/5011 = 16%]Downloaded: 896 file(s) [attempted 896/5011 = 17%]Downloaded: 961 file(s) [attempted 961/5011 = 19%]Downloaded: 1027 file(s) [attempted 1027/5011 = 20%]Downloaded: 1092 file(s) [attempted 1092/5011 = 21%]Downloaded: 1163 file(s) [attempted 1163/5011 = 23%]Downloaded: 1232 file(s) [attempted 1232/5011 = 24%]Downloaded: 1308 file(s) [attempted 1308/5011 = 26%]Downloaded: 1382 file(s) [attempted 1382/5011 = 27%]Downloaded: 1446 file(s) [attempted 1446/5011 = 28%]Downloaded: 1465 file(s) [attempted 1465/5011 = 29%]Downloaded: 1532 file(s) [attempted 1532/5011 = 30%]Downloaded: 1596 file(s) [attempted 1596/5011 = 31%]Downloaded: 1639 file(s) [attempted 1639/5011 = 32%]Downloaded: 1711 file(s) [attempted 1711/5011 = 34%]Downloaded: 1751 file(s) [attempted 1751/5011 = 34%]Downloaded: 1799 file(s) [attempted 1799/5011 = 35%]Downloaded: 1863 file(s) [attempted 1863/5011 = 37%]Downloaded: 1930 file(s) [attempted 1930/5011 = 38%]Downloaded: 1989 file(s) [attempted 1989/5011 = 39%]Downloaded: 2049 file(s) [attempted 2049/5011 = 40%]Downloaded: 2077 file(s) [attempted 2077/5011 = 41%]Downloaded: 2151 file(s) [attempted 2151/5011 = 42%]Downloaded: 2208 file(s) [attempted 2208/5011 = 44%]Downloaded: 2263 file(s) [attempted 2263/5011 = 45%]Downloaded: 2332 file(s) [attempted 2332/5011 = 46%]Downloaded: 2389 file(s) [attempted 2389/5011 = 47%]Downloaded: 2461 file(s) [attempted 2461/5011 = 49%]Downloaded: 2532 file(s) [attempted 2532/5011 = 50%]Downloaded: 2597 file(s) [attempted 2597/5011 = 51%]Downloaded: 2666 file(s) [attempted 2666/5011 = 53%]Downloaded: 2721 file(s) [attempted 2721/5011 = 54%]Downloaded: 2794 file(s) [attempted 2794/5011 = 55%]Downloaded: 2837 file(s) [attempted 2837/5011 = 56%]Downloaded: 2899 file(s) [attempted 2899/5011 = 57%]Downloaded: 2959 file(s) [attempted 2959/5011 = 59%]Downloaded: 3016 file(s) [attempted 3016/5011 = 60%]Downloaded: 3073 file(s) [attempted 3073/5011 = 61%]Downloaded: 3154 file(s) [attempted 3154/5011 = 62%]Downloaded: 3213 file(s) [attempted 3213/5011 = 64%]Downloaded: 3275 file(s) [attempted 3275/5011 = 65%]Downloaded: 3344 file(s) [attempted 3344/5011 = 66%]Downloaded: 3414 file(s) [attempted 3414/5011 = 68%]Downloaded: 3478 file(s) [attempted 3478/5011 = 69%]Downloaded: 3552 file(s) [attempted 3552/5011 = 70%]Downloaded: 3609 file(s) [attempted 3609/5011 = 72%]Downloaded: 3668 file(s) [attempted 3668/5011 = 73%]Downloaded: 3749 file(s) [attempted 3749/5011 = 74%]Downloaded: 3828 file(s) [attempted 3828/5011 = 76%]Downloaded: 3892 file(s) [attempted 3892/5011 = 77%]Downloaded: 3966 file(s) [attempted 3966/5011 = 79%]Downloaded: 4026 file(s) [attempted 4026/5011 = 80%]Downloaded: 4085 file(s) [attempted 4085/5011 = 81%]Downloaded: 4145 file(s) [attempted 4145/5011 = 82%]Downloaded: 4218 file(s) [attempted 4218/5011 = 84%]Downloaded: 4276 file(s) [attempted 4276/5011 = 85%]Downloaded: 4342 file(s) [attempted 4342/5011 = 86%]Downloaded: 4385 file(s) [attempted 4385/5011 = 87%]Downloaded: 4457 file(s) [attempted 4457/5011 = 88%]Downloaded: 4523 file(s) [attempted 4523/5011 = 90%]Downloaded: 4599 file(s) [attempted 4599/5011 = 91%]Downloaded: 4669 file(s) [attempted 4669/5011 = 93%]Downloaded: 4738 file(s) [attempted 4738/5011 = 94%]Downloaded: 4804 file(s) [attempted 4804/5011 = 95%]Downloaded: 4866 file(s) [attempted 4866/5011 = 97%]Downloaded: 4919 file(s) [attempted 4919/5011 = 98%]Downloaded: 4954 file(s) [attempted 4954/5011 = 98%]Downloaded: 5011 file(s) [attempted 5011/5011 = 100%] (100% success)
+Decompressing 5011 file(s)
+Unpacked in 16914 ms
+Completed successfully!
+info: mathlib: cloning https://github.com/leanprover-community/mathlib4.git to '././.lake/packages/mathlib'
+info: batteries: cloning https://github.com/leanprover-community/batteries to '././.lake/packages/batteries'
+info: Qq: cloning https://github.com/leanprover-community/quote4 to '././.lake/packages/Qq'
+info: aesop: cloning https://github.com/leanprover-community/aesop to '././.lake/packages/aesop'
+info: proofwidgets: cloning https://github.com/leanprover-community/ProofWidgets4 to '././.lake/packages/proofwidgets'
+info: importGraph: cloning https://github.com/leanprover-community/import-graph to '././.lake/packages/importGraph'
+info: Cli: cloning https://github.com/leanprover/lean4-cli to '././.lake/packages/Cli'
+info: mathlib: running post-update hooks
