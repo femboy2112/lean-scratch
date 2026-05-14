@@ -178,6 +178,86 @@ Recommended next branch:
 
 `codex/tlica-generated-trajectory-api-v0`
 
+## 10. Profile-space helper API branch
+
+- Work branch: `codex/tlica-profile-space-helpers-v0`, created from synced
+  `main`.
+- Goal: add low-risk convenience lemmas for `ProfileSpace`, `edist_def`, and
+  the pseudo-emetric/profile-distance API without changing the underlying
+  distance definitions.
+- Lean project directory: repository root (`.`).
+
+Starting checks before branch creation:
+
+- `git fetch --all`: succeeded.
+- `git checkout main`: already on `main`.
+- `git pull origin main`: already up to date.
+- `python3 scripts/check_codex_skills.py`: succeeded.
+- `bash scripts/bootstrap_codex.sh`: succeeded.
+- `lake build`: succeeded with existing warning-only lints.
+- `bash scripts/audit_lean.sh`: succeeded.
+
+Lean declarations added:
+
+- `edist_eq_dInfUnion`
+- `edist_self_profile`
+- `edist_symm_profile`
+- `edist_triangle_profile`
+- `edist_le_one_profile`
+- `mem_emetric_ball_iff_dInfUnion_lt`
+
+The existing `edist_def` theorem remains the definitional bridge from
+profile-space `edist` to `dInfUnion`. The new helper family packages existing
+`dInfUnion` self, symmetry, triangle, and unit-bound theorems through the
+`ProfileSpace` wrapper. The emetric-ball helper unfolds membership in
+`EMetric.ball` to the union-form profile distance.
+
+Skipped candidates:
+
+- `ProfileSpace.ext_zeroExtend`: skipped because `ProfileSpace` is a type
+  alias for bundled `ScalarProfile` data, and equal zero-extensions do not
+  determine the bundled domain/value fields.
+- Cauchy, completeness, and broader topology helpers: intentionally out of
+  scope for this API-helper branch.
+
+Files updated:
+
+- `TLICA/ProfileComparison/PseudoEMetric.lean`
+- `MAPPING.md`
+- `docs/tlica_codex/LEAN_VERIFICATION_REPORT.md`
+- `docs/tlica_codex/lean_declaration_inventory.md`
+- `docs/tlica_rosetta/ROSETTA_MATH_FIRST_LEDGER.md`
+- `docs/tlica_rosetta/ROSETTA_DECLARATION_COVERAGE.md`
+- `docs/tlica_rosetta/ROSETTA_COVERAGE_AUDIT.md`
+- `docs/tlica_rosetta/FEATURE_COMPLETENESS_MATRIX.md`
+- `docs/tlica_rosetta/LEAN_IMPROVEMENT_BACKLOG.md`
+- `docs/tlica_rosetta/NEXT_LEAN_FRONTIER.md`
+
+Status and exclusions:
+
+- `ProfileSpace` remains the pseudo-emetric wrapper over `ScalarProfile`.
+- `edist` on `ProfileSpace` is definitionally `dInfUnion`.
+- Added lemmas are API/convenience theorems, not new foundational distance
+  definitions.
+- No changes were made to `ScalarProfile`, `zeroExtend`, `dInfUnion`,
+  `dInfShared`, `ProfileSpace`, or the `PseudoEMetricSpace` instance.
+- No RCX/religious-experience formalization, named affect taxonomy,
+  stochastic projection, phenomenological duration, or contestable-boundary
+  Lean theory was added.
+
+Final validation for this branch:
+
+- `lake build`: succeeded with existing warning-only lints.
+- `bash scripts/audit_lean.sh`: succeeded.
+- `python3 scripts/extract_lean_decls.py > docs/tlica_codex/lean_declaration_inventory.md`:
+  succeeded.
+- Audit target: zero imported `sorry`, zero imported `admit`, and zero global
+  `axiom` declarations.
+
+Recommended next branch:
+
+`codex/tlica-contestable-boundary-source-refinement-v0`
+
 Purpose: expand deterministic trajectory helper APIs around supplied
 trajectories, one-step branches, and adjacent profile distances while keeping
 the layer deterministic.
