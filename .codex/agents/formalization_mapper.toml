@@ -1,4 +1,5 @@
 name = "formalization_mapper"
+description = "Maintain TLICA source-to-math-to-Lean mapping and Rosetta status docs."
 model_reasoning_effort = "high"
 model_verbosity = "medium"
 approval_policy = "on-request"

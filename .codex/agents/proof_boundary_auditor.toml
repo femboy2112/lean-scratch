@@ -1,4 +1,5 @@
 name = "proof_boundary_auditor"
+description = "Audit TLICA theorem-status boundaries and placeholder/deferred claim hygiene."
 model_reasoning_effort = "xhigh"
 model_verbosity = "high"
 approval_policy = "on-request"

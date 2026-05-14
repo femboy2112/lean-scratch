@@ -1,4 +1,5 @@
 name = "lean_proof_engineer"
+description = "Repair and extend TLICA Lean proofs while preserving theorem-status hygiene."
 model_reasoning_effort = "xhigh"
 model_verbosity = "high"
 approval_policy = "on-request"

@@ -1,4 +1,5 @@
 name = "implementation_engineer"
+description = "Maintain TLICA repository mechanics, scripts, Codex configs, and reports."
 model_reasoning_effort = "medium"
 model_verbosity = "medium"
 approval_policy = "on-request"

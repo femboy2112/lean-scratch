@@ -1,4 +1,5 @@
 name = "tlica_theory_analyst"
+description = "Analyze TLICA source commitments before Lean encoding and theorem packaging."
 model_reasoning_effort = "xhigh"
 model_verbosity = "high"
 approval_policy = "on-request"

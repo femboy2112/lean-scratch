@@ -41,6 +41,7 @@ REQUIRED_AGENTS = [
 FRONTMATTER = re.compile(r"^---\n(.*?)\n---\n", re.DOTALL)
 SUPPORTED_AGENT_KEYS = {
     "name",
+    "description",
     "developer_instructions",
     "model_reasoning_effort",
     "model_verbosity",
@@ -117,6 +118,9 @@ def validate_agent(agent: str, findings: list[dict[str, str]]) -> None:
     expected_name = path.stem
     if data.get("name") != expected_name:
         append_finding(findings, "BLOCKER", rel, f"name must be {expected_name!r}")
+    description = data.get("description")
+    if not isinstance(description, str) or not description.strip():
+        append_finding(findings, "BLOCKER", rel, "missing non-empty description")
 
 
 def main() -> None:

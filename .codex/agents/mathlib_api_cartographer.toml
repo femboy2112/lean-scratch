@@ -1,4 +1,5 @@
 name = "mathlib_api_cartographer"
+description = "Locate mathlib APIs, imports, signatures, and proof-compatible formulations."
 model_reasoning_effort = "high"
 model_verbosity = "medium"
 approval_policy = "on-request"
