@@ -19,12 +19,7 @@ Scope: recommended Lean-ready or prose-first branches after
    `futureMSIContents` names where proof-stable. Compatibility names remain
    only in `TLICA.GeneralActionProjection` for older branch continuity.
 
-3. `codex/tlica-generated-trajectory-api-v0`
-   - Expand deterministic trajectory helper API around `generatedBy`,
-     one-step branches, and adjacent profile distances.
-   - Keep the layer deterministic.
-
-4. `codex/tlica-profile-space-helpers-v0`
+3. `codex/tlica-profile-space-helpers-v0`
    - Add convenience lemmas for `ProfileSpace`, `edist_def`, and the
      pseudometric/profile-distance API.
    - Avoid changing the underlying distance definitions.

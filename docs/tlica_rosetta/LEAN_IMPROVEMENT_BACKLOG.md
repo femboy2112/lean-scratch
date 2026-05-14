@@ -60,11 +60,17 @@ coverage.
 |---|---|---|---|---|---|---|---|
 | Completed P2 | Direct `ProjectedPCE` API cleanup | Prevents compatibility names from becoming the active application API. | Existing direct `ProjectMap α Act`, `ProjectedPCE`, `projectedProfile`, and `futureMSIContents` definitions. | `codex/tlica-direct-projected-pce-api-v0` | `TLICA/Agency.lean`, `TLICA/FreeWill.lean`, `TLICA/TemporalTrajectory.lean`, `TLICA/DifferentiatedAffect.lean` | Mapping, ledger, coverage docs, matrix, backlog, report, inventory | Active modules now use direct API definitions where proof-stable. `TLICA.GeneralActionProjection` remains as the compatibility-only layer for older branches. |
 
+## A7. Completed in `codex/tlica-generated-trajectory-api-v0`
+
+| Priority | Target | Why it matters | Required dependencies | Branch name | Lean files | Docs updated | Result |
+|---|---|---|---|---|---|---|---|
+| Completed P2 | Generated trajectory helper API | Further expands deterministic trajectory helper names around supplied trajectories. | Existing `generatedBy`, one-step branches, and adjacent distance definitions. | `codex/tlica-generated-trajectory-api-v0` | `TLICA/TemporalTrajectory.lean` | Mapping, ledger, coverage docs, matrix, report, inventory | Added branch-profile and one-step-branch generated step helpers, generated adjacent union/shared-distance rewrites, guarded shared-distance facts, one-step branch direct API aliases, and one-step branch union-distance bounds/reflexivity/symmetry/triangle helpers. |
+
 ## B. Remaining Immediate Lean-Ready Theorem Targets
 
 | Priority | Target | Why it matters | Required dependencies | Proposed branch name | Expected Lean files | Expected docs to update | Risk |
 |---|---|---|---|---|---|---|---|
-| P2 | Generated trajectory helper API | Further expands deterministic trajectory helper names around supplied trajectories. | Existing `generatedBy`, one-step branches, and adjacent distance definitions. | `codex/tlica-generated-trajectory-api-v0` | `TLICA/TemporalTrajectory.lean` | `MAPPING.md`, ledger, coverage docs | Low-medium |
+| P2 | Profile-space helper API | Add convenience lemmas for profile-space distance notation without changing distance definitions. | Existing `ProfileSpace`, `edist`, and pointwise distance package. | `codex/tlica-profile-space-helpers-v0` | `TLICA/ProfileComparison/PseudoEMetric.lean`, possibly `TLICA/ProfileComparison/Pointwise.lean` | `MAPPING.md`, ledger, coverage docs | Low-medium |
 
 ## C. Lean-Ready Structure Targets
 
