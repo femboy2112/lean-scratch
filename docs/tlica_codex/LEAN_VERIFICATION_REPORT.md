@@ -107,7 +107,33 @@ Audit target:
 - Zero `admit` in imported Lean files.
 - Zero global `axiom` declarations in imported Lean files.
 
-## 7. Remaining exclusions and next branch
+## 7. Canonical `main` establishment
+
+- `origin/main` status before this task: no remote `main` ref was present.
+- Local `main` status before this task: no local `main` branch was present.
+- Action taken: created `main` directly from the verified
+  `codex/tlica-claude-union-shell-sync-v0` checkpoint.
+- Obsolete one-shot prompt/orchestration files removed from `main`:
+  - `CLAUDE_CODE_PROMPT.md`
+  - `CLAUDE_CODE_PROMPT_ROUND2.md`
+  - `CLAUDE_CODE_PROMPT_ROUND3.md`
+  - `CLAUDE_CODE_PROMPT_ROUND4.md`
+  - `ORCHESTRATION_GO.md`
+  - `CODEX_GO_NEXT.md`
+  - `tlica-lean/CLAUDE_CODE_PROMPT.md`
+  - `tlica-lean/CLAUDE_CODE_PROMPT_ROUND2.md`
+  - `tlica-lean/CLAUDE_CODE_PROMPT_ROUND3.md`
+- Durable Codex/Rosetta prompt documentation under `docs/tlica_codex/` was
+  kept as project documentation.
+- Claude result-log copies under `tlica-results-*` were kept as provenance.
+- `lake build`: succeeded with existing warning-only lints.
+- `bash scripts/audit_lean.sh`: succeeded.
+- `python3 scripts/extract_lean_decls.py > docs/tlica_codex/lean_declaration_inventory.md`:
+  succeeded; no declaration inventory diff was produced by prompt removal.
+- Audit target: zero imported `sorry`, zero imported `admit`, and zero global
+  `axiom` declarations.
+
+## 8. Remaining exclusions and next branch
 
 Remaining exclusions:
 
