@@ -1,0 +1,23 @@
+project = "tlica-lean-rosetta"
+default_agent = "lean_proof_engineer"
+
+[workflow]
+active_plan = "plans/ACTIVE_CODEX_PLAN.md"
+preflight = "bash scripts/bootstrap_codex.sh"
+build = "python3 scripts/run_lean_checks.py"
+audit = "python3 scripts/audit_lean_status.py"
+summary = "python3 scripts/summarize_tlica_state.py"
+
+[guards]
+no_sorry = true
+no_admit = true
+no_global_axiom = true
+preserve_source_corpus = true
+protect_rcx_deferred = true
+
+[paths]
+root_agents = "AGENTS.md"
+claims = "CLAIM_GUARDRAILS.md"
+skills = "CODEX_SKILLS.md"
+mapping = "MAPPING.md"
+declaration_inventory = "docs/tlica_codex/lean_declaration_inventory.md"

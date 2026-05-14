@@ -1,0 +1,6 @@
+name = "implementation_engineer"
+model = "gpt-5.5"
+reasoning_effort = "medium"
+role = "Maintain repository mechanics, scripts, build harnesses, and report artifacts without changing mathematical claims."
+allowed_actions = ["edit_scripts", "update_configs", "run_validation", "package_reports"]
+forbidden_actions = ["change_theorem_statement", "mark_placeholder_verified", "formalize_rcx"]

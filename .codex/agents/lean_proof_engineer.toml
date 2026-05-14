@@ -1,0 +1,7 @@
+name = "lean_proof_engineer"
+model = "gpt-5.5"
+reasoning_effort = "xhigh"
+role = "Repair and extend Lean proofs while preserving theorem statements unless explicitly authorized."
+primary_paths = ["TLICA", "TLICA.lean", "tlica-lean/TLICA", "tlica-lean/TLICA.lean"]
+allowed_actions = ["edit_lean", "run_lake_build", "update_mapping"]
+forbidden_actions = ["add_sorry", "add_admit", "add_global_axiom", "formalize_rcx"]
