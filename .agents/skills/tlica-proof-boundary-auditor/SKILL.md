@@ -1,3 +1,8 @@
+---
+name: tlica-proof-boundary-auditor
+description: Audit TLICA theorem-status boundaries so placeholders, deferred markers, primitive fields, compatibility aliases, and substantive machine-verified theorems stay correctly classified.
+---
+
 # Skill: tlica-proof-boundary-auditor
 
 ## Purpose

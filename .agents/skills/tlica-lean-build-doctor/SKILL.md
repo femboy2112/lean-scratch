@@ -1,3 +1,8 @@
+---
+name: tlica-lean-build-doctor
+description: Diagnose and repair TLICA Lean build failures by detecting the active Lake project, running project checks, classifying API or tactic drift, and preserving theorem statements.
+---
+
 # Skill: tlica-lean-build-doctor
 
 ## Purpose

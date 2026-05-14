@@ -1,3 +1,8 @@
+---
+name: tlica-profile-comparison-lab
+description: Analyze TLICA profile-comparison and shell-refinement theorem targets, separating scalar, shared-domain, and union-domain obligations before Lean proof work.
+---
+
 # Skill: tlica-profile-comparison-lab
 
 ## Purpose

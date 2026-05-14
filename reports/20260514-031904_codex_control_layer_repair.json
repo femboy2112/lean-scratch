@@ -1,0 +1,49 @@
+{
+  "branch": "codex/tlica-direct-projected-pce-api-v0",
+  "lean_project_dir": ".",
+  "head": "58ea4d90b3842928a165fa01f870090b6686b9eb",
+  "repairs_applied": [
+    "added YAML frontmatter with name and description to all five project skills",
+    "rewrote all six .codex/agents TOML files to supported Codex role schema",
+    "moved role constraints into developer_instructions prose",
+    "strengthened scripts/check_codex_skills.py to validate skill frontmatter and agent schema"
+  ],
+  "verification": {
+    "python3 scripts/check_codex_skills.py": "pass",
+    "bash scripts/bootstrap_codex.sh": "pass",
+    "codex debug prompt-input \"agent config validation\"": "pass",
+    "python3 scripts/run_lean_checks.py": "pass",
+    "lake build": "pass with existing linter warnings",
+    "python3 scripts/audit_lean_status.py": "pass",
+    "bash scripts/audit_lean.sh": "pass",
+    "python3 scripts/summarize_tlica_state.py": "pass",
+    "python3 scripts/extract_lean_decls.py > docs/tlica_codex/lean_declaration_inventory.md": "pass; no diff"
+  },
+  "theorem_status_changes": {
+    "lean_declarations_changed": false,
+    "theorem_statements_changed": false,
+    "status_docs_changed": false,
+    "declaration_inventory_changed": false
+  },
+  "placeholder_deferred_inventory": {
+    "sorry": 0,
+    "admit": 0,
+    "global_axiom": 0,
+    "true_placeholder": 0,
+    "deferred_marker": [
+      "TLICA/DifferentiatedAffect.lean:354 namedAffectTaxonomy_deferred",
+      "TLICA/DifferentiatedAffect.lean:358 loveConstitutiveExtension_deferred",
+      "TLICA/DifferentiatedAffect.lean:362 substrateAffectPathway_deferred",
+      "TLICA/DifferentiatedAffect.lean:366 sourceOpacityAffect_deferred",
+      "TLICA/ProfileComparison/ShellRefinement.lean:344 shellStratifiedBound_deferred",
+      "TLICA/TemporalTrajectory.lean:200 stochasticTrajectory_deferred",
+      "TLICA/TemporalTrajectory.lean:204 phenomenologicalDuration_deferred",
+      "TLICA/TemporalTrajectory.lean:208 temporalContinuityMetric_deferred"
+    ]
+  },
+  "remaining_gaps": [
+    "deferred markers remain intentionally deferred",
+    "pre-existing lake build linter warnings remain"
+  ],
+  "next_recommended_branch": "codex/tlica-direct-projected-pce-api-v0"
+}

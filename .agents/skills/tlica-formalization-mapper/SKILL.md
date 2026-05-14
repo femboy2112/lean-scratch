@@ -1,3 +1,8 @@
+---
+name: tlica-formalization-mapper
+description: Maintain the TLICA declaration-to-source-to-Rosetta bridge by refreshing Lean declaration inventories, comparing MAPPING and Rosetta status rows, and classifying coverage with the project guardrail vocabulary.
+---
+
 # Skill: tlica-formalization-mapper
 
 ## Purpose

@@ -1,3 +1,8 @@
+---
+name: tlica-research-orchestrator
+description: Orchestrate TLICA active mission packets by loading control docs, running preflight, routing build/audit/mapper work, and producing status reports under the repository guardrails.
+---
+
 # Skill: tlica-research-orchestrator
 
 ## Purpose
