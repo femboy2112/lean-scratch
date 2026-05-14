@@ -19,8 +19,10 @@ The seven-shell scalar convention is source-fixed in the rigorous edition:
 The boundary-convention branch encoded these conventions additively in Lean as
 `ShellIndex7`, `shellOf7`, endpoint functions, helper lemmas, and
 `fullShellStratifiedBound`. The profile-shell corollary branch packages that
-scalar theorem into shared-domain profile-level bounds over `dInfShared`.
-Existing interior `shellOf` over `Fin 5` remains unchanged.
+scalar theorem into shared-domain profile-level bounds over `dInfShared`. The
+union-shell sync branch also packages the scalar theorem into union-domain
+`dInfUnion` bounds using explicit zero-extension and outer-shell absorption
+hypotheses. Existing interior `shellOf` over `Fin 5` remains unchanged.
 
 ## Convention Table
 
@@ -36,7 +38,7 @@ Existing interior `shellOf` over `Fin 5` remains unchanged.
 | Boundary endpoint convention `r_(-1)=1`, `r_6=0` for Proposition 5.3.1 | source-fixed in working paper | `profile_comparison_v0_2.md` Proposition 5.3.1 | `shellLowerEndpoint`, `shellUpperEndpoint` |
 | Shell distance terminology | source-suggested | Working paper uses endpoint max bound rather than a standalone categorical shell-distance function | Lean proves `shellEndpointBound` and helper facts, not a separate categorical distance theorem |
 | Profile-level full shell-stable corollary over `dInfShared` | Lean-inferred theorem | Follows from pointwise theorem plus `shellStableDistanceBound_of_pointwise` over shared contents | `dInfShared_le_shellEndpointBound_zeroExtend`, `dInfShared_le_shellEndpointBound`, `dInfShared_le_of_pointwise_shellEndpointBound` |
-| Profile-level shell-stable corollary over `dInfUnion` | Lean-ready only after hypothesis refinement | `dInfUnion` compares zero-extended values over the union domain, so absent profile values contribute `0` | Audited below; no theorem added in this branch |
+| Profile-level shell-stable corollary over `dInfUnion` | machine-verified theorem family | `dInfUnion` compares zero-extended values over the union domain, so absent profile values contribute `0` | `dInfUnion_le_shellEndpointBound_zeroExtend`, `dInfUnion_le_threeWayMax_shellEndpointBound`, and variable-shell variants |
 
 ## Theorem Status
 
@@ -52,6 +54,8 @@ Machine-verified in this branch:
 - `shellOf7_cogito_value`
 - `shellOf7_outer_bound`
 - `shellEndpointBound`
+- `interiorShellIndexDistance_self`
+- `interiorShellIndexDistance_symm`
 - `fullShellStratifiedBound_endpointBound`
 - `shellEndpointBound_nonneg`
 - `shellEndpointBound_self_cogito`
@@ -64,35 +68,57 @@ Machine-verified in this branch:
 - `dInfShared_le_shellEndpointBound`
 - `dInfShared_le_of_pointwise_shellEndpointBound`
 - `dInfShared_le_sameInteriorShellEndpointBound`
+- `dInfUnion_le_of_pointwise`
+- `dInfUnion_le_of_pointwise_union`
+- `dInfUnion_le_shellEndpointBound_zeroExtend`
+- `dInfUnion_le_threeWayMax_shellEndpointBound`
+- `dInfUnion_le_of_pointwise_shellEndpointBound`
 
 The legacy marker `shellStratifiedBound_deferred` remains only as a compatibility
 marker for older documentation. It is superseded at the pointwise scalar level
 by `fullShellStratifiedBound`; at the shared-profile level, the exported
 machine-verified corollaries are the `dInfShared_*shellEndpointBound*`
-theorems.
+theorems. At the union-profile level, the exported machine-verified corollaries
+are the `dInfUnion_*shellEndpointBound*` theorem family.
 
-## Union-Domain Shell-Bound Audit
+## Union-Domain Shell-Bound Status
 
-A `dInfUnion` shell theorem is structurally harder than the shared-domain
-theorem:
+A `dInfUnion` shell theorem is structurally more explicit than the
+shared-domain theorem:
 
 - `dInfUnion f g` compares `f.zeroExtend x` and `g.zeroExtend x` over the
   ambient/union-relevant domain.
 - If `x` is outside one profile's domain, that profile contributes the value
   `0`.
-- A clean shell theorem therefore needs shell hypotheses for zero-extended
-  values over `f.domain ∪ g.domain`, not only over `f.domain ∩ g.domain`.
-- Those hypotheses must say whether absent contents are treated as exact-zero
-  outer-shell values, strict not-I points, or another application-calibrated
-  convention.
+- The clean theorem family therefore states shell hypotheses for zero-extended
+  values over the ambient domain, or splits the source-shaped hypothesis into
+  shared-domain, `f`-only, and `g`-only cases.
+- Absent contents are treated as zero values in `ShellIndex7.outer`, matching
+  the encoded zero-extension convention.
 
-No `dInfUnion` shell-bound theorem is added in this branch. The next theorem
-should use explicit union-domain zero-extension shell assignments once the
-hypothesis shape is fixed.
+The union-domain target is now machine verified:
+
+- `dInfUnion_le_shellEndpointBound_zeroExtend` is the preferred direct union
+  API when callers already reason about zero-extended profile values.
+- `dInfUnion_le_threeWayMax_shellEndpointBound` is the preferred source-shape
+  theorem for own-domain shell assignments, with a three-way max over shared,
+  `f`-only, and `g`-only cases.
+- `dInfUnion_le_of_pointwise_shellEndpointBound` is the variable-shell version.
+
+## Source-Version Note
+
+The encoded seven-shell convention is taken from the working-paper / formal
+apparatus sources cited in this audit, especially `04_profiles.md` and
+`profile_comparison_v0_2.md`. If a later source edition changes shell
+numbering, endpoint inclusivity, or strict-not-I treatment, `ShellIndex7`,
+`shellOf7`, and the shell-bound theorem family must be re-audited. The current
+Lean theorem family is valid for the encoded convention regardless of later
+prose changes.
 
 ## Remaining Work
 
-The remaining work is no longer a source-level boundary blocker, and the
-shared-domain profile-level packaging is machine verified. The next independent
-target is a union-domain theorem with explicit zero-extension shell hypotheses,
-or a separate shell-count/topological invariant if the source chooses one.
+The remaining work is no longer a source-level boundary blocker. The scalar
+seven-shell theorem, shared-domain profile-level packaging, and union-domain
+profile-level packaging are machine verified. The next independent target is
+direct projected-PCE API cleanup, or a separate shell-count/topological
+invariant if the source chooses one.

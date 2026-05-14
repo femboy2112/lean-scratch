@@ -67,6 +67,17 @@ def shellOf (rs : ShellThresholds) (i : Fin 5) (a : ℝ) : Prop :=
 def interiorShellIndexDistance (i j : Fin 5) : Nat :=
   if i.val ≤ j.val then j.val - i.val else i.val - j.val
 
+/-- Interior shell index distance vanishes on the diagonal. -/
+theorem interiorShellIndexDistance_self (i : Fin 5) :
+    interiorShellIndexDistance i i = 0 := by
+  simp [interiorShellIndexDistance]
+
+/-- Interior shell index distance is symmetric. -/
+theorem interiorShellIndexDistance_symm (i j : Fin 5) :
+    interiorShellIndexDistance i j = interiorShellIndexDistance j i := by
+  unfold interiorShellIndexDistance
+  split_ifs with hij hji <;> omega
+
 /-- Seven shell indices from the source convention: cogito, five interior
     threshold shells, and the outer low-correlation shell. -/
 inductive ShellIndex7 where

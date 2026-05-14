@@ -1,12 +1,13 @@
 # Next Lean Frontier
 
 Scope: recommended Lean-ready or prose-first branches after
-`codex/tlica-profile-shell-bound-corollary-v0`.
+`codex/tlica-claude-union-shell-sync-v0`.
 
 ## Recommended Branches
 
 1. ~~`codex/tlica-union-shell-bound-v0`~~ — **done** (landed on
-   `claude/test-lean-build-5zO1q` rather than a codex branch): five
+   `claude/test-lean-build-5zO1q` and synced into
+   `codex/tlica-claude-union-shell-sync-v0`): five
    `dInfUnion` shell-bound theorems in
    `TLICA/ProfileComparison/ShellRefinement.lean`, parallel to the
    `dInfShared_le_*` family, absorbing absent values into the `outer`

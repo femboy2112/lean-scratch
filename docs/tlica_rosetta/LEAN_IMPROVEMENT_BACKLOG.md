@@ -47,11 +47,17 @@ coverage.
 | Completed audit | Union-domain shell-bound audit | Prevents overclaiming a `dInfUnion` shell theorem before zero-extension shell hypotheses are fixed. | `dInfUnion`, zero-extension convention. | `codex/tlica-profile-shell-bound-corollary-v0` | None | `SHELL_BOUNDARY_CONVENTION_AUDIT.md`, `NEXT_LEAN_FRONTIER.md`, matrix, backlog, report | Documents that union-domain shell bounds need hypotheses over `f.domain ∪ g.domain`, including absent values as zero. |
 | Completed P2 | Direct projected-profile/future-content aliases | Reduces compatibility-name friction without refactoring downstream modules. | Existing general/direct equality theorems. | `codex/tlica-profile-shell-bound-corollary-v0` | `TLICA/FreeWill.lean`, `TLICA/TemporalTrajectory.lean` | Mapping, ledger, coverage docs, matrix, report, inventory | Added branch and trajectory direct future-content bridges, plus a temporal one-step branch union-distance definition and unfold theorem. |
 
+## A5. Completed in `codex/tlica-claude-union-shell-sync-v0`
+
+| Priority | Target | Why it matters | Required dependencies | Branch name | Lean files | Docs updated | Result |
+|---|---|---|---|---|---|---|---|
+| Completed P2 | Union-domain profile shell-stratified bound | Packages `fullShellStratifiedBound` over `dInfUnion` with explicit zero-extension and outer-shell absorption hypotheses. | Boundary-aware pointwise theorem, union-domain hypothesis design, absent values treated as zero. | `codex/tlica-claude-union-shell-sync-v0` | `TLICA/ProfileComparison/ShellRefinement.lean` | `MAPPING.md`, ledger, matrix, coverage docs, shell audit, report, inventory | Added `dInfUnion_le_of_pointwise`, `dInfUnion_le_of_pointwise_union`, `dInfUnion_le_shellEndpointBound_zeroExtend`, `dInfUnion_le_threeWayMax_shellEndpointBound`, and `dInfUnion_le_of_pointwise_shellEndpointBound`. |
+| Completed P4 | Interior shell-distance helper usage | Keeps `interiorShellIndexDistance` from being only an orphaned helper definition. | Existing `interiorShellIndexDistance`. | `codex/tlica-claude-union-shell-sync-v0` | `TLICA/ProfileComparison/ShellRefinement.lean` | Mapping, ledger, coverage docs, matrix, report, inventory | Added `interiorShellIndexDistance_self` and `interiorShellIndexDistance_symm`. |
+
 ## B. Remaining Immediate Lean-Ready Theorem Targets
 
 | Priority | Target | Why it matters | Required dependencies | Proposed branch name | Expected Lean files | Expected docs to update | Risk |
 |---|---|---|---|---|---|---|---|
-| P2 | Union-domain profile shell-stratified bound | Packages `fullShellStratifiedBound` over `dInfUnion` once zero-extension shell-assignment hypotheses over `f.domain ∪ g.domain` are fixed. | Boundary-aware pointwise theorem, union-domain hypothesis design, absent values treated as zero. | `codex/tlica-union-shell-bound-v0` | `TLICA/ProfileComparison/ShellRefinement.lean` if hypothesis shape is clean | `MAPPING.md`, ledger, matrix, coverage docs, shell audit | Medium |
 | P2 | Direct `ProjectedPCE` API cleanup | Reduces dependence on compatibility names in comments and downstream helper statements. | Existing equality theorem `generalProjectedPCE_eq_projectedPCE`; branch/trajectory direct API bridges. | `codex/tlica-direct-projected-pce-api-v0` | Dependent modules if touched | `MAPPING.md`, ledger, coverage audit | Low-medium |
 
 ## C. Lean-Ready Structure Targets
