@@ -2,24 +2,32 @@
 
 ## Current checkpoint
 
-Base mathematical checkpoint:
+Current canonical branch:
+
+```text
+main
+```
+
+Current mathematical checkpoint includes:
+
+- durable TLICA-specific Codex control layer;
+- Claude union-domain shell-bound sync;
+- direct `ProjectMap α Act` / `ProjectedPCE` API migration;
+- machine-verified scalar, shared-domain, and union-domain shell-bound theorem families;
+- no RCX formalization, no named affect taxonomy, no stochastic projection, and no phenomenological duration.
+
+Completed branches now folded into `main` include:
 
 ```text
 codex/tlica-claude-union-shell-sync-v0
-```
-
-Current scaffold branch:
-
-```text
 codex/tlica-codex-control-layer-v0
+codex/tlica-direct-projected-pce-api-v0
 ```
-
-This branch installs the durable TLICA-specific Codex control layer. The latest Lean state already includes the scalar/shared/union shell-bound theorem families and synchronized Rosetta/control docs.
 
 ## Active packet
 
 ```text
-plans/codex/2026-05-14_tlica_status_hygiene_packet.md
+plans/codex/2026-05-14_tlica_generated_trajectory_api_packet.md
 ```
 
 ## Launch command
@@ -30,35 +38,37 @@ $tlica-research-orchestrator go
 
 ## Immediate objective
 
-Validate the newly installed Codex control layer and audit current status documents against the latest union-shell checkpoint before starting new theorem work.
-
-This first active mission is intentionally conservative:
-
-- verify scaffold files and skill manifests;
-- detect the Lean project directory;
-- run build/audit where possible;
-- compare MAPPING/Rosetta/docs against declaration inventory and build evidence;
-- repair stale status language only;
-- do not change theorem statements.
-
-## Next Lean branch after hygiene
+Create and run the next Lean branch:
 
 ```text
-codex/tlica-direct-projected-pce-api-v0
+codex/tlica-generated-trajectory-api-v0
 ```
 
-Purpose: migrate active modules away from compatibility names toward the primary `ProjectMap α Act` / `ProjectedPCE` API where proof-stable.
+Purpose: expand deterministic trajectory helper APIs around `generatedBy`, one-step branches, and adjacent profile distances while keeping the trajectory layer deterministic.
+
+## Required first checks
+
+Before new Lean work:
+
+```bash
+python3 scripts/check_codex_skills.py
+bash scripts/bootstrap_codex.sh
+lake build
+bash scripts/audit_lean.sh
+```
 
 ## Required final artifacts
 
-- `reports/<timestamp>_tlica_status_hygiene_audit.md`
-- `reports/<timestamp>_tlica_status_hygiene_audit.json`
+- updated `docs/tlica_codex/LEAN_VERIFICATION_REPORT.md`
+- updated `docs/tlica_codex/lean_declaration_inventory.md` if Lean changed
+- updated Rosetta/MAPPING docs if declarations or status changed
+- mission report under `reports/`
 
 ## Do not do in this active packet
 
-- Do not change theorem statements.
-- Do not add new application modules.
-- Do not formalize RCX.
+- Do not add religious-experience / RCX Lean formalization.
 - Do not add named affect taxonomy.
-- Do not add stochastic projection or phenomenological duration.
+- Do not add stochastic projection.
+- Do not add phenomenological duration.
 - Do not add contestable-boundary Lean theory.
+- Do not change source-corpus files unless explicitly authorized.
