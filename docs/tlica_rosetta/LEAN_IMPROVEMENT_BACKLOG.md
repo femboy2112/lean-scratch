@@ -66,18 +66,23 @@ coverage.
 |---|---|---|---|---|---|---|---|
 | Completed P2 | Generated trajectory helper API | Further expands deterministic trajectory helper names around supplied trajectories. | Existing `generatedBy`, one-step branches, and adjacent distance definitions. | `codex/tlica-generated-trajectory-api-v0` | `TLICA/TemporalTrajectory.lean` | Mapping, ledger, coverage docs, matrix, report, inventory | Added branch-profile and one-step-branch generated step helpers, generated adjacent union/shared-distance rewrites, guarded shared-distance facts, one-step branch direct API aliases, and one-step branch union-distance bounds/reflexivity/symmetry/triangle helpers. |
 
+## A8. Completed in `codex/tlica-profile-space-helpers-v0`
+
+| Priority | Target | Why it matters | Required dependencies | Branch name | Lean files | Docs updated | Result |
+|---|---|---|---|---|---|---|---|
+| Completed P2 | Profile-space helper API | Makes the profile-space pseudo-emetric instance easier to cite without changing the underlying distance definitions. | Existing `ProfileSpace`, `edist`, and pointwise union-distance package. | `codex/tlica-profile-space-helpers-v0` | `TLICA/ProfileComparison/PseudoEMetric.lean` | `MAPPING.md`, ledger, coverage docs, matrix, report, inventory | Added `edist`/`dInfUnion` bridge, self/symmetry/triangle/unit-bound helper theorems, and an `EMetric.ball` unfold helper. |
+
 ## B. Remaining Immediate Lean-Ready Theorem Targets
 
-| Priority | Target | Why it matters | Required dependencies | Proposed branch name | Expected Lean files | Expected docs to update | Risk |
-|---|---|---|---|---|---|---|---|
-| P2 | Profile-space helper API | Add convenience lemmas for profile-space distance notation without changing distance definitions. | Existing `ProfileSpace`, `edist`, and pointwise distance package. | `codex/tlica-profile-space-helpers-v0` | `TLICA/ProfileComparison/PseudoEMetric.lean`, possibly `TLICA/ProfileComparison/Pointwise.lean` | `MAPPING.md`, ledger, coverage docs | Low-medium |
+No immediate theorem-only target is currently queued after the profile-space
+helper API. The next listed targets require source or signature clarification
+before Lean theorem work.
 
 ## C. Lean-Ready Structure Targets
 
 | Priority | Target | Why it matters | Required dependencies | Proposed branch name | Expected Lean files | Expected docs to update | Risk |
 |---|---|---|---|---|---|---|---|
 | P3 | Contestable boundary signature clarification | Turns `contestableBoundary` from a bare named set into a documented structure or theorem target after source refinement. | Choice among perturbation sensitivity, Mode A/C dual candidacy, projection-induced class change, or temporal instability. | `codex/tlica-contestable-boundary-signature` | `TLICA/IBoundary.lean` after source work | `MAPPING.md`, ledger, source-alignment audit | Medium |
-| P2 | Pseudo-emetric convenience lemmas | Makes the profile-space instance easier to cite. | Existing `ProfileSpace` and `edist_def`. | `codex/tlica-profile-space-helpers` | `TLICA/ProfileComparison/PseudoEMetric.lean` | `MAPPING.md`, ledger | Low |
 
 ## D. Prose-First Targets
 

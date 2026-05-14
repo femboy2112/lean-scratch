@@ -1,0 +1,57 @@
+{
+  "branch": "codex/tlica-profile-space-helpers-v0",
+  "lean_dir": ".",
+  "active_mission_packet": "plans/codex/2026-05-14_tlica_profile_space_helpers_packet.md",
+  "objective": "Add low-risk ProfileSpace pseudo-emetric helper lemmas without changing underlying profile-distance definitions.",
+  "starting_checks": {
+    "git_fetch_all": "passed",
+    "git_checkout_main": "passed",
+    "git_pull_origin_main": "passed",
+    "check_codex_skills": "passed",
+    "bootstrap_codex": "passed",
+    "lake_build": "passed_with_existing_warning_only_lints",
+    "audit_lean": "passed"
+  },
+  "lean_files_changed": [
+    "TLICA/ProfileComparison/PseudoEMetric.lean"
+  ],
+  "declarations_added": [
+    "edist_eq_dInfUnion",
+    "edist_self_profile",
+    "edist_symm_profile",
+    "edist_triangle_profile",
+    "edist_le_one_profile",
+    "mem_emetric_ball_iff_dInfUnion_lt"
+  ],
+  "skipped_candidates": [
+    {
+      "name": "ProfileSpace.ext_zeroExtend",
+      "reason": "Equality of zero-extensions does not determine bundled ScalarProfile domain/value data."
+    },
+    {
+      "name": "Cauchy, completeness, and broader topology helpers",
+      "reason": "Out of scope for this helper branch."
+    }
+  ],
+  "docs_updated": [
+    "MAPPING.md",
+    "docs/tlica_codex/LEAN_VERIFICATION_REPORT.md",
+    "docs/tlica_codex/lean_declaration_inventory.md",
+    "docs/tlica_rosetta/ROSETTA_MATH_FIRST_LEDGER.md",
+    "docs/tlica_rosetta/ROSETTA_DECLARATION_COVERAGE.md",
+    "docs/tlica_rosetta/ROSETTA_COVERAGE_AUDIT.md",
+    "docs/tlica_rosetta/FEATURE_COMPLETENESS_MATRIX.md",
+    "docs/tlica_rosetta/LEAN_IMPROVEMENT_BACKLOG.md",
+    "docs/tlica_rosetta/NEXT_LEAN_FRONTIER.md"
+  ],
+  "final_validation": {
+    "lake_build": "passed_with_existing_warning_only_lints",
+    "audit_lean": "passed",
+    "extract_lean_decls": "passed",
+    "sorry_admit_axiom_audit": "passed"
+  },
+  "underlying_distance_definitions_changed": false,
+  "prohibited_application_layers_added": false,
+  "source_corpus_edited": false,
+  "next_recommended_branch": "codex/tlica-contestable-boundary-source-refinement-v0"
+}
