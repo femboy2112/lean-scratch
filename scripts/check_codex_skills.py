@@ -31,6 +31,7 @@ REQUIRED_AGENTS = [
     "proof_boundary_auditor.toml",
     "formalization_mapper.toml",
     "implementation_engineer.toml",
+    "tlica_theory_analyst.toml",
 ]
 
 
