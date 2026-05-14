@@ -323,9 +323,13 @@ theorem shellEndpointBound_symm
 
     The boundary-aware pointwise scalar theorem is now
     `fullShellStratifiedBound`; shared-domain profile corollaries are exported
-    through endpoint-bound theorems below. Union-domain shell bounds remain a
-    separate hypothesis-design target because zero-extension introduces `0`
-    outside one profile's domain. -/
+    through endpoint-bound theorems below. Union-domain shell bounds are
+    encoded by `dInfUnion_le_of_pointwise`, `dInfUnion_le_of_pointwise_union`,
+    `dInfUnion_le_shellEndpointBound_zeroExtend`,
+    `dInfUnion_le_threeWayMax_shellEndpointBound`, and
+    `dInfUnion_le_of_pointwise_shellEndpointBound`. The `outer` shell absorbs
+    `0` on each profile-only portion of the union; see the three-way-max
+    corollary for the natural source-paper hypothesis shape. -/
 def shellStratifiedBound_deferred : Prop := True
 
 /-- Profile-level shared-distance bound from an explicit pointwise bound.
@@ -472,5 +476,151 @@ theorem shellStableDistanceVanishing_simple
       linarith
     · exact absurd hx.2 hgx
   · exact absurd hx.1 hfx
+
+/-! ## Union-form shell-bound corollaries
+
+The lemmas below are the union-domain analogues of the `dInfShared_le_*`
+family. They build on `dInfUnion`, which (per `Pointwise.lean`) is the
+supremum `⨆ x : α, ENNReal.ofReal |f.zeroExtend x - g.zeroExtend x|` over
+the universal content-type — outside `f.domain ∪ g.domain` both
+zero-extensions are `0`, so the contribution vanishes.
+
+Reference: profile_comparison_v0_2.md §5.3 (union-form shell-stability
+bounds via zero-extension and outer-shell absorption). -/
+
+/-- Profile-level union-distance bound from an explicit pointwise bound.
+
+    Parallel to `shellStableDistanceBound_of_pointwise` but for `dInfUnion`.
+    No non-emptiness hypothesis is needed because `dInfUnion`'s supremum
+    indexes over the universal `α`, with absent values contributing `0`. -/
+theorem dInfUnion_le_of_pointwise
+    (f g : ScalarProfile α) (B : ℝ)
+    (h_pointwise : ∀ x : α, |f.zeroExtend x - g.zeroExtend x| ≤ B) :
+    dInfUnion f g ≤ ENNReal.ofReal B := by
+  unfold dInfUnion
+  apply iSup_le
+  intro x
+  exact ENNReal.ofReal_le_ofReal (h_pointwise x)
+
+/-- Variant of `dInfUnion_le_of_pointwise` whose hypothesis is restricted
+    to `f.domain ∪ g.domain`.
+
+    Outside the union both zero-extensions are `0`, so the pointwise
+    difference is `0` and is bounded by any nonnegative `B`. -/
+theorem dInfUnion_le_of_pointwise_union
+    (f g : ScalarProfile α) (B : ℝ) (hB : 0 ≤ B)
+    (h_pointwise :
+      ∀ x, x ∈ f.domain ∪ g.domain →
+        |f.zeroExtend x - g.zeroExtend x| ≤ B) :
+    dInfUnion f g ≤ ENNReal.ofReal B := by
+  apply dInfUnion_le_of_pointwise f g B
+  intro x
+  by_cases hx : x ∈ f.domain ∪ g.domain
+  · exact h_pointwise x hx
+  · have hfx : x ∉ f.domain := fun h => hx (Or.inl h)
+    have hgx : x ∉ g.domain := fun h => hx (Or.inr h)
+    rw [f.zeroExtend_of_not_mem x hfx, g.zeroExtend_of_not_mem x hgx]
+    simpa using hB
+
+/-- Union-domain shell bound stated directly over zero-extended values.
+
+    If every zero-extended value of `f` lies in shell `i` and every
+    zero-extended value of `g` lies in shell `j` (under thresholds `rs`),
+    then the union `L∞` distance is bounded by the seven-shell endpoint
+    bound.
+
+    The hypotheses range over all of `α`. For `x ∉ f.domain` the
+    zero-extended value is `0`, so the typical caller takes `i` or `j`
+    equal to `ShellIndex7.outer` on the corresponding complement.
+    Use `dInfUnion_le_threeWayMax_shellEndpointBound` for the natural
+    source-paper hypothesis shape. -/
+theorem dInfUnion_le_shellEndpointBound_zeroExtend
+    (rs : ShellThresholds) (f g : ScalarProfile α) (i j : ShellIndex7)
+    (hf_shell : ∀ x : α, shellOf7 rs i (f.zeroExtend x))
+    (hg_shell : ∀ x : α, shellOf7 rs j (g.zeroExtend x)) :
+    dInfUnion f g ≤ ENNReal.ofReal (shellEndpointBound rs i j) := by
+  apply dInfUnion_le_of_pointwise f g (shellEndpointBound rs i j)
+  intro x
+  exact fullShellStratifiedBound_endpointBound rs
+    (f.zeroExtend x) (g.zeroExtend x) i j (hf_shell x) (hg_shell x)
+
+/-- Union-domain shell bound with shell hypotheses stated separately on
+    each profile's own domain subtype, paying for the asymmetry with a
+    three-way max of endpoint bounds.
+
+    On `f.domain ∩ g.domain` the relevant bound is `shellEndpointBound rs i j`;
+    on `f.domain \ g.domain` the absent profile contributes `0` (in shell
+    `outer`), giving bound `shellEndpointBound rs i outer`; symmetrically
+    for `g.domain \ f.domain`. The overall bound is the max of these
+    three. -/
+theorem dInfUnion_le_threeWayMax_shellEndpointBound
+    (rs : ShellThresholds) (f g : ScalarProfile α) (i j : ShellIndex7)
+    (hf_shell :
+      ∀ x, ∀ hfx : x ∈ f.domain,
+        shellOf7 rs i (f.toFun ⟨x, hfx⟩))
+    (hg_shell :
+      ∀ x, ∀ hgx : x ∈ g.domain,
+        shellOf7 rs j (g.toFun ⟨x, hgx⟩)) :
+    dInfUnion f g ≤
+      ENNReal.ofReal
+        (max (shellEndpointBound rs i j)
+          (max (shellEndpointBound rs i ShellIndex7.outer)
+            (shellEndpointBound rs ShellIndex7.outer j))) := by
+  set B :=
+    max (shellEndpointBound rs i j)
+      (max (shellEndpointBound rs i ShellIndex7.outer)
+        (shellEndpointBound rs ShellIndex7.outer j))
+  have hB : 0 ≤ B :=
+    le_trans (shellEndpointBound_nonneg rs i j) (le_max_left _ _)
+  have h_zero_outer : shellOf7 rs ShellIndex7.outer (0 : ℝ) := by
+    refine ⟨le_refl 0, rs.r_five_pos⟩
+  apply dInfUnion_le_of_pointwise f g B
+  intro x
+  by_cases hfx : x ∈ f.domain
+  · by_cases hgx : x ∈ g.domain
+    · -- both domains
+      have hf := hf_shell x hfx
+      have hg := hg_shell x hgx
+      rw [f.zeroExtend_of_mem x hfx, g.zeroExtend_of_mem x hgx]
+      exact le_trans
+        (fullShellStratifiedBound_endpointBound rs _ _ i j hf hg)
+        (le_max_left _ _)
+    · -- f only; g.zeroExtend x = 0 ∈ outer
+      have hf := hf_shell x hfx
+      rw [f.zeroExtend_of_mem x hfx, g.zeroExtend_of_not_mem x hgx]
+      exact le_trans
+        (fullShellStratifiedBound_endpointBound rs _ _ i ShellIndex7.outer
+          hf h_zero_outer)
+        (le_trans (le_max_left _ _) (le_max_right _ _))
+  · by_cases hgx : x ∈ g.domain
+    · -- g only; f.zeroExtend x = 0 ∈ outer
+      have hg := hg_shell x hgx
+      rw [f.zeroExtend_of_not_mem x hfx, g.zeroExtend_of_mem x hgx]
+      exact le_trans
+        (fullShellStratifiedBound_endpointBound rs _ _ ShellIndex7.outer j
+          h_zero_outer hg)
+        (le_trans (le_max_right _ _) (le_max_right _ _))
+    · -- neither; both extensions are 0
+      rw [f.zeroExtend_of_not_mem x hfx, g.zeroExtend_of_not_mem x hgx]
+      simpa using hB
+
+/-- Union-domain shell bound with pointwise shell indices allowed to vary,
+    provided each pointwise endpoint bound is bounded by `B`.
+
+    Parallel to `dInfShared_le_of_pointwise_shellEndpointBound`. -/
+theorem dInfUnion_le_of_pointwise_shellEndpointBound
+    (rs : ShellThresholds) (f g : ScalarProfile α) (B : ℝ)
+    (h_point :
+      ∀ x : α,
+        ∃ i j,
+          shellOf7 rs i (f.zeroExtend x) ∧
+          shellOf7 rs j (g.zeroExtend x) ∧
+          shellEndpointBound rs i j ≤ B) :
+    dInfUnion f g ≤ ENNReal.ofReal B := by
+  apply dInfUnion_le_of_pointwise f g B
+  intro x
+  rcases h_point x with ⟨i, j, hf, hg, hle⟩
+  exact le_trans
+    (fullShellStratifiedBound_endpointBound rs _ _ i j hf hg) hle
 
 end TLICA.ProfileComparison.ShellRefinement

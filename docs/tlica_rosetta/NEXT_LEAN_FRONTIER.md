@@ -5,11 +5,12 @@ Scope: recommended Lean-ready or prose-first branches after
 
 ## Recommended Branches
 
-1. `codex/tlica-union-shell-bound-v0`
-   - Add a `dInfUnion` shell-bound theorem only after the union-domain
-     zero-extension shell-assignment hypotheses are fixed.
-   - The likely theorem should quantify over `f.domain ∪ g.domain` and account
-     for absent values as zero.
+1. ~~`codex/tlica-union-shell-bound-v0`~~ — **done** (landed on
+   `claude/test-lean-build-5zO1q` rather than a codex branch): five
+   `dInfUnion` shell-bound theorems in
+   `TLICA/ProfileComparison/ShellRefinement.lean`, parallel to the
+   `dInfShared_le_*` family, absorbing absent values into the `outer`
+   shell.
 
 2. `codex/tlica-direct-projected-pce-api-v0`
    - Migrate new modules from compatibility names to primary

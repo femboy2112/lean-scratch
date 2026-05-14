@@ -1,0 +1,37 @@
+@TLICA.ProfileComparison.ShellRefinement.dInfUnion_le_of_pointwise : ∀ {α : Type u_1}
+  (f g : TLICA.Profile.ScalarProfile α) (B : ℝ),
+  (∀ (x : α), |f.zeroExtend x - g.zeroExtend x| ≤ B) →
+    TLICA.ProfileComparison.Pointwise.dInfUnion f g ≤ ENNReal.ofReal B
+@TLICA.ProfileComparison.ShellRefinement.dInfUnion_le_of_pointwise_union : ∀ {α : Type u_1}
+  (f g : TLICA.Profile.ScalarProfile α) (B : ℝ),
+  0 ≤ B →
+    (∀ x ∈ f.domain ∪ g.domain, |f.zeroExtend x - g.zeroExtend x| ≤ B) →
+      TLICA.ProfileComparison.Pointwise.dInfUnion f g ≤ ENNReal.ofReal B
+@TLICA.ProfileComparison.ShellRefinement.dInfUnion_le_shellEndpointBound_zeroExtend : ∀ {α : Type u_1}
+  (rs : TLICA.ProfileComparison.ShellRefinement.ShellThresholds) (f g : TLICA.Profile.ScalarProfile α)
+  (i j : TLICA.ProfileComparison.ShellRefinement.ShellIndex7),
+  (∀ (x : α), TLICA.ProfileComparison.ShellRefinement.shellOf7 rs i (f.zeroExtend x)) →
+    (∀ (x : α), TLICA.ProfileComparison.ShellRefinement.shellOf7 rs j (g.zeroExtend x)) →
+      TLICA.ProfileComparison.Pointwise.dInfUnion f g ≤
+        ENNReal.ofReal (TLICA.ProfileComparison.ShellRefinement.shellEndpointBound rs i j)
+@TLICA.ProfileComparison.ShellRefinement.dInfUnion_le_threeWayMax_shellEndpointBound : ∀ {α : Type u_1}
+  (rs : TLICA.ProfileComparison.ShellRefinement.ShellThresholds) (f g : TLICA.Profile.ScalarProfile α)
+  (i j : TLICA.ProfileComparison.ShellRefinement.ShellIndex7),
+  (∀ (x : α) (hfx : x ∈ f.domain), TLICA.ProfileComparison.ShellRefinement.shellOf7 rs i (f.toFun ⟨x, hfx⟩)) →
+    (∀ (x : α) (hgx : x ∈ g.domain), TLICA.ProfileComparison.ShellRefinement.shellOf7 rs j (g.toFun ⟨x, hgx⟩)) →
+      TLICA.ProfileComparison.Pointwise.dInfUnion f g ≤
+        ENNReal.ofReal
+          (max (TLICA.ProfileComparison.ShellRefinement.shellEndpointBound rs i j)
+            (max
+              (TLICA.ProfileComparison.ShellRefinement.shellEndpointBound rs i
+                TLICA.ProfileComparison.ShellRefinement.ShellIndex7.outer)
+              (TLICA.ProfileComparison.ShellRefinement.shellEndpointBound rs
+                TLICA.ProfileComparison.ShellRefinement.ShellIndex7.outer j)))
+@TLICA.ProfileComparison.ShellRefinement.dInfUnion_le_of_pointwise_shellEndpointBound : ∀ {α : Type u_1}
+  (rs : TLICA.ProfileComparison.ShellRefinement.ShellThresholds) (f g : TLICA.Profile.ScalarProfile α) (B : ℝ),
+  (∀ (x : α),
+      ∃ i j,
+        TLICA.ProfileComparison.ShellRefinement.shellOf7 rs i (f.zeroExtend x) ∧
+          TLICA.ProfileComparison.ShellRefinement.shellOf7 rs j (g.zeroExtend x) ∧
+            TLICA.ProfileComparison.ShellRefinement.shellEndpointBound rs i j ≤ B) →
+    TLICA.ProfileComparison.Pointwise.dInfUnion f g ≤ ENNReal.ofReal B

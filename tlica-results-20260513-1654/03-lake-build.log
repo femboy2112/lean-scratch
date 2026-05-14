@@ -1,0 +1,23 @@
+✔ [1288/1298] Built TLICA.Basic
+✔ [1289/1298] Built TLICA.Profile
+✔ [1290/1298] Built TLICA.IntegrationGraph
+✔ [1291/1298] Built TLICA.ProfileComparison.Pointwise
+✔ [1292/1298] Built TLICA.PhiCoordinate
+✔ [1293/1298] Built TLICA.ModeAggregation
+⚠ [1294/1298] Built TLICA.ProfileComparison.ShellRefinement
+warning: ././././TLICA/ProfileComparison/ShellRefinement.lean:77:30: unused variable `rs`
+note: this linter can be disabled with `set_option linter.unusedVariables false`
+warning: ././././TLICA/ProfileComparison/ShellRefinement.lean:78:15: unused variable `ha_unit`
+note: this linter can be disabled with `set_option linter.unusedVariables false`
+warning: ././././TLICA/ProfileComparison/ShellRefinement.lean:78:41: unused variable `hb_unit`
+note: this linter can be disabled with `set_option linter.unusedVariables false`
+warning: ././././TLICA/ProfileComparison/ShellRefinement.lean:88:38: unused variable `rs`
+note: this linter can be disabled with `set_option linter.unusedVariables false`
+warning: ././././TLICA/ProfileComparison/ShellRefinement.lean:89:5: unused variable `f`
+note: this linter can be disabled with `set_option linter.unusedVariables false`
+warning: ././././TLICA/ProfileComparison/ShellRefinement.lean:89:7: unused variable `g`
+note: this linter can be disabled with `set_option linter.unusedVariables false`
+✔ [1295/1298] Built TLICA.Dynamics
+✔ [1296/1298] Built TLICA.NonReducibility
+✔ [1297/1298] Built TLICA
+Build completed successfully.

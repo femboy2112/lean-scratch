@@ -1,0 +1,26 @@
+TLICA.IntegrationGraph.strict_rho_bound : ∀ (C : ℝ), 0 ≤ C → C / (1 + C) < 1
+@TLICA.PhiCoordinate.phi_tier3_lt_phiCogito : ∀ {K : Type u_1} [inst : TLICA.KField K] (n : ℕ) (ε : K),
+  TLICA.PhiCoordinate.Tier3Strictness n ε → TLICA.PhiCoordinate.phiTier3 n ε < TLICA.PhiCoordinate.phiCogito
+@TLICA.ModeAggregation.mode_aggregation_lt_one : ∀ {ι : Type u_1} [inst : DecidableEq ι] (a ρ : ι → ℝ),
+  (∀ (k : ι), 0 ≤ a k) →
+    Summable a →
+      ∑' (k : ι), a k = 1 →
+        (∀ (k : ι), ρ k ≤ 1) → (∀ (k : ι), 0 ≤ ρ k) → ∀ (k₀ : ι), 0 < a k₀ → ρ k₀ < 1 → ∑' (k : ι), a k * ρ k < 1
+@TLICA.Dynamics.mode_aggregation_uniform_convergent : ∀ {ι : Type u_1} {T : Type u_2} (a : ι → ℝ) (ρ : ι → T → ℝ),
+  (∀ (k : ι), 0 ≤ a k) →
+    Summable a →
+      (∀ (k : ι) (t : T), |ρ k t| ≤ 1) →
+        TendstoUniformly (fun s t => ∑ k ∈ s, a k * ρ k t) (fun t => ∑' (k : ι), a k * ρ k t) Filter.atTop
+@TLICA.NonReducibility.formal_non_reducibility : ∀ {K : Type u_1} [inst : TLICA.KField K],
+  (¬∃ F, ∀ (t : TLICA.NonReducibility.CoordinateTriple K), F t.φ t.κ = t.ρ) ∧
+    (¬∃ F, ∀ (t : TLICA.NonReducibility.CoordinateTriple K), F t.ρ t.κ = t.φ) ∧
+      ¬∃ F, ∀ (t : TLICA.NonReducibility.CoordinateTriple K), F t.ρ t.φ = t.κ
+@TLICA.Profile.ScalarProfile.abs_sub_zeroExtend_le_one : ∀ {α : Type u_1} (f g : TLICA.Profile.ScalarProfile α) (x : α),
+  |f.zeroExtend x - g.zeroExtend x| ≤ 1
+@TLICA.ProfileComparison.Pointwise.dInfUnion_self : ∀ {α : Type u_1} (f : TLICA.Profile.ScalarProfile α),
+  TLICA.ProfileComparison.Pointwise.dInfUnion f f = 0
+@TLICA.ProfileComparison.Pointwise.dInfUnion_triangle : ∀ {α : Type u_1} (f g h : TLICA.Profile.ScalarProfile α),
+  TLICA.ProfileComparison.Pointwise.dInfUnion f h ≤
+    TLICA.ProfileComparison.Pointwise.dInfUnion f g + TLICA.ProfileComparison.Pointwise.dInfUnion g h
+@TLICA.ProfileComparison.Pointwise.dInfShared_top_iff : ∀ {α : Type u_1} (f g : TLICA.Profile.ScalarProfile α),
+  TLICA.ProfileComparison.Pointwise.dInfShared f g = ⊤ ↔ ¬(f.domain ∩ g.domain).Nonempty
