@@ -86,7 +86,7 @@ Lean carriers: `FutureMSIModel`, `ProfileIso`, `CoherentFutureMSIModel`, `Cohere
 
 The generalized deterministic layer is now a compatibility naming layer. `GeneralProjectMap α Act` is an abbreviation for the parameterized foundation `ProjectMap α Act`; there is only one primitive deterministic projection structure. The old `generalProjectMapOfProjectMap` bridge is retained as an identity-style compatibility definition for the degenerate action wrapper.
 
-`GeneralProjectedPCE` is retained for older branch continuity in the agency/free-will/temporal/affect stack. It is a compatibility wrapper for `ProjectedPCE`. It has the same nonnegativity, equality, rank-comparison, monotonicity, selection, and conditional strict-differentiation theorems as `ProjectedPCE`, but no longer requires a duplicate primitive project-map structure. It still does not assert that differentiating actions exist; strict differentiation remains conditional on a supplied strict global-rank inequality.
+`GeneralProjectedPCE` is retained for older branch continuity in `TLICA.GeneralActionProjection`. Active agency, free-will, temporal, and affect modules use the direct `ProjectedPCE` API where proof-stable. The compatibility wrapper has the same nonnegativity, equality, rank-comparison, monotonicity, selection, and conditional strict-differentiation theorems as `ProjectedPCE`, but no longer requires a duplicate primitive project-map structure. It still does not assert that differentiating actions exist; strict differentiation remains conditional on a supplied strict global-rank inequality.
 
 Deterministic projection remains the current layer; stochastic projection remains deferred.
 
@@ -114,7 +114,7 @@ Lean carriers: `branchProfile`, `branchFutureContents`, `branchDistinctAlternati
 
 ## 8.5 Deterministic temporal trajectories
 
-A temporal trajectory is modeled as a natural-number-indexed sequence of scalar profiles. An action schedule is a natural-number-indexed sequence of actions. This layer depends on `FreeWill`, and through it on `Agency` and `GeneralActionProjection`. The `generatedBy` predicate states that a supplied trajectory follows the deterministic generalized projection at every successor step under the supplied schedule; it does not assert that every initial condition or schedule has a globally existing trajectory.
+A temporal trajectory is modeled as a natural-number-indexed sequence of scalar profiles. An action schedule is a natural-number-indexed sequence of actions. This layer depends on `FreeWill`, and through it on `Agency`. The `generatedBy` predicate states that a supplied trajectory follows the deterministic direct `projectedProfile` step at every successor step under the supplied schedule; it does not assert that every initial condition or schedule has a globally existing trajectory.
 
 The scheduled branch future contents at time `n` are the existing free-will branch future contents applied to the profile at `n` and the scheduled action at `n`. Adjacent-time stability is measured through the existing profile-comparison distances: union-domain distance `dInfUnion` and shared-domain distance `dInfShared`. Uniform and eventual union-step stability are predicates over these adjacent-time distances.
 
@@ -132,7 +132,7 @@ The branch-profile side defines union/shared distances between deterministic act
 
 Witness structures package PCE-support, PCE-defeat, PCE-neutrality, profile shift, and a generic `AffectKernelWitness` over feasible actions. The generic kernel requires only a branch-profile shift or projected-PCE differentiation; it is not a named affect category. Free-will witnesses yield profile-shift affect kernels, and PCE-free-will witnesses yield PCE-differentiated affect kernels. If all feasible actions have equal branch profiles and equal projected-PCE values, no affect-kernel witness exists.
 
-`DifferentiatedAffect` depends on `TemporalTrajectory`, and through it on `FreeWill`, `Agency`, and `GeneralActionProjection`. Named affect taxonomy remains deferred. Substrate and source-opacity affect pathways remain deferred.
+`DifferentiatedAffect` depends on `TemporalTrajectory`, and through it on `FreeWill` and `Agency`; it uses direct branch-profile and future-MSI-content APIs where proof-stable. Named affect taxonomy remains deferred. Substrate and source-opacity affect pathways remain deferred.
 
 Lean carriers: `relativePCEDelta`, `pceSupportive`, `pceNeutral`, `pceDefeating`, `pceSupportive_iff`, `pceNeutral_iff`, `pceDefeating_iff`, `pceValence_trichotomy`, `branchUnionDistance`, `branchSharedDistance`, `branchProfileShift`, `branchFutureContents_eq_of_branchProfile_eq`, `branchProfile_ne_of_branchFutureContents_ne`, `PCESupportAffectWitness`, `PCEDefeatAffectWitness`, `PCENeutralAffectWitness`, `ProfileShiftAffectWitness`, `AffectKernelWitness`, `affectKernel_of_freeWillWitness`, `affectKernel_of_pceFreeWillWitness`, `no_affectKernel_of_branch_and_pce_collapse`, `temporalAffectIntensity`, `namedAffectTaxonomy_deferred`, `loveConstitutiveExtension_deferred`, `substrateAffectPathway_deferred`, `sourceOpacityAffect_deferred`.
 

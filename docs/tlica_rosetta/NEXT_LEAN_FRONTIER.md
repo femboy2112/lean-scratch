@@ -1,7 +1,7 @@
 # Next Lean Frontier
 
 Scope: recommended Lean-ready or prose-first branches after
-`codex/tlica-claude-union-shell-sync-v0`.
+`codex/tlica-direct-projected-pce-api-v0`.
 
 ## Recommended Branches
 
@@ -13,10 +13,11 @@ Scope: recommended Lean-ready or prose-first branches after
    `dInfShared_le_*` family, absorbing absent values into the `outer`
    shell.
 
-2. `codex/tlica-direct-projected-pce-api-v0`
-   - Migrate new modules from compatibility names to primary
-     `ProjectMap`/`ProjectedPCE` names where this is proof-stable.
-   - Use the existing direct bridge lemmas before refactoring definitions.
+2. ~~`codex/tlica-direct-projected-pce-api-v0`~~ — **done**:
+   active agency, free-will, temporal, and affect modules now use primary
+   `ProjectMap`/`ProjectedPCE`, `projectedProfile`, and
+   `futureMSIContents` names where proof-stable. Compatibility names remain
+   only in `TLICA.GeneralActionProjection` for older branch continuity.
 
 3. `codex/tlica-generated-trajectory-api-v0`
    - Expand deterministic trajectory helper API around `generatedBy`,

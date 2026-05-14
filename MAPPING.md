@@ -23,7 +23,7 @@ Earlier branches used broader status wording. This mapping now uses the normaliz
 
 ## v0.4.1 normalized boundary
 
-`ProjectMap α Act` is the primary deterministic projection structure. `GeneralProjectMap`, `GeneralProjectedPCE`, and the `general*` projected-profile/future-content names are compatibility names only. `ProjectedPCE` is the primary application-ready projected-PCE definition over parameterized `ProjectMap α Act`.
+`ProjectMap α Act` is the primary deterministic projection structure. `GeneralProjectMap`, `GeneralProjectedPCE`, and the `general*` projected-profile/future-content names are compatibility names only. `ProjectedPCE` is the primary application-ready projected-PCE definition over parameterized `ProjectMap α Act`. Active agency, free-will, temporal, and affect modules use the direct API where proof-stable; the remaining compatibility names are intentionally retained in `TLICA.GeneralActionProjection`.
 
 `Action α` is the old singleton wrapper default. `DefaultAction α := Unit` is the direct unit degenerate carrier. `DefaultProjectMap` and `UnitDefaultProjectMap` are degenerate/default compatibility forms.
 
@@ -228,7 +228,7 @@ stochastic projection remains deferred.
 
 | Lean declaration | Working-paper reference | Status |
 |---|---|---|
-| `AgencyContext` | Agency as feasible action context over projected PCE, using compatibility names over primary `ProjectedPCE` | `machine_verified_structure` |
+| `AgencyContext` | Agency as feasible action context over the direct `ProjectMap α Act` / `ProjectedPCE` API | `machine_verified_structure` |
 | `AgencyContext.fam`, `globalRank`, `proj` | Projected-PCE calibration objects | `primitive_structure_field` |
 | `FeasibilityModel`, `FeasibilityModel.feasible`, `FeasibilityModel.noAction_feasible` | Project-map-indexed feasible-action model with no-action feasibility | `machine_verified_structure`; `primitive_structure_field` |
 | `AgencyContext.feasibility`, `AgencyContext.feasible`, `AgencyContext.noAction_feasible`, `AgencyContext.mkFromFeasible` | Agency feasibility supplied by reusable `FeasibilityModel`, with constructor from explicit feasible-set data | `machine_verified_definition` |
@@ -245,10 +245,11 @@ stochastic projection remains deferred.
 | `pceDifferentiatedAlternative_of_selected_strictly_beats` | Strictly beating a feasible alternative gives PCE differentiation | `machine_verified_theorem` |
 | `exists_selectsFeasibleAction_of_finset`, `exists_selectsFeasibleAction_of_finite_feasible`, `exists_selectsFeasibleAction_of_fintype` | Finite feasible-action maximizer existence wrappers | `machine_verified_theorem` |
 
-The agency layer depends on `GeneralActionProjection` compatibility names over
-the parameterized foundation `ProjectMap`. It does not assert that selected
-actions exist globally; existence is represented by `AgencyWitness` or by an
-explicit `selectsFeasibleAction` hypothesis.
+The agency layer now uses the direct `ProjectMap α Act` / `ProjectedPCE` API.
+It does not assert that selected actions exist globally; existence is
+represented by `AgencyWitness` or by an explicit `selectsFeasibleAction`
+hypothesis. The older `GeneralActionProjection` names remain available only as
+compatibility aliases and theorems.
 
 ## Free-will layer
 
@@ -305,11 +306,11 @@ incompatibilism/compatibilism claims remain deferred.
 | `temporalContinuityMetric_deferred` | Richer temporal-continuity metric | `deferred_marker_not_theorem` |
 
 The temporal-trajectory layer depends on `FreeWill`, and through it on
-`Agency` and `GeneralActionProjection`; it also uses the existing pointwise
-profile-comparison distances. Trajectories are supplied as indexed data and are
-verified by `generatedBy` when appropriate. The layer does not assert global
-trajectory existence, stochastic dynamics, phenomenological duration, or
-differentiated affect.
+`Agency`; it also uses the direct `projectedProfile` API and the existing
+pointwise profile-comparison distances. Trajectories are supplied as indexed
+data and are verified by `generatedBy` when appropriate. The layer does not
+assert global trajectory existence, stochastic dynamics, phenomenological
+duration, or differentiated affect.
 
 ## Differentiated-affect layer
 
@@ -334,7 +335,7 @@ differentiated affect.
 | `namedAffectTaxonomy_deferred`, `loveConstitutiveExtension_deferred`, `substrateAffectPathway_deferred`, `sourceOpacityAffect_deferred` | Named affect taxonomy and non-profile/PCE pathways | `deferred_marker_not_theorem` |
 
 The differentiated-affect layer depends on `TemporalTrajectory`, and through it
-on `FreeWill`, `Agency`, and `GeneralActionProjection`. It formalizes only the
-first profile/PCE affect kernel. PCE-support, PCE-defeat, and PCE-neutrality are
-relative to a baseline action. Named affect taxonomy, substrate affect pathways,
-and source-opacity pathways remain deferred.
+on `FreeWill` and `Agency`; it uses the direct future-MSI-content API. It
+formalizes only the first profile/PCE affect kernel. PCE-support, PCE-defeat,
+and PCE-neutrality are relative to a baseline action. Named affect taxonomy,
+substrate affect pathways, and source-opacity pathways remain deferred.

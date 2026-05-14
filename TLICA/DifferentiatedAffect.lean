@@ -18,7 +18,7 @@ open TLICA.ProfileComparison.Pointwise
 open TLICA.Agency
 open TLICA.FreeWill
 open TLICA.TemporalTrajectory
-open TLICA.GeneralActionProjection
+open TLICA.ActionProjection
 open scoped ENNReal
 
 variable {α Act : Type*}
@@ -172,7 +172,7 @@ theorem branchFutureContents_eq_of_branchProfile_eq
     (h : branchProfile ctx P a = branchProfile ctx P b) :
     branchFutureContents ctx P a = branchFutureContents ctx P b := by
   unfold branchProfile at h
-  unfold branchFutureContents generalFutureMSIContents generalFutureMSI
+  unfold branchFutureContents futureMSIContents futureMSI
   rw [h]
 
 /-- Distinct branch future contents imply distinct branch profiles. -/

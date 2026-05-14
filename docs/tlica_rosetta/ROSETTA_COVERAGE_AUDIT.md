@@ -34,10 +34,10 @@ Coverage classifications:
 | ACT-004 | Lifted future contents | has multiple Lean declarations | `liftSet`, `liftMSIContents`, `projectedProfile`, `futureMSI`, `futureMSIContents` | Direct `ProjectMap α Act` API. |
 | ACT-005 | Primary `ProjectedPCE` | has multiple Lean declarations | `ProjectedPCE`, theorem namespace | Primary application-ready projected-PCE definition. |
 | ACT-006 | Primary projected action selection | has multiple Lean declarations | `selectsProjectedAction`, `selected_has_max_projectedPCE` | Maximizer predicate, no existence theorem. |
-| ACT-007 to ACT-009 | General action compatibility | has multiple Lean declarations | `GeneralProjectMap`, `GeneralProjectedPCE`, `general*` names | Compatibility only; no second primitive projection structure. |
-| AGY-001 to AGY-005 | Agency witness layer and finite feasible maximizer existence | has multiple Lean declarations | `FeasibilityModel`, `AgencyContext`, `selectsFeasibleAction`, `AgencyWitness`, live/PCE-differentiated predicates, finite-selection wrappers | First structural witness layer plus finset, finite-set, and fintype feasible selection theorems; no unrestricted global agency existence. |
-| FWL-001 to FWL-004 | Free-will witness layer | has multiple Lean declarations | branch definitions, direct projected-profile/future-MSI bridge theorems, `FreeWillWitness`, `PCEFreeWillWitness`, collapse theorems | First structural branch-sensitive witness layer. |
-| TMP-001 to TMP-004 | Deterministic temporal trajectory substrate | has multiple Lean declarations | `ProfileTrajectory`, `ActionSchedule`, `generatedBy`, generated-step helpers, future-content bridges, stability/divergence declarations, step and one-step branch-distance bounds | Supplied/verified trajectories only; no global trajectory existence. |
+| ACT-007 to ACT-009 | General action compatibility | has multiple Lean declarations | `GeneralProjectMap`, `GeneralProjectedPCE`, `general*` names | Compatibility only; no second primitive projection structure; active modules use direct names where proof-stable. |
+| AGY-001 to AGY-005 | Agency witness layer and finite feasible maximizer existence | has multiple Lean declarations | `FeasibilityModel`, `AgencyContext`, `selectsFeasibleAction`, `AgencyWitness`, live/PCE-differentiated predicates, finite-selection wrappers | First structural witness layer over direct `ProjectMap α Act` / `ProjectedPCE` plus finset, finite-set, and fintype feasible selection theorems; no unrestricted global agency existence. |
+| FWL-001 to FWL-004 | Free-will witness layer | has multiple Lean declarations | direct branch definitions, projected-profile/future-MSI bridge theorems, `FreeWillWitness`, `PCEFreeWillWitness`, collapse theorems | First structural branch-sensitive witness layer. |
+| TMP-001 to TMP-004 | Deterministic temporal trajectory substrate | has multiple Lean declarations | `ProfileTrajectory`, `ActionSchedule`, direct `generatedBy`, generated-step helpers, future-content bridges, stability/divergence declarations, step and one-step branch-distance bounds | Supplied/verified trajectories only; no global trajectory existence. |
 | TMP-005 | Temporal enrichments | deferred marker only | `stochasticTrajectory_deferred`, `phenomenologicalDuration_deferred`, `temporalContinuityMetric_deferred` | Markers, not theorem claims. |
 | AFF-001 to AFF-006 | Profile/PCE affect kernel | has multiple Lean declarations | PCE valence, branch shift and branch-distance bounds/metric-style helpers, affect witness, bridge, collapse, intensity declarations | Generic kernel only, not named affect taxonomy. |
 | AFF-007 | Named/pathway affect enrichments | deferred marker only | `namedAffectTaxonomy_deferred`, `loveConstitutiveExtension_deferred`, `substrateAffectPathway_deferred`, `sourceOpacityAffect_deferred` | Markers, not theorem claims. |
@@ -48,6 +48,7 @@ Coverage classifications:
 - `ProjectMap α Act` is the primary deterministic projection structure.
 - `ProjectedPCE` is the primary projected-PCE definition.
 - `GeneralProjectMap`, `GeneralProjectedPCE`, and `general*` names are compatibility-only.
+- Active agency, free-will, temporal, and affect modules use direct `ProjectMap α Act`, `ProjectedPCE`, `projectedProfile`, and `futureMSIContents` names where proof-stable.
 - `Action α` is the old singleton wrapper default.
 - `DefaultAction α := Unit` is the direct unit degenerate carrier.
 - `DefaultProjectMap` and `UnitDefaultProjectMap` are degenerate/default compatibility forms.

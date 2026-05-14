@@ -17,32 +17,31 @@ namespace TLICA.FreeWill
 open TLICA.Profile
 open TLICA.Agency
 open TLICA.ActionProjection
-open TLICA.GeneralActionProjection
 
 variable {α Act : Type*}
 
 /-- The projected branch profile for an action in an agency context. -/
 def branchProfile (ctx : AgencyContext α Act) (P : ScalarProfile α) (a : Act) :
     ScalarProfile α :=
-  generalProjectedProfile ctx.proj P a
+  projectedProfile ctx.proj P a
 
 /-- Branch profiles are definitionally the direct projected profiles. -/
 theorem branchProfile_eq_projectedProfile
     (ctx : AgencyContext α Act) (P : ScalarProfile α) (a : Act) :
-    branchProfile ctx P a = projectedProfile ctx.proj P a := by
-  rw [branchProfile, generalProjectedProfile_eq_projectedProfile]
+    branchProfile ctx P a = projectedProfile ctx.proj P a :=
+  rfl
 
 /-- The lifted future MSI contents for an action branch. -/
 def branchFutureContents (ctx : AgencyContext α Act)
     (P : ScalarProfile α) (a : Act) : Set α :=
-  generalFutureMSIContents ctx.fam ctx.proj P a
+  futureMSIContents ctx.fam ctx.proj P a
 
 /-- Branch future contents are definitionally the direct future-MSI contents. -/
 theorem branchFutureContents_eq_futureMSIContents
     (ctx : AgencyContext α Act) (P : ScalarProfile α) (a : Act) :
     branchFutureContents ctx P a =
-      futureMSIContents ctx.fam ctx.proj P a := by
-  rw [branchFutureContents, generalFutureMSIContents_eq_futureMSIContents]
+      futureMSIContents ctx.fam ctx.proj P a :=
+  rfl
 
 /-- Live alternatives whose projected future contents differ. -/
 def branchDistinctAlternative (ctx : AgencyContext α Act)
@@ -69,12 +68,12 @@ theorem branchFutureContents_ne_of_pce_ne
   intro hcontents
   apply h
   have hfuture :
-      generalFutureMSIContents ctx.fam ctx.proj P a =
-        generalFutureMSIContents ctx.fam ctx.proj P b := by
+      futureMSIContents ctx.fam ctx.proj P a =
+        futureMSIContents ctx.fam ctx.proj P b := by
     simpa [branchFutureContents] using hcontents
-  unfold feasibleProjectedPCE GeneralProjectedPCE
-  change ctx.globalRank.rank (generalFutureMSIContents ctx.fam ctx.proj P a) =
-    ctx.globalRank.rank (generalFutureMSIContents ctx.fam ctx.proj P b)
+  unfold feasibleProjectedPCE ProjectedPCE
+  change ctx.globalRank.rank (futureMSIContents ctx.fam ctx.proj P a) =
+    ctx.globalRank.rank (futureMSIContents ctx.fam ctx.proj P b)
   rw [hfuture]
 
 /-- PCE-branch distinct alternatives are branch-distinct alternatives. -/
