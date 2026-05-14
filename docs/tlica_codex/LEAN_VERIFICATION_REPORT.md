@@ -181,3 +181,60 @@ Recommended next branch:
 Purpose: expand deterministic trajectory helper APIs around supplied
 trajectories, one-step branches, and adjacent profile distances while keeping
 the layer deterministic.
+
+## 10. Generated trajectory API branch
+
+- Branch: `codex/tlica-generated-trajectory-api-v0`.
+- Lean project directory: repository root (`lakefile.lean` detected at `.`).
+- Inherited `main` verification before branching:
+  - `git fetch --all`: succeeded.
+  - `git checkout main`: already current.
+  - `git pull origin main`: already up to date.
+  - `lake build`: succeeded with existing warning-only lints.
+  - `bash scripts/audit_lean.sh`: succeeded.
+  - `python3 scripts/check_codex_skills.py`: succeeded.
+  - `bash scripts/bootstrap_codex.sh`: succeeded.
+- Lean changes:
+  - Added generated step aliases:
+    `generatedBy_step_branchProfile`, `generatedBy_step_oneStepBranch`.
+  - Added generated adjacent-distance rewrites:
+    `generatedBy_stepUnionDistance_eq_projectedProfile`,
+    `generatedBy_stepUnionDistance_eq_oneStepBranch`,
+    `generatedBy_stepSharedDistance_eq_projectedProfile`,
+    `generatedBy_stepSharedDistance_eq_oneStepBranch`.
+  - Added shared-distance facts:
+    `stepSharedDistance_nonneg`,
+    `stepSharedDistance_le_one_of_nonempty`,
+    `stepSharedDistance_top_iff`.
+  - Added one-step branch aliases and union-distance helper theorems:
+    `oneStepBranch_eq_branchProfile`, `oneStepBranch_eq_projectedProfile`,
+    `oneStepBranchUnionDistance_eq_projectedProfile`,
+    `oneStepBranchUnionDistance_nonneg`,
+    `oneStepBranchUnionDistance_le_one`,
+    `oneStepBranchUnionDistance_self`,
+    `oneStepBranchUnionDistance_symm`,
+    `oneStepBranchUnionDistance_triangle`.
+- Theorem/status changes:
+  - New declarations are deterministic helper definitions/theorems only.
+  - No global trajectory existence, stochastic projection, phenomenological
+    duration, RCX, named affect taxonomy, or contestable-boundary theory was
+    added.
+  - Shared-distance unit bound is guarded by nonempty shared domain, preserving
+    the existing top convention for empty shared domains.
+- Docs updated:
+  - `MAPPING.md`
+  - `docs/tlica_codex/LEAN_VERIFICATION_REPORT.md`
+  - `docs/tlica_codex/lean_declaration_inventory.md`
+  - `docs/tlica_rosetta/ROSETTA_MATH_FIRST_LEDGER.md`
+  - `docs/tlica_rosetta/ROSETTA_DECLARATION_COVERAGE.md`
+  - `docs/tlica_rosetta/ROSETTA_COVERAGE_AUDIT.md`
+  - `docs/tlica_rosetta/FEATURE_COMPLETENESS_MATRIX.md`
+  - `docs/tlica_rosetta/LEAN_IMPROVEMENT_BACKLOG.md`
+  - `docs/tlica_rosetta/NEXT_LEAN_FRONTIER.md`
+  - `docs/tlica_rosetta/ROSETTA_PURE_MATH_VIEW.md`
+  - `docs/tlica_rosetta/ROSETTA_BRIDGE_VIEW.md`
+- Remaining compatibility use:
+  - `GeneralProjectMap`, `GeneralProjectedPCE`, and `general*` names remain
+    intentionally confined to `TLICA.GeneralActionProjection`.
+- Recommended next branch:
+  - `codex/tlica-profile-space-helpers-v0`.

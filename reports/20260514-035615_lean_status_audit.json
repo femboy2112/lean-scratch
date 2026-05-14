@@ -1,0 +1,48 @@
+{
+  "sorry": [],
+  "admit": [],
+  "global_axiom": [],
+  "true_placeholder": [],
+  "deferred_marker": [
+    {
+      "file": "TLICA/DifferentiatedAffect.lean",
+      "line": 354,
+      "match": "namedAffectTaxonomy_deferred : Prop := True"
+    },
+    {
+      "file": "TLICA/DifferentiatedAffect.lean",
+      "line": 358,
+      "match": "loveConstitutiveExtension_deferred : Prop := True"
+    },
+    {
+      "file": "TLICA/DifferentiatedAffect.lean",
+      "line": 362,
+      "match": "substrateAffectPathway_deferred : Prop := True"
+    },
+    {
+      "file": "TLICA/DifferentiatedAffect.lean",
+      "line": 366,
+      "match": "sourceOpacityAffect_deferred : Prop := True"
+    },
+    {
+      "file": "TLICA/ProfileComparison/ShellRefinement.lean",
+      "line": 344,
+      "match": "shellStratifiedBound_deferred : Prop := True"
+    },
+    {
+      "file": "TLICA/TemporalTrajectory.lean",
+      "line": 351,
+      "match": "stochasticTrajectory_deferred : Prop := True"
+    },
+    {
+      "file": "TLICA/TemporalTrajectory.lean",
+      "line": 355,
+      "match": "phenomenologicalDuration_deferred : Prop := True"
+    },
+    {
+      "file": "TLICA/TemporalTrajectory.lean",
+      "line": 359,
+      "match": "temporalContinuityMetric_deferred : Prop := True"
+    }
+  ]
+}

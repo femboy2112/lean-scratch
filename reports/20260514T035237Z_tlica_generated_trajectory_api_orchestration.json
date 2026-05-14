@@ -1,0 +1,69 @@
+{
+  "branch": "codex/tlica-generated-trajectory-api-v0",
+  "lean_project_dir": ".",
+  "active_packet": "plans/codex/2026-05-14_tlica_generated_trajectory_api_packet.md",
+  "mission_result": "completed",
+  "starting_checks": {
+    "git_fetch_all": "passed",
+    "git_checkout_main": "passed",
+    "git_pull_origin_main": "passed",
+    "lake_build": "passed",
+    "audit_lean": "passed",
+    "check_codex_skills": "passed",
+    "bootstrap_codex": "passed"
+  },
+  "final_checks": {
+    "lake_build": "passed",
+    "audit_lean": "passed",
+    "extract_lean_decls": "passed",
+    "run_lean_checks": "passed",
+    "bash_audit_lean_status_py": "nonblocking command-shape issue: Python script invoked through bash",
+    "python_audit_lean_status": "passed",
+    "summarize_tlica_state": "passed",
+    "bootstrap_codex": "passed"
+  },
+  "lean_declarations_added": [
+    "generatedBy_step_branchProfile",
+    "generatedBy_step_oneStepBranch",
+    "generatedBy_stepUnionDistance_eq_projectedProfile",
+    "generatedBy_stepUnionDistance_eq_oneStepBranch",
+    "stepSharedDistance_nonneg",
+    "stepSharedDistance_le_one_of_nonempty",
+    "stepSharedDistance_top_iff",
+    "generatedBy_stepSharedDistance_eq_projectedProfile",
+    "generatedBy_stepSharedDistance_eq_oneStepBranch",
+    "oneStepBranch_eq_branchProfile",
+    "oneStepBranch_eq_projectedProfile",
+    "oneStepBranchUnionDistance_eq_projectedProfile",
+    "oneStepBranchUnionDistance_nonneg",
+    "oneStepBranchUnionDistance_le_one",
+    "oneStepBranchUnionDistance_self",
+    "oneStepBranchUnionDistance_symm",
+    "oneStepBranchUnionDistance_triangle"
+  ],
+  "status_changes": {
+    "new_machine_verified_theorems": 17,
+    "new_deferred_markers": 0,
+    "prohibited_application_layers_added": false,
+    "shared_distance_bound_guard": "nonempty shared domain"
+  },
+  "docs_updated": [
+    "MAPPING.md",
+    "docs/tlica_codex/LEAN_VERIFICATION_REPORT.md",
+    "docs/tlica_codex/lean_declaration_inventory.md",
+    "docs/tlica_rosetta/ROSETTA_MATH_FIRST_LEDGER.md",
+    "docs/tlica_rosetta/ROSETTA_DECLARATION_COVERAGE.md",
+    "docs/tlica_rosetta/ROSETTA_COVERAGE_AUDIT.md",
+    "docs/tlica_rosetta/FEATURE_COMPLETENESS_MATRIX.md",
+    "docs/tlica_rosetta/LEAN_IMPROVEMENT_BACKLOG.md",
+    "docs/tlica_rosetta/NEXT_LEAN_FRONTIER.md",
+    "docs/tlica_rosetta/ROSETTA_PURE_MATH_VIEW.md",
+    "docs/tlica_rosetta/ROSETTA_BRIDGE_VIEW.md"
+  ],
+  "remaining_gaps": [
+    "No global existence/uniqueness theorem for generated trajectories is asserted.",
+    "Shared-distance results remain conditional where the source convention requires nonempty shared domains.",
+    "Compatibility names remain intentionally confined to TLICA.GeneralActionProjection."
+  ],
+  "next_recommended_branch": "codex/tlica-profile-space-helpers-v0"
+}
