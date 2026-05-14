@@ -13,6 +13,7 @@ Current mathematical checkpoint includes:
 - durable TLICA-specific Codex control layer;
 - Claude union-domain shell-bound sync;
 - direct `ProjectMap α Act` / `ProjectedPCE` API migration;
+- deterministic generated-trajectory helper API;
 - machine-verified scalar, shared-domain, and union-domain shell-bound theorem families;
 - no RCX formalization, no named affect taxonomy, no stochastic projection, and no phenomenological duration.
 
@@ -22,12 +23,13 @@ Completed branches now folded into `main` include:
 codex/tlica-claude-union-shell-sync-v0
 codex/tlica-codex-control-layer-v0
 codex/tlica-direct-projected-pce-api-v0
+codex/tlica-generated-trajectory-api-v0
 ```
 
 ## Active packet
 
 ```text
-plans/codex/2026-05-14_tlica_generated_trajectory_api_packet.md
+plans/codex/2026-05-14_tlica_profile_space_helpers_packet.md
 ```
 
 ## Launch command
@@ -41,10 +43,10 @@ $tlica-research-orchestrator go
 Create and run the next Lean branch:
 
 ```text
-codex/tlica-generated-trajectory-api-v0
+codex/tlica-profile-space-helpers-v0
 ```
 
-Purpose: expand deterministic trajectory helper APIs around `generatedBy`, one-step branches, and adjacent profile distances while keeping the trajectory layer deterministic.
+Purpose: add low-risk convenience lemmas for `ProfileSpace`, `edist_def`, and the pseudo-emetric/profile-distance API without changing the underlying distance definitions.
 
 ## Required first checks
 
@@ -66,6 +68,7 @@ bash scripts/audit_lean.sh
 
 ## Do not do in this active packet
 
+- Do not change `ScalarProfile`, `zeroExtend`, `dInfUnion`, `dInfShared`, `ProfileSpace`, or the `PseudoEMetricSpace` instance.
 - Do not add religious-experience / RCX Lean formalization.
 - Do not add named affect taxonomy.
 - Do not add stochastic projection.
