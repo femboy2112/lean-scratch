@@ -1,50 +1,70 @@
-# AGENTS.md — TLICA Lean / Rosetta Instructions
+# AGENTS.md — TLICA Codex Control Layer
 
-You are working in the TLICA formalization repository. Your task is mathematical formalization and Rosetta synchronization.
+You are operating inside the TLICA Lean/Rosetta formalization repository. Your role is proof-assistant operator, mathematical verifier, and Rosetta-maintenance agent.
 
-## Immediate instruction
+## Mission
 
-If the user says only:
+Build and maintain a machine-checkable Lean 4 / mathlib formalization of the Two-Layer Identity-Correlation Architecture (TLICA), with a precise Rosetta mapping among:
 
-```text
-go
-```
+1. TLICA philosophical/theoretical concept.
+2. Pure mathematical object or theorem.
+3. Lean declaration/proof status.
+4. Source-paper location.
 
-or asks you to continue the next TLICA task, immediately read and execute:
+The current priority is **math first**: protect theorem-status hygiene, preserve build correctness, and keep documentation synchronized with actual Lean evidence.
 
-```text
-CODEX_GO_NEXT.md
-```
+## Repository layout rule
 
-Do not ask the user to paste the prompt. The prompt is already in the repository.
+Codex orchestration lives at the repository root.
 
-## Current priority
+The Lean project may be either:
 
-The active next task is:
+- root-level, detected by `lakefile.lean`; or
+- `tlica-lean/`, detected by `tlica-lean/lakefile.lean`.
 
-1. Establish or update `main` from `codex/tlica-claude-union-shell-sync-v0`.
-2. Remove stale one-shot prompt/orchestration files from `main`.
-3. Create `codex/tlica-direct-projected-pce-api-v0` from `main`.
-4. Migrate active modules toward the primary `ProjectMap α Act` / `ProjectedPCE` API where proof-stable.
+Scripts must auto-detect this. Do not hard-code one layout unless the active mission explicitly says to.
 
-Detailed phase instructions are in `CODEX_GO_NEXT.md`.
+## Mandatory startup
+
+When beginning a Codex run:
+
+1. Read this file.
+2. Read `CODEX.md`.
+3. Read `CLAIM_GUARDRAILS.md`.
+4. Read `CODEX_SKILLS.md`.
+5. Read `plans/ACTIVE_CODEX_PLAN.md`.
+6. Read the active mission packet named by that plan.
+7. Run preflight/build/audit before claiming success.
 
 ## Hard rules
 
 1. Imported Lean modules must compile with `lake build`.
-2. Run `bash scripts/audit_lean.sh` before committing.
-3. Do not use `sorry`, `admit`, or global `axiom` declarations.
-4. If a claim is primitive in the theory, encode it as a named structure field, typeclass field, or documented axiom schema. Do not present it as proved.
-5. If a proof depends on an assumption, name that assumption and map it to its source reference.
-6. Do not alter files in `docs/tlica_source_corpus/` except by explicit user request.
-7. Every new Lean declaration must be reflected in `MAPPING.md`, `docs/tlica_codex/lean_declaration_inventory.md`, and the relevant Rosetta control docs.
-8. Preserve the distinction between:
-   - machine-verified theorem,
-   - definition/signature,
-   - primitive axiom/field,
-   - compatibility alias/theorem,
-   - deferred marker not theorem,
-   - prose-only unformalized target.
+2. Run `bash scripts/audit_lean.sh` before finalizing any Lean-affecting branch.
+3. Do not use `sorry`, `admit`, or global `axiom` declarations in imported Lean modules.
+4. A Lean declaration is not automatically a completed formalization target merely because it type-checks.
+5. A declaration whose proposition is `True`, or whose body is an intentional placeholder, must be labelled `statement_placeholder`, not `machine_verified_theorem`.
+6. Primitive assumptions must be encoded as named structure/typeclass fields or explicitly documented axiom schemas, not presented as proved facts.
+7. Do not alter `docs/tlica_source_corpus/` unless the active mission explicitly authorizes source-corpus edits.
+8. Every new Lean declaration must be reflected in `MAPPING.md`, `docs/tlica_codex/lean_declaration_inventory.md`, and relevant Rosetta control docs.
+9. Keep compatibility names distinct from primary API names.
+10. Preserve all explicit deferrals.
+
+## Status vocabulary
+
+Use these labels consistently:
+
+- `machine_verified_theorem`
+- `machine_verified_definition`
+- `machine_verified_structure`
+- `primitive_structure_field`
+- `compatibility_alias`
+- `compatibility_theorem`
+- `statement_placeholder`
+- `deferred_marker_not_theorem`
+- `application_deferred`
+- `prose_only_unformalized`
+- `author_math_required`
+- `deprecated_or_superseded`
 
 ## Explicit exclusions
 
@@ -61,28 +81,39 @@ Do not add:
 
 ## Build/audit commands
 
-Run these before committing:
+Before finalizing, run through the root harness where possible:
 
 ```bash
-lake exe cache get
+bash scripts/bootstrap_codex.sh
+python3 scripts/run_lean_checks.py
+bash scripts/audit_lean_status.py || true
+python3 scripts/summarize_tlica_state.py
+```
+
+Also run the project-native checks:
+
+```bash
 lake build
 bash scripts/audit_lean.sh
 python3 scripts/extract_lean_decls.py > docs/tlica_codex/lean_declaration_inventory.md
 ```
 
-## Main local documents
+If the Lean project is under `tlica-lean/`, the scripts should run these commands there.
 
-- `CODEX_GO_NEXT.md` — current execution prompt.
-- `MAPPING.md` — Lean declaration map.
-- `docs/tlica_codex/LEAN_VERIFICATION_REPORT.md` — current verification report.
-- `docs/tlica_codex/lean_declaration_inventory.md` — extracted declaration inventory.
-- `docs/tlica_rosetta/ROSETTA_MATH_FIRST_LEDGER.md` — normalized Rosetta ledger.
-- `docs/tlica_rosetta/ROSETTA_DECLARATION_COVERAGE.md` — declaration-to-Rosetta coverage.
-- `docs/tlica_rosetta/ROSETTA_COVERAGE_AUDIT.md` — Rosetta-to-Lean coverage audit.
-- `docs/tlica_rosetta/FEATURE_COMPLETENESS_MATRIX.md` — formalization completeness matrix.
-- `docs/tlica_rosetta/LEAN_IMPROVEMENT_BACKLOG.md` — prioritized Lean backlog.
-- `docs/tlica_rosetta/NEXT_LEAN_FRONTIER.md` — next branch sequence.
+## Review policy
+
+Before claiming a round complete, produce or update a verification report that records:
+
+- branch name;
+- Lean project directory used;
+- `lake build` result;
+- audit result;
+- theorem/status changes;
+- placeholder/deferred declarations;
+- docs updated;
+- remaining gaps;
+- next recommended branch.
 
 ## Commit discipline
 
-Commit after a coherent verified step. Use precise commit messages and push the branch requested in `CODEX_GO_NEXT.md`.
+Commit after a coherent verified step. Use specific commit messages. Never bury a theorem-status downgrade or placeholder under generic prose.
