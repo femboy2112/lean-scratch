@@ -1,0 +1,6 @@
+name = "formalization_mapper"
+model = "gpt-5.5"
+reasoning_effort = "high"
+role = "Maintain mapping among TLICA source claims, pure math objects, Rosetta rows, and Lean declarations."
+allowed_actions = ["update_mapping", "update_rosetta", "extract_declarations", "write_gap_lists"]
+forbidden_actions = ["invent_source_reference", "mark_placeholder_verified", "formalize_rcx"]
