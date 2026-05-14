@@ -133,7 +133,38 @@ Audit target:
 - Audit target: zero imported `sorry`, zero imported `admit`, and zero global
   `axiom` declarations.
 
-## 8. Remaining exclusions and next branch
+## 8. Direct projected-PCE API branch
+
+- Work branch: `codex/tlica-direct-projected-pce-api-v0`, created from pushed
+  `main`.
+- Goal: migrate active modules toward the direct `ProjectMap α Act` /
+  `ProjectedPCE` API where proof-stable.
+- Lean files updated:
+  - `TLICA/Agency.lean`
+  - `TLICA/FreeWill.lean`
+  - `TLICA/TemporalTrajectory.lean`
+  - `TLICA/DifferentiatedAffect.lean`
+- API migration completed:
+  - `FeasibilityModel` and `AgencyContext.proj` now use `ProjectMap α Act`.
+  - `feasibleProjectedPCE` now unfolds directly to `ProjectedPCE`.
+  - `branchProfile` now unfolds directly to `projectedProfile`.
+  - `branchFutureContents` now unfolds directly to `futureMSIContents`.
+  - `generatedBy` now records direct `projectedProfile` steps.
+  - Affect branch-content/profile proofs unfold direct `futureMSIContents` /
+    `futureMSI`.
+- Remaining compatibility use: `GeneralProjectMap`, `GeneralProjectedPCE`, and
+  `general*` names remain intentionally in `TLICA.GeneralActionProjection` as
+  compatibility aliases/theorems for older branch continuity.
+- Union-domain shell theorem family remains machine verified from the
+  `codex/tlica-claude-union-shell-sync-v0` checkpoint.
+- `lake build`: succeeded with existing warning-only lints.
+- `bash scripts/audit_lean.sh`: succeeded.
+- `python3 scripts/extract_lean_decls.py > docs/tlica_codex/lean_declaration_inventory.md`:
+  succeeded.
+- Audit target: zero imported `sorry`, zero imported `admit`, and zero global
+  `axiom` declarations.
+
+## 9. Remaining exclusions and next branch
 
 Remaining exclusions:
 
@@ -145,7 +176,8 @@ Remaining exclusions:
 
 Recommended next branch:
 
-`codex/tlica-direct-projected-pce-api-v0`
+`codex/tlica-generated-trajectory-api-v0`
 
-Purpose: migrate newer modules away from compatibility names toward the primary
-`ProjectMap α Act` / `ProjectedPCE` API where this is proof-stable.
+Purpose: expand deterministic trajectory helper APIs around supplied
+trajectories, one-step branches, and adjacent profile distances while keeping
+the layer deterministic.

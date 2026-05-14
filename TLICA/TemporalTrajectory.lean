@@ -18,7 +18,6 @@ open TLICA.ProfileComparison.Pointwise
 open TLICA.Agency
 open TLICA.FreeWill
 open TLICA.ActionProjection
-open TLICA.GeneralActionProjection
 open scoped ENNReal
 
 variable {α Act : Type*}
@@ -39,7 +38,7 @@ structure ActionSchedule (Act : Type*) where
 def generatedBy (ctx : AgencyContext α Act)
     (traj : ProfileTrajectory α) (sched : ActionSchedule Act) : Prop :=
   ∀ n, traj.profileAt (n + 1) =
-    generalProjectedProfile ctx.proj (traj.profileAt n) (sched.actionAt n)
+    projectedProfile ctx.proj (traj.profileAt n) (sched.actionAt n)
 
 /-- Named one-step equation for a generated trajectory. -/
 theorem generatedBy_step
@@ -47,7 +46,7 @@ theorem generatedBy_step
     {sched : ActionSchedule Act}
     (h : generatedBy ctx traj sched) (n : ℕ) :
     traj.profileAt (n + 1) =
-      generalProjectedProfile ctx.proj (traj.profileAt n) (sched.actionAt n) :=
+      projectedProfile ctx.proj (traj.profileAt n) (sched.actionAt n) :=
   h n
 
 /-- Direct projected-profile spelling of the generated one-step equation. -/
@@ -56,8 +55,8 @@ theorem generatedBy_step_projectedProfile
     {sched : ActionSchedule Act}
     (h : generatedBy ctx traj sched) (n : ℕ) :
     traj.profileAt (n + 1) =
-      projectedProfile ctx.proj (traj.profileAt n) (sched.actionAt n) := by
-  rw [generatedBy_step h n, generalProjectedProfile_eq_projectedProfile]
+      projectedProfile ctx.proj (traj.profileAt n) (sched.actionAt n) :=
+  generatedBy_step h n
 
 /-- Future MSI contents of the scheduled branch at a time along a trajectory. -/
 def trajectoryFutureContents (ctx : AgencyContext α Act)

@@ -4,15 +4,14 @@ TLICA.Agency — Feasible action selection under projected PCE.
 Agency is modeled as more than action occurrence: an agency context provides a
 deterministic projection layer, a feasible action set for each profile, and
 action-sensitive continuation appraisal by projected PCE. The implementation
-still uses the `GeneralProjectMap` / `GeneralProjectedPCE` compatibility names,
-but `ProjectMap α Act` and `ProjectedPCE` are the primary objects. Selection is
+uses the primary `ProjectMap α Act` / `ProjectedPCE` API directly. Selection is
 only stated relative to feasible alternatives. Global maximizer existence is
 proved only under an explicit finite nonempty feasible-action hypothesis.
 
 Free-will branch semantics remain deferred.
 -/
 
-import TLICA.GeneralActionProjection
+import TLICA.ActionProjection
 import Mathlib.Data.Finset.Lattice
 import Mathlib.Data.Set.Finite
 
@@ -21,7 +20,6 @@ namespace TLICA.Agency
 open TLICA.Profile
 open TLICA.ProjectMap
 open TLICA.ActionProjection
-open TLICA.GeneralActionProjection
 
 variable {α Act : Type*}
 
@@ -30,7 +28,7 @@ variable {α Act : Type*}
 This lifts no-action feasibility into a reusable foundation-level structure
 while allowing feasibility to depend on the action space and projection
 context. -/
-structure FeasibilityModel (α Act : Type*) (proj : GeneralProjectMap α Act) where
+structure FeasibilityModel (α Act : Type*) (proj : ProjectMap α Act) where
   /-- Feasible actions at a current profile. -/
   feasible : ScalarProfile α → Set Act
   /-- No-action is always feasible. -/
@@ -47,9 +45,8 @@ structure AgencyContext (α Act : Type*) where
   fam : FutureMSIModel α
   /-- Universal-domain preservation ranking. -/
   globalRank : GlobalPreservationRanking α
-  /-- Deterministic projection over `Act`. Uses the compatibility name for the
-      primary `ProjectMap α Act`. -/
-  proj : GeneralProjectMap α Act
+  /-- Deterministic projection over `Act`. -/
+  proj : ProjectMap α Act
   /-- Feasibility model for this projection context. -/
   feasibility : FeasibilityModel α Act proj
 
@@ -74,7 +71,7 @@ theorem noAction_feasible (ctx : AgencyContext α Act) (P : ScalarProfile α) :
 def mkFromFeasible
     (fam : FutureMSIModel α)
     (globalRank : GlobalPreservationRanking α)
-    (proj : GeneralProjectMap α Act)
+    (proj : ProjectMap α Act)
     (feasible : ScalarProfile α → Set Act)
     (noAction_feasible : ∀ P, proj.noAction ∈ feasible P) :
     AgencyContext α Act where
@@ -89,15 +86,13 @@ def mkFromFeasible
 end AgencyContext
 
 /-- Projected PCE evaluated in an agency context. Feasibility is kept as a
-    separate predicate so infeasible alternatives can be excluded explicitly.
-    This uses the compatibility wrapper for the primary `ProjectedPCE`. -/
+    separate predicate so infeasible alternatives can be excluded explicitly. -/
 def feasibleProjectedPCE (ctx : AgencyContext α Act)
     (P : ScalarProfile α) (a : Act) : ℝ :=
-  GeneralProjectedPCE ctx.fam ctx.globalRank ctx.proj P a
+  ProjectedPCE ctx.fam ctx.globalRank ctx.proj P a
 
 /-- Agency-context projected PCE is definitionally the direct `ProjectedPCE`
-    API; the `GeneralProjectedPCE` name is retained only as a compatibility
-    wrapper. -/
+    API. -/
 theorem feasibleProjectedPCE_eq_projectedPCE
     (ctx : AgencyContext α Act)
     (P : ScalarProfile α) (a : Act) :

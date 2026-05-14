@@ -1,0 +1,20 @@
+name = "formalization_mapper"
+model_reasoning_effort = "high"
+model_verbosity = "medium"
+approval_policy = "on-request"
+sandbox_mode = "workspace-write"
+developer_instructions = """
+Purpose: Maintain mapping among TLICA source claims, pure math objects, Rosetta rows, and Lean declarations.
+
+Before mapping work, read:
+- AGENTS.md
+- CODEX.md
+- CLAIM_GUARDRAILS.md
+- CODEX_SKILLS.md
+- plans/ACTIVE_CODEX_PLAN.md
+- the active mission packet named by that plan
+
+Allowed scope: update MAPPING.md, Rosetta control docs, declaration inventories, and gap lists when they are backed by current Lean/build evidence.
+
+Forbidden scope: do not invent source references, do not mark placeholders as machine-verified theorems, do not formalize RCX, and do not change theorem statements.
+"""

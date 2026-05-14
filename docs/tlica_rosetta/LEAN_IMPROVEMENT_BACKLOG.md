@@ -54,11 +54,17 @@ coverage.
 | Completed P2 | Union-domain profile shell-stratified bound | Packages `fullShellStratifiedBound` over `dInfUnion` with explicit zero-extension and outer-shell absorption hypotheses. | Boundary-aware pointwise theorem, union-domain hypothesis design, absent values treated as zero. | `codex/tlica-claude-union-shell-sync-v0` | `TLICA/ProfileComparison/ShellRefinement.lean` | `MAPPING.md`, ledger, matrix, coverage docs, shell audit, report, inventory | Added `dInfUnion_le_of_pointwise`, `dInfUnion_le_of_pointwise_union`, `dInfUnion_le_shellEndpointBound_zeroExtend`, `dInfUnion_le_threeWayMax_shellEndpointBound`, and `dInfUnion_le_of_pointwise_shellEndpointBound`. |
 | Completed P4 | Interior shell-distance helper usage | Keeps `interiorShellIndexDistance` from being only an orphaned helper definition. | Existing `interiorShellIndexDistance`. | `codex/tlica-claude-union-shell-sync-v0` | `TLICA/ProfileComparison/ShellRefinement.lean` | Mapping, ledger, coverage docs, matrix, report, inventory | Added `interiorShellIndexDistance_self` and `interiorShellIndexDistance_symm`. |
 
+## A6. Completed in `codex/tlica-direct-projected-pce-api-v0`
+
+| Priority | Target | Why it matters | Required dependencies | Branch name | Lean files | Docs updated | Result |
+|---|---|---|---|---|---|---|---|
+| Completed P2 | Direct `ProjectedPCE` API cleanup | Prevents compatibility names from becoming the active application API. | Existing direct `ProjectMap α Act`, `ProjectedPCE`, `projectedProfile`, and `futureMSIContents` definitions. | `codex/tlica-direct-projected-pce-api-v0` | `TLICA/Agency.lean`, `TLICA/FreeWill.lean`, `TLICA/TemporalTrajectory.lean`, `TLICA/DifferentiatedAffect.lean` | Mapping, ledger, coverage docs, matrix, backlog, report, inventory | Active modules now use direct API definitions where proof-stable. `TLICA.GeneralActionProjection` remains as the compatibility-only layer for older branches. |
+
 ## B. Remaining Immediate Lean-Ready Theorem Targets
 
 | Priority | Target | Why it matters | Required dependencies | Proposed branch name | Expected Lean files | Expected docs to update | Risk |
 |---|---|---|---|---|---|---|---|
-| P2 | Direct `ProjectedPCE` API cleanup | Reduces dependence on compatibility names in comments and downstream helper statements. | Existing equality theorem `generalProjectedPCE_eq_projectedPCE`; branch/trajectory direct API bridges. | `codex/tlica-direct-projected-pce-api-v0` | Dependent modules if touched | `MAPPING.md`, ledger, coverage audit | Low-medium |
+| P2 | Generated trajectory helper API | Further expands deterministic trajectory helper names around supplied trajectories. | Existing `generatedBy`, one-step branches, and adjacent distance definitions. | `codex/tlica-generated-trajectory-api-v0` | `TLICA/TemporalTrajectory.lean` | `MAPPING.md`, ledger, coverage docs | Low-medium |
 
 ## C. Lean-Ready Structure Targets
 
@@ -83,7 +89,7 @@ coverage.
 | Priority | Target | Why it matters | Required dependencies | Proposed branch name | Expected Lean files | Expected docs to update | Risk |
 |---|---|---|---|---|---|---|---|
 | P0 | Prevent `GeneralProjectMap` primitive wording | Misstates v0.4 architecture if described as primitive. | Existing source-alignment docs. | `codex/tlica-compatibility-wording-audit` | None expected | Rosetta docs, verification report | Low |
-| P2 | Migrate new docs/modules to direct `ProjectMap`/`ProjectedPCE` names | Keeps compatibility names from becoming de facto primary. | Existing compatibility equalities. | `codex/tlica-direct-projected-pce-api` | `TLICA/Agency.lean` and dependents only if low risk | `MAPPING.md`, ledger | Medium |
+| Completed P2 | Migrate new docs/modules to direct `ProjectMap`/`ProjectedPCE` names | Keeps compatibility names from becoming de facto primary. | Existing direct API definitions. | `codex/tlica-direct-projected-pce-api-v0` | `TLICA/Agency.lean`, `TLICA/FreeWill.lean`, `TLICA/TemporalTrajectory.lean`, `TLICA/DifferentiatedAffect.lean` | `MAPPING.md`, ledger, coverage docs | Completed |
 | P2 | Old singleton `Action` wrapper cleanup | Reduces confusion around `Action α` versus arbitrary `Act`. | `DefaultAction`, `DefaultProjectMap`, `UnitDefaultProjectMap`. | `codex/tlica-action-wrapper-cleanup` | `TLICA/ProjectMap.lean`, docs only if possible | `MAPPING.md`, source-alignment audit | Medium |
 | P2 | Default-action naming cleanup | Clarifies foundation default versus application action carriers. | Current `ProjectMap` compatibility names. | `codex/tlica-default-action-naming` | `TLICA/ProjectMap.lean` if needed | `MAPPING.md`, ledger | Medium |
 
